@@ -3,6 +3,8 @@ import { Button } from 'reactstrap';
 import './patient.css';
 import './materialize.css'
 import $ from 'jquery';
+import {connect} from 'react-redux'
+import {patientAction} from '../../store/action/patientAction'
 
 
 
@@ -25,7 +27,6 @@ class CreatePatient extends Component {
 //Note: handle submit information
   handleSubmit= (e) => {
     e.preventDefault()
-    console.log('rrrrrrrrr',this.state)
     const obj=Object.assign({},this.state)
     const that=this
 
@@ -57,11 +58,6 @@ class CreatePatient extends Component {
           }
       
     });
-
-
-
-
-
   }
 
 //Note: handle on change information
@@ -80,7 +76,7 @@ class CreatePatient extends Component {
   }
 
   render() {
-   
+   console.log(this.props)
     return (
       <div>
         <div className="container">
@@ -195,5 +191,18 @@ class CreatePatient extends Component {
   }
 }
 
+//Note:add the redux state to the props
+const mapStateToProps=(state)=>{
+  return {
+      name:state.patient.test
+  }
+}
 
-export default CreatePatient
+//Note: add the action to the props
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    patientAction:(data)=>dispatch(patientAction(data))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CreatePatient)
