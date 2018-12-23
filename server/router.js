@@ -30,11 +30,15 @@ router.route('/delete')
 
 router.route('/check')
   .get(authenticationMiddleware(), function (req, res) {
-
     res.send('autho')
-
-
   })
+
+//Note:test
+router.route('/test')
+  .post( function (req, res) {
+    console.log(req.body)
+    res.send('done')
+  })  
 
 //Note : 
 function authenticationMiddleware() {
