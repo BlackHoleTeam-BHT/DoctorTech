@@ -7,6 +7,7 @@
     "bootstrap": "^4.2.1",
     "install": "^0.12.2",
     "jquery": "^3.3.1",
+    "materialize-css": "^1.0.0-rc.2",
     "moment": "^2.23.0",
     "npm": "^6.5.0",
     "react": "^16.6.3",
@@ -16,7 +17,8 @@
     "react-scripts": "2.1.1",
     "react-select-element": "^1.6.3",
     "reactstrap": "^6.5.0",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "sweetalert2-react": "^0.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,5 +35,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000/"
 }
