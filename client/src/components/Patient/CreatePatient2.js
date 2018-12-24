@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
+import $ from 'jquery';
+import './patient.css';
 
 const styles = theme => ({
   container: {
@@ -21,12 +19,12 @@ const styles = theme => ({
     marginTop: 50,
   },
   textField: {
-    width:300
+    width: 300
 
   },
   textField2: {
-    width:700
- 
+    width: 700
+
 
   },
   dense: {
@@ -37,214 +35,261 @@ const styles = theme => ({
   },
   root: {
     flexGrow: 1,
+  },
+  button: {
+    width: 200
+  },
+  group:{
+    checked:true
   }
 });
 
 
 
-class TextFields extends React.Component {
+class CreatePatient extends React.Component {
   state = {
-    name: 'Cat in the Hat',
+    firstName: '',
+    MiddleName: '',
+    lastName: '',
     age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
-  };
+    Phone: '',
+    insurance: '',
+    email: '',
+    location: '',
+    selectedOption: 'Male',
+    checked: false
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
+  }
+
+
+  //Note: handle submit information
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const obj = Object.assign({}, this.state)
+    const that = this
+
+    $.ajax({
+      type: "POST",
+      url: '/doc/test',
+      data: {
+        obj
+      },
+      success: function (data) {
+        console.log("user data ", data)
+        that.setState({
+          firstName: '',
+          MiddleName: '',
+          lastName: '',
+          age: '',
+          Phone: '',
+          insurance: '',
+          email: '',
+          location: '',
+          selectedOption: 'Male',
+          checked: false
+
+        })
+
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+
     });
-  };
+  }
+
+  //Note: handle on change information
+  handleChange2 = (e) => {
+    console.log(e.target)
+    this.setState({
+      [e.target.id]: e.target.value
+    })
+  }
+
+
+  //Note: handle on change option 
+  handleOptionChange = (e) => {
+    console.log(e.target.value)
+    this.setState({
+      selectedOption: e.target.value
+    });
+  }
+
 
   render() {
     const { classes } = this.props;
+    console.log(this.state)
 
     return (
-        <div>
-        
-      <form className={classes.container} noValidate autoComplete="off">
-        <div className={classes.root}>
-          <Grid container spacing={24}>
-            <Grid container  md={12}>
-              <Grid md={1}></Grid>
-              <Grid md={3}>
-                <TextField
-                  id="standard-password-input"
-                  label="First-Name"
-                  type="text"
-                  margin="normal"
-                  className={classes.textField}
+      <div>
 
-                />
+        <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+          <div className={classes.root}>
+            <Grid container spacing={24}>
+              <Grid container md={12} item>
+                <Grid md={1} item></Grid>
+                <Grid md={3} item>
+                  <TextField
+                    required
+                    id="firstName"
+                    value={this.state.firstName}
+                    onChange={this.handleChange2}
+                    label="First-Name"
+                    type="text"
+                    margin="normal"
+                    className={classes.textField}
+
+                  />
+                </Grid>
+                <Grid md={3} item>
+                  <TextField
+                    required
+                    id="MiddleName"
+                    value={this.state.MiddleName}
+                    onChange={this.handleChange2}
+                    label="Middle-Name"
+                    type="text"
+                    margin="normal"
+                    className={classes.textField}
+
+
+                  />
+                </Grid>
+                <Grid md={3} item>
+                  <TextField
+                    required
+                    value={this.state.lastName}
+                    id="lastName"
+                    onChange={this.handleChange2}
+                    label="Last-Name"
+                    type="text"
+                    margin="normal"
+                    className={classes.textField}
+
+
+                  />
+                </Grid>
               </Grid>
-              <Grid md={3}>
-                <TextField
-                  id="standard-password-input"
-                  label="Middle-Name"
-                  type="password"
-                  margin="normal"
-                  className={classes.textField}
 
 
-                />
+              <Grid container md={12} item>
+                <Grid md={1} item></Grid>
+                <Grid md={3} item>
+                  <TextField
+                    required
+                    value={this.state.age}
+                    id="age"
+                    onChange={this.handleChange2}
+                    label="Age"
+                    className={classes.textField}
+                    type="number"
+                    margin="normal"
+                  />
+                </Grid>
+                <Grid md={3} item>
+                  <TextField
+                    onChange={this.handleChange2}
+                    value={this.state.Phone}
+                    id="Phone"
+                    label="Phone"
+                    className={classes.textField}
+                    type="tel"
+                    margin="normal"
+                  />
+                </Grid>
+                <Grid md={3} item>
+                  <TextField
+                    onChange={this.handleChange2}
+                    value={this.state.insurance}
+                    id="insurance"
+                    label="insurance-Number"
+                    className={classes.textField}
+                    type="number"
+                    margin="normal"
+                  />
+                </Grid>
               </Grid>
-              <Grid md={3}>
-                <TextField
-                  id="standard-password-input"
-                  label="Last-Name"
-                  type="password"
-                  margin="normal"
-                  className={classes.textField}
+
+              <Grid container md={12} item>
+                <Grid md={1} item></Grid>
+                <Grid xs={6} item>
+                  <TextField
+                    onChange={this.handleChange2}
+                    value={this.state.email}
+                    id="email"
+                    label="Email"
+                    type="email"
+                    margin="normal"
+                    className={classes.textField2}
+                  />
+                </Grid>
+              </Grid>
+
+              <Grid container md={12} item>
+                <Grid md={1} item></Grid>
+                <Grid xs={6} item>
+                  <TextField
+                    onChange={this.handleChange2}
+                    value={this.state.location}
+                    id="location"
+                    label="Location"
+                    type="text"
+                    margin="normal"
+                    className={classes.textField2}
+                  />
+                </Grid>
+              </Grid>
+
+              <Grid container md={12} style={{ marginTop: '10px' }} item>
+                <Grid md={1} item></Grid>
+                <Grid md={1} item>
+                  <p>Gender</p>
+                </Grid>
+                <Grid md={3} item>
+                  <RadioGroup
+                 
+                    aria-label="Gender"
+                    name="gender1"                    
+                    className={classes.group}
+                    value={this.state.selectedOption}
+                    onChange={this.handleOptionChange}
+                    style={{ display: 'flex', flexDirection: 'row' }}
+                  >
+                    <FormControlLabel   value="Male" control={<Radio   checked={this.state.selectedOption=='Male'} />} label="Male" />
+                    <FormControlLabel value="Female" control={<Radio   />} label="Female" />
+                  </RadioGroup>
+                </Grid>
+                <Grid md={3} item>
 
 
-                />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.checked}
+                        onChange={()=>{this.setState({checked:!this.state.checked}) }}
+                        value="checkedA"
+                      />
+                    }
+                    label="Married"
+                  />
+                </Grid>
+              </Grid>
+
+
+              <Grid container md={12} style={{ marginTop: '25px' }} item>
+
+                <Grid md={1} item></Grid>
+                <Grid md={6} item>
+                  <Button type="submit" variant="contained" color="secondary" size="large" className={classes.button} >
+                    <SaveIcon  />
+                    Save
+                 </Button>
+
+                </Grid>
               </Grid>
             </Grid>
-
-
-            <Grid container  md={12}>
-              <Grid md={1}></Grid>
-              <Grid md={3}>
-                <TextField
-                  id="standard-password-input"
-                  label="Age"
-                  className={classes.textField}
-                  type="number"
-                  margin="normal"
-                />
-              </Grid>
-              <Grid md={3}>
-                <TextField
-                  id="standard-password-input"
-                  label="Phone"
-                  className={classes.textField}
-
-                  type="tel"
-                  margin="normal"
-                />
-              </Grid>
-              <Grid md={3}>
-                <TextField
-                  id="standard-password-input"
-                  label="insurance-Number"
-                  className={classes.textField}
-
-                  type="number"
-                  margin="normal"
-                />
-              </Grid>
-            </Grid>
-
-            <Grid container md={12}>
-              <Grid md={1}></Grid>
-              <Grid xs={6}>
-                <TextField
-                  id="standard-password-input"
-                  label="Email"
-                  type="email"
-                  margin="normal"
-                  className={classes.textField2}
-
-                />
-              </Grid>
-              </Grid>
-
-              <Grid container md={12}>
-              <Grid md={1}></Grid>
-              <Grid xs={6}>
-                <TextField
-                  label="Location"
-                  type="text"
-                  margin="normal"
-                  className={classes.textField2}
-
-                />
-              </Grid>
-              </Grid>
-                
-              <Grid container md={12} style={{marginTop:'10px'}}>
-              <Grid md={1}></Grid>
-              <Grid md={1}>
-              <p>Gender</p>
-              </Grid>
-              <Grid md={3}>
-          <RadioGroup
-            aria-label="Gender"
-            name="gender1"
-            className={classes.group}
-            value={this.state.value}
-            onChange={this.handleChange}
-            style={{ display: 'flex', flexDirection: 'row' }}
-          >
-            <FormControlLabel value="female" control={<Radio />} label="Female" />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />              
-          </RadioGroup>
-          </Grid>
-          <Grid md={3}>
-
-
-          <FormControlLabel
-          control={
-            <Checkbox
-              checked={this.state.checkedA}
-              onChange={this.handleChange('checkedA')}
-              value="checkedA"
-            />
-          }
-          label="Married"
-        />
-
-
-
-          </Grid>
-          </Grid>
-           
-
-
-
-            <Grid item >
-              <FormControl className={classes.formControl} fullWidth>
-                <InputLabel htmlFor="demo-controlled-open-select">Age</InputLabel>
-                <Select
-                  open={this.state.open}
-                  onClose={this.handleClose}
-                  onOpen={this.handleOpen}
-                  value={this.state.age}
-                  onChange={this.handleChange}
-                  inputProps={{
-                    name: 'age',
-                    id: 'demo-controlled-open-select',
-                  }}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-
-          </Grid>
-
-
-
-
-
-
-            
-
-          
-
-
-
-
-
-
-
-        </div>
-      </form>
+          </div>
+        </form>
       </div>
 
 
@@ -252,8 +297,8 @@ class TextFields extends React.Component {
   }
 }
 
-TextFields.propTypes = {
+CreatePatient.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TextFields);
+export default withStyles(styles)(CreatePatient);

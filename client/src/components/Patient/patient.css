@@ -1,3 +1,5 @@
-.CreatePatientSubmit{
-    width: 800px
-}
+.container {
+    display: 'flex';
+    flexWrap: 'wrap';
+    marginTop: 50
+  }
