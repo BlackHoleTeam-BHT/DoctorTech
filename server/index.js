@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// Note:add the  session config
+// Note:add the session config
 app.use(cookieParser());
 var sessionStore = new MySQLStore({}, dbConnection.db);
 app.use(session({
