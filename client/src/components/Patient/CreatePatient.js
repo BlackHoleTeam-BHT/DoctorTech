@@ -34,6 +34,8 @@ class CreatePatient extends Component {
     const obj=Object.assign({},this.state)
     const that=this
 
+    
+
     $.ajax({
       type: "POST",
       url: '/doc/test',

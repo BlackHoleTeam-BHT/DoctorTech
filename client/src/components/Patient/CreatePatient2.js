@@ -11,6 +11,9 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import $ from 'jquery';
 import './patient.css';
+import { compose } from 'redux'
+import {connect} from 'react-redux'
+import {patientAction} from '../../store/action/patientAction'
 
 const styles = theme => ({
   container: {
@@ -62,11 +65,14 @@ class CreatePatient extends React.Component {
   }
 
 
+
   //Note: handle submit information
   handleSubmit = (e) => {
     e.preventDefault()
     const obj = Object.assign({}, this.state)
     const that = this
+
+   
 
     $.ajax({
       type: "POST",
@@ -100,6 +106,7 @@ class CreatePatient extends React.Component {
 
   //Note: handle on change information
   handleChange2 = (e) => {
+    // this.props.patientAction({data:'walid'})
     console.log(e.target)
     this.setState({
       [e.target.id]: e.target.value
@@ -118,7 +125,7 @@ class CreatePatient extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.state)
+    console.log(this.props)
 
     return (
       <div>
@@ -301,4 +308,20 @@ CreatePatient.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CreatePatient);
+
+
+//Note:add the redux state to the props
+const mapStateToProps=(state)=>{
+  return {
+      name:state.patient.test
+  }
+}
+
+//Note: add the action to the props
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    patientAction:(data)=>dispatch(patientAction(data))
+  }
+}
+
+export default compose( withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(CreatePatient);
