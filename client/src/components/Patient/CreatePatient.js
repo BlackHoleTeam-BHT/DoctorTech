@@ -5,6 +5,10 @@ import './materialize.css'
 import $ from 'jquery';
 import {connect} from 'react-redux'
 import {patientAction} from '../../store/action/patientAction'
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+
+
 
 
 
@@ -29,6 +33,8 @@ class CreatePatient extends Component {
     e.preventDefault()
     const obj=Object.assign({},this.state)
     const that=this
+
+    
 
     $.ajax({
       type: "POST",
@@ -76,10 +82,14 @@ class CreatePatient extends Component {
   }
 
   render() {
+    
    console.log(this.props)
     return (
       <div>
+
         <div className="container">
+
+          
 
 
           <div className="row">

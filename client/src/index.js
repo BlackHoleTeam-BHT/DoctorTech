@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import CreatePatient from './components/Patient/CreatePatient'
+
+import CreatePatient from './components/Patient/CreatePatient2'
 import {createStore,applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import rootReducer from './store/reducer/rootReducer'
