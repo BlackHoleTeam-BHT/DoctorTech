@@ -1,0 +1,35 @@
+#signinCss {
+
+    width: 80%;
+    padding: 20px;
+    margin: 12px;
+    font-size: 13px;
+    height: 520px;
+
+}
+
+
+.form-control{
+    font-size: 12px !important;
+
+}
+
+#btn{
+    width:100%
+}
+
+#Right{
+    background-image: url("doctor2.jpg");
+    background-size: 100%;
+
+}
+
+body {
+    line-height: 1.1 !important;
+}
+
+p {
+    color: #404040;
+    font-weight: bold
+
+}
