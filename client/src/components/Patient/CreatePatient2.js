@@ -14,6 +14,7 @@ import './patient.css';
 import { compose } from 'redux'
 import {connect} from 'react-redux'
 import {patientAction} from '../../store/action/patientAction'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
   container: {
@@ -60,15 +61,20 @@ class CreatePatient extends React.Component {
     email: '',
     location: '',
     selectedOption: 'Male',
-    checked: false
+    checked: false,
+    buttonColor:'secondary',
+    progress:false
 
   }
 
+
+  //Note:handle save button
 
 
   //Note: handle submit information
   handleSubmit = (e) => {
     e.preventDefault()
+    this.setState({progress:true})
     const obj = Object.assign({}, this.state)
     const that = this
 
@@ -81,6 +87,7 @@ class CreatePatient extends React.Component {
         obj
       },
       success: function (data) {
+        that.setState({progress:false})
         console.log("user data ", data)
         that.setState({
           firstName: '',
@@ -93,6 +100,7 @@ class CreatePatient extends React.Component {
           location: '',
           selectedOption: 'Male',
           checked: false
+          
 
         })
 
@@ -287,10 +295,12 @@ class CreatePatient extends React.Component {
 
                 <Grid md={1} item></Grid>
                 <Grid md={6} item>
-                  <Button type="submit" variant="contained" color="secondary" size="large" className={classes.button} >
+                 {!this.state.progress && <Button type="submit" variant="contained" color={this.state.buttonColor} size="large" className={classes.button} >
                     <SaveIcon  />
                     Save
-                 </Button>
+                 </Button>}
+
+                 {this.state.progress  && <CircularProgress className={classes.progress} />}
 
                 </Grid>
               </Grid>
