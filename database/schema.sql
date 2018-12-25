@@ -131,11 +131,12 @@ CREATE TABLE PatientCases (
 DROP TABLE IF EXISTS ChiefComplaint;
 		
 CREATE TABLE ChiefComplaint (
+  `id` INTEGER NOT NULL,
   `caseId` INTEGER NOT NULL,
   `title` VARCHAR(35) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`caseId`)
+  PRIMARY KEY (`id`)
 );
 
 -- ---
@@ -146,6 +147,7 @@ CREATE TABLE ChiefComplaint (
 DROP TABLE IF EXISTS MedicalHistory;
 		
 CREATE TABLE MedicalHistory (
+  `id` INTEGER NOT NULL,
   `caseId` INTEGER NOT NULL ,
   ` heartDisease` TINYINT(1) NOT NULL,
   `joints` TINYINT(1) NOT NULL,
@@ -155,7 +157,7 @@ CREATE TABLE MedicalHistory (
   `description` MEDIUMTEXT NOT NULL,
   `familyHistory` MEDIUMTEXT NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`caseId`)
+  PRIMARY KEY (`id`)
 );
 
 -- ---
@@ -166,6 +168,7 @@ CREATE TABLE MedicalHistory (
 DROP TABLE IF EXISTS `PhysicalExamination`;
 		
 CREATE TABLE `PhysicalExamination` (
+  `id` INTEGER NOT NULL,
   `caseId` INTEGER NOT NULL ,
   `weight` DOUBLE NOT NULL,
   `height` DOUBLE NOT NULL,
@@ -174,7 +177,7 @@ CREATE TABLE `PhysicalExamination` (
   `middleBodyNotes` MEDIUMTEXT NOT NULL,
   `bottomBodyNotes` MEDIUMTEXT NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`caseId`)
+  PRIMARY KEY (`id`)
 );
 
 -- ---
@@ -185,12 +188,13 @@ CREATE TABLE `PhysicalExamination` (
 DROP TABLE IF EXISTS `MedicalPrescription`;
 		
 CREATE TABLE `MedicalPrescription` (
+  `id` INTEGER NOT NULL,
   `caseId` INTEGER NOT NULL ,
   `name` VARCHAR(50) NOT NULL,
   `daysInterval` INTEGER NOT NULL,
   `times` INTEGER NOT NULL ,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`caseId`)
+  PRIMARY KEY (`id`)
 );
 
 -- ---
@@ -201,10 +205,11 @@ CREATE TABLE `MedicalPrescription` (
 DROP TABLE IF EXISTS `PatientPlane`;
 		
 CREATE TABLE `PatientPlane` (
+  `id` INTEGER NOT NULL,
   `caseId` INTEGER NOT NULL,
   `medicalPlane` MEDIUMTEXT NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`caseId`)
+  PRIMARY KEY (`id`)
 );
 
 -- ---
@@ -215,12 +220,13 @@ CREATE TABLE `PatientPlane` (
 DROP TABLE IF EXISTS MedicalAnalysis;
 		
 CREATE TABLE MedicalAnalysis (
+  `id` INTEGER NOT NULL,
   `caseId` INTEGER  AUTO_INCREMENT NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   `status` TINYINT(1) NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`caseId`)
+  PRIMARY KEY (`id`)
 );
 
 -- ---
