@@ -11,10 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
 import DrawerMenu from './DrawerMenu.js';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
-import SignIn from '../auth/SignIn.js';
-import Signup from '../auth/Signup.js';
-
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import CreatePatient from '../Patient/CreatePatient2.js';
 const drawerWidth = 260;
 
 const styles = theme => ({
@@ -116,7 +114,7 @@ class Dashboard extends React.Component {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             {/*  Router for Drawer menu TODO add the compnent */}
-            <Route exact path="/dashboard/add-patient"  />
+            <Route exact path="/dashboard/add-patient" component={CreatePatient} />
             <Route exact path="/dashboard/patients"  />
 
           </main>

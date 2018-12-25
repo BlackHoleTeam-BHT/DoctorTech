@@ -108,6 +108,21 @@ CREATE TABLE Progress (
   PRIMARY KEY (`id`)
 );
 
+
+-- Table PatientCases
+
+DROP TABLE IF EXISTS PatientCases
+
+CREATE TABLE PatientCases (
+  `id` INTEGER NOT NULL,
+  `patientId` INTEGER NOT NULL,
+  `description` MEDIUMTEXT NOT NULL,
+  `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+
+
 -- ---
 -- Table 'ChiefComplaint'
 -- 
@@ -116,11 +131,11 @@ CREATE TABLE Progress (
 DROP TABLE IF EXISTS ChiefComplaint;
 		
 CREATE TABLE ChiefComplaint (
-  `patientId` INTEGER NOT NULL,
+  `caseId` INTEGER NOT NULL,
   `title` VARCHAR(35) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`patientId`)
+  PRIMARY KEY (`caseId`)
 );
 
 -- ---
@@ -131,7 +146,7 @@ CREATE TABLE ChiefComplaint (
 DROP TABLE IF EXISTS MedicalHistory;
 		
 CREATE TABLE MedicalHistory (
-  `patientId` INTEGER NOT NULL ,
+  `caseId` INTEGER NOT NULL ,
   ` heartDisease` TINYINT(1) NOT NULL,
   `joints` TINYINT(1) NOT NULL,
   `bloodPressure` TINYINT(1) NOT NULL,
@@ -140,7 +155,7 @@ CREATE TABLE MedicalHistory (
   `description` MEDIUMTEXT NOT NULL,
   `familyHistory` MEDIUMTEXT NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`patientId`)
+  PRIMARY KEY (`caseId`)
 );
 
 -- ---
@@ -151,7 +166,7 @@ CREATE TABLE MedicalHistory (
 DROP TABLE IF EXISTS `PhysicalExamination`;
 		
 CREATE TABLE `PhysicalExamination` (
-  `patientId` INTEGER NOT NULL ,
+  `caseId` INTEGER NOT NULL ,
   `weight` DOUBLE NOT NULL,
   `height` DOUBLE NOT NULL,
   `bodyTemperature` DOUBLE NOT NULL,
@@ -159,7 +174,7 @@ CREATE TABLE `PhysicalExamination` (
   `middleBodyNotes` MEDIUMTEXT NOT NULL,
   `bottomBodyNotes` MEDIUMTEXT NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`patientId`)
+  PRIMARY KEY (`caseId`)
 );
 
 -- ---
@@ -170,12 +185,12 @@ CREATE TABLE `PhysicalExamination` (
 DROP TABLE IF EXISTS `MedicalPrescription`;
 		
 CREATE TABLE `MedicalPrescription` (
-  `patientId` INTEGER NOT NULL ,
+  `caseId` INTEGER NOT NULL ,
   `name` VARCHAR(50) NOT NULL,
   `daysInterval` INTEGER NOT NULL,
   `times` INTEGER NOT NULL ,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`patientId`)
+  PRIMARY KEY (`caseId`)
 );
 
 -- ---
@@ -186,10 +201,10 @@ CREATE TABLE `MedicalPrescription` (
 DROP TABLE IF EXISTS `PatientPlane`;
 		
 CREATE TABLE `PatientPlane` (
-  `patientId` INTEGER NOT NULL,
+  `caseId` INTEGER NOT NULL,
   `medicalPlane` MEDIUMTEXT NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`patientId`)
+  PRIMARY KEY (`caseId`)
 );
 
 -- ---
@@ -200,12 +215,12 @@ CREATE TABLE `PatientPlane` (
 DROP TABLE IF EXISTS MedicalAnalysis;
 		
 CREATE TABLE MedicalAnalysis (
-  `patientId` INTEGER  AUTO_INCREMENT NOT NULL,
+  `caseId` INTEGER  AUTO_INCREMENT NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   `status` TINYINT(1) NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`patientId`)
+  PRIMARY KEY (`caseId`)
 );
 
 -- ---
@@ -267,14 +282,15 @@ ALTER TABLE `Login` ADD FOREIGN KEY (id_Roles) REFERENCES `Roles` (`id`);
 ALTER TABLE `Doctors` ADD FOREIGN KEY (id) REFERENCES `Login` (`id`);
 ALTER TABLE `Patients` ADD FOREIGN KEY (id_Progress) REFERENCES `Progress` (`id`);
 ALTER TABLE `Patients` ADD FOREIGN KEY (id_Doctor) REFERENCES `Doctors` (`id`);
+ALTER TABLE `PatientCases` ADD FOREIGN KEY (patientId) REFERENCES `Patients` (`id`);
 ALTER TABLE `Assistant` ADD FOREIGN KEY (id) REFERENCES `Login` (`id`);
 ALTER TABLE `Assistant` ADD FOREIGN KEY (id_Doctor) REFERENCES `Doctors` (`id`);
-ALTER TABLE `ChiefComplaint` ADD FOREIGN KEY (patientId) REFERENCES `Patients` (`id`);
-ALTER TABLE `MedicalHistory` ADD FOREIGN KEY (patientId) REFERENCES `Patients` (`id`);
-ALTER TABLE `PhysicalExamination` ADD FOREIGN KEY (patientId) REFERENCES `Patients` (`id`);
-ALTER TABLE `MedicalPrescription` ADD FOREIGN KEY (patientId) REFERENCES `Patients` (`id`);
-ALTER TABLE `PatientPlane` ADD FOREIGN KEY (patientId) REFERENCES `Patients` (`id`);
-ALTER TABLE `MedicalAnalysis` ADD FOREIGN KEY (patientId) REFERENCES `Patients` (`id`);
+ALTER TABLE `ChiefComplaint` ADD FOREIGN KEY (caseId) REFERENCES `PatientCases` (`id`);
+ALTER TABLE `MedicalHistory` ADD FOREIGN KEY (caseId) REFERENCES `PatientCases` (`id`);
+ALTER TABLE `PhysicalExamination` ADD FOREIGN KEY (caseId) REFERENCES `PatientCases` (`id`);
+ALTER TABLE `MedicalPrescription` ADD FOREIGN KEY (caseId) REFERENCES `PatientCases` (`id`);
+ALTER TABLE `PatientPlane` ADD FOREIGN KEY (caseId) REFERENCES `PatientCases` (`id`);
+ALTER TABLE `MedicalAnalysis` ADD FOREIGN KEY (caseId) REFERENCES `PatientCases` (`id`);
 ALTER TABLE `Appointment` ADD FOREIGN KEY (id_Doctors) REFERENCES `Doctors` (`id`);
 ALTER TABLE `Appointment` ADD FOREIGN KEY (id_Patients) REFERENCES `Patients` (`id`);
 ALTER TABLE `Consultants` ADD FOREIGN KEY (id_Doctors) REFERENCES `Doctors` (`id`);
