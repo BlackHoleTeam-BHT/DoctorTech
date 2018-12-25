@@ -9,16 +9,17 @@ var router = express.Router();
 router.route('/sign-up')
   .post(function (req, res) {
     console.log(req.body)
-    res.send({mohamamd: "sdsdsdsd"})
+    res.send({mohamamd: "sdsdsdsd", id :"558965"})
   })
 
 
 // dealing with sign in request
 router.route('/login')
-  .get(function (req, res) {
+  .post(function (req, res) {
+    console.log(req.body)
     var user = { id: 1, email: 'e@e.com' }
     req.login(user, function (done) {
-      res.send('done')
+      res.send(user)
     })
 
   })

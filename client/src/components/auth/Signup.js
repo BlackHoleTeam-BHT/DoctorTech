@@ -28,12 +28,16 @@ class Signup extends Component {
   // funcation to submit data to server and signup
   submitValue = (e) => {
     e.preventDefault()
-    // call sign up function from props that was maped from redux
+    // call sign up function from props that was maped from redux dispatch
     this.props.signUp(this.state)
+    
   }
   
   render() {
-    console.log(this.props)
+    // to check if the user make sign up successfully
+    if (this.props.user !== null) {
+      this.props.history.push('/dashboard/' + this.props.user.id);
+    }
     return (
       <div>
         <Container>
@@ -100,18 +104,14 @@ class Signup extends Component {
                   <Label for="Password">Location</Label>
                   <Input type="location" name="location" id="location" placeholder="input your location" value={this.state.value} onChange={this.takeValue} />
                 </FormGroup>
-                <Row>
-                  <Col xs="6">
+                <div>
                     <FormGroup>
                       <Button color="primary" id="btn"  onClick={this.submitValue}>Sign up</Button>
                     </FormGroup>
-                  </Col>
-                  <Col xs="6">
-                    <FormGroup>
-                      <Button color="primary" id="btn">Sign in</Button>
-                    </FormGroup>
-                  </Col>
-                </Row>
+                </div>
+                <div className="text-center">
+                  <a href="/signin">Already I have account ? Login </a>
+                </div>
               </div>
             </Col>
           </Row>
@@ -130,7 +130,7 @@ const mapDipatchToProps = (dispatch) => {
  // map state from reducer to component props
 const mapStateToProps = (state) => {
     return {
-      user: state
+      user: state.auth.user
     }
 }
 
