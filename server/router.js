@@ -24,6 +24,14 @@ router.route('/login')
 
   })
 
+  router.route('/create-patient')
+  .post(function (req, res) {
+    console.log(req.body)
+    var user = { id: 1, email: 'e@e.com' }
+    res.send(user)
+  })
+
+
 router.route('/delete')
   .get(function (req, res) {
     req.session.destroy();

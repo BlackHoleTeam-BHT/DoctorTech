@@ -5,9 +5,6 @@ const initState = {
 
 // auth reducer to deal with sign up and sign in component in redux and save the data in the store
 const authReducer = (state = initState, action) => {
-
-  if (action) {
-    console.log('authReducer', action)
     switch (action.type) {
       case "SIGN_IN": return {
         user: action.data
@@ -23,7 +20,5 @@ const authReducer = (state = initState, action) => {
         return state;
     }
   }
-  return state
-}
 
 export default authReducer
