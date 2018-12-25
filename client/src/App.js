@@ -4,6 +4,8 @@ import Header from './components/layout/Header.js'
 import Dashboard from './components/dashboard/Dashboard.js';
 import SignIn from './components/auth/SignIn.js';
 import Signup from './components/auth/Signup.js';
+import Home from './components/layout/Home.js';
+
 
 class App extends Component {
   state = {
@@ -16,9 +18,9 @@ class App extends Component {
           {this.state.isLogin ? <Header /> : ''}
           <Switch>
             {/* Router all the component  ToDO add the component */}
-            <Route exact path="/" />
-            <Route path="/signin" />
-            <Route path="/signup"  />
+            <Route exact path="/" component={Home} />
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={Signup} />
             <Route path="/dashboard" component={Dashboard} />
           </Switch>
         </div>
