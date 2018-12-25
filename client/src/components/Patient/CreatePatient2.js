@@ -9,7 +9,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
-import $ from 'jquery';
 import './patient.css';
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -224,7 +223,7 @@ class CreatePatient extends React.Component {
                     onChange={this.handleOptionChange}
                     style={{ display: 'flex', flexDirection: 'row' }}
                   >
-                    <FormControlLabel value="Male" control={<Radio checked={this.state.selectedOption == 'Male'} />} label="Male" />
+                    <FormControlLabel value="Male" control={<Radio checked={this.state.selectedOption === 'Male'} />} label="Male" />
                     <FormControlLabel value="Female" control={<Radio />} label="Female" />
                   </RadioGroup>
                 </Grid>

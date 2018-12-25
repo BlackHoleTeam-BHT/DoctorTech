@@ -10,9 +10,14 @@ export const signUp = (user) => {
             type: 'POST',
             data: JSON.stringify({ ...user }),
             contentType: 'application/json',
-            success: (data) => {
+            success: (res) => {
                 // dispatch the data from response  with type of action to authReducer
-                dispatch({ type: 'SIGN_UP', data: data })
+                if (res.state !== "USER_EXIST") {
+                    dispatch({ type: 'SIGN_UP', data: res.data })
+                } else {
+                    dispatch({ type: 'USER_EXIST', userExist: true })
+                }
+
             },
             error: (error) => {
                 // dispatch the err  with type of action to authReducer
@@ -31,9 +36,15 @@ export const signIn = (user) => {
             type: 'POST',
             data: JSON.stringify(user),
             contentType: 'application/json',
-            success: (data) => {
+            success: (res) => {
                 // dispatch the data from response  with type of action to authReducer
-                dispatch({ type: 'SIGN_IN', data: data })
+                if (res.state !== "USER_EXIST") {
+                    console.log(res)
+                    dispatch({ type: 'SIGN_IN', data: res.data })
+                } else {
+                    dispatch({ type: 'SIGN_IN', data: res.data })
+                }
+
             },
             error: (error) => {
                 // dispatch the err  with type of action to authReducer

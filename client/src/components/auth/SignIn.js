@@ -1,5 +1,4 @@
 import React from "react";
-import $ from "jquery";
 import { connect } from 'react-redux';
 import {signIn} from '../../store/action/authActions';
 import {

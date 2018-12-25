@@ -18,4 +18,4 @@ dbConnection.connect(function(err) {
   }
 });
 
-module.exports.db = dbConnection;
+module.exports = dbConnection;
