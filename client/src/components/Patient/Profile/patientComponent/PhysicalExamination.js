@@ -14,13 +14,23 @@ import bodylogo from '../../../../image/body.gif'
 import bodylogo2 from '../../../../image/body2.jpg'
 import legslogo from '../../../../image/legs.gif'
 import legslogo2 from '../../../../image/legs2.jpg'
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import '../../patient.css'
+// 
 
 const styles = theme => ({
     root: {
         flexGrow: 1,
         marginTop: 5,
-
         marginLeft: 0,
+        
+    },
+    root2: {
+        width: '100%',
+        maxWidth: 400,
     },
     paper: {
         display: 'inline-flex',
@@ -28,6 +38,7 @@ const styles = theme => ({
         width: 400,
         marginTop: -3,
         marginLeft: 10,
+
 
     },
     control: {
@@ -38,8 +49,26 @@ const styles = theme => ({
         height: 200,
         cursor: 'pointer'
 
-    }
+    },
+    icon: {
+        textAlign: 'center',
 
+    },
+    list: {
+       textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    list2:{
+        textAlign:'justify',
+        maxWidth: 400,
+        wordWrap: 'break-word',
+        color:'red',
+        width: 'auto',
+        margin: 15,
+        
+        
+
+    }
 });
 
 class PhysicalExamination extends React.Component {
@@ -88,8 +117,8 @@ class PhysicalExamination extends React.Component {
 
             }
 
-        }else{
-                
+        } else {
+
             if (e.target.id == '0') {
                 this.setState({
                     legsSrc: legslogo,
@@ -123,27 +152,65 @@ class PhysicalExamination extends React.Component {
 
 
                         <Grid container justify="center" item xs={12} >
-                            <Paper className={classes.paper} > </Paper>
+                            <Paper className={classes.paper} >
+                                <i className="fas fa-3x fa-weight icon"></i>
+                            </Paper>
                             <Paper className={classes.paper} >
                                 <img src={this.state.headSrc} id={this.state.imageHeadId} onClick={this.handleImageClick} className={classes.img} alt="head" />
                             </Paper>
-                            <Paper className={classes.paper} ></Paper>
+                            <Paper className={classes.paper} >
+                                <List className={classes.root2}>
+                                    <ListItemText
+                                        className={classes.list}
+                                        primary={<b>Head</b>}
+                                        secondary={
+                                            <div className={classes.list2}></div>
+                                        }></ListItemText>
+
+                                </List>
+                            </Paper>
                         </Grid>
 
                         <Grid container justify="center" item xs={12} >
-                            <Paper className={classes.paper} > </Paper>
+                            <Paper className={classes.paper} >
+                                <i className="fas fa-3x  fa-male icon"></i>
+                            </Paper>
                             <Paper className={classes.paper} >
                                 <img src={this.state.bodySrc} id={this.state.imageBodyId} onClick={this.handleImageClick} className={classes.img} alt="body" />
                             </Paper>
-                            <Paper className={classes.paper} ></Paper>
+                            <Paper className={classes.paper} >
+                            <List className={classes.root2}>
+                            <ListItemText
+                            className={classes.list}
+                                primary={<b>Body</b>}
+                                secondary={
+                                    <div className={classes.list2}></div>
+                                }></ListItemText>
+
+                            </List>
+                            </Paper>
                         </Grid>
 
                         <Grid container justify="center" item xs={12} >
-                            <Paper className={classes.paper} ></Paper>
                             <Paper className={classes.paper} >
-                            <img src={this.state.legsSrc} id={this.state.imagelegsId} onClick={this.handleImageClick} className={classes.img} alt="legs" />
+                                <i className="fas fa-3x fa-temperature-high icon"></i>
                             </Paper>
-                            <Paper className={classes.paper} ></Paper>
+                            <Paper className={classes.paper} >
+                                <img src={this.state.legsSrc} id={this.state.imagelegsId} onClick={this.handleImageClick} className={classes.img} alt="legs" />
+                            </Paper>
+                            <Paper className={classes.paper} >
+                            <List className={classes.root2}>
+                            <ListItemText
+                            className={classes.list}
+                                primary={<b>Legs</b>}
+                                secondary={
+                                    <div className={classes.list2}>
+                                    fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdddddddddddddddddddddddddddddddd
+                                    </div>
+                                }></ListItemText>
+
+                            </List>
+                            </Paper>
                         </Grid>
 
 
@@ -155,7 +222,7 @@ class PhysicalExamination extends React.Component {
                     <Paper className={classes.control}>
                         <Grid container>
                             <Grid item>
-                                <FormLabel>spacing</FormLabel>
+                                <FormLabel>Scale</FormLabel>
                                 <RadioGroup
                                     name="spacing"
                                     aria-label="Spacing"
@@ -184,3 +251,7 @@ PhysicalExamination.propTypes = {
 };
 
 export default withStyles(styles)(PhysicalExamination);
+
+
+
+
