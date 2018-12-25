@@ -6,6 +6,7 @@ import SignIn from './components/auth/SignIn.js';
 import Signup from './components/auth/Signup.js';
 import Home from './components/layout/Home.js';
 
+
 class App extends Component {
   state = {
     isLogin: true
