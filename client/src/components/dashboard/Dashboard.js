@@ -13,7 +13,6 @@ import Button from '@material-ui/core/Button'
 import DrawerMenu from './DrawerMenu.js';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import CreatePatient from '../Patient/CreatePatient2.js';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
 
 const drawerWidth = 260;
 

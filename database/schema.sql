@@ -111,10 +111,10 @@ CREATE TABLE Progress (
 
 -- Table PatientCases
 
-DROP TABLE IF EXISTS PatientCases
+DROP TABLE IF EXISTS PatientCases;
 
 CREATE TABLE PatientCases (
-  `id` INTEGER NOT NULL,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `patientId` INTEGER NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -131,7 +131,7 @@ CREATE TABLE PatientCases (
 DROP TABLE IF EXISTS ChiefComplaint;
 		
 CREATE TABLE ChiefComplaint (
-  `id` INTEGER NOT NULL,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `caseId` INTEGER NOT NULL,
   `title` VARCHAR(35) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE ChiefComplaint (
 DROP TABLE IF EXISTS MedicalHistory;
 		
 CREATE TABLE MedicalHistory (
-  `id` INTEGER NOT NULL,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `caseId` INTEGER NOT NULL ,
   ` heartDisease` TINYINT(1) NOT NULL,
   `joints` TINYINT(1) NOT NULL,
@@ -168,7 +168,7 @@ CREATE TABLE MedicalHistory (
 DROP TABLE IF EXISTS `PhysicalExamination`;
 		
 CREATE TABLE `PhysicalExamination` (
-  `id` INTEGER NOT NULL,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `caseId` INTEGER NOT NULL ,
   `weight` DOUBLE NOT NULL,
   `height` DOUBLE NOT NULL,
@@ -188,7 +188,7 @@ CREATE TABLE `PhysicalExamination` (
 DROP TABLE IF EXISTS `MedicalPrescription`;
 		
 CREATE TABLE `MedicalPrescription` (
-  `id` INTEGER NOT NULL,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `caseId` INTEGER NOT NULL ,
   `name` VARCHAR(50) NOT NULL,
   `daysInterval` INTEGER NOT NULL,
@@ -205,7 +205,7 @@ CREATE TABLE `MedicalPrescription` (
 DROP TABLE IF EXISTS `PatientPlane`;
 		
 CREATE TABLE `PatientPlane` (
-  `id` INTEGER NOT NULL,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `caseId` INTEGER NOT NULL,
   `medicalPlane` MEDIUMTEXT NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -220,8 +220,8 @@ CREATE TABLE `PatientPlane` (
 DROP TABLE IF EXISTS MedicalAnalysis;
 		
 CREATE TABLE MedicalAnalysis (
-  `id` INTEGER NOT NULL,
-  `caseId` INTEGER  AUTO_INCREMENT NOT NULL,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `caseId` INTEGER  NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `description` MEDIUMTEXT NOT NULL,
   `status` TINYINT(1) NOT NULL,

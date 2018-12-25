@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Container, Row, Col, Card, FormGroup, Label, Input, Button } from 'reactstrap';
 import '../style/SignUp.css'
+import { signUp } from '../../store/action/authActions';
 class Signup extends Component {
   constructor(props) {
     super(props)
@@ -18,17 +19,21 @@ class Signup extends Component {
       location: ""
     }
   }
+  // function to get data from form
   takeValue = (e) =>{
     this.setState({
       [e.target.id]:e.target.value
     })
   }
+  // funcation to submit data to server and signup
   submitValue = (e) => {
     e.preventDefault()
-    console.log(this.state)
+    // call sign up function from props that was maped from redux
+    this.props.signUp(this.state)
   }
   
   render() {
+    console.log(this.props)
     return (
       <div>
         <Container>
@@ -98,12 +103,12 @@ class Signup extends Component {
                 <Row>
                   <Col xs="6">
                     <FormGroup>
-                      <Button color="primary" id="btn"  onClick={this.submitValue}>Sign In</Button>
+                      <Button color="primary" id="btn"  onClick={this.submitValue}>Sign up</Button>
                     </FormGroup>
                   </Col>
                   <Col xs="6">
                     <FormGroup>
-                      <Button color="primary" id="btn">Sign up</Button>
+                      <Button color="primary" id="btn">Sign in</Button>
                     </FormGroup>
                   </Col>
                 </Row>
@@ -116,4 +121,18 @@ class Signup extends Component {
   }
 }
 
-export default Signup
+// map dispatch (actions) from reducer to component props
+const mapDipatchToProps = (dispatch) => {
+   return {
+     signUp: (user) => dispatch(signUp(user))
+   }
+}
+ // map state from reducer to component props
+const mapStateToProps = (state) => {
+    return {
+      user: state
+    }
+}
+
+// use connect to pass mapDispatchToprops to reducer
+export default connect(mapStateToProps, mapDipatchToProps)(Signup)

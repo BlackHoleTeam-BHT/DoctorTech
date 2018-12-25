@@ -38,7 +38,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Note: activate the router
-app.use('/doc', router);
+app.use('/', router);
 
 
 const PORT = process.env.PORT || 5000;

@@ -2,16 +2,18 @@ const express = require('express');
 var passport = require('passport');
 const dbConnection = require('../database/config');
 
-
-
-
 // Note: define the router
 var router = express.Router();
 
+// dealing with sign up request 
+router.route('/sign-up')
+  .post(function (req, res) {
+    console.log(req.body)
+    res.send({mohamamd: "sdsdsdsd"})
+  })
 
 
-
-
+// dealing with sign in request
 router.route('/login')
   .get(function (req, res) {
     var user = { id: 1, email: 'e@e.com' }
