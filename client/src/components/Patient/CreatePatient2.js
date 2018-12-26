@@ -9,9 +9,10 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
-import $ from 'jquery';
 import './patient.css';
+import $ from 'jquery';
 import { compose } from 'redux'
+import { createPatient } from '../../store/action/patientAction'
 import {connect} from 'react-redux'
 import {patientAction} from '../../store/action/patientAction'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -43,12 +44,10 @@ const styles = theme => ({
   button: {
     width: 200
   },
-  group:{
-    checked:true
+  group: {
+    checked: true
   }
 });
-
-
 
 class CreatePatient extends React.Component {
   state = {
@@ -113,9 +112,9 @@ class CreatePatient extends React.Component {
   }
 
   //Note: handle on change information
-  handleChange2 = (e) => {
+  handleChange = (e) => {
     // this.props.patientAction({data:'walid'})
-    console.log(e.target)
+    console.log(e.target.value)
     this.setState({
       [e.target.id]: e.target.value
     })
@@ -137,7 +136,6 @@ class CreatePatient extends React.Component {
 
     return (
       <div>
-
         <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
           <div className={classes.root}>
             <Grid container spacing={24}>
@@ -148,7 +146,7 @@ class CreatePatient extends React.Component {
                     required
                     id="firstName"
                     value={this.state.firstName}
-                    onChange={this.handleChange2}
+                    onChange={this.handleChange}
                     label="First-Name"
                     type="text"
                     margin="normal"
@@ -161,7 +159,7 @@ class CreatePatient extends React.Component {
                     required
                     id="MiddleName"
                     value={this.state.MiddleName}
-                    onChange={this.handleChange2}
+                    onChange={this.handleChange}
                     label="Middle-Name"
                     type="text"
                     margin="normal"
@@ -175,7 +173,7 @@ class CreatePatient extends React.Component {
                     required
                     value={this.state.lastName}
                     id="lastName"
-                    onChange={this.handleChange2}
+                    onChange={this.handleChange}
                     label="Last-Name"
                     type="text"
                     margin="normal"
@@ -194,7 +192,7 @@ class CreatePatient extends React.Component {
                     required
                     value={this.state.age}
                     id="age"
-                    onChange={this.handleChange2}
+                    onChange={this.handleChange}
                     label="Age"
                     className={classes.textField}
                     type="number"
@@ -203,7 +201,7 @@ class CreatePatient extends React.Component {
                 </Grid>
                 <Grid md={3} item>
                   <TextField
-                    onChange={this.handleChange2}
+                    onChange={this.handleChange}
                     value={this.state.Phone}
                     id="Phone"
                     label="Phone"
@@ -214,7 +212,7 @@ class CreatePatient extends React.Component {
                 </Grid>
                 <Grid md={3} item>
                   <TextField
-                    onChange={this.handleChange2}
+                    onChange={this.handleChange}
                     value={this.state.insurance}
                     id="insurance"
                     label="insurance-Number"
@@ -229,7 +227,7 @@ class CreatePatient extends React.Component {
                 <Grid md={1} item></Grid>
                 <Grid xs={6} item>
                   <TextField
-                    onChange={this.handleChange2}
+                    onChange={this.handleChange}
                     value={this.state.email}
                     id="email"
                     label="Email"
@@ -244,7 +242,7 @@ class CreatePatient extends React.Component {
                 <Grid md={1} item></Grid>
                 <Grid xs={6} item>
                   <TextField
-                    onChange={this.handleChange2}
+                    onChange={this.handleChange}
                     value={this.state.location}
                     id="location"
                     label="Location"
@@ -262,16 +260,16 @@ class CreatePatient extends React.Component {
                 </Grid>
                 <Grid md={3} item>
                   <RadioGroup
-                 
+
                     aria-label="Gender"
-                    name="gender1"                    
+                    name="gender1"
                     className={classes.group}
                     value={this.state.selectedOption}
                     onChange={this.handleOptionChange}
                     style={{ display: 'flex', flexDirection: 'row' }}
                   >
-                    <FormControlLabel   value="Male" control={<Radio   checked={this.state.selectedOption=='Male'} />} label="Male" />
-                    <FormControlLabel value="Female" control={<Radio   />} label="Female" />
+                    <FormControlLabel value="Male" control={<Radio checked={this.state.selectedOption === 'Male'} />} label="Male" />
+                    <FormControlLabel value="Female" control={<Radio />} label="Female" />
                   </RadioGroup>
                 </Grid>
                 <Grid md={3} item>
@@ -281,7 +279,7 @@ class CreatePatient extends React.Component {
                     control={
                       <Checkbox
                         checked={this.state.checked}
-                        onChange={()=>{this.setState({checked:!this.state.checked}) }}
+                        onChange={() => { this.setState({ checked: !this.state.checked }) }}
                         value="checkedA"
                       />
                     }
@@ -321,17 +319,17 @@ CreatePatient.propTypes = {
 
 
 //Note:add the redux state to the props
-const mapStateToProps=(state)=>{
+const mapStateToProps = (state) => {
   return {
-      name:state.patient.test
+    patient: state.patient.patient
   }
 }
 
 //Note: add the action to the props
-const mapDispatchToProps=(dispatch)=>{
-  return{
-    patientAction:(data)=>dispatch(patientAction(data))
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createPatient: (data) => dispatch(createPatient(data))
   }
 }
 
-export default compose( withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(CreatePatient);
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(CreatePatient);

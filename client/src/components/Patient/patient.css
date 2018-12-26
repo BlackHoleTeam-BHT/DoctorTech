@@ -1,13 +1,6 @@
-.container {
-    display: 'flex';
-    flexWrap: 'wrap';
-    marginTop: 50
-  }
-
-  .textField {
-    width: 300
-  }
-
-  .textField2{
-    width: 700
-  }
+.icon{
+  text-align:center;
+  margin: auto;
+  margin-bottom: 0;
+  margin-top: 0
+}
