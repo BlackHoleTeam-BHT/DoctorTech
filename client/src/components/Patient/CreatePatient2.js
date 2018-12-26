@@ -10,9 +10,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import './patient.css';
+import $ from 'jquery';
 import { compose } from 'redux'
-import { connect } from 'react-redux'
 import { createPatient } from '../../store/action/patientAction'
+import {connect} from 'react-redux'
+import {patientAction} from '../../store/action/patientAction'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
   container: {
@@ -57,13 +60,55 @@ class CreatePatient extends React.Component {
     email: '',
     location: '',
     selectedOption: 'Male',
-    checked: false
+    checked: false,
+    buttonColor:'secondary',
+    progress:false
 
   }
+
+
+  //Note:handle save button
+
+
   //Note: handle submit information
   handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.createPatient(this.state)
+    e.preventDefault()
+    this.setState({progress:true})
+    const obj = Object.assign({}, this.state)
+    const that = this
+
+   
+
+    $.ajax({
+      type: "POST",
+      url: '/doc/test',
+      data: {
+        obj
+      },
+      success: function (data) {
+        that.setState({progress:false})
+        console.log("user data ", data)
+        that.setState({
+          firstName: '',
+          MiddleName: '',
+          lastName: '',
+          age: '',
+          Phone: '',
+          insurance: '',
+          email: '',
+          location: '',
+          selectedOption: 'Male',
+          checked: false
+          
+
+        })
+
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+
+    });
   }
 
   //Note: handle on change information
@@ -248,10 +293,12 @@ class CreatePatient extends React.Component {
 
                 <Grid md={1} item></Grid>
                 <Grid md={6} item>
-                  <Button type="submit" variant="contained" color="secondary" size="large" className={classes.button} >
-                    <SaveIcon />
+                 {!this.state.progress && <Button type="submit" variant="contained" color={this.state.buttonColor} size="large" className={classes.button} >
+                    <SaveIcon  />
                     Save
-                 </Button>
+                 </Button>}
+
+                 {this.state.progress  && <CircularProgress className={classes.progress} />}
 
                 </Grid>
               </Grid>
