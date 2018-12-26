@@ -7,6 +7,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -34,20 +36,28 @@ const styles = theme => ({
     },
 });
 
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-    id += 1;
-    return { id, name, calories, fat, carbs, protein };
+
+
+class medicalAnalysis extends React.Component {
+
+    state={
+
+    }
+    
+handleClose=(value)=>{
+    console.log('data',value.name)
+
 }
 
-function medicalAnalysis(props) {
+     result=[{name:'blood test',description:' blood test analysis ',date:'01/01/2018',Status:'0'},
+     {name:'blood test',description:' blood test analysis ',date:'01/01/2018',Status:'1'}]
     
 
+  
 
-    var result=[{eventName:'ozil',cost:25,availableSeats:5,date:'01/01/2018',approve:1}]
-    
+ render() {
 
-    const { classes } = props;
+    const { classes } = this.props;
 
     return (
             <div>
@@ -55,34 +65,34 @@ function medicalAnalysis(props) {
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow >
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}}>Event Name</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} numeric>Event Cost</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} numeric>Number of seats</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Event Date</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} numeric>Manager Approval</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}}>Analysis Name</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Description</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Request Date</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Status</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Action</CustomTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {result.map(row => {
+                    {this.result.map((row,key)=> {
                         return (
-                            <TableRow className={classes.row} key={row.id}>
+                            <TableRow className={classes.row} key={key}>
                                 <CustomTableCell style={{  textAlign:"center"}} component="th" scope="row">
-                                    {row.eventName}
+                                    {row.name}
                                 </CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} >{row.cost}</CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} numeric>{row.availableSeats}</CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} numeric>{row.date}</CustomTableCell>
-                                {/* <CustomTableCell numeric style={{  textAlign:"center",color: (row.approve==1) ? 'green':'red' }}>{(row.approve==1)?'approved':'Not Approve'}</CustomTableCell> */}
-                                <CustomTableCell numeric style={{  textAlign:"center",color: (row.approve==1) ? 'green':(row.approve==0) ? 'blue':'red' }}>{(row.approve==1)?'approved':(row.approve==0) ? 'Pending':'rejected'}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{row.description}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{row.date}</CustomTableCell>
+                                <CustomTableCell numeric style={{  textAlign:"center",color: (row.Status==1) ? 'green':'red'}}>{(row.Status==1)?'Done': 'Pending'}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{(row.Status==0) ? <IconButton id={row.Status} onClick={()=>this.handleClose(row)} style={{  color:"black"}}><Icon>lock</Icon></IconButton> : <IconButton style={{  color:"black"}}><Icon>lock_open</Icon></IconButton>}</CustomTableCell>
+                               
                             </TableRow>
                         );
                     })}
                 </TableBody>
             </Table>     
         </Paper>
-        <p style={{textAlign:"center",fontSize:'10px',color:'red',paddingTop:'20px'}}>Press ESC to Exit</p>
+       
         </div>
-    );
+    )}
 }
 
 medicalAnalysis.propTypes = {
