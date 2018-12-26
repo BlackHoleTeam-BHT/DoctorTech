@@ -6,6 +6,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   root: {
@@ -20,11 +21,17 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
+  bItem:{
+      marginLeft: 10,
+      marginTop: 0,
+  }
+  
 });
 
 class MedicalHistory extends React.Component {
   state = {
     expanded: null,
+    history:{heart:0,joint:1,blood:0,diabetes:1,Renal:0,description:'ozil Welcome walid',}
   };
 
   handleChange = panel => (event, expanded) => {
@@ -45,10 +52,21 @@ class MedicalHistory extends React.Component {
             <Typography className={classes.secondaryHeading}><i class="fas fa-2x fa-briefcase-medical"></i></Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
-              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-              maximus est, id dignissim quam.
-            </Typography>
+          
+            <Grid container spacing={0}>
+            <Grid container md={12} item>
+                <Grid md={1} item> </Grid>
+                <Grid md={2} item> {(this.state.history.heart==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Heart-Diseases</b></Grid>
+                <Grid md={2} item> {(this.state.history.blood==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Blood-Pressure</b></Grid>
+                <Grid md={2} item> {(this.state.history.joint==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Joints</b></Grid>
+                <Grid md={2} item> {(this.state.history.diabetes==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Diabetes</b></Grid>
+                <Grid md={2} item> {(this.state.history.Renal==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Renal-Diseases</b></Grid>
+                
+                
+                </Grid>    
+            </Grid>
+           
+            
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
