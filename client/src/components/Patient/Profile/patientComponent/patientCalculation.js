@@ -11,7 +11,10 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
         width: 650,
-        marginTop: 20,
+        marginTop: 10,
+        marginLeft: 0,
+        marginBottom: 10,
+     
 
 
     },
@@ -21,11 +24,12 @@ const styles = theme => ({
         paddingBottom: theme.spacing.unit * 2,
         width: 250,
         display: 'inline-flex',
-        marginLeft: 6,
+        marginLeft: 30,
         marginTop: 8,
+        paddingLeft: 50,
     },
     logo: {
-        marginLeft: 280,
+        marginLeft: 260,
     },
     img: {
         width: 60,

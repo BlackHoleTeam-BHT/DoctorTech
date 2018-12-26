@@ -17,6 +17,8 @@ const styles = theme => ({
         width: '100%',
         maxWidth: 500,
         backgroundColor: theme.palette.background.paper,
+        marginLeft: 0,
+        marginTop: 50,
     },
     inline: {
         display: 'inline',
