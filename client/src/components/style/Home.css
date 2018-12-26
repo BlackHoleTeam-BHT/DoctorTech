@@ -14,3 +14,127 @@ img {
   h2.who{
     font-family:"Comic Sans MS", cursive, sans-serif
   }
+
+.footer-bottom {
+    position: relative;
+    padding: 22px 0px;
+    background-color: #000000;
+    color: rgb(192, 194, 195);
+}
+
+.copyright{
+  padding-left: 50px;
+}
+
+.created{
+  padding-right: 50px;
+}
+
+
+
+
+.widgets-section{
+	position:relative;
+  padding:60px 0px 30px;
+  background-color:#141714 !important;
+}
+
+.footer-widget{
+	position:relative;
+	margin-bottom:30px;
+}
+
+.footer-widget h2{
+	position:relative;
+	font-size:20px;
+	font-weight:600;
+	color:#ffffff;
+	padding-bottom:12px;
+	margin-bottom:20px;
+	text-transform:capitalize;
+}
+
+.footer-widget h2:after{
+	position:absolute;
+	content:'';
+	left:0px;
+	bottom:0px;
+	width:30px;
+	height:2px;
+	background-color:#55b6c7;
+}
+
+.logo-widget{
+	position:relative;
+}
+
+.logo-widget .logo{
+	position:relative;
+	margin-bottom:15px;
+}
+
+.logo-widget .text{
+	position:relative;
+	color:#cccccc;
+	font-size:16px;
+	font-weight:300;
+	font-style:italic;
+}
+
+.list{
+	position:relative;
+}
+
+.list li{
+	position:relative;
+	margin-bottom:8px;
+}
+
+.list li a{
+	position:relative;
+	color:#858585;
+	font-size:15px;
+	transition:all 0.3s ease;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+}
+
+.list li a:hover{
+	color:#55b6c7;
+}
+
+.info-widget{
+	position:relative;
+}
+
+.number{
+	position:relative;
+	color:#cccccc;
+	font-size:18px;
+	font-weight:700;
+	margin-bottom:12px;
+	font-family: 'Montserrat', sans-serif;
+}
+.text{
+	position:relative;
+	color:#cccccc;
+	font-size:16px;
+	margin-bottom:20px;
+}
+
+.footer-bottom{
+	position:relative;
+	padding:22px 0px;
+	background-color:#000000;
+}
+.created{
+	position:relative;
+	color:#858585;
+	font-size:15px;
+}
+
+span{
+  padding-left: 35px;
+}
