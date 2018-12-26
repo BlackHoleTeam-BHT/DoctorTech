@@ -15,12 +15,13 @@ import MedicalAnalysis from '../src/components/Patient/Profile/patientComponent/
 import PhysicalExamination from './components/Patient/Profile/patientComponent/PhysicalExamination'
 import MedicalPrescription from './components/Patient/Profile/patientComponent/medicalPrescription'
 import MedicalHistory from './components/Patient/Profile/patientComponent/MedicalHistory'
+import PatientPlan from './components/Patient/Profile/patientComponent/PatientPlan'
 
 
 // Note:create the store and add the thunk Middleware
 const store=createStore(rootReducer,applyMiddleware(thunk))
 
-ReactDOM.render(<Provider store={store}><MedicalHistory/></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><PatientPlan/></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

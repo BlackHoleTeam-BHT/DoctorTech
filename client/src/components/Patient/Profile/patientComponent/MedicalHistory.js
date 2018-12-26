@@ -31,7 +31,7 @@ const styles = theme => ({
 class MedicalHistory extends React.Component {
   state = {
     expanded: null,
-    history:{heart:0,joint:1,blood:0,diabetes:1,Renal:0,description:'ozil Welcome walid',}
+    history:{heart:0,joint:1,blood:0,diabetes:1,Renal:0,description:'ozil Welcome walid',family:'fff'}
   };
 
   handleChange = panel => (event, expanded) => {
