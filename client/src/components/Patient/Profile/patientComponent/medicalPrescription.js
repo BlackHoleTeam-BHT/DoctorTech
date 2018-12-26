@@ -38,7 +38,7 @@ const styles = theme => ({
 
 
 
-class medicalAnalysis extends React.Component {
+class MedicalPrescription extends React.Component {
 
     state={
 
@@ -49,8 +49,8 @@ handleClose=(value)=>{
 
 }
 
-     result=[{name:'blood test',description:' blood test analysis ',date:'01/01/2018',Status:'0'},
-     {name:'blood test',description:' blood test analysis ',date:'01/01/2018',Status:'1'}]
+     result=[{name:'AXI',DaysInterval:'30',time:'3'},
+     {name:'AUB',DaysInterval:'10',time:'1'}]
     
 
   
@@ -65,24 +65,22 @@ handleClose=(value)=>{
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow >
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}}>Analysis Name</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Description</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Request Date</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Status</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Action</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}}>Medicine Name</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Days Interval</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Times/day</CustomTableCell>
+                        
+                        
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {this.result.map((row,key)=> {
                         return (
                             <TableRow className={classes.row} key={key}>
-                                <CustomTableCell style={{  textAlign:"center"}} component="th" scope="row">
-                                    {row.name}
-                                </CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} >{row.description}</CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} >{row.date}</CustomTableCell>
-                                <CustomTableCell numeric style={{  textAlign:"center",color: (row.Status==1) ? 'green':'red'}}>{(row.Status==1)?'Done': 'Pending'}</CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} >{(row.Status==0) ? <IconButton id={row.Status} onClick={()=>this.handleClose(row)} style={{  color:"black"}}><Icon>lock</Icon></IconButton> : <IconButton onClick={()=>this.handleClose(row)} style={{  color:"black"}}><Icon>lock_open</Icon></IconButton>}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} component="th" scope="row">{row.name}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{row.DaysInterval}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{row.time}</CustomTableCell>
+                                
+                                
                                
                             </TableRow>
                         );
@@ -95,8 +93,8 @@ handleClose=(value)=>{
     )}
 }
 
-medicalAnalysis.propTypes = {
+MedicalPrescription.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(medicalAnalysis);
+export default withStyles(styles)(MedicalPrescription);
