@@ -2,7 +2,6 @@ import React from 'react';
 import {
   MenuList,
   MenuItem,
-  Typography,
   Divider,
 
 } from '@material-ui/core';
