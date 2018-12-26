@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
 import {signIn} from '../../store/action/authActions';
+import '../style/SignIn.css'
+import image from '../style/doctor2.jpg'
 import {
   Button,
   Col,
@@ -48,7 +50,7 @@ class SignIn extends React.Component {
       <div>
         <Container>
           <Row>
-            <Col md="6" sm="12" id="Right" />
+            <Col md="6" sm="12" id="Right" ><img src={image} /></Col>
             <Col md="6" sm="12">
               <div id="signinCss">
                 <h3>Hey there, welcome back.</h3>

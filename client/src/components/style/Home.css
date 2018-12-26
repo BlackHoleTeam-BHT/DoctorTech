@@ -1,0 +1,16 @@
+
+img {
+    width: 100%;
+    height: auto;
+  }
+
+  .carousel-caption{
+    right: 50% !important;
+    bottom: 50% !important;
+    left: 0 !important;
+    color: rebeccapurple !important
+  }
+
+  h2.who{
+    font-family:"Comic Sans MS", cursive, sans-serif
+  }
