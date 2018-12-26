@@ -8,7 +8,8 @@ export const createPatient=(data)=>{
         $.ajax({
             type: "POST",
             url: '/create-patient',
-            data: JSON.stringify({...data}),
+            data: JSON.stringify(data),
+            contentType: 'application/json',
             success: function (data) {
               dispatch({type:'CREATE_PATIENT',data:data})
             },

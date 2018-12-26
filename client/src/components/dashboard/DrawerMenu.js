@@ -6,11 +6,13 @@ import {
 
 } from '@material-ui/core';
 import { NavLink } from 'react-router-dom'
-
+import {connect} from 'react-redux';
 //  import MailIcon from '@material-ui/icons/Mail';
 //  import MenuIcon from '@material-ui/icons/Menu';
 
-const DrawerMenu = ({ classes }) => {
+const DrawerMenu = (props) => {
+  const classes = props.classes;
+  console.log(props)
   return (
     <div>
       <div className={classes.toolbar}>
@@ -20,19 +22,19 @@ const DrawerMenu = ({ classes }) => {
       <MenuList>
         <MenuItem 
           className={classes.menuItem} component={NavLink} exact 
-          to="/dashboard" 
+          to={"/dashboard/" + props.user.id} 
           activeStyle={{ background: "grey", color: "white" }}>
           Home
         </MenuItem>
         <MenuItem 
             className={classes.menuItem} component={NavLink} 
-            to="/dashboard/add-patient" 
+            to={"/dashboard/"+ props.user.id +"/add-patient" }
             activeStyle={{ background: "grey", color: "white" }}>
           Add Patient
         </MenuItem>
         <MenuItem className={classes.menuItem}
            component={NavLink} 
-           to="/dashboard/patients" 
+           to={"/dashboard/"+ props.user.id +"/patients" }
            activeStyle={{ background: "grey", color: "white" }}>
           Patient
         </MenuItem>
@@ -55,4 +57,11 @@ const DrawerMenu = ({ classes }) => {
   )
 }
 
-export default DrawerMenu;
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+  return {
+    user : state.auth.user
+  }
+}
+
+export default connect(mapStateToProps)(DrawerMenu);

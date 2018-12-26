@@ -13,7 +13,8 @@ import Button from '@material-ui/core/Button'
 import DrawerMenu from './DrawerMenu.js';
 import { BrowserRouter, Route} from 'react-router-dom';
 import CreatePatient from '../Patient/CreatePatient2.js';
-
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 const drawerWidth = 260;
 
 const styles = theme => ({
@@ -115,8 +116,8 @@ class Dashboard extends React.Component {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             {/*  Router for Drawer menu TODO add the compnent */}
-            <Route exact path="/dashboard/add-patient" component={CreatePatient} />
-            <Route exact path="/dashboard/patients"  />
+            <Route exact path="/dashboard/:id/add-patient" component={CreatePatient} />
+            <Route exact path="/dashboard/:id/patients"  />
 
           </main>
         </div>
@@ -134,4 +135,10 @@ Dashboard.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Dashboard);
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+  return {
+    user : state.auth.user
+  }
+}
+export default compose(withStyles(styles, { withTheme: true }), connect(mapStateToProps))(Dashboard);

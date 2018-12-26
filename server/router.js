@@ -51,7 +51,6 @@ router.route('/login')
         throw err;
       } else if (result.length > 0) {
         // if result array more than zero we check on password
-        console.log(result)
         if (user.password === result[0].password) {
           // if password correct select user info
           let user = result[0];
@@ -63,7 +62,7 @@ router.route('/login')
               req.login(user, function (done) {
                 console.log("user login Success")
                 res.send({
-                  data: results[0],
+                  data: null || results[0],
                   state: "LOGIN_SUCCESS"
                 })
               });
@@ -90,10 +89,20 @@ router.route('/login')
 // service to deal with  create patient request 
 router.route('/create-patient')
   .post(function (req, res) {
-    console.log(req.body)
-    var user = { id: 1, email: 'e@e.com' }
-    res.send(user)
-  })
+    console.log(req.body);
+    const patient = req.body;
+    // to determind patient state if pending or in progress
+    if(patient.id_Roles === 1) {
+      // if id roles refer to doctor make the patient in progress
+      patient.id_Progress = 2
+    } else {
+      // if id roles refer to assistent make the patient pending on pending list
+      patient.id_Progress = 1
+    }
+    db.insertIntoPatientTable(patient, function(err, res){
+        console.log(res);
+    });
+  });
 
 
 router.route('/delete')

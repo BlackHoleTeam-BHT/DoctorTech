@@ -59,10 +59,10 @@ class CreatePatient extends React.Component {
     insurance: '',
     email: '',
     location: '',
-    selectedOption: 'Male',
-    checked: false,
     buttonColor:'secondary',
-    progress:false
+    progress:false,
+    gender: 'Male',
+    maritalStatus: false,
 
   }
 
@@ -72,43 +72,11 @@ class CreatePatient extends React.Component {
 
   //Note: handle submit information
   handleSubmit = (e) => {
-    e.preventDefault()
-    this.setState({progress:true})
-    const obj = Object.assign({}, this.state)
-    const that = this
-
-   
-
-    $.ajax({
-      type: "POST",
-      url: '/doc/test',
-      data: {
-        obj
-      },
-      success: function (data) {
-        that.setState({progress:false})
-        console.log("user data ", data)
-        that.setState({
-          firstName: '',
-          MiddleName: '',
-          lastName: '',
-          age: '',
-          Phone: '',
-          insurance: '',
-          email: '',
-          location: '',
-          selectedOption: 'Male',
-          checked: false
-          
-
-        })
-
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-
-    });
+    e.preventDefault();
+    const patient = this.state;
+    patient.id_Doctor = this.props.user.id;
+    patient.id_Roles = this.props.user.id_Roles
+    this.props.createPatient(this.state)
   }
 
   //Note: handle on change information
@@ -125,7 +93,7 @@ class CreatePatient extends React.Component {
   handleOptionChange = (e) => {
     console.log(e.target.value)
     this.setState({
-      selectedOption: e.target.value
+      gender: e.target.value
     });
   }
 
@@ -164,8 +132,6 @@ class CreatePatient extends React.Component {
                     type="text"
                     margin="normal"
                     className={classes.textField}
-
-
                   />
                 </Grid>
                 <Grid md={3} item>
@@ -264,11 +230,11 @@ class CreatePatient extends React.Component {
                     aria-label="Gender"
                     name="gender1"
                     className={classes.group}
-                    value={this.state.selectedOption}
+                    value={this.state.gender}
                     onChange={this.handleOptionChange}
                     style={{ display: 'flex', flexDirection: 'row' }}
                   >
-                    <FormControlLabel value="Male" control={<Radio checked={this.state.selectedOption === 'Male'} />} label="Male" />
+                    <FormControlLabel value="Male" control={<Radio checked={this.state.gender === 'Male'} />} label="Male" />
                     <FormControlLabel value="Female" control={<Radio />} label="Female" />
                   </RadioGroup>
                 </Grid>
@@ -278,8 +244,8 @@ class CreatePatient extends React.Component {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={this.state.checked}
-                        onChange={() => { this.setState({ checked: !this.state.checked }) }}
+                        checked={this.state.maritalStatus}
+                        onChange={() => { this.setState({ maritalStatus: !this.state.checked }) }}
                         value="checkedA"
                       />
                     }
@@ -321,7 +287,8 @@ CreatePatient.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patient: state.patient.patient
+    patient: state.patient.patient,
+    user : state.auth.user
   }
 }
 
