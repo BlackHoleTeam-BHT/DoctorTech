@@ -1,6 +1,6 @@
 import React from "react";
-import $ from "jquery";
-import "../style/SignIn.css";
+import { connect } from 'react-redux';
+import {signIn} from '../../store/action/authActions';
 import {
   Button,
   Col,
@@ -8,7 +8,8 @@ import {
   Container,
   Label,
   FormGroup,
-  Input
+  Input,
+  Alert
 } from "reactstrap";
 
 class SignIn extends React.Component {
@@ -20,37 +21,29 @@ class SignIn extends React.Component {
       isLoggedIn: false
     };
   }
-
+  // this function to get datan from
   handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
-
+  // this function to login 
   handleSubmit = e => {
     e.preventDefault();
-
     let userSignInDetails = {
       email: this.state.email,
       password: this.state.password
     }
-
-    $.ajax({
-      type: "POST",
-      url: "/logIn",  
-      data: userSignInDetails,
-     
-      success: data => {
-        alert("Welcome");
-      },
-      error: err => {
-        console.log("err", err);
-      }
-
-    });
+    // call sign in function from props that was maped from redux dispatch
+    this.props.signIn(userSignInDetails)
   };
 
   render() {
+    console.log(this.props)
+    // to check if the user make sign up successfully
+    if (this.props.user !== null) {
+      this.props.history.push('/dashboard/' + this.props.user.id);
+    }
     return (
       <div>
         <Container>
@@ -91,6 +84,16 @@ class SignIn extends React.Component {
                     Sign In
                   </Button>
                 </FormGroup>
+                <div className="text-center" style ={{marginTop: 20}}>
+                  <a href="/signup">Create new account ? Sign up</a>
+                </div>
+                <div  className="text-center" style ={{marginTop: 20}}>
+                  {!this.props.correctLogin &&
+                    <Alert color="danger">
+                       Your email or password not correct !!!
+                    </Alert>
+                  }
+                </div>
               </div>
             </Col>
           </Row>
@@ -100,4 +103,18 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+// map dispatch (actions) from reducer to component props
+const mapDipatchToProps = (dispatch) => {
+  return {
+    signIn: (user) => dispatch(signIn(user))
+  }
+}
+// map state from reducer to component props
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+    correctLogin: state.auth.correctLogin
+  }
+}
+
+export default connect(mapStateToProps, mapDipatchToProps)(SignIn);

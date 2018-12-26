@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({
 
 // Note:add the session config
 app.use(cookieParser());
-var sessionStore = new MySQLStore({}, dbConnection.db);
+var sessionStore = new MySQLStore({}, dbConnection);
 app.use(session({
   secret: 'huhkjhjgyftdtgi45',
   resave: false,
@@ -38,7 +38,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Note: activate the router
-app.use('/doc', router);
+app.use('/', router);
 
 
 const PORT = process.env.PORT || 5000;
