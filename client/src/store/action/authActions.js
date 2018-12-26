@@ -15,7 +15,7 @@ export const signUp = (user) => {
                 if (res.state !== "USER_EXIST") {
                     dispatch({ type: 'SIGN_UP', data: res.data })
                 } else {
-                    dispatch({ type: 'USER_EXIST', userExist: true })
+                    dispatch({ type: 'SIGN_UP_USER_EXIST', userExist: true })
                 }
 
             },
@@ -38,17 +38,17 @@ export const signIn = (user) => {
             contentType: 'application/json',
             success: (res) => {
                 // dispatch the data from response  with type of action to authReducer
-                if (res.state !== "USER_EXIST") {
+                if (res.state === "LOGIN_SUCCESS") {
                     console.log(res)
-                    dispatch({ type: 'SIGN_IN', data: res.data })
+                    dispatch({ type: 'LOGIN', data: res.data, correctLogin: true})
                 } else {
-                    dispatch({ type: 'SIGN_IN', data: res.data })
+                    dispatch({ type: 'LOGIN_NOT_SUCCESS', correctLogin: false })
                 }
 
             },
             error: (error) => {
                 // dispatch the err  with type of action to authReducer
-                dispatch({ type: 'SIGN_IN_ERROE', data: error })
+                dispatch({ type: 'LOGIN_ERROE', data: error })
             }
         })
 

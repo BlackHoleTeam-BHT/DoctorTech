@@ -8,7 +8,8 @@ import {
   Container,
   Label,
   FormGroup,
-  Input
+  Input,
+  Alert
 } from "reactstrap";
 
 class SignIn extends React.Component {
@@ -83,6 +84,16 @@ class SignIn extends React.Component {
                     Sign In
                   </Button>
                 </FormGroup>
+                <div className="text-center" style ={{marginTop: 20}}>
+                  <a href="/signup">Create new account ? Sign up</a>
+                </div>
+                <div  className="text-center" style ={{marginTop: 20}}>
+                  {!this.props.correctLogin &&
+                    <Alert color="danger">
+                       Your email or password not correct !!!
+                    </Alert>
+                  }
+                </div>
               </div>
             </Col>
           </Row>
@@ -101,7 +112,8 @@ const mapDipatchToProps = (dispatch) => {
 // map state from reducer to component props
 const mapStateToProps = (state) => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    correctLogin: state.auth.correctLogin
   }
 }
 

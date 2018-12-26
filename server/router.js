@@ -13,22 +13,24 @@ router.route('/sign-up')
     //add user role
     user.id_Roles = 1;
     // check if the account exist
-    db.isAccountExist(user, function(err, result) {
-      if(err) {
+    db.isAccountExist(user, function (err, result) {
+      if (err) {
         throw err
-      } else if(result.length === 0) {
+      } else if (result.length === 0) {
         // insert Doctor  info
-          db.insertUserInfo(user, function(err, insertId) {
-             console.log(insertId)
-             db.selectDoctorInfo(insertId, function(err, results) {
-               if(err) throw err;
-               console.log(results);
-               res.send({
-                 state:"USER_NOT_EXIST",
-                 data: results[0],
-               });
-             });
+        db.insertUserInfo(user, function (err, insertId) {
+          console.log(insertId)
+          db.selectDoctorInfo(insertId, function (err, results) {
+            let user = results[0];
+            if (err) throw err;
+            req.login(user, function (done) {
+              res.send({
+                state: "USER_NOT_EXIST",
+                data: results[0],
+              });
+            });
           });
+        });
       } else {
         console.log(" Exist")
         res.send({
@@ -43,15 +45,50 @@ router.route('/sign-up')
 // dealing with sign in request
 router.route('/login')
   .post(function (req, res) {
-    console.log(req.body)
-    var user = { id: 1, email: 'e@e.com' }
-    req.login(user, function (done) {
-      res.send(user)
-    })
+    let user = req.body;
+    db.isAccountExist(user, function (err, result) {
+      if (err) {
+        throw err;
+      } else if (result.length > 0) {
+        // if result array more than zero we check on password
+        console.log(result)
+        if (user.password === result[0].password) {
+          // if password correct select user info
+          let user = result[0];
+          db.selectDoctorInfo(user.id, function (err, results) {
+            if (err) {
+              throw err
+            } else {
+              // add session for the user
+              req.login(user, function (done) {
+                console.log("user login Success")
+                res.send({
+                  data: results[0],
+                  state: "LOGIN_SUCCESS"
+                })
+              });
+            }
+          });
+        } else {
+          // if the password not match user password
+          res.send({
+            data: null,
+            state: "PASSWORD_NOT_CORRECT"
+          });
+        }
+      } else {
+        // if the user not exist
+        res.send({
+          data: null,
+          state: "USER_NOT_EXIST"
+        });
+      }
+    });
 
   })
 
-  router.route('/create-patient')
+// service to deal with  create patient request 
+router.route('/create-patient')
   .post(function (req, res) {
     console.log(req.body)
     var user = { id: 1, email: 'e@e.com' }
@@ -72,10 +109,10 @@ router.route('/check')
 
 //Note:test
 router.route('/test')
-  .post( function (req, res) {
+  .post(function (req, res) {
     console.log(req.body)
     res.send('done')
-  })  
+  })
 
 //Note : 
 function authenticationMiddleware() {
@@ -105,10 +142,6 @@ passport.deserializeUser(function (id, done) {
   })
 
 });
-
-
-
-
 
 
 module.exports = router;

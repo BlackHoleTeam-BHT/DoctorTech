@@ -61,6 +61,7 @@ const insertUserInfo = (user , callback) => {
     })
  }
 
+
 module.exports.isAccountExist = isAccountExist;
 module.exports.insertUserInfo = insertUserInfo;
 module.exports.selectDoctorInfo = selectDoctorInfo;
