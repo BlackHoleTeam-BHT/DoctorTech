@@ -50,7 +50,7 @@ const styles = theme => ({
 
   },formControl: {
     margin: theme.spacing.unit,
-    minWidth: 120,
+    minWidth: 150,
   },
   select:{
     color:'red'
@@ -69,14 +69,14 @@ const styles = theme => ({
 class PatientProfile extends React.Component {
   state = {
     value: 0,
-    selectValue:''
+    selectValue:10
   };
   handleChange = (event, value) => {
     console.log(event.target, value)
     this.setState({ value });
   };
 
-  handleChangeSelect=(event,value)=>{
+  handleChangeSelect=(event)=>{
     console.log('event',event.target.value)
     this.setState({ [event.target.name]: event.target.value });
 
@@ -97,10 +97,11 @@ class PatientProfile extends React.Component {
           <Grid md={1} item></Grid>
           <Grid md={5} item >
             <PatientCard id={this.props.match.params.id}></PatientCard>
-            <form className={classes.root} autoComplete="off">
+            
             <FormControl className={classes.formControl}>
             <InputLabel htmlFor="age-simple">Select Case</InputLabel>
             <Select
+            
             
             value={this.state.selectValue}
             onChange={this.handleChangeSelect}
@@ -109,15 +110,13 @@ class PatientProfile extends React.Component {
               id: 'age-simple',
             }}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
+
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
           </Select>
           </FormControl>
-          </form>
+          
           </Grid>
           <Grid md={6} item right>
             <PatientCalculation ></PatientCalculation>
