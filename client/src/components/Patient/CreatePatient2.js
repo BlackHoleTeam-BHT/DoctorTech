@@ -61,7 +61,8 @@ class CreatePatient extends React.Component {
     buttonColor: 'secondary',
     progress: false,
     gender: 'Male',
-    maritalStatus: false,
+    maritalStatus: false
+    
 
   }
 
@@ -252,7 +253,7 @@ class CreatePatient extends React.Component {
                     control={
                       <Checkbox
                         checked={this.state.maritalStatus}
-                        onChange={() => { this.setState({ maritalStatus: !this.state.checked }) }}
+                        onChange={() => { this.setState({ maritalStatus: !this.state.maritalStatus }) }}
                         value="checkedA"
                       />
                     }
