@@ -41,7 +41,7 @@ export const getPatients = (doctorId) => {
 }
 
 
-// Note: Get the user information based on ID
+// Note: Get the patient information based on ID
 export const GetUserInformation=(id)=>{
   console.log('action','recived')
   
@@ -50,6 +50,33 @@ export const GetUserInformation=(id)=>{
     $.ajax({
       type: "POST",
       url: '/patientInformation',
+      contentType:'application/json',
+      data:JSON.stringify({id:id}),
+      success: function (data) {
+        dispatch({type:'GetUserInformation',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}
+
+// Note: Get the patient Casses based on ID
+export const GetPatientCassis=(id)=>{
+  console.log('action Casses','recived')
+
+  
+  return(dispatch, getState)=>{
+
+    $.ajax({
+      type: "POST",
+      url: '/patientInCassis',
       contentType:'application/json',
       data:JSON.stringify({id:id}),
       success: function (data) {

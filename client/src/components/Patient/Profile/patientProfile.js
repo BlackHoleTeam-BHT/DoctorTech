@@ -19,6 +19,9 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import {connect} from 'react-redux'
+import { compose } from 'redux'
+import {GetPatientCassis} from '../../../store/action/patientAction'
 
 
 function TabContainer(props) {
@@ -67,10 +70,20 @@ const styles = theme => ({
 
 
 class PatientProfile extends React.Component {
-  state = {
-    value: 0,
-    selectValue:10
-  };
+
+  constructor(props){
+    super(props)
+    this.state = {
+      value: 0,
+      selectValue:''
+    };
+
+ 
+
+}
+
+  
+
   handleChange = (event, value) => {
     console.log(event.target, value)
     this.setState({ value });
@@ -84,6 +97,7 @@ class PatientProfile extends React.Component {
 
   componentDidMount() {
     console.log('paramId',this.props.match.params.id)
+    console.log('x1',this.props)
 }
 
 
@@ -179,7 +193,23 @@ PatientProfile.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PatientProfile);
+
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+  return {
+    patient: state
+  }
+}
+
+// Note: add the action to the props
+const mapDispatchToProps = (dispatch) => {
+  return {
+    GetPatientCassis: (id) => dispatch(GetPatientCassis(id))
+  }
+}
+
+
+export default compose(withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(PatientProfile);
 
 
 
