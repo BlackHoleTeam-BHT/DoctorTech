@@ -14,6 +14,7 @@ import { compose } from 'redux'
 import {GetUserInformation} from '../../../../store/action/patientAction'
 
 
+
 //Note:page style
 const styles = theme => ({
     root: {
@@ -107,7 +108,7 @@ class PatientCard extends React.Component {
                         </div>   
                         
 
-
+                        
    
 
             </List>

@@ -38,7 +38,7 @@ export const getPatients = (doctorId) => {
     });
   }
     }
-}
+
 
 
 // Note: Get the patient information based on ID
@@ -53,7 +53,8 @@ export const GetUserInformation=(id)=>{
       contentType:'application/json',
       data:JSON.stringify({id:id}),
       success: function (data) {
-        dispatch({type:'GetPatientCassis',data:data})
+      console.log()
+        dispatch({type:'GetUserInformation',data:data})
        
       },
       error: (err) => {
@@ -81,7 +82,8 @@ export const GetPatientCassis=(id)=>{
       contentType:'application/json',
       data:JSON.stringify({id:id}),
       success: function (data) {
-        dispatch({type:'GetUserInformation',data:data})
+        console.log('d',data)
+        dispatch({type:'GetPatientCassis',data:data})
       },
       error: (err) => {
         console.log('server err',err)
