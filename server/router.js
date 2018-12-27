@@ -152,6 +152,19 @@ function authenticationMiddleware() {
   }
 }
 
+//Note :to select the patient information
+router.route('/patientInformation')
+  .post(function(req,res){
+    const id=req.body.id
+    db.selectPatientInfo(id,function(err,result){
+      if(err){
+        throw err
+      }else{
+        res.send(result)
+      }
+    })
+  })
+
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
   done(null, user.id);

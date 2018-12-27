@@ -111,3 +111,4 @@ module.exports.insertUserInfo = insertUserInfo;
 module.exports.selectDoctorInfo = selectDoctorInfo;
 module.exports.insertIntoPatientTable = insertIntoPatientTable;
 module.exports.selectAllPatientInfo = selectAllPatientInfo;
+module.exports.selectPatientInfo = selectPatientInfo;

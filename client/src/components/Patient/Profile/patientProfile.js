@@ -15,6 +15,10 @@ import PhysicalExamination from './patientComponent/PhysicalExamination'
 import MedicalAnalysis from './patientComponent/medicalAnalysis'
 import MedicalPrescription from './patientComponent/medicalPrescription'
 import PatientPlan from './patientComponent/PatientPlan'
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 
 function TabContainer(props) {
@@ -44,7 +48,20 @@ const styles = theme => ({
   },
   tab: {
 
-  }
+  },formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+  },
+  select:{
+    color:'red'
+  },
+  root2:{
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2,
+  },
 })
 
 
@@ -52,11 +69,18 @@ const styles = theme => ({
 class PatientProfile extends React.Component {
   state = {
     value: 0,
+    selectValue:''
   };
   handleChange = (event, value) => {
     console.log(event.target, value)
     this.setState({ value });
   };
+
+  handleChangeSelect=(event,value)=>{
+    console.log('event',event.target.value)
+    this.setState({ [event.target.name]: event.target.value });
+
+  }
 
   componentDidMount() {
     console.log('paramId',this.props.match.params.id)
@@ -73,6 +97,27 @@ class PatientProfile extends React.Component {
           <Grid md={1} item></Grid>
           <Grid md={5} item >
             <PatientCard id={this.props.match.params.id}></PatientCard>
+            <form className={classes.root} autoComplete="off">
+            <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="age-simple">Select Case</InputLabel>
+            <Select
+            
+            value={this.state.selectValue}
+            onChange={this.handleChangeSelect}
+            inputProps={{
+              name: 'selectValue',
+              id: 'age-simple',
+            }}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+          </FormControl>
+          </form>
           </Grid>
           <Grid md={6} item right>
             <PatientCalculation ></PatientCalculation>

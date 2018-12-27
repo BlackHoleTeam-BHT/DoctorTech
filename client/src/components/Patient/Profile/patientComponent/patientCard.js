@@ -42,59 +42,63 @@ const styles = theme => ({
 
 class PatientCard extends React.Component {
 
-    state = {
-        complaint: [{
-            id: 1,
-            Name: 'Walid HAj Hussien',
-            gender: " Male",
-            Age:'27',
-            Gender: 'Male'
-        }]
+
+
+    constructor(props){
+        super(props)
+        this.state = {
+
+        }
+
+        //Note : to get the patient information
+        this.props.GetPationInformation(this.props.id)
+
     }
 
 
     componentDidMount() {
-        var Id=this.props.id
-        console.log('Case',Id)
-        this.props.GetPationInformation(Id)
-    }
 
+    }
 
     render() {
         const { classes } = this.props;
+        console.log(this.props.patient)
+        var PatioentInformation =this.props.patient[0]
+        
+  
+        
         
         return (
             <List className={classes.root}>
-                {this.state.complaint.map((value, key) => {
-                    return (
+             
                          <div>
                              
-                        <ListItem alignItems="flex-start" key={key} >
+                        <ListItem alignItems="flex-start"  >
                             <ListItemAvatar >
-                            <Avatar alt="Remy Sharp" src={patientlogo} title={value.date} className={classes.img} />
+                            <Avatar alt="Remy Sharp" src={patientlogo} className={classes.img} />
                             
                             </ListItemAvatar>
                             <ListItemText
                             className={classes.list}
-                                primary={value.Name}
+                                primary={PatioentInformation.firstName}
                                 secondary={
                                     
                                     <React.Fragment className={classes.fragment}>
                                     <br/> 
                                         <Typography component="span" className={classes.inline} color="textPrimary">
-                                           Gender&nbsp;&nbsp;&nbsp;:&nbsp;   
+                                        Gender&nbsp;&nbsp;:&nbsp;&nbsp;   
                                           </Typography>
-                                        {value.gender}
+                                          {PatioentInformation.gender}
                                         <br/>
                                         <Typography component="span" className={classes.inline} color="textPrimary">
                                            Age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
                                           </Typography>
-                                        {value.Age}
+                                          {PatioentInformation.age}
                                         <br/>
                                         <Typography component="span" className={classes.inline} color="textPrimary">
-                                        Gender&nbsp;&nbsp;:&nbsp;&nbsp;
+                                           Status&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
                                           </Typography>
-                                        {value.Gender}
+                                          {(PatioentInformation.maritalStatus=='true') ? 'Married':'Single'}
                                     </React.Fragment>
                                 }
                             />
@@ -104,9 +108,7 @@ class PatientCard extends React.Component {
                         
 
 
-                    )
-
-                })}
+   
 
             </List>
         );
@@ -123,7 +125,7 @@ PatientCard.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
     return {
-      patient: state
+      patient: state.patient.PatientProfile
     }
   }
   

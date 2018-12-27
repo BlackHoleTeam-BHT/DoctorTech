@@ -48,10 +48,12 @@ export const GetUserInformation=(id)=>{
   return(dispatch, getState)=>{
 
     $.ajax({
-      type: "Get",
-      url: '/create-patient',
+      type: "POST",
+      url: '/patientInformation',
+      contentType:'application/json',
+      data:JSON.stringify({id:id}),
       success: function (data) {
-        console.log('server recived')
+        dispatch({type:'GetUserInformation',data:data})
       },
       error: (err) => {
         console.log('server err',err)

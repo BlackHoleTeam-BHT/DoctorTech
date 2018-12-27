@@ -1,6 +1,15 @@
 const initState={
     patient: null,
-    patients: []
+    patients: [],
+    PatientProfile:[{
+      firstName:'',
+      lastName:'',
+      age:'',
+      gender:'',
+      maritalStatus:''
+
+    }]
+
 }
 
 const patientReducer=(state=initState,action)=>{
@@ -16,10 +25,10 @@ const patientReducer=(state=initState,action)=>{
       }
       case "CREATE_PATIENT_ERROR":
         return state;
-      case "GetPationtInformation":
+      case "GetUserInformation":
         return {
           ...state,
-          patient:action.data    
+          PatientProfile:action.data    
         }  
       default:
         return state;
