@@ -10,10 +10,11 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        width: 650,
+        width: 600,
         marginTop: 10,
-        marginLeft: 0,
+        marginLeft: 60,
         marginBottom: 10,
+        
      
 
 
@@ -22,9 +23,9 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        width: 250,
+        width: 200,
         display: 'inline-flex',
-        marginLeft: 30,
+        marginLeft: 60,
         marginTop: 8,
         paddingLeft: 50,
     },

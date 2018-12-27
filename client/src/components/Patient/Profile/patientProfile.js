@@ -10,6 +10,12 @@ import NoSsr from '@material-ui/core/NoSsr';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import ChiefComplaint from './patientComponent/chiefComplent'
+import MedicalHistory from './patientComponent/MedicalHistory'
+import PhysicalExamination from './patientComponent/PhysicalExamination'
+import MedicalAnalysis from './patientComponent/medicalAnalysis'
+import MedicalPrescription from './patientComponent/medicalPrescription'
+import PatientPlan from './patientComponent/PatientPlan'
+
 
 function TabContainer(props) {
     return (
@@ -33,6 +39,8 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
+        paddingLeft: 0,
+        paddingRight: 0,
     },
     tab:{
         
@@ -85,11 +93,27 @@ class PatientProfile extends React.Component {
           {value === 0 && <TabContainer>
             <ChiefComplaint></ChiefComplaint>
               </TabContainer>}
-          {value === 1 && <TabContainer>Page Two</TabContainer>}
-          {value === 2 && <TabContainer>Page Three</TabContainer>}
-          {value === 3 && <TabContainer>Page four</TabContainer>}
-          {value === 4 && <TabContainer>Page five</TabContainer>}
-          {value === 5 && <TabContainer>Page six</TabContainer>}
+
+          {value === 1 && <TabContainer>
+           <MedicalHistory></MedicalHistory>
+              </TabContainer>}
+
+          {value === 2 && <TabContainer>
+            <PhysicalExamination></PhysicalExamination>
+              </TabContainer>}
+
+          {value === 3 && <TabContainer>
+            <MedicalAnalysis></MedicalAnalysis>
+              </TabContainer>}
+
+          {value === 4 && <TabContainer>
+            <MedicalPrescription></MedicalPrescription>
+              </TabContainer>}
+
+          {value === 5 && <TabContainer>
+            <PatientPlan></PatientPlan>
+              </TabContainer>}
+
         </div>
       </NoSsr>
       <Grid md={1} item></Grid>
