@@ -16,9 +16,25 @@ export const createPatient=(data)=>{
             error: (err) => {
               dispatch({type:'CREATE_PATIENT_ERROR', error: err})
             }
-      
           });
-        
-
     }
+}
+
+// this action in redux to get patient info for each doctor
+export const getPatients=  (doctorId) => {
+  return (dispatch, getState)=>{
+      //sync
+      $.ajax({
+          type: "POST",
+          url: '/patients',
+          data: JSON.stringify({doctorId : doctorId}),
+          contentType: 'application/json',
+          success: function (data) {
+            dispatch({type:'GET_PATIENTS',data:data})
+          },
+          error: (err) => {
+            dispatch({type:'GET_PATIENTS_ERROR', error: err})
+          }
+        });
+  }
 }
