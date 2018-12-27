@@ -2,11 +2,11 @@ const mysql = require('mysql');
 
 //Note: to setup the database credential
 var dbConnection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: '19919901',
+  host: "db4free.net",
+  user: "doctortech",
+  password: '123456789',
   insecureAuth: true,
-  database: 'doctortechdb'
+  database: 'doctortech'
 });
 
 //Note:create the connection with database
@@ -18,4 +18,4 @@ dbConnection.connect(function(err) {
   }
 });
 
-module.exports.db = dbConnection;
+module.exports = dbConnection;
