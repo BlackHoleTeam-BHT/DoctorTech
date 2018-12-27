@@ -78,6 +78,7 @@ class PatientProfile extends React.Component {
       selectValue:''
     };
 
+    this.props.GetPatientCassis(this.props.match.params.id)
  
 
 }
@@ -102,6 +103,7 @@ class PatientProfile extends React.Component {
 
 
   render() {
+    console.log('xxx',this.props)
     const { classes } = this.props;
 
     const { value } = this.state;
@@ -124,10 +126,12 @@ class PatientProfile extends React.Component {
               id: 'age-simple',
             }}
           >
-
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+              {this.props.patient.currentCase.map((value,key)=>{
+                return (
+                  <MenuItem key={key} value={value.patientId}>{value.title}</MenuItem>
+                )
+              })}
+       
           </Select>
           </FormControl>
           
@@ -197,7 +201,7 @@ PatientProfile.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patient: state
+    patient: state.patient
   }
 }
 

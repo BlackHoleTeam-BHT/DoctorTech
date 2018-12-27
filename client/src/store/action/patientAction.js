@@ -53,7 +53,8 @@ export const GetUserInformation=(id)=>{
       contentType:'application/json',
       data:JSON.stringify({id:id}),
       success: function (data) {
-        dispatch({type:'GetUserInformation',data:data})
+        dispatch({type:'GetPatientCassis',data:data})
+       
       },
       error: (err) => {
         console.log('server err',err)
@@ -69,7 +70,7 @@ export const GetUserInformation=(id)=>{
 
 // Note: Get the patient Casses based on ID
 export const GetPatientCassis=(id)=>{
-  console.log('action Casses','recived')
+  console.log('action Casses',id)
 
   
   return(dispatch, getState)=>{

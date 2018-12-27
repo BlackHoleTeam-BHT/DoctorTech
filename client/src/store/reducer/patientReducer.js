@@ -8,7 +8,8 @@ const initState={
       gender:'',
       maritalStatus:''
 
-    }]
+    }],
+    currentCase:[]
 
 }
 
@@ -29,7 +30,12 @@ const patientReducer=(state=initState,action)=>{
         return {
           ...state,
           PatientProfile:action.data    
-        }  
+        }
+      case "GetPatientCassis":
+      return{
+        ...state,
+        currentCase:action.data
+      }    
       default:
         return state;
     }
