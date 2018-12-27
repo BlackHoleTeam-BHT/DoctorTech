@@ -16,6 +16,11 @@ const patientReducer=(state=initState,action)=>{
       }
       case "CREATE_PATIENT_ERROR":
         return state;
+      case "GetPationtInformation":
+        return {
+          ...state,
+          patient:action.data    
+        }  
       default:
         return state;
     }

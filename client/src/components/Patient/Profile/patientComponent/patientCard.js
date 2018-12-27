@@ -9,6 +9,9 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import logo from '../../../../image/chief2.jpg'
 import patientlogo from '../../../../image/patientlogo.jpg'
+import {connect} from 'react-redux'
+import { compose } from 'redux'
+import {GetUserInformation} from '../../../../store/action/patientAction'
 
 
 //Note:page style
@@ -45,13 +48,21 @@ class PatientCard extends React.Component {
             Name: 'Walid HAj Hussien',
             gender: " Male",
             Age:'27',
-            BirthDay: '01/06/1991'
+            Gender: 'Male'
         }]
+    }
+
+
+    componentDidMount() {
+        var Id=this.props.id
+        console.log('Case',Id)
+        this.props.GetPationInformation(Id)
     }
 
 
     render() {
         const { classes } = this.props;
+        
         return (
             <List className={classes.root}>
                 {this.state.complaint.map((value, key) => {
@@ -81,9 +92,9 @@ class PatientCard extends React.Component {
                                         {value.Age}
                                         <br/>
                                         <Typography component="span" className={classes.inline} color="textPrimary">
-                                        BirthDay&nbsp;:&nbsp;
+                                        Gender&nbsp;&nbsp;:&nbsp;&nbsp;
                                           </Typography>
-                                        {value.BirthDay}
+                                        {value.Gender}
                                     </React.Fragment>
                                 }
                             />
@@ -109,5 +120,20 @@ PatientCard.propTypes = {
 };
 
 
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+    return {
+      patient: state
+    }
+  }
+  
+  //Note: add the action to the props
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      GetPationInformation: (id) => dispatch(GetUserInformation(id))
+    }
+  }
 
-export default withStyles(styles)(PatientCard);
+
+
+export default compose(withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(PatientCard);

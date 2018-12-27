@@ -37,4 +37,30 @@ export const getPatients = (doctorId) => {
       }
     });
   }
+    }
+}
+
+
+// Note: Get the user information based on ID
+export const GetUserInformation=(id)=>{
+  console.log('action','recived')
+  
+  return(dispatch, getState)=>{
+
+    $.ajax({
+      type: "Get",
+      url: '/create-patient',
+      success: function (data) {
+        console.log('server recived')
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
 }
