@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import {Typography} from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
@@ -13,8 +14,8 @@ import './patient.css';
 import $ from 'jquery';
 import { compose } from 'redux'
 import { createPatient } from '../../store/action/patientAction'
-import {connect} from 'react-redux'
-import {patientAction} from '../../store/action/patientAction'
+import { connect } from 'react-redux'
+import { patientAction } from '../../store/action/patientAction'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
@@ -59,10 +60,10 @@ class CreatePatient extends React.Component {
     insurance: '',
     email: '',
     location: '',
-    selectedOption: 'Male',
-    checked: false,
-    buttonColor:'secondary',
-    progress:false
+    buttonColor: 'secondary',
+    progress: false,
+    gender: 'Male',
+    maritalStatus: false,
 
   }
 
@@ -72,43 +73,11 @@ class CreatePatient extends React.Component {
 
   //Note: handle submit information
   handleSubmit = (e) => {
-    e.preventDefault()
-    this.setState({progress:true})
-    const obj = Object.assign({}, this.state)
-    const that = this
-
-   
-
-    $.ajax({
-      type: "POST",
-      url: '/doc/test',
-      data: {
-        obj
-      },
-      success: function (data) {
-        that.setState({progress:false})
-        console.log("user data ", data)
-        that.setState({
-          firstName: '',
-          MiddleName: '',
-          lastName: '',
-          age: '',
-          Phone: '',
-          insurance: '',
-          email: '',
-          location: '',
-          selectedOption: 'Male',
-          checked: false
-          
-
-        })
-
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-
-    });
+    e.preventDefault();
+    const patient = this.state;
+    patient.id_Doctor = this.props.user.id;
+    patient.id_Roles = this.props.user.id_Roles
+    this.props.createPatient(this.state)
   }
 
   //Note: handle on change information
@@ -125,7 +94,7 @@ class CreatePatient extends React.Component {
   handleOptionChange = (e) => {
     console.log(e.target.value)
     this.setState({
-      selectedOption: e.target.value
+      gender: e.target.value
     });
   }
 
@@ -136,12 +105,15 @@ class CreatePatient extends React.Component {
 
     return (
       <div>
+        <Grid className="text-center">
+          <Typography variant="display2">Add new patient</Typography>
+        </Grid>
         <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
           <div className={classes.root}>
             <Grid container spacing={24}>
               <Grid container md={12} item>
                 <Grid md={1} item></Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={11} xs={11} item>
                   <TextField
                     required
                     id="firstName"
@@ -154,7 +126,7 @@ class CreatePatient extends React.Component {
 
                   />
                 </Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={12} xs={11} item>
                   <TextField
                     required
                     id="MiddleName"
@@ -164,11 +136,9 @@ class CreatePatient extends React.Component {
                     type="text"
                     margin="normal"
                     className={classes.textField}
-
-
                   />
                 </Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={12} xs={12} item>
                   <TextField
                     required
                     value={this.state.lastName}
@@ -187,7 +157,7 @@ class CreatePatient extends React.Component {
 
               <Grid container md={12} item>
                 <Grid md={1} item></Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={11} xs={11} item>
                   <TextField
                     required
                     value={this.state.age}
@@ -199,7 +169,7 @@ class CreatePatient extends React.Component {
                     margin="normal"
                   />
                 </Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={11} xs={11} item>
                   <TextField
                     onChange={this.handleChange}
                     value={this.state.Phone}
@@ -210,7 +180,7 @@ class CreatePatient extends React.Component {
                     margin="normal"
                   />
                 </Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={11} xs={11} item>
                   <TextField
                     onChange={this.handleChange}
                     value={this.state.insurance}
@@ -264,11 +234,11 @@ class CreatePatient extends React.Component {
                     aria-label="Gender"
                     name="gender1"
                     className={classes.group}
-                    value={this.state.selectedOption}
+                    value={this.state.gender}
                     onChange={this.handleOptionChange}
                     style={{ display: 'flex', flexDirection: 'row' }}
                   >
-                    <FormControlLabel value="Male" control={<Radio checked={this.state.selectedOption === 'Male'} />} label="Male" />
+                    <FormControlLabel value="Male" control={<Radio checked={this.state.gender === 'Male'} />} label="Male" />
                     <FormControlLabel value="Female" control={<Radio />} label="Female" />
                   </RadioGroup>
                 </Grid>
@@ -278,8 +248,8 @@ class CreatePatient extends React.Component {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={this.state.checked}
-                        onChange={() => { this.setState({ checked: !this.state.checked }) }}
+                        checked={this.state.maritalStatus}
+                        onChange={() => { this.setState({ maritalStatus: !this.state.checked }) }}
                         value="checkedA"
                       />
                     }
@@ -287,18 +257,15 @@ class CreatePatient extends React.Component {
                   />
                 </Grid>
               </Grid>
-
-
               <Grid container md={12} style={{ marginTop: '25px' }} item>
-
                 <Grid md={1} item></Grid>
                 <Grid md={6} item>
-                 {!this.state.progress && <Button type="submit" variant="contained" color={this.state.buttonColor} size="large" className={classes.button} >
-                    <SaveIcon  />
+                  {!this.state.progress && <Button type="submit" variant="contained" color={this.state.buttonColor} size="large" className={classes.button} >
+                    <SaveIcon />
                     Save
                  </Button>}
 
-                 {this.state.progress  && <CircularProgress className={classes.progress} />}
+                  {this.state.progress && <CircularProgress className={classes.progress} />}
 
                 </Grid>
               </Grid>
@@ -321,7 +288,8 @@ CreatePatient.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patient: state.patient.patient
+    patient: state.patient.patient,
+    user: state.auth.user
   }
 }
 
