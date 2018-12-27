@@ -116,7 +116,7 @@ class Dashboard extends React.Component {
             </Hidden>
           </nav>
           <main className={classes.content}>
-            {/* <div className={classes.toolbar} /> */}
+            <div className={classes.toolbar} />
             {/*  Router for Drawer menu TODO add the compnent */}
             <Route exact path="/dashboard/:id/add-patient" component={CreatePatient} />
             <Route exact path="/dashboard/:id/patients" component={Patients} />
