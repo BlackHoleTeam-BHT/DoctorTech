@@ -100,7 +100,7 @@ class Dashboard extends React.Component {
                   paper: classes.drawerPaper,
                 }}
               >
-                <DrawerMenu classes={classes} />
+                <DrawerMenu  classes={classes} />
               </Drawer>
             </Hidden>
             <Hidden xsDown implementation="css">

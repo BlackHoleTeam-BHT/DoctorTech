@@ -9,7 +9,7 @@ class Patients extends React.Component {
   render() {
     return (
       <div>
-        <Grid  sm={12} xs={12} md={12}>
+        <Grid item sm={12} xs={12} md={12}>
           <Search />
           <PatientList />
         </Grid>

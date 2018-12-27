@@ -23,31 +23,31 @@ const DrawerMenu = (props) => {
         <MenuItem 
           className={classes.menuItem} component={NavLink} exact 
           to={"/dashboard/" + props.user.id} 
-          activeStyle={{ background: "grey", color: "white" }}>
+          >
           Home
         </MenuItem>
         <MenuItem 
             className={classes.menuItem} component={NavLink} 
             to={"/dashboard/"+ props.user.id +"/add-patient" }
-            activeStyle={{ background: "grey", color: "white" }}>
+            >
           Add Patient
         </MenuItem>
         <MenuItem className={classes.menuItem}
            component={NavLink} 
            to={"/dashboard/"+ props.user.id +"/patients" }
-           activeStyle={{ background: "grey", color: "white" }}>
+          >
           Patient
         </MenuItem>
         <MenuItem className={classes.menuItem}
            component={NavLink}
             to="/dashxbard"
-             activeStyle={{ background: "grey", color: "white" }}>
+        >
           Conslations
         </MenuItem>
         <MenuItem className={classes.menuItem} 
           component={NavLink} 
           to="/daschbard" 
-          activeStyle={{ background: "grey", color: "white" }}>
+        >
           Smart prediction
         </MenuItem>
         <Divider />

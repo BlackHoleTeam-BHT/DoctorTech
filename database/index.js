@@ -77,7 +77,23 @@ const insertIntoPatientTable = (patient, callback) => {
   })
 }
 
+//function to  select Patient information based on the ID
+ const selectAllPatientInfo = (doctorId, callback) => {
+   const sql =`SELECT * FROM Patients WHERE id_Doctor = '${doctorId}' order by createdAt ASC;`;
+   dbConnection.query(sql, function(err, results) {
+       if(err) {
+           console.log("Error during select info all Patients Table \n"+err)
+           callback(err, null);
+       } else {
+           callback(null, results);
+       }
+
+   })
+
+ }
+
 module.exports.isAccountExist = isAccountExist;
 module.exports.insertUserInfo = insertUserInfo;
 module.exports.selectDoctorInfo = selectDoctorInfo;
 module.exports.insertIntoPatientTable = insertIntoPatientTable;
+module.exports.selectAllPatientInfo = selectAllPatientInfo;

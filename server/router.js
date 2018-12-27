@@ -104,6 +104,22 @@ router.route('/create-patient')
     });
   });
 
+  // service to deal with getPatients request 
+  router.route('/patients')
+  .post(function (req, res) {
+    console.log(req.body);
+    const doctorId = req.body.doctorId;
+    db.selectAllPatientInfo(doctorId, function (err, results) {
+      if(err) throw errr;
+      if(results.length > 0) {
+        res.send({
+          data: results
+        })
+      }
+    })
+  
+  })
+
 
 router.route('/delete')
   .get(function (req, res) {
