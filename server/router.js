@@ -169,6 +169,7 @@ router.route('/patientInformation')
 router.route('/patientInCassis')
 .post(function(req,res){
   const id=req.body.id
+  console.log(id)
   db.selectPatientCassis(id,function(err,result){
     if(err){
       throw err

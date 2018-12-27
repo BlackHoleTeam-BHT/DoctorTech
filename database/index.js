@@ -108,10 +108,10 @@ const insertIntoPatientTable = (patient, callback) => {
 
     //function to  select Patient Cassis based on the Patient ID
     const selectPatientCassis = (PatientId, callback) => {
-        const sql =`SELECT 	* FROM PatientCassis  WHERE id = '${PatientId}' `
+        const sql =`SELECT 	* FROM PatientCases  WHERE patientId = '${PatientId}' `
         dbConnection.query(sql, function(err, results) {
             if(err) {
-                console.log("Error during select info  from PatientsCassis Table \n"+err)
+                console.log("Error during select info  from PatientCases Table \n"+err)
                 callback(err, null);
             } else {
                 callback(null, results);
