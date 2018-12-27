@@ -13,8 +13,8 @@ import './patient.css';
 import $ from 'jquery';
 import { compose } from 'redux'
 import { createPatient } from '../../store/action/patientAction'
-import {connect} from 'react-redux'
-import {patientAction} from '../../store/action/patientAction'
+import { connect } from 'react-redux'
+import { patientAction } from '../../store/action/patientAction'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
@@ -59,8 +59,8 @@ class CreatePatient extends React.Component {
     insurance: '',
     email: '',
     location: '',
-    buttonColor:'secondary',
-    progress:false,
+    buttonColor: 'secondary',
+    progress: false,
     gender: 'Male',
     maritalStatus: false,
 
@@ -104,12 +104,15 @@ class CreatePatient extends React.Component {
 
     return (
       <div>
+        <Grid className="text-center">
+          <Typography variant="display2">Add new patient</Typography>
+        </Grid>
         <form className={classes.container} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
           <div className={classes.root}>
             <Grid container spacing={24}>
               <Grid container md={12} item>
                 <Grid md={1} item></Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={11} xs={11} item>
                   <TextField
                     required
                     id="firstName"
@@ -122,7 +125,7 @@ class CreatePatient extends React.Component {
 
                   />
                 </Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={12} xs={11} item>
                   <TextField
                     required
                     id="MiddleName"
@@ -134,7 +137,7 @@ class CreatePatient extends React.Component {
                     className={classes.textField}
                   />
                 </Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={12} xs={12} item>
                   <TextField
                     required
                     value={this.state.lastName}
@@ -153,7 +156,7 @@ class CreatePatient extends React.Component {
 
               <Grid container md={12} item>
                 <Grid md={1} item></Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={11} xs={11} item>
                   <TextField
                     required
                     value={this.state.age}
@@ -165,7 +168,7 @@ class CreatePatient extends React.Component {
                     margin="normal"
                   />
                 </Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={11} xs={11} item>
                   <TextField
                     onChange={this.handleChange}
                     value={this.state.Phone}
@@ -176,7 +179,7 @@ class CreatePatient extends React.Component {
                     margin="normal"
                   />
                 </Grid>
-                <Grid md={3} item>
+                <Grid md={3} sm={11} xs={11} item>
                   <TextField
                     onChange={this.handleChange}
                     value={this.state.insurance}
@@ -253,18 +256,15 @@ class CreatePatient extends React.Component {
                   />
                 </Grid>
               </Grid>
-
-
               <Grid container md={12} style={{ marginTop: '25px' }} item>
-
                 <Grid md={1} item></Grid>
                 <Grid md={6} item>
-                 {!this.state.progress && <Button type="submit" variant="contained" color={this.state.buttonColor} size="large" className={classes.button} >
-                    <SaveIcon  />
+                  {!this.state.progress && <Button type="submit" variant="contained" color={this.state.buttonColor} size="large" className={classes.button} >
+                    <SaveIcon />
                     Save
                  </Button>}
 
-                 {this.state.progress  && <CircularProgress className={classes.progress} />}
+                  {this.state.progress && <CircularProgress className={classes.progress} />}
 
                 </Grid>
               </Grid>
@@ -288,7 +288,7 @@ CreatePatient.propTypes = {
 const mapStateToProps = (state) => {
   return {
     patient: state.patient.patient,
-    user : state.auth.user
+    user: state.auth.user
   }
 }
 

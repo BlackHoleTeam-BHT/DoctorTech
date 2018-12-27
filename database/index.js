@@ -25,7 +25,7 @@ const insertUserInfo = (user, callback) => {
     } else {
       if (user.id_Roles === 1) {
         insertIntoDoctorTable(user, result.insertId, callback)
-      }
+      } 
     }
   })
 }
@@ -66,13 +66,13 @@ const insertIntoPatientTable = (patient, callback) => {
   const sql = `INSERT INTO Patients (firstName, middleName, lastName, age, gender,location, maritalStatus,
                phoneNumber, email, insurance, id_Progress, id_Doctor) VALUES ('${patient.firstName}', '${patient.MiddleName}'
                , '${patient.lastName}', '${patient.age}', '${patient.gender}', '${patient.location}', '${patient.maritalStatus}',
-               '${patient.phone}', '${patient.email}', ${patient.insurance}, '${patient.id_Progress}', '${patient.id_Doctor}');`;
-  dbConnection.query(sql, function (err, results) {
+               '${patient.Phone}', '${patient.email}', ${patient.insurance}, '${patient.id_Progress}', '${patient.id_Doctor}');`;
+  dbConnection.query(sql, function (err, result) {
     if (err) {
       console.log("Error during insert into patient table  \n" + err)
       callback(err, null);
     } else {
-      callback(null, results);
+      callback(null, result.insertId );
     }
   })
 }
