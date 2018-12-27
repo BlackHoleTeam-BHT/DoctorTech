@@ -146,7 +146,7 @@ class PatientProfile extends React.Component {
           </Grid>
           <Grid container md={12} item>
             <Grid md={1} item></Grid>
-
+            <Grid md={10} sm={11} xs={11} item>
             <NoSsr>
               <div className={classes.root}>
                 <AppBar position="static" style ={{background:"#2caee2"}}>
@@ -184,6 +184,7 @@ class PatientProfile extends React.Component {
                 </TabContainer>}
               </div>
             </NoSsr>
+            </Grid>
             <Grid md={1} item></Grid>
           </Grid>
         </Grid>
