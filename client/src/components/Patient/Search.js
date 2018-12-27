@@ -3,9 +3,9 @@ import {
   Paper,
   InputBase,
   IconButton,
-  Typography
+  Typography,
+  Grid
 } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -54,5 +54,4 @@ class Search extends React.Component {
 Search.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
 export default withStyles(styles)(Search);

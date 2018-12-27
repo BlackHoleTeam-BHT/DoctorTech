@@ -8,8 +8,8 @@ import {Provider} from 'react-redux'
 import rootReducer from './store/reducer/rootReducer'
 import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import PatientList from './components/Patient/PatientList.js';
-import Search from './components/Patient/Search.js'
+import Patients from './components/Patient/Patients.js'
+import PatientLitEntry from './components/Patient/PatientListEntry.js'
 // Note:create the store and add the thunk Middleware
 const store=createStore(rootReducer,applyMiddleware(thunk))
 

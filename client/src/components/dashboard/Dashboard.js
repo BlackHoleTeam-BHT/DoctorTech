@@ -15,6 +15,8 @@ import { BrowserRouter, Route} from 'react-router-dom';
 import CreatePatient from '../Patient/CreatePatient2.js';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import Patients from '../Patient/Patients.js'
+
 const drawerWidth = 260;
 
 const styles = theme => ({
@@ -31,7 +33,7 @@ const styles = theme => ({
     },
   },
   appBar: {
-    background: "#002866",
+    background: "#2caee2",
     marginLeft: drawerWidth,
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -114,11 +116,10 @@ class Dashboard extends React.Component {
             </Hidden>
           </nav>
           <main className={classes.content}>
-            <div className={classes.toolbar} />
+            {/* <div className={classes.toolbar} /> */}
             {/*  Router for Drawer menu TODO add the compnent */}
             <Route exact path="/dashboard/:id/add-patient" component={CreatePatient} />
-            <Route exact path="/dashboard/:id/patients"  />
-
+            <Route exact path="/dashboard/:id/patients" component={Patients} />
           </main>
         </div>
       </BrowserRouter>

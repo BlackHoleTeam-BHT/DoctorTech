@@ -4,15 +4,20 @@ import {
   Paper,
   Typography
 } from '@material-ui/core'
-
+ import PatientListEntry from './PatientListEntry'
 class PatientList extends React.Component {
 
 
   render() {
     return (
-      <div>
-        
-      </div>
+      <Paper container>
+        <PatientListEntry />
+        <PatientListEntry />
+        <PatientListEntry />
+        <PatientListEntry />
+        <PatientListEntry />
+        <PatientListEntry />
+      </Paper>
     )
   }
 }
