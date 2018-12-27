@@ -11,10 +11,12 @@
     width: 100%;
 }
 
-#Right{
-    background-image:url('./doctor.jpg');
-    background-size: 100%
-}
+
 body{
     line-height: 1.1 !important;
 }
+
+/* img {
+    width: 20%;
+    height: auto;
+  } */

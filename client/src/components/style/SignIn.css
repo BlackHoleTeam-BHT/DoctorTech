@@ -1,12 +1,16 @@
 #signinCss {
 
-    width: 80%;
+   
     padding: 20px;
     margin: 12px;
     font-size: 13px;
-    height: 520px;
+   
 
 }
+img {
+    width: 100%;
+    height: auto;
+  }
 
 
 .form-control{
