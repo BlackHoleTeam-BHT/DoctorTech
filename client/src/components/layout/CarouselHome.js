@@ -73,7 +73,7 @@ class CarouselHome extends Component {
           key={item.src}  
         >
           <img src={item.src} alt={item.altText} />
-          <CarouselCaption  captionHeader={item.caption} />
+          <CarouselCaption captionHeader={item.caption} />
         </CarouselItem>
       );
     });
