@@ -33,17 +33,17 @@ const insertUserInfo = (user, callback) => {
 const insertIntoDoctorTable = (user, insertId, callback) => {
   const sql = `INSERT INTO Doctors (id, firstName, lastName, specialist, phoneNumber,
                 bio, location, clinicNumber, clinicName) 
-                VALUES ('${insertId}','${user.firstName}','${user.lastName}','${user.specialist}',
-                '${user.phoneNumber}','${user.bio}','${user.location}','${user.clinicNumber}','${user.clinicName}');`;
-  dbConnection.query(sql, function (err, result, feilds) {
-    if (err) {
-      console.log("Error during insert into Doctor Table \n" + err)
-      callback(err, null);
-    } else {
-      callback(null, insertId);
-    }
-  })
-}
+                VALUES ("${insertId}","${user.firstName}","${user.lastName}","${user.specialist}",
+                "${user.phoneNumber}","${user.bio}","${user.location}","${user.clinicNumber}","${user.clinicName}");`;
+    dbConnection.query(sql, function(err, result, feilds) {
+        if(err) {
+            console.log("Error during insert into Doctor Table \n"+err)
+            callback(err, null);
+        } else {
+            callback(null, insertId);
+        }
+    })
+ }
 
 
 // function to select Doctor info from Doctor table

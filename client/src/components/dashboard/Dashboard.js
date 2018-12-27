@@ -20,6 +20,8 @@ import Patients from '../Patient/Patients.js';
 import PatientProfile from '../Patient/Profile/patientProfile.js';
 import {logout} from '../../store/action/authActions.js';
 import {Redirect} from 'react-router-dom'
+import DrProfile from '../doctorProfile/DrProfile.js'
+
 const drawerWidth = 260;
 
 const styles = theme => ({
@@ -145,6 +147,8 @@ class Dashboard extends React.Component {
             <Route exact path="/dashboard/:id/add-patient" component={CreatePatient} />
             <Route exact path="/dashboard/:id/patients" component={Patients} />
             <Route path="/dashboard/:id/PatientProfile/:id" component={PatientProfile} />
+            <Route exact path = "/dashboard/dr-profile" component = {DrProfile}/>
+
           </main>
         </div>
       </BrowserRouter>
