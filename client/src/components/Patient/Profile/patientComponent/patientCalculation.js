@@ -10,7 +10,12 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        width: 650,
+        width: 600,
+        marginTop: 10,
+        marginLeft: 60,
+        marginBottom: 10,
+        
+     
 
 
     },
@@ -18,13 +23,14 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        width: 250,
+        width: 200,
         display: 'inline-flex',
-        marginLeft: 6,
+        marginLeft: 60,
         marginTop: 8,
+        paddingLeft: 50,
     },
     logo: {
-        marginLeft: 280,
+        marginLeft: 260,
     },
     img: {
         width: 60,

@@ -81,8 +81,8 @@ handleClose=(value)=>{
                                 </CustomTableCell>
                                 <CustomTableCell style={{  textAlign:"center"}} >{row.description}</CustomTableCell>
                                 <CustomTableCell style={{  textAlign:"center"}} >{row.date}</CustomTableCell>
-                                <CustomTableCell numeric style={{  textAlign:"center",color: (row.Status==1) ? 'green':'red'}}>{(row.Status==1)?'Done': 'Pending'}</CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} >{(row.Status==0) ? <IconButton id={row.Status} onClick={()=>this.handleClose(row)} style={{  color:"black"}}><Icon>lock</Icon></IconButton> : <IconButton onClick={()=>this.handleClose(row)} style={{  color:"black"}}><Icon>lock_open</Icon></IconButton>}</CustomTableCell>
+                                <CustomTableCell  style={{  textAlign:"center",color: (row.Status==1) ? 'green':'red'}}>{(row.Status==1)?'Done': 'Pending'}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{(row.Status==0) ? <IconButton id={row.Status} onClick={()=>this.handleClose(row)} style={{  color:"black"}}><i style={{paddingRight:'20px'}} className="material-icons">lock</i></IconButton> : <IconButton onClick={()=>this.handleClose(row)} style={{color:"black"}}><i style={{paddingRight:'20px'}} className="material-icons">lock_open</i></IconButton>}</CustomTableCell>
                                
                             </TableRow>
                         );
@@ -90,7 +90,6 @@ handleClose=(value)=>{
                 </TableBody>
             </Table>     
         </Paper>
-       
         </div>
     )}
 }
@@ -100,3 +99,4 @@ medicalAnalysis.propTypes = {
 };
 
 export default withStyles(styles)(medicalAnalysis);
+

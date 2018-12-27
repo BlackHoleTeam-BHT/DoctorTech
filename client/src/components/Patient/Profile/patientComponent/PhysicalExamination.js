@@ -26,6 +26,7 @@ const styles = theme => ({
         flexGrow: 1,
         marginTop: 5,
         marginLeft: 0,
+        maxWidth:'500'
         
     },
     root2: {
@@ -43,6 +44,7 @@ const styles = theme => ({
     },
     control: {
         padding: theme.spacing.unit * 2,
+        
     },
     img: {
         width: 400,
@@ -145,6 +147,8 @@ class PhysicalExamination extends React.Component {
 
         return (
 
+            <div>
+
             <Grid container className={classes.root} spacing={16}>
                 <Grid item xs={12}>
                     <Grid container className={classes.root} justify="center" spacing={Number(spacing)}>
@@ -218,7 +222,7 @@ class PhysicalExamination extends React.Component {
 
                     </Grid>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} >
                     <Paper className={classes.control}>
                         <Grid container>
                             <Grid item>
@@ -242,6 +246,7 @@ class PhysicalExamination extends React.Component {
                     </Paper>
                 </Grid>
             </Grid>
+            </div>
         );
     }
 }
@@ -252,6 +257,6 @@ PhysicalExamination.propTypes = {
 
 export default withStyles(styles)(PhysicalExamination);
 
-
+//style= {{display:"flex", justifyContent: 'center'}}
 
 

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Row, Col, FormGroup, Label, Input, Button,Alert } from 'reactstrap';
+import { Container, Row, Col, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 import '../style/SignUp.css'
 import { signUp } from '../../store/action/authActions';
+import image from '../style/doctor.jpg'
+
 class Signup extends Component {
   constructor(props) {
     super(props)
@@ -41,7 +43,7 @@ class Signup extends Component {
       <div>
         <Container>
           <Row>
-            <Col md="6" sm="12" id="Right"></Col>
+            <Col md="6" sm="12" id="RightUp">  <img src={image} /> </Col>
             <Col md="6" sm="12">
               <div id="signUpCss">
                 <h4 className="text-center">Sign Up </h4>
@@ -97,7 +99,7 @@ class Signup extends Component {
                 </Row>
                 <FormGroup>
                   <Label for="location">Location</Label>
-                  <Input  type="location" name="location" id="location" placeholder="input your location" value={this.state.value} onChange={this.takeValue} />
+                  <Input type="location" name="location" id="location" placeholder="input your location" value={this.state.value} onChange={this.takeValue} />
                 </FormGroup>
                 <FormGroup>
                   <Label for="bio">BIO</Label>
@@ -111,7 +113,7 @@ class Signup extends Component {
                 <div className="text-center">
                   <a href="/signin">Already I have account ? Login </a>
                 </div>
-                <div  className="text-center" style ={{marginTop: 20}}>
+                <div className="text-center" style={{ marginTop: 20 }}>
                   {this.props.userExist &&
                     <Alert color="danger">
                       This user already exist!
@@ -137,7 +139,7 @@ const mapDipatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
-    userExist : state.auth.userExist
+    userExist: state.auth.userExist
   }
 }
 
