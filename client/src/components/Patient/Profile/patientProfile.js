@@ -19,10 +19,18 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+<<<<<<< HEAD
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { GetPatientCassis, GetUserInformation} from '../../../store/action/patientAction';
 import {Redirect} from 'react-router-dom';
+=======
+import {connect} from 'react-redux'
+import { compose } from 'redux'
+import {GetPatientCassis} from '../../../store/action/patientAction'
+import moment from 'moment'
+
+>>>>>>> add the duration time to the patient page
 
 function TabContainer(props) {
   return (
@@ -74,7 +82,12 @@ class PatientProfile extends React.Component {
     super(props)
     this.state = {
       value: 0,
+<<<<<<< HEAD
       selectValue: ''
+=======
+      selectValue:'',
+      selectDate:false
+>>>>>>> add the duration time to the patient page
     };
 
     // get all the info about the patient
@@ -89,9 +102,17 @@ class PatientProfile extends React.Component {
     this.setState({ value });
   };
 
+<<<<<<< HEAD
   handleChangeSelect = (event) => {
     console.log('event', event.target.value)
     this.setState({ [event.target.name]: event.target.value });
+=======
+  handleChangeSelect=(event,value)=>{
+    console.log('event',value)
+    console.log('event',this.props.patient.currentCase)
+    this.setState({ [event.target.name]: event.target.value,selectDate:value.props.id });
+
+>>>>>>> add the duration time to the patient page
 
   }
 
@@ -102,7 +123,11 @@ class PatientProfile extends React.Component {
 
 
   render() {
+<<<<<<< HEAD
     console.log('xxx', this.props)
+=======
+    console.log('xxx',this.props.patient.currentCase)
+>>>>>>> add the duration time to the patient page
     const { classes } = this.props;
 
     const { value } = this.state;
@@ -116,6 +141,7 @@ class PatientProfile extends React.Component {
       <Grid container className={classes.root} spacing={16}>
         <Grid container md={12} item>
           <Grid md={1} item></Grid>
+<<<<<<< HEAD
           <Grid md={5} item >
             <PatientCard id={this.props.match.params.id} patient= {this.props.patientProfile}></PatientCard>
 
@@ -142,6 +168,35 @@ class PatientProfile extends React.Component {
 
           </Grid>
           <Grid md={6} item right ="true" className="text-center">
+=======
+          <Grid md={4} item >
+            <PatientCard id={this.props.match.params.id}></PatientCard>
+            
+            <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="age-simple">Select Case</InputLabel>
+            <Select
+            
+            
+            value={this.state.selectValue}
+            onChange={this.handleChangeSelect}
+            inputProps={{
+              name: 'selectValue',
+              id: 'age-simple',
+            }}
+          >
+              {this.props.patient.currentCase.map((value,key)=>{
+                return (
+                  <MenuItem key={key} id={value.createdAt} value={value.patientId}>{value.title}</MenuItem>
+                )
+              })}
+       
+          </Select>
+          </FormControl>
+          
+          </Grid>
+          <Grid md={2} style={{justifyContent: 'center',margin: 'auto'}} item >{this.state.selectDate && moment(this.state.selectDate).fromNow()}</Grid>
+          <Grid md={5} item right>
+>>>>>>> add the duration time to the patient page
             <PatientCalculation ></PatientCalculation>
           </Grid>
           <Grid container md={12} item>
@@ -222,3 +277,8 @@ export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchT
 
 
 
+<<<<<<< HEAD
+=======
+//this.props.match.params.id
+//BMI :Calculation: [weight (kg) / height (cm) / height (cm)] x 10,000
+>>>>>>> add the duration time to the patient page

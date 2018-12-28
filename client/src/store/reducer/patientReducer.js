@@ -12,7 +12,12 @@ const initState={
       maritalStatus:''
 
     }],
-    currentCase:[]
+    currentCase:[],
+    chiefComplaint:[{
+      id:1,
+      title:'',
+      description:''
+    }]
 
 }
 
