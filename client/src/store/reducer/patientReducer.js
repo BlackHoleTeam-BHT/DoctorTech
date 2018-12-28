@@ -12,6 +12,7 @@ const initState={
       maritalStatus:''
 
     }],
+    currentPatient:false,
     currentCase:[],
     chiefComplaint:[{
       id:1,
@@ -42,7 +43,8 @@ const patientReducer=(state=initState,action)=>{
       case "GetPatientCassis":
         return{
           ...state,
-          currentCase:action.data
+          currentCase:action.data,
+          currentPatient:true
         }    
 
       case "SEARCH_PATIENT":
@@ -56,6 +58,7 @@ const patientReducer=(state=initState,action)=>{
           ...state,
           isSearchNow: action.isSearchNow
         }
+  
       default:
         return state;
     }
