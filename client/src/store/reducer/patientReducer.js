@@ -59,6 +59,12 @@ const patientReducer=(state=initState,action)=>{
           isSearchNow: action.isSearchNow
         }
   
+      case "GetCaseInfo":
+      return{
+        ...state,
+        chiefComplaint:action.data.ChiefComplaint
+
+      }   
       default:
         return state;
     }

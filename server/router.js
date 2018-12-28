@@ -186,6 +186,20 @@ router.route('/patientInCassis')
   })
 })
 
+  //Note :to select the Case Info
+  router.route('/GetCaseInfo')
+  .post(function(req,res){
+    const CaseId=req.body.id
+    console.log('caseid',CaseId)
+    db.selectCaseInfo(CaseId,function(err,result){
+      if(err){
+        throw err
+      }else{
+        res.send(result)
+      }
+    })
+  })
+
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
   done(null, user.id);

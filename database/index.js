@@ -121,6 +121,26 @@ const insertIntoPatientTable = (patient, callback) => {
     
       }
 
+
+          //function to  select Patient Case Info  based on the Case ID
+    const selectCaseInfo = (CaseId, callback) => {
+      var obj={
+        ChiefComplaint:''
+      }
+      const sql1 =`SELECT * FROM ChiefComplaint WHERE caseId='${CaseId}' `
+      dbConnection.query(sql1, function(err, results) {
+          if(err) {
+              console.log("Error during select info  from ChiefComplaint Table \n"+err)
+              callback(err, null);
+          } else {
+              obj['ChiefComplaint']=results
+              callback(null, obj);
+          }
+  
+      })
+  
+    }
+
 module.exports.isAccountExist = isAccountExist;
 module.exports.insertUserInfo = insertUserInfo;
 module.exports.selectDoctorInfo = selectDoctorInfo;
@@ -128,3 +148,4 @@ module.exports.insertIntoPatientTable = insertIntoPatientTable;
 module.exports.selectAllPatientInfo = selectAllPatientInfo;
 module.exports.selectPatientInfo = selectPatientInfo;
 module.exports.selectPatientCassis = selectPatientCassis;
+module.exports.selectCaseInfo = selectCaseInfo;

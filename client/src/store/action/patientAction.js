@@ -117,26 +117,26 @@ export const searchAboutPatient=(target)=>{
 }
 
 // Note: Get the patient selected Case information by case id 
-export const GetCaseInfo=(id)=>{
-  console.log('action GetCaseInfo',id)
+export const GetCaseInfo=(CaseId)=>{
+  console.log('action GetCaseInfo',CaseId)
 
   
   return(dispatch, getState)=>{
 
-    // $.ajax({
-    //   type: "POST",
-    //   url: '/GetCaseInfo',
-    //   contentType:'application/json',
-    //   data:JSON.stringify({id:id}),
-    //   success: function (data) {
-    //     console.log('d',data)
-    //     dispatch({type:'GetCaseInfo',data:data})
-    //   },
-    //   error: (err) => {
-    //     console.log('server err',err)
-    //   }
+    $.ajax({
+      type: "POST",
+      url: '/GetCaseInfo',
+      contentType:'application/json',
+      data:JSON.stringify({id:CaseId}),
+      success: function (data) {
+        console.log('obj for chief',data)
+        dispatch({type:'GetCaseInfo',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
   
-    // });
+    });
 
 
 

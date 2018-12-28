@@ -111,7 +111,7 @@ class PatientProfile extends React.Component {
 
 
   render() {
-    console.log('xx',this.props)
+    console.log('chifcomplaint ',this.props.patient)
     const { classes } = this.props;
 
     const { value } = this.state;
