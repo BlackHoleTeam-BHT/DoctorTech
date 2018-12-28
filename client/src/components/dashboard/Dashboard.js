@@ -5,8 +5,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
+import {Toolbar, Avatar} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
@@ -17,7 +18,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import Patients from '../Patient/Patients.js';
 import PatientProfile from '../Patient/Profile/patientProfile.js';
-
+import {logout} from '../../store/action/authActions.js';
 const drawerWidth = 260;
 
 const styles = theme => ({
@@ -54,6 +55,11 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
   },
+  avtar: {
+    background:  "#ff80b3",
+    color: "#fff",
+    marginRight: 15
+  }
 });
 
 class Dashboard extends React.Component {
@@ -65,9 +71,17 @@ class Dashboard extends React.Component {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
 
+  // function to logout 
+  logout () {
+    // logout function from authAction
+    this.props.logOut();
+  }
   render() {
     const { classes, theme } = this.props;
-
+    
+    if(this.props.logout) {
+      this.props.history.push('/')
+    }
     return (
       <BrowserRouter>
         <div className={classes.root}>
@@ -85,7 +99,11 @@ class Dashboard extends React.Component {
               <Typography variant="h6" color="inherit" className={classes.grow}>
                 Doctor Tech
               </Typography>
-              <Button color="inherit">Logout</Button>
+              <Avatar className={classes.avtar} >Dr</Avatar>
+              <Typography variant="body2" color="inherit">
+                {this.props.user.firstName +' ' +this.props.user.lastName}
+              </Typography>
+              <Button color="inherit" onClick={this.logout.bind(this)}>Logout</Button>
             </Toolbar>
           </AppBar>
           <nav className={classes.drawer}>
@@ -141,7 +159,15 @@ Dashboard.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    user : state.auth.user
+    user : state.auth.user,
+    logout: state.auth.logout
   }
 }
-export default compose(withStyles(styles, { withTheme: true }), connect(mapStateToProps))(Dashboard);
+
+//Note: add the action to the props
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logOut: () => dispatch(logout())
+  }
+}
+export default compose(withStyles(styles, { withTheme: true }), connect(mapStateToProps, mapDispatchToProps))(Dashboard);

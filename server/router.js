@@ -88,7 +88,7 @@ router.route('/login')
 
 // service to deal with  create patient request 
 router.route('/create-patient')
-  .post(function (req, res) {
+  .post(authenticationMiddleware(), function (req, res) {
     console.log(req.body);
     const patient = req.body;
     // to determind patient state if pending or in progress
@@ -109,7 +109,7 @@ router.route('/create-patient')
 
   // service to deal with getPatients request 
   router.route('/patients')
-  .post(function (req, res) {
+  .post(authenticationMiddleware(), function (req, res) {
     console.log(req.body);
     const doctorId = req.body.doctorId;
     db.selectAllPatientInfo(doctorId, function (err, results) {
@@ -123,11 +123,15 @@ router.route('/create-patient')
   
   })
 
-
-router.route('/delete')
-  .get(function (req, res) {
+// service to deal with logout request
+router.route('/logout')
+  .post(function (req, res) {
+    console.log("logout")
+    req.logout()
     req.session.destroy();
-    res.send('session has been deleted')
+    res.send({
+      state: 'logout'
+    })
   })
 
 router.route('/check')

@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          {!this.props.user ? <Header /> : ''}
+          {!this.props.login ? <Header /> : ''}
           <Switch>
             {/* Router all the component  ToDO add the component */}
             <Route exact path="/" component={Home} />
@@ -33,7 +33,8 @@ class App extends Component {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-      user: state.auth.user
+      user: state.auth.user,
+      login: state.auth.login
   }
 }
 export default connect(mapStateToProps)(App);

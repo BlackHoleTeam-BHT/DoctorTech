@@ -39,7 +39,6 @@ export const signIn = (user) => {
             success: (res) => {
                 // dispatch the data from response  with type of action to authReducer
                 if (res.state === "LOGIN_SUCCESS") {
-                    console.log(res)
                     dispatch({ type: 'LOGIN', data: res.data, correctLogin: true})
                 } else {
                     dispatch({ type: 'LOGIN_NOT_SUCCESS', correctLogin: false })
@@ -49,6 +48,27 @@ export const signIn = (user) => {
             error: (error) => {
                 // dispatch the err  with type of action to authReducer
                 dispatch({ type: 'LOGIN_ERROE', data: error })
+            }
+        })
+
+    }
+}
+
+// actoin for redux to make send  sign in data to server
+export const logout = () => {
+    return (dispatch, getState) => {
+        $.ajax({
+            url: '/logout',
+            type: 'POST',
+            contentType: 'application/json',
+            success: (res) => {
+                // dispatch the data from response  with type of action to authReducer
+                if (res.state === "logout") {
+                    dispatch({ type: 'LOGOUT', logout: true})
+                }
+            },
+            error: (error) => {
+               console.log("Error during log out")
             }
         })
 
