@@ -24,6 +24,8 @@ import { compose } from 'redux';
 import { GetPatientCassis, GetUserInformation} from '../../../store/action/patientAction';
 import {Redirect} from 'react-router-dom';
 import moment from 'moment'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import {GetCaseInfo} from '../../../store/action/patientAction'
 
 
 function TabContainer(props) {
@@ -94,8 +96,10 @@ class PatientProfile extends React.Component {
 
   handleChangeSelect=(event,value)=>{
     console.log('event',value)
-    console.log('event',this.props.patient.currentCase)
+    console.log('event gg',event.target)
     this.setState({ [event.target.name]: event.target.value,selectDate:value.props.id });
+    this.props.GetCaseInfo(value.props.case)
+
 
 
   }
@@ -107,7 +111,7 @@ class PatientProfile extends React.Component {
 
 
   render() {
-    console.log('xxx',this.props.patient.currentCase)
+    console.log('xx',this.props)
     const { classes } = this.props;
 
     const { value } = this.state;
@@ -138,7 +142,7 @@ class PatientProfile extends React.Component {
           >
               {this.props.patient.currentCase.map((value,key)=>{
                 return (
-                  <MenuItem key={key} id={value.createdAt} value={value.patientId}>{value.title}</MenuItem>
+                  <MenuItem key={key} id={value.createdAt} case={value.id} value={value.patientId}>{value.title}</MenuItem>
                 )
               })}
        
@@ -219,8 +223,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     GetPatientCassis: (id) => dispatch(GetPatientCassis(id)),
-    GetPationInformation: (id) => dispatch(GetUserInformation(id))
+    GetPationInformation: (id) => dispatch(GetUserInformation(id)),
 
+    GetCaseInfo :(id)=> dispatch(GetCaseInfo(id)) 
   }
 }
 
