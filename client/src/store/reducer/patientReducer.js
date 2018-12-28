@@ -38,6 +38,14 @@ const initState={
       diabetes:'',
       BloodPressure:'',
       BMI:''
+    }],
+    medicalAnalysis:[{
+      id:'',
+      name:'',
+      description:'',
+      status:'',
+      createdAt:''
+
     }]
 
 }
@@ -84,7 +92,8 @@ const patientReducer=(state=initState,action)=>{
         ...state,
         chiefComplaint:action.data.ChiefComplaint,
         MedicalHistory:action.data.MedicalHistory,
-        PhysicalExamination:action.data.PhysicalExamination
+        PhysicalExamination:action.data.PhysicalExamination,
+        medicalAnalysis:action.data.medicalAnalysis
 
       }   
       default:

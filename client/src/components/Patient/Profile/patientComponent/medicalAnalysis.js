@@ -9,6 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -42,12 +44,21 @@ class medicalAnalysis extends React.Component {
 
   state = {
 
+    }
+    
+handleClose=(value)=>{
+   
+    console.log('ID',value.id)
+
+    if(value.status==0){
+
+    }else{
+
+    }
+    
   }
 
-  handleClose = (value) => {
-    console.log('data', value.name)
 
-  }
 
   result = [{ name: 'blood test', description: ' blood test analysis ', date: '01/01/2018', Status: '0' },
   { name: 'blood test', description: ' blood test analysis ', date: '01/01/2018', Status: '1' }]
@@ -56,37 +67,38 @@ class medicalAnalysis extends React.Component {
   render() {
 
     const { classes } = this.props;
+    console.log('analysis',this.props.patient.medicalAnalysis)
 
     return (
       <div>
         <Paper className={classes.root}>
-          <Table className={classes.table}>
-            <TableHead>
-              <TableRow >
-                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }}>Analysis Name</CustomTableCell>
-                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Description</CustomTableCell>
-                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Request Date</CustomTableCell>
-                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Status</CustomTableCell>
-                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Action</CustomTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.result.map((row, key) => {
-                return (
-                  <TableRow className={classes.row} key={key}>
-                    <CustomTableCell style={{ textAlign: "center" }} component="th" scope="row">
-                      {row.name}
-                    </CustomTableCell>
-                    <CustomTableCell style={{ textAlign: "center" }} >{row.description}</CustomTableCell>
-                    <CustomTableCell style={{ textAlign: "center" }} >{row.date}</CustomTableCell>
-                    <CustomTableCell style={{ textAlign: "center", color: (row.Status === 1) ? 'green' : 'red' }}>{(row.Status === 1) ? 'Done' : 'Pending'}</CustomTableCell>
-                    <CustomTableCell style={{ textAlign: "center" }} >{(row.Status === 0) ? <IconButton id={row.Status} onClick={() => this.handleClose(row)} style={{ color: "black" }}><i style={{ paddingRight: '20px' }} className="material-icons">lock</i></IconButton> : <IconButton onClick={() => this.handleClose(row)} style={{ color: "black" }}><i style={{ paddingRight: '20px' }} className="material-icons">lock_open</i></IconButton>}</CustomTableCell>
-
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+            <Table className={classes.table}>
+                <TableHead>
+                    <TableRow >
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}}>Analysis Name</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Description</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Request Date</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Status</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Action</CustomTableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {this.props.patient.medicalAnalysis.map((row,key)=> {
+                        return (
+                            <TableRow className={classes.row} key={key}>
+                                <CustomTableCell style={{  textAlign:"center"}} component="th" scope="row">
+                                    {row.name}
+                                </CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{row.description}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{row.createdAt.slice(0,10)}</CustomTableCell>
+                                <CustomTableCell  style={{  textAlign:"center",color: (row.status==1) ? 'green':'red'}}>{(row.status==1)?'Done': 'Pending'}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{(row.status==0) ? <IconButton id={row.status} onClick={()=>this.handleClose(row)} style={{  color:"black"}}><i style={{paddingRight:'20px'}} className="material-icons">lock</i></IconButton> : <IconButton onClick={()=>this.handleClose(row)} style={{color:"black"}}><i style={{paddingRight:'20px'}} className="material-icons">lock_open</i></IconButton>}</CustomTableCell>
+                               
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>     
         </Paper>
       </div>
     )
@@ -97,5 +109,22 @@ medicalAnalysis.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(medicalAnalysis);
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+    return {
+      patient: state.patient
+    }
+  }
+
+
+  // Note: add the action to the props
+const mapDispatchToProps = (dispatch) => {
+    return {
+      
+    }
+  }
+  
+  
+
+export default compose(withStyles(styles),connect(mapStateToProps))(medicalAnalysis);
 
