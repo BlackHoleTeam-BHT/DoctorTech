@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Grid
+  Grid, Typography
 } from '@material-ui/core'
 import Search from './Search.js'
 import PatientList from './PatientList'
@@ -17,11 +17,20 @@ class Patients extends React.Component {
   }
 
   render() {
+    let patients  = []
+    if(this.props.isSearchNow) {
+      patients = this.props.patientSearchResults;
+    } else {
+      patients = this.props.patients;
+    }
     return (
       <div>
         <Grid item sm={12} xs={12} >
+          <Typography variant="h6" color="secondary">
+            {"Number of patiens: " + patients.length}
+          </Typography>
           <Search />
-          <PatientList patients={this.props.patients} />
+          <PatientList patients={patients} />
         </Grid>
       </div>
     )
@@ -32,6 +41,8 @@ class Patients extends React.Component {
 const mapStateToProps = (state) => {
   return {
     patients: state.patient.patients,
+    patientSearchResults: state.patient.patientSearchResults,
+    isSearchNow : state.patient.isSearchNow,
     user: state.auth.user
   }
 }

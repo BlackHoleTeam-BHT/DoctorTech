@@ -2,6 +2,8 @@ const initState={
     patient: null,
     patientID: 0,
     patients: [],
+    patientSearchResults : [],
+    isSearchNow: false,
     PatientProfile:[{
       firstName:'',
       lastName:'',
@@ -33,10 +35,22 @@ const patientReducer=(state=initState,action)=>{
           PatientProfile:action.data    
         }
       case "GetPatientCassis":
-      return{
-        ...state,
-        currentCase:action.data
-      }    
+        return{
+          ...state,
+          currentCase:action.data
+        }    
+
+      case "SEARCH_PATIENT":
+        return{
+          ...state,
+          patientSearchResults:action.data,
+          isSearchNow: action.isSearchNow
+        }  
+      case "SEARCH_PATIENT_STOP":
+        return {
+          ...state,
+          isSearchNow: action.isSearchNow
+        }
       default:
         return state;
     }

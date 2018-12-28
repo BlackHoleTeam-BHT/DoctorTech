@@ -25,7 +25,7 @@ class PatientListEntry extends React.Component {
   }
 
   render() { 
-    
+  
     return (
       <Grid style={{ display: 'flex', justifyContent: 'center', alignItems: "center", margin: 10 }}>
         <Card style={{ width: 1000 }} onClick ={this.hanldOnClickPatient.bind(this)}>

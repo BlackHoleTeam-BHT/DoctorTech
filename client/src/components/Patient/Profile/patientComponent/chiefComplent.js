@@ -35,7 +35,6 @@ const styles = theme => ({
 });
 
 
-
 class ChiefComplaint extends React.Component {
 
   state = {
@@ -51,7 +50,6 @@ class ChiefComplaint extends React.Component {
       date: '15/12/2018'
     }]
   }
-
 
   render() {
     const { classes } = this.props;
@@ -72,7 +70,7 @@ class ChiefComplaint extends React.Component {
                       <br />
                       <Typography component="span" className={classes.inline} color="textPrimary">
                         Complaint
-                                          </Typography>
+                      </Typography>
                       {value.description}
                     </React.Fragment>
                   }
@@ -80,9 +78,6 @@ class ChiefComplaint extends React.Component {
               </ListItem>
               {key % 2 === 0 && <hr className={classes.hr} />}
             </div>
-
-
-
           )
 
         })}
