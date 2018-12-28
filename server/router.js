@@ -99,8 +99,11 @@ router.route('/create-patient')
       // if id roles refer to assistent make the patient pending on pending list
       patient.id_Progress = 1
     }
-    db.insertIntoPatientTable(patient, function(err, res){
-        console.log(res);
+    db.insertIntoPatientTable(patient, function(err, insertId){
+        console.log(insertId);
+        res.send({
+          patientId: insertId
+        })
     });
   });
 

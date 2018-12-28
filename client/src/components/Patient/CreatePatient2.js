@@ -6,16 +6,14 @@ import Grid from '@material-ui/core/Grid';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import {Typography} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import './patient.css';
-import $ from 'jquery';
 import { compose } from 'redux'
 import { createPatient } from '../../store/action/patientAction'
 import { connect } from 'react-redux'
-import { patientAction } from '../../store/action/patientAction'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
@@ -67,10 +65,7 @@ class CreatePatient extends React.Component {
 
   }
 
-
   //Note:handle save button
-
-
   //Note: handle submit information
   handleSubmit = (e) => {
     e.preventDefault();
@@ -102,7 +97,9 @@ class CreatePatient extends React.Component {
   render() {
     const { classes } = this.props;
     console.log(this.props)
-
+    if(this.props.patientID !== 0){
+      this.props.history.push('/PatientProfile/' + this.props.patientID);
+    }
     return (
       <div>
         <Grid className="text-center">
@@ -273,8 +270,6 @@ class CreatePatient extends React.Component {
           </div>
         </form>
       </div>
-
-
     );
   }
 }
@@ -288,7 +283,7 @@ CreatePatient.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patient: state.patient.patient,
+    patientID: state.patient.patientID,
     user: state.auth.user
   }
 }

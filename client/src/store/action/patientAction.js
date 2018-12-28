@@ -11,7 +11,7 @@ export const createPatient = (data) => {
       data: JSON.stringify(data),
       contentType: 'application/json',
       success: function (data) {
-        dispatch({ type: 'CREATE_PATIENT', data: data })
+        dispatch({ type: 'CREATE_PATIENT', data: data.patientId })
       },
       error: (err) => {
         dispatch({ type: 'CREATE_PATIENT_ERROR', error: err })
@@ -62,9 +62,6 @@ export const GetUserInformation=(id)=>{
       }
   
     });
-
-
-
   }
 
 }
@@ -72,8 +69,6 @@ export const GetUserInformation=(id)=>{
 // Note: Get the patient Casses based on ID
 export const GetPatientCassis=(id)=>{
   console.log('action Casses',id)
-
-  
   return(dispatch, getState)=>{
 
     $.ajax({
@@ -90,9 +85,33 @@ export const GetPatientCassis=(id)=>{
       }
   
     });
+  }
+}
 
 
-
+// Note: search about patient depend on id , name or phone number for patieb using filter to all patiens 
+export const searchAboutPatient=(target)=>{
+  return(dispatch, getState)=>{
+     console.log(getState())
+    let data = getState().patient.patients.filter((elem) => {
+      let fullName = elem.firstName + ' ' + elem.middleName + ' ' + elem.lastName;
+        if(elem.id.toString().includes(target)) {
+          return true
+        } else if(fullName.toLowerCase().includes(target.toLowerCase())) {
+          return true
+        } else if(elem.phoneNumber.includes(target)) {
+          return true
+        }
+        return false;
+     })
+      console.log(data)
+    if(target){
+      // if the target has data that is mean there is search process
+      dispatch({type:'SEARCH_PATIENT', data: data, isSearchNow: true})
+    } else {
+      // there is not search process
+      dispatch({type:'SEARCH_PATIENT_STOP', isSearchNow: false})
+    }
   }
 
 }

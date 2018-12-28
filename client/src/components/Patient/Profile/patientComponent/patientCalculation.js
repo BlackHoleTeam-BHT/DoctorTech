@@ -6,86 +6,85 @@ import Typography from '@material-ui/core/Typography';
 import calculater from '../../../../image/calculater.gif'
 
 const styles = theme => ({
-    root: {
-        ...theme.mixins.gutters(),
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
-        width: 600,
-        marginTop: 10,
-        marginLeft: 60,
-        marginBottom: 10,
-        
-     
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    width: "60%",
+    marginTop: 40,
+    marginLeft: 20,
+    marginBottom: 10,
 
 
-    },
-    root2: {
-        ...theme.mixins.gutters(),
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
-        width: 200,
-        display: 'inline-flex',
-        marginLeft: 60,
-        marginTop: 8,
-        paddingLeft: 50,
-    },
-    logo: {
-        marginLeft: 260,
-    },
-    img: {
-        width: 60,
-        hieght: 60
-    }
+
+
+  },
+  root2: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    width: "42%",
+    display: 'inline-flex',
+    marginLeft: 20,
+    marginTop: 8,
+    paddingLeft: 20,
+  },
+  img: {
+    width: 40,
+    hieght: 40
+  }
 
 });
 
 function PatientCalculation(props) {
-    const { classes } = props;
+  const { classes } = props;
 
-    return (
-        <div>
-            <Paper className={classes.root} elevation={1}>
+  return (
+    <div>
+      <Paper className={classes.root} elevation={1}>
 
-                <Typography variant="h5" component="h3" className={classes.logo}>
-                    <img src={calculater} alt="" className={classes.img} />
-                </Typography>
-                <Paper className={classes.root2} elevation={1}>
-                    <Typography component="p" >
-                        <i class="material-icons">
-                            accessibility
-                        </i>
-                    </Typography>
-                </Paper>
-                <Paper className={classes.root2} elevation={1}>
-                    <Typography component="p1" >
-                    <i class="material-icons">
-                        opacity
-                    </i>
+        <Typography variant="h5" className="text-center">
+          <img src={calculater} alt="" className={classes.img} />
+          Calculater
         </Typography>
-                </Paper>
+        <Paper className={classes.root2} elevation={1}>
+          <Typography variant="h6" >
+            <i className="material-icons" style={{ marginRight: 10, marginTop: 10 }}>
+              accessibility
+            </i>
 
-                <Paper className={classes.root2} elevation={1}>
-                    <Typography component="p1" >
-                    <i class="material-icons">
-                      colorize
-                    </i>
-        </Typography>
-                </Paper>
-                <Paper className={classes.root2} elevation={1}>
-                    <Typography component="p1" >
-                    <i class="material-icons">
-                    whatshot
-                    </i>
-        </Typography>
-                </Paper>
+          </Typography>
+        </Paper>
+        <Paper className={classes.root2} elevation={1}>
+          <Typography variant="h6">
+            <i className="material-icons" style={{ marginRight: 10, marginTop: 10 }}>
+              opacity
+            </i>
+          </Typography>
+        </Paper>
 
-            </Paper>
-        </div>
-    );
+        <Paper className={classes.root2} elevation={1}>
+          <Typography variant="h6" >
+            <i className="material-icons" style={{ marginRight: 10, marginTop: 10 }}>
+              colorize
+            </i>
+        </Typography>
+        </Paper>
+        <Paper className={classes.root2} elevation={1}>
+          <Typography variant="h6" >
+            <i className="material-icons" style={{ marginRight: 10, marginTop: 10 }}>
+              whatshot
+            </i>
+          </Typography>
+        </Paper>
+
+      </Paper>
+    </div>
+  );
 }
 
 PatientCalculation.propTypes = {
-    classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(PatientCalculation);
