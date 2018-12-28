@@ -27,6 +27,17 @@ const initState={
       renalDisease:0,
       patientHistory:'',
       familyHistory:''
+    }],
+    PhysicalExamination:[{
+      weight:'',
+      height:'',
+      bodyTemperature:'',
+      headNotes:'',
+      middleBodyNotes:'',
+      bottomBodyNotes:'',
+      diabetes:'',
+      BloodPressure:'',
+      BMI:''
     }]
 
 }
@@ -72,7 +83,8 @@ const patientReducer=(state=initState,action)=>{
       return{
         ...state,
         chiefComplaint:action.data.ChiefComplaint,
-        MedicalHistory:action.data.MedicalHistory
+        MedicalHistory:action.data.MedicalHistory,
+        PhysicalExamination:action.data.PhysicalExamination
 
       }   
       default:

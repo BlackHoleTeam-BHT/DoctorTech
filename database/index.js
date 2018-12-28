@@ -25,7 +25,7 @@ const insertUserInfo = (user, callback) => {
     } else {
       if (user.id_Roles === 1) {
         insertIntoDoctorTable(user, result.insertId, callback)
-      } 
+      }
     }
   })
 }
@@ -72,89 +72,103 @@ const insertIntoPatientTable = (patient, callback) => {
       console.log("Error during insert into patient table  \n" + err)
       callback(err, null);
     } else {
-      callback(null, result.insertId );
+      callback(null, result.insertId);
     }
   })
 }
 
 //function to  select Patient information based on the ID
- const selectAllPatientInfo = (doctorId, callback) => {
-   const sql =`SELECT * FROM Patients WHERE id_Doctor = '${doctorId}' order by createdAt ASC;`;
-   dbConnection.query(sql, function(err, results) {
-       if(err) {
-           console.log("Error during select info all Patients Table \n"+err)
-           callback(err, null);
-       } else {
-           callback(null, results);
-       }
+const selectAllPatientInfo = (doctorId, callback) => {
+  const sql = `SELECT * FROM Patients WHERE id_Doctor = '${doctorId}' order by createdAt ASC;`;
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during select info all Patients Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
 
-   })
+  })
 
- }
-  //function to  select Patient information based on the ID
-  const selectPatientInfo = (PatientId, callback) => {
-    const sql =`SELECT 	* FROM Patients WHERE id = '${PatientId}' `
-    dbConnection.query(sql, function(err, results) {
-        if(err) {
-            console.log("Error during select info  from Patients Table \n"+err)
-            callback(err, null);
+}
+//function to  select Patient information based on the ID
+const selectPatientInfo = (PatientId, callback) => {
+  const sql = `SELECT 	* FROM Patients WHERE id = '${PatientId}' `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during select info  from Patients Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
+//function to  select Patient Cassis based on the Patient ID
+const selectPatientCassis = (PatientId, callback) => {
+  const sql = `SELECT 	* FROM PatientCases  WHERE patientId = '${PatientId}' `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during select info  from PatientCases Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
+
+//function to  select Patient Case Info  based on the Case ID
+const selectCaseInfo = (CaseId, callback) => {
+  var obj = {
+    ChiefComplaint: '',
+    MedicalHistory: '',
+    PhysicalExamination: ''
+  }
+  const sql1 = `SELECT * FROM ChiefComplaint WHERE caseId='${CaseId}' `
+  const sql2 = `SELECT * FROM MedicalHistory WHERE caseId='${CaseId}' `
+  const sql3 = `SELECT * FROM PhysicalExamination WHERE caseId='${CaseId}' `
+  dbConnection.query(sql1, function (err, results) {
+    if (err) {
+      console.log("Error during select info  from ChiefComplaint Table \n" + err)
+      callback(err, null);
+    } else {
+      obj['ChiefComplaint'] = results
+
+      dbConnection.query(sql2, function (err, results) {
+
+        if (err) {
+          console.log("Error during select info  from MedicalHistory Table \n" + err)
+          callback(err, null);
         } else {
-            callback(null, results);
+          obj['MedicalHistory'] = results
+
+          dbConnection.query(sql3, function (err, results) {
+
+            if (err) {
+              console.log("Error during select info  from PhysicalExamination Table \n" + err)
+              callback(err, null);
+            } else {
+              obj['PhysicalExamination'] = results
+              callback(null, obj)
+
+            }
+
+          })
+
         }
 
-    })
-
-  }
-
-    //function to  select Patient Cassis based on the Patient ID
-    const selectPatientCassis = (PatientId, callback) => {
-        const sql =`SELECT 	* FROM PatientCases  WHERE patientId = '${PatientId}' `
-        dbConnection.query(sql, function(err, results) {
-            if(err) {
-                console.log("Error during select info  from PatientCases Table \n"+err)
-                callback(err, null);
-            } else {
-                callback(null, results);
-            }
-    
-        })
-    
-      }
-
-
-          //function to  select Patient Case Info  based on the Case ID
-    const selectCaseInfo = (CaseId, callback) => {
-      var obj={
-        ChiefComplaint:'',
-        MedicalHistory:''
-      }
-      const sql1 =`SELECT * FROM ChiefComplaint WHERE caseId='${CaseId}' `
-      const sql2 =`SELECT * FROM MedicalHistory WHERE caseId='${CaseId}' `
-      dbConnection.query(sql1, function(err, results) {
-          if(err) {
-              console.log("Error during select info  from ChiefComplaint Table \n"+err)
-              callback(err, null);
-          } else {
-              obj['ChiefComplaint']=results
-
-              dbConnection.query(sql2, function(err, results) {
-
-                if(err){
-                  console.log("Error during select info  from MedicalHistory Table \n"+err)
-                  callback(err, null);
-                }else{
-                  obj['MedicalHistory']=results
-                  callback(null, obj)
-
-                }
-
-              })
-              
-          }
-  
       })
-  
+
     }
+
+  })
+
+}
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
 module.exports.isAccountExist = isAccountExist;
