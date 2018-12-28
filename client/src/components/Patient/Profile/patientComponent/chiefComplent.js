@@ -59,7 +59,7 @@ class ChiefComplaint extends React.Component {
         console.log('CF',this.props.patient.chiefComplaint)
         return (
             <List className={classes.root}>
-                {this.state.complaint.map((value, key) => {
+                {this.props.patient.chiefComplaint.map((value, key) => {
                     return (
                          <div>
                              
@@ -74,7 +74,7 @@ class ChiefComplaint extends React.Component {
                                     <React.Fragment>
                                         <br/>
                                         <Typography component="span" className={classes.inline} color="textPrimary">
-                                           Complaint
+                                           Complaint - &nbsp;
                                           </Typography>
                                         {value.description}
                                     </React.Fragment>
