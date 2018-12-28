@@ -8,14 +8,6 @@ import {Provider} from 'react-redux'
 import rootReducer from './store/reducer/rootReducer'
 import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ChiefComplaint from './components/Patient/Profile/patientComponent/chiefComplent'
-import PatientCard from './components/Patient/Profile/patientComponent/patientCard'
-import PatientCalculation from './components/Patient/Profile/patientComponent/patientCalculation'
-import MedicalAnalysis from '../src/components/Patient/Profile/patientComponent/medicalAnalysis'
-import PhysicalExamination from './components/Patient/Profile/patientComponent/PhysicalExamination'
-import MedicalPrescription from './components/Patient/Profile/patientComponent/medicalPrescription'
-import MedicalHistory from './components/Patient/Profile/patientComponent/MedicalHistory'
-import PatientPlan from './components/Patient/Profile/patientComponent/PatientPlan'
 
 
 // Note:create the store and add the thunk Middleware

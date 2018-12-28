@@ -11,11 +11,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import './patient.css';
-import $ from 'jquery';
 import { compose } from 'redux'
 import { createPatient } from '../../store/action/patientAction'
 import { connect } from 'react-redux'
-import { patientAction } from '../../store/action/patientAction'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({

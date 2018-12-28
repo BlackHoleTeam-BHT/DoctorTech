@@ -63,7 +63,6 @@ class PatientCard extends React.Component {
       <List className={classes.root}>
 
         <div>
-
           <ListItem alignItems="flex-start"  >
             <ListItemAvatar >
               <Avatar alt="Remy Sharp" src={patientlogo} className={classes.img} />
@@ -74,7 +73,7 @@ class PatientCard extends React.Component {
               primary={PatioentInformation.firstName}
               secondary={
 
-                <React.Fragment className={classes.fragment}>
+                <React.Fragment>
                   <br />
                   <Typography component="span" className={classes.inline} color="textPrimary">
                     Gender&nbsp;&nbsp;:&nbsp;&nbsp;
@@ -96,11 +95,6 @@ class PatientCard extends React.Component {
           </ListItem>
 
         </div>
-
-
-
-
-
       </List>
     );
   }

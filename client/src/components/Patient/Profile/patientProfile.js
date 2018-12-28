@@ -135,7 +135,7 @@ class PatientProfile extends React.Component {
             </FormControl>
 
           </Grid>
-          <Grid md={6} item right className="text-center">
+          <Grid md={6} item right ="true" className="text-center">
             <PatientCalculation ></PatientCalculation>
           </Grid>
           <Grid container md={12} item>

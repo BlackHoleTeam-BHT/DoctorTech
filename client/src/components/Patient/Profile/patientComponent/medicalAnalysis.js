@@ -11,91 +11,90 @@ import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 
 const CustomTableCell = withStyles(theme => ({
-    head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
 }))(TableCell);
 
 const styles = theme => ({
-    root: {
-        width: '100%',
-        marginTop: theme.spacing.unit * 3,
-        overflowX: 'auto',
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
     },
-    table: {
-        minWidth: 700,
-    },
-    row: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.background.default,
-        },
-    },
+  },
 });
 
 
 
 class medicalAnalysis extends React.Component {
 
-    state={
+  state = {
 
-    }
-    
-handleClose=(value)=>{
-    console.log('data',value.name)
+  }
 
-}
+  handleClose = (value) => {
+    console.log('data', value.name)
 
-     result=[{name:'blood test',description:' blood test analysis ',date:'01/01/2018',Status:'0'},
-     {name:'blood test',description:' blood test analysis ',date:'01/01/2018',Status:'1'}]
-    
+  }
 
-  
+  result = [{ name: 'blood test', description: ' blood test analysis ', date: '01/01/2018', Status: '0' },
+  { name: 'blood test', description: ' blood test analysis ', date: '01/01/2018', Status: '1' }]
 
- render() {
+
+  render() {
 
     const { classes } = this.props;
 
     return (
-            <div>
+      <div>
         <Paper className={classes.root}>
-            <Table className={classes.table}>
-                <TableHead>
-                    <TableRow >
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}}>Analysis Name</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Description</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Request Date</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Status</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Action</CustomTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {this.result.map((row,key)=> {
-                        return (
-                            <TableRow className={classes.row} key={key}>
-                                <CustomTableCell style={{  textAlign:"center"}} component="th" scope="row">
-                                    {row.name}
-                                </CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} >{row.description}</CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} >{row.date}</CustomTableCell>
-                                <CustomTableCell  style={{  textAlign:"center",color: (row.Status==1) ? 'green':'red'}}>{(row.Status==1)?'Done': 'Pending'}</CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} >{(row.Status==0) ? <IconButton id={row.Status} onClick={()=>this.handleClose(row)} style={{  color:"black"}}><i style={{paddingRight:'20px'}} className="material-icons">lock</i></IconButton> : <IconButton onClick={()=>this.handleClose(row)} style={{color:"black"}}><i style={{paddingRight:'20px'}} className="material-icons">lock_open</i></IconButton>}</CustomTableCell>
-                               
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>     
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow >
+                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }}>Analysis Name</CustomTableCell>
+                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Description</CustomTableCell>
+                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Request Date</CustomTableCell>
+                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Status</CustomTableCell>
+                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Action</CustomTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.result.map((row, key) => {
+                return (
+                  <TableRow className={classes.row} key={key}>
+                    <CustomTableCell style={{ textAlign: "center" }} component="th" scope="row">
+                      {row.name}
+                    </CustomTableCell>
+                    <CustomTableCell style={{ textAlign: "center" }} >{row.description}</CustomTableCell>
+                    <CustomTableCell style={{ textAlign: "center" }} >{row.date}</CustomTableCell>
+                    <CustomTableCell style={{ textAlign: "center", color: (row.Status === 1) ? 'green' : 'red' }}>{(row.Status === 1) ? 'Done' : 'Pending'}</CustomTableCell>
+                    <CustomTableCell style={{ textAlign: "center" }} >{(row.Status === 0) ? <IconButton id={row.Status} onClick={() => this.handleClose(row)} style={{ color: "black" }}><i style={{ paddingRight: '20px' }} className="material-icons">lock</i></IconButton> : <IconButton onClick={() => this.handleClose(row)} style={{ color: "black" }}><i style={{ paddingRight: '20px' }} className="material-icons">lock_open</i></IconButton>}</CustomTableCell>
+
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
         </Paper>
-        </div>
-    )}
+      </div>
+    )
+  }
 }
 
 medicalAnalysis.propTypes = {
-    classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(medicalAnalysis);
