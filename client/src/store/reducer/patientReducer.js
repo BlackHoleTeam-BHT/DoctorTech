@@ -18,6 +18,15 @@ const initState={
       id:1,
       title:'',
       description:''
+    }],
+    MedicalHistory:[{
+      heartDisease:0,
+      joints:0,
+      bloodPressure:0,
+      diabetes:0,
+      renalDisease:0,
+      patientHistory:'',
+      familyHistory:''
     }]
 
 }
@@ -62,7 +71,8 @@ const patientReducer=(state=initState,action)=>{
       case "GetCaseInfo":
       return{
         ...state,
-        chiefComplaint:action.data.ChiefComplaint
+        chiefComplaint:action.data.ChiefComplaint,
+        MedicalHistory:action.data.MedicalHistory
 
       }   
       default:

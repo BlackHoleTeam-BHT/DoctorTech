@@ -7,6 +7,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
+import {connect} from 'react-redux'
+import { compose } from 'redux'
 
 const styles = theme => ({
   root: {
@@ -31,7 +33,7 @@ const styles = theme => ({
 class MedicalHistory extends React.Component {
   state = {
     expanded: null,
-    history:{heart:0,joint:1,blood:0,diabetes:1,Renal:0,description:'ozil Welcome walid',family:'fff'}
+    history:[{heart:0,joint:1,blood:0,diabetes:1,Renal:0,description:'ozil Welcome walid',family:'fff'}]
   };
 
   handleChange = panel => (event, expanded) => {
@@ -43,7 +45,7 @@ class MedicalHistory extends React.Component {
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
-
+    console.log('historu',this.props.patient.MedicalHistory)
     return (
       <div className={classes.root}>
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
@@ -56,11 +58,11 @@ class MedicalHistory extends React.Component {
             <Grid container spacing={0}>
             <Grid container md={12} item>
                 <Grid md={1} item> </Grid>
-                <Grid md={2} item> {(this.state.history.heart==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Heart-Diseases</b></Grid>
-                <Grid md={2} item> {(this.state.history.blood==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Blood-Pressure</b></Grid>
-                <Grid md={2} item> {(this.state.history.joint==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Joints</b></Grid>
-                <Grid md={2} item> {(this.state.history.diabetes==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Diabetes</b></Grid>
-                <Grid md={2} item> {(this.state.history.Renal==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Renal-Diseases</b></Grid>
+                <Grid md={2} item> {(this.props.patient.MedicalHistory[0].heartDisease==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Heart-Diseases</b></Grid>
+                <Grid md={2} item> {(this.props.patient.MedicalHistory[0].bloodPressure==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Blood-Pressure</b></Grid>
+                <Grid md={2} item> {(this.props.patient.MedicalHistory[0].joints==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Joints</b></Grid>
+                <Grid md={2} item> {(this.props.patient.MedicalHistory[0].diabetes==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Diabetes</b></Grid>
+                <Grid md={2} item> {(this.props.patient.MedicalHistory[0].renalDisease==1)?<i style={{color:'green'}} class="material-icons">done</i>:<i style={{color:'red'}} class="material-icons">close</i>}<b className={classes.bItem}>Renal-Diseases</b></Grid>
                 
                 
                 </Grid>    
@@ -78,8 +80,7 @@ class MedicalHistory extends React.Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-              diam eros in elit. Pellentesque convallis laoreet laoreet.
+              {this.props.patient.MedicalHistory[0].patientHistory}
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -92,8 +93,7 @@ class MedicalHistory extends React.Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas
-              eros, vitae egestas augue. Duis vel est augue.
+            {this.props.patient.MedicalHistory[0].familyHistory}
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -107,4 +107,12 @@ MedicalHistory.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MedicalHistory);
+
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+  return {
+    patient: state.patient
+  }
+}
+
+export default compose(withStyles(styles),connect(mapStateToProps))(MedicalHistory);

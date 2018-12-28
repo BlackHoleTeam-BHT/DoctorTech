@@ -108,13 +108,7 @@ const mapStateToProps = (state) => {
     }
   }
   
-//   // Note: add the action to the props
-//   const mapDispatchToProps = (dispatch) => {
-//     return {
-//       GetPatientCassis: (id) => dispatch(GetPatientCassis(id)),
-//       GetCaseInfo :(id)=> dispatch(GetCaseInfo(id)) 
-//     }
-//   }
+
 
 
 
