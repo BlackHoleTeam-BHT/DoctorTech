@@ -40,7 +40,10 @@ const initState={
       BMI:''
     }],
     medicalAnalysis:[],
-    MedicalPrescription:[]
+    MedicalPrescription:[],
+    PatientPlan:[{
+      step:5
+    }]
 
 }
 
