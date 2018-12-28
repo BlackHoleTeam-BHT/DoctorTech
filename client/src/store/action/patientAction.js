@@ -62,9 +62,6 @@ export const GetUserInformation=(id)=>{
       }
   
     });
-
-
-
   }
 
 }

@@ -121,7 +121,7 @@ class Dashboard extends React.Component {
             {/*  Router for Drawer menu TODO add the compnent */}
             <Route exact path="/dashboard/:id/add-patient" component={CreatePatient} />
             <Route exact path="/dashboard/:id/patients" component={Patients} />
-            <Route path="/PatientProfile/:id" component={PatientProfile} />
+            <Route path="/dashboard/:id/PatientProfile/:id" component={PatientProfile} />
           </main>
         </div>
       </BrowserRouter>

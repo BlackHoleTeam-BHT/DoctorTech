@@ -13,8 +13,6 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { GetUserInformation } from '../../../../store/action/patientAction'
 
-
-
 //Note:page style
 const styles = theme => ({
   root: {
@@ -39,11 +37,7 @@ const styles = theme => ({
   }
 });
 
-
-
 class PatientCard extends React.Component {
-
-
 
   constructor(props) {
     super(props)
@@ -52,10 +46,9 @@ class PatientCard extends React.Component {
     }
 
     //Note : to get the patient information
-    this.props.GetPationInformation(this.props.id)
+    // this.props.GetPationInformation(this.props.id)
 
   }
-
 
   componentDidMount() {
 
@@ -65,9 +58,6 @@ class PatientCard extends React.Component {
     const { classes } = this.props;
     console.log(this.props.patient)
     var PatioentInformation = this.props.patient[0]
-
-
-
 
     return (
       <List className={classes.root}>
@@ -126,7 +116,7 @@ PatientCard.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patient: state.patient.PatientProfile
+    //patient: state.patient.PatientProfile
   }
 }
 
@@ -136,7 +126,5 @@ const mapDispatchToProps = (dispatch) => {
     GetPationInformation: (id) => dispatch(GetUserInformation(id))
   }
 }
-
-
 
 export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(PatientCard);

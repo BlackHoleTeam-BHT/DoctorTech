@@ -21,7 +21,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { GetPatientCassis } from '../../../store/action/patientAction'
+import { GetPatientCassis, GetUserInformation} from '../../../store/action/patientAction'
 
 
 function TabContainer(props) {
@@ -68,7 +68,6 @@ const styles = theme => ({
 })
 
 
-
 class PatientProfile extends React.Component {
 
   constructor(props) {
@@ -78,7 +77,11 @@ class PatientProfile extends React.Component {
       selectValue: ''
     };
 
-    this.props.GetPatientCassis(this.props.match.params.id)
+    // get all the info about the patient
+    this.props.GetPationInformation(this.props.match.params.id)
+    // get all the cases to the patient
+    this.props.GetPatientCassis(this.props.match.params.id);
+    
   }
 
   handleChange = (event, value) => {
@@ -108,7 +111,7 @@ class PatientProfile extends React.Component {
         <Grid container md={12} item>
           <Grid md={1} item></Grid>
           <Grid md={5} item >
-            <PatientCard id={this.props.match.params.id}></PatientCard>
+            <PatientCard id={this.props.match.params.id} patient= {this.props.patientProfile}></PatientCard>
 
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="age-simple">Select Case</InputLabel>
@@ -192,17 +195,20 @@ PatientProfile.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patient: state.patient
+    patient: state.patient,
+    patientProfile: state.patient.PatientProfile
+
   }
 }
 
 // Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
-    GetPatientCassis: (id) => dispatch(GetPatientCassis(id))
+    GetPatientCassis: (id) => dispatch(GetPatientCassis(id)),
+    GetPationInformation: (id) => dispatch(GetUserInformation(id))
+
   }
 }
-
 
 export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(PatientProfile);
 
