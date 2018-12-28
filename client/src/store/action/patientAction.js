@@ -11,7 +11,7 @@ export const createPatient = (data) => {
       data: JSON.stringify(data),
       contentType: 'application/json',
       success: function (data) {
-        dispatch({ type: 'CREATE_PATIENT', data: data })
+        dispatch({ type: 'CREATE_PATIENT', data: data.patientId })
       },
       error: (err) => {
         dispatch({ type: 'CREATE_PATIENT_ERROR', error: err })

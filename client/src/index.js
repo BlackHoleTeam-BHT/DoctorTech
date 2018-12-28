@@ -16,7 +16,6 @@ import PhysicalExamination from './components/Patient/Profile/patientComponent/P
 import MedicalPrescription from './components/Patient/Profile/patientComponent/medicalPrescription'
 import MedicalHistory from './components/Patient/Profile/patientComponent/MedicalHistory'
 import PatientPlan from './components/Patient/Profile/patientComponent/PatientPlan'
-import PatientProfile from './components/Patient/Profile/patientProfile'
 
 
 // Note:create the store and add the thunk Middleware

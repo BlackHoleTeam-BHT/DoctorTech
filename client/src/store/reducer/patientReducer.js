@@ -1,5 +1,6 @@
 const initState={
     patient: null,
+    patientID: 0,
     patients: [],
     PatientProfile:[{
       firstName:'',
@@ -18,7 +19,7 @@ const patientReducer=(state=initState,action)=>{
     switch (action.type) {
       case "CREATE_PATIENT": return {
         ...state,
-        patient: action.data
+        patientID: action.data
       }
       case "GET_PATIENTS": return {
         ...state,

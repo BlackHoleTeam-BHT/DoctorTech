@@ -15,7 +15,8 @@ import { BrowserRouter, Route} from 'react-router-dom';
 import CreatePatient from '../Patient/CreatePatient2.js';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import Patients from '../Patient/Patients.js'
+import Patients from '../Patient/Patients.js';
+import PatientProfile from '../Patient/Profile/patientProfile.js';
 
 const drawerWidth = 260;
 
@@ -120,6 +121,7 @@ class Dashboard extends React.Component {
             {/*  Router for Drawer menu TODO add the compnent */}
             <Route exact path="/dashboard/:id/add-patient" component={CreatePatient} />
             <Route exact path="/dashboard/:id/patients" component={Patients} />
+            <Route path="/PatientProfile/:id" component={PatientProfile} />
           </main>
         </div>
       </BrowserRouter>

@@ -19,9 +19,9 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { compose } from 'redux'
-import {GetPatientCassis} from '../../../store/action/patientAction'
+import { GetPatientCassis } from '../../../store/action/patientAction'
 
 
 function TabContainer(props) {
@@ -51,14 +51,14 @@ const styles = theme => ({
   },
   tab: {
 
-  },formControl: {
+  }, formControl: {
     margin: theme.spacing.unit,
     minWidth: 150,
   },
-  select:{
-    color:'red'
+  select: {
+    color: 'red'
   },
-  root2:{
+  root2: {
     display: 'flex',
     flexWrap: 'wrap',
   },
@@ -71,39 +71,37 @@ const styles = theme => ({
 
 class PatientProfile extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       value: 0,
-      selectValue:''
+      selectValue: ''
     };
 
     this.props.GetPatientCassis(this.props.match.params.id)
- 
+  }
 
-}
 
-  
 
   handleChange = (event, value) => {
     console.log(event.target, value)
     this.setState({ value });
   };
 
-  handleChangeSelect=(event)=>{
-    console.log('event',event.target.value)
+  handleChangeSelect = (event) => {
+    console.log('event', event.target.value)
     this.setState({ [event.target.name]: event.target.value });
 
   }
 
   componentDidMount() {
-    console.log('paramId',this.props.match.params.id)
-    console.log('x1',this.props)
-}
+    console.log('paramId', this.props.match.params.id)
+    console.log('x1', this.props)
+  }
 
 
   render() {
-    console.log('xxx',this.props)
+    console.log('xxx', this.props)
     const { classes } = this.props;
 
     const { value } = this.state;
@@ -113,30 +111,30 @@ class PatientProfile extends React.Component {
           <Grid md={1} item></Grid>
           <Grid md={5} item >
             <PatientCard id={this.props.match.params.id}></PatientCard>
-            
+
             <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="age-simple">Select Case</InputLabel>
-            <Select
-            
-            
-            value={this.state.selectValue}
-            onChange={this.handleChangeSelect}
-            inputProps={{
-              name: 'selectValue',
-              id: 'age-simple',
-            }}
-          >
-              {this.props.patient.currentCase.map((value,key)=>{
-                return (
-                  <MenuItem key={key} value={value.patientId}>{value.title}</MenuItem>
-                )
-              })}
-       
-          </Select>
-          </FormControl>
-          
+              <InputLabel htmlFor="age-simple">Select Case</InputLabel>
+              <Select
+
+
+                value={this.state.selectValue}
+                onChange={this.handleChangeSelect}
+                inputProps={{
+                  name: 'selectValue',
+                  id: 'age-simple',
+                }}
+              >
+                {this.props.patient.currentCase.map((value, key) => {
+                  return (
+                    <MenuItem key={key} value={value.patientId}>{value.title}</MenuItem>
+                  )
+                })}
+
+              </Select>
+            </FormControl>
+
           </Grid>
-          <Grid md={6} item right>
+          <Grid md={6} item right className="text-center">
             <PatientCalculation ></PatientCalculation>
           </Grid>
           <Grid container md={12} item>
@@ -177,15 +175,10 @@ class PatientProfile extends React.Component {
                 {value === 5 && <TabContainer>
                   <PatientPlan></PatientPlan>
                 </TabContainer>}
-
               </div>
             </NoSsr>
             <Grid md={1} item></Grid>
-
           </Grid>
-
-
-
         </Grid>
       </Grid>
     )
@@ -213,8 +206,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default compose(withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(PatientProfile);
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(PatientProfile);
 
 
 
-//this.props.match.params.id
