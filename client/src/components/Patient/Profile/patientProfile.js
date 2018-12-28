@@ -81,8 +81,6 @@ class PatientProfile extends React.Component {
     this.props.GetPatientCassis(this.props.match.params.id)
   }
 
-
-
   handleChange = (event, value) => {
     console.log(event.target, value)
     this.setState({ value });
@@ -142,7 +140,7 @@ class PatientProfile extends React.Component {
 
             <NoSsr>
               <div className={classes.root}>
-                <AppBar position="static">
+                <AppBar position="static" style ={{background:"#2caee2"}}>
                   <Tabs fullWidth className={classes.tab} value={value} onChange={this.handleChange}>
                     <LinkTab label="Page One" href="page1" />
                     <LinkTab label="Page Two" href="page2" />
