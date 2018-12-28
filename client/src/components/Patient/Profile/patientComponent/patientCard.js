@@ -9,6 +9,10 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import logo from '../../../../image/chief2.jpg'
 import patientlogo from '../../../../image/patientlogo.jpg'
+import {connect} from 'react-redux'
+import { compose } from 'redux'
+import {GetUserInformation} from '../../../../store/action/patientAction'
+
 
 
 //Note:page style
@@ -17,6 +21,8 @@ const styles = theme => ({
         width: '100%',
         maxWidth: 500,
         backgroundColor: theme.palette.background.paper,
+        marginLeft: 0,
+        marginTop: 50,
     },
     inline: {
         display: 'inline',
@@ -37,51 +43,63 @@ const styles = theme => ({
 
 class PatientCard extends React.Component {
 
-    state = {
-        complaint: [{
-            id: 1,
-            Name: 'Walid HAj Hussien',
-            gender: " Male",
-            Age:'27',
-            BirthDay: '01/06/1991'
-        }]
+
+
+    constructor(props){
+        super(props)
+        this.state = {
+
+        }
+
+        //Note : to get the patient information
+        this.props.GetPationInformation(this.props.id)
+
     }
 
 
+    componentDidMount() {
+
+    }
+
     render() {
         const { classes } = this.props;
+        console.log(this.props.patient)
+        var PatioentInformation =this.props.patient[0]
+        
+  
+        
+        
         return (
             <List className={classes.root}>
-                {this.state.complaint.map((value, key) => {
-                    return (
+             
                          <div>
                              
-                        <ListItem alignItems="flex-start" key={key} >
+                        <ListItem alignItems="flex-start"  >
                             <ListItemAvatar >
-                            <Avatar alt="Remy Sharp" src={patientlogo} title={value.date} className={classes.img} />
+                            <Avatar alt="Remy Sharp" src={patientlogo} className={classes.img} />
                             
                             </ListItemAvatar>
                             <ListItemText
                             className={classes.list}
-                                primary={value.Name}
+                                primary={PatioentInformation.firstName}
                                 secondary={
                                     
                                     <React.Fragment className={classes.fragment}>
                                     <br/> 
                                         <Typography component="span" className={classes.inline} color="textPrimary">
-                                           Gender&nbsp;&nbsp;&nbsp;:&nbsp;   
+                                        Gender&nbsp;&nbsp;:&nbsp;&nbsp;   
                                           </Typography>
-                                        {value.gender}
+                                          {PatioentInformation.gender}
                                         <br/>
                                         <Typography component="span" className={classes.inline} color="textPrimary">
                                            Age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
                                           </Typography>
-                                        {value.Age}
+                                          {PatioentInformation.age}
                                         <br/>
                                         <Typography component="span" className={classes.inline} color="textPrimary">
-                                        BirthDay&nbsp;:&nbsp;
+                                           Status&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
                                           </Typography>
-                                        {value.BirthDay}
+                                          {(PatioentInformation.maritalStatus=='true') ? 'Married':'Single'}
                                     </React.Fragment>
                                 }
                             />
@@ -90,10 +108,8 @@ class PatientCard extends React.Component {
                         </div>   
                         
 
-
-                    )
-
-                })}
+                        
+   
 
             </List>
         );
@@ -107,5 +123,20 @@ PatientCard.propTypes = {
 };
 
 
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+    return {
+      patient: state.patient.PatientProfile
+    }
+  }
+  
+  //Note: add the action to the props
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      GetPationInformation: (id) => dispatch(GetUserInformation(id))
+    }
+  }
 
-export default withStyles(styles)(PatientCard);
+
+
+export default compose(withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(PatientCard);

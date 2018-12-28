@@ -81,9 +81,13 @@ class PatientPlan extends React.Component {
 
     }
 
+
+    handleOpen=()=>{
+
+    }
+
     render() {
         const { classes } = this.props;
-        const steps = getSteps();
         const { activeStep } = this.state;
 
         return (
@@ -181,7 +185,7 @@ class PatientPlan extends React.Component {
                        </Button>
                     </Paper>
                 )}
-                {activeStep==4 && <Button>Open</Button>}
+                {activeStep==4 && <Button onClick={this.handleOpen}>Open</Button>}
             </div>
         );
     }
