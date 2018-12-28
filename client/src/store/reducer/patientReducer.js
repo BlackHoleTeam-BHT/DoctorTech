@@ -39,14 +39,7 @@ const initState={
       BloodPressure:'',
       BMI:''
     }],
-    medicalAnalysis:[{
-      id:'',
-      name:'',
-      description:'',
-      status:'',
-      createdAt:''
-
-    }]
+    medicalAnalysis:[]
 
 }
 
@@ -95,6 +88,17 @@ const patientReducer=(state=initState,action)=>{
         PhysicalExamination:action.data.PhysicalExamination,
         medicalAnalysis:action.data.medicalAnalysis
 
+      }
+      case "UpdateAnalysisStatus":
+      var NewMedicalAnalysis=state.medicalAnalysis
+      for(var i=0;i<NewMedicalAnalysis.length;i++){
+        if(NewMedicalAnalysis[i].id==action.data.Id){
+          NewMedicalAnalysis[i].status=action.data.status
+        }
+      }
+      return{
+          ...state,
+          medicalAnalysis:NewMedicalAnalysis
       }   
       default:
         return state;

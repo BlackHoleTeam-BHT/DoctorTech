@@ -184,6 +184,25 @@ const selectCaseInfo = (CaseId, callback) => {
   })
 
 }
+
+
+
+//function to  update the medicalAnalysis Status
+const UpdateAnalysisStatus = (Id,status, callback) => {
+  const sql = `UPDATE MedicalAnalysis SET STATUS='${status}' WHERE id='${Id}' `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from medicalAnalysis Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
+
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
 module.exports.isAccountExist = isAccountExist;
@@ -194,3 +213,4 @@ module.exports.selectAllPatientInfo = selectAllPatientInfo;
 module.exports.selectPatientInfo = selectPatientInfo;
 module.exports.selectPatientCassis = selectPatientCassis;
 module.exports.selectCaseInfo = selectCaseInfo;
+module.exports.UpdateAnalysisStatus = UpdateAnalysisStatus;

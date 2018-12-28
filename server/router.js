@@ -200,6 +200,23 @@ router.route('/patientInCassis')
     })
   })
 
+
+//Note :to update the medicalAnalysis Status
+    router.route('/UpdateAnalysisStatus')
+    .post(function(req,res){
+      const CaseId=req.body.id
+      const Status=req.body.status
+
+      console.log('status',req.body)
+      db.UpdateAnalysisStatus(CaseId,Status,function(err,result){
+        if(err){
+          throw err
+        }else{
+          res.send('1')
+        }
+      })
+    })
+
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
   done(null, user.id);

@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import {UpdateAnalysisStatus} from '../../../../store/action/patientAction'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -50,10 +51,11 @@ handleClose=(value)=>{
    
     console.log('ID',value.id)
 
-    if(value.status==0){
-
+    if(value.status==1){
+        
+        this.props.UpdateAnalysisStatus(value.id,0)
     }else{
-
+        this.props.UpdateAnalysisStatus(value.id,1)
     }
     
   }
@@ -67,7 +69,7 @@ handleClose=(value)=>{
   render() {
 
     const { classes } = this.props;
-    console.log('analysis',this.props.patient.medicalAnalysis)
+    console.log('analysis',this.props)
 
     return (
       <div>
@@ -120,11 +122,11 @@ const mapStateToProps = (state) => {
   // Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
     return {
-      
+        UpdateAnalysisStatus: (id,status) => dispatch(UpdateAnalysisStatus(id,status))
     }
   }
   
   
 
-export default compose(withStyles(styles),connect(mapStateToProps))(medicalAnalysis);
+export default compose(withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(medicalAnalysis);
 

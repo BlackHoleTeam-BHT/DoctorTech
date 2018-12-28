@@ -143,3 +143,37 @@ export const GetCaseInfo=(CaseId)=>{
   }
 
 }
+
+// Note: Update the Medical Analysis status 
+export const UpdateAnalysisStatus=(Id,status)=>{
+  console.log('action UpdateAnalysisStatus',Id)
+  const data={
+    Id:Id,
+    status:status
+  }
+  
+  return(dispatch, getState)=>{
+
+    $.ajax({
+      type: "POST",
+      url: '/UpdateAnalysisStatus',
+      contentType:'application/json',
+      data:JSON.stringify({id:Id,status:status}),
+      success: function (result) {
+        console.log('UpdateAnalysisStatus',result)
+        if(result==1){
+          dispatch({type:'UpdateAnalysisStatus',data:data})
+        }
+        // dispatch({type:'GetCaseInfo',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}
