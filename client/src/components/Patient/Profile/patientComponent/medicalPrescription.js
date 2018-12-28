@@ -7,8 +7,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -58,32 +58,36 @@ class MedicalPrescription extends React.Component {
   render() {
 
     const { classes } = this.props;
+    console.log(this.props.patient.MedicalPrescription)
 
     return (
       <div>
         <Paper className={classes.root}>
-          <Table className={classes.table}>
-            <TableHead>
-              <TableRow >
-                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }}>Medicine Name</CustomTableCell>
-                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Days Interval</CustomTableCell>
-                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Times/day</CustomTableCell>
-
-
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.result.map((row, key) => {
-                return (
-                  <TableRow className={classes.row} key={key}>
-                    <CustomTableCell style={{ textAlign: "center" }} component="th" scope="row">{row.name}</CustomTableCell>
-                    <CustomTableCell style={{ textAlign: "center" }} >{row.DaysInterval}</CustomTableCell>
-                    <CustomTableCell style={{ textAlign: "center" }} >{row.time}</CustomTableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+            <Table className={classes.table}>
+                <TableHead>
+                    <TableRow >
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}}>Medicine Name</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Days Interval</CustomTableCell>
+                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Times/day</CustomTableCell>
+                        
+                        
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {this.props.patient.MedicalPrescription.map((row,key)=> {
+                        return (
+                            <TableRow className={classes.row} key={key}>
+                                <CustomTableCell style={{  textAlign:"center"}} component="th" scope="row">{row.name}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{row.daysInterval}</CustomTableCell>
+                                <CustomTableCell style={{  textAlign:"center"}} >{row.times}</CustomTableCell>
+                                
+                                
+                               
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>     
         </Paper>
 
       </div>
@@ -95,4 +99,12 @@ MedicalPrescription.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MedicalPrescription);
+
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+    return {
+      patient: state.patient
+    }
+  }
+
+export default compose(withStyles(styles),connect(mapStateToProps))(MedicalPrescription);

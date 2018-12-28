@@ -39,7 +39,8 @@ const initState={
       BloodPressure:'',
       BMI:''
     }],
-    medicalAnalysis:[]
+    medicalAnalysis:[],
+    MedicalPrescription:[]
 
 }
 
@@ -86,7 +87,8 @@ const patientReducer=(state=initState,action)=>{
         chiefComplaint:action.data.ChiefComplaint,
         MedicalHistory:action.data.MedicalHistory,
         PhysicalExamination:action.data.PhysicalExamination,
-        medicalAnalysis:action.data.medicalAnalysis
+        medicalAnalysis:action.data.medicalAnalysis,
+        MedicalPrescription:action.data.MedicalPrescription
 
       }
       case "UpdateAnalysisStatus":
