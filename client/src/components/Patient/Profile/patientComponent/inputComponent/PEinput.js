@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import Button from '@material-ui/core/Button';
-import {AddChiefComplaint} from '../../../../../store/action/patientAction'
+import { AddPhysicalExamination } from '../../../../../store/action/patientAction'
 import { timingSafeEqual } from 'crypto';
 
 const styles = theme => ({
@@ -28,7 +28,7 @@ const styles = theme => ({
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
-    margin:'auto'
+    margin: 'auto'
   },
   bItem: {
     marginLeft: 10,
@@ -45,8 +45,12 @@ const styles = theme => ({
 
 class PEinput extends React.Component {
   state = {
-    title: "",
-    description: "",
+    weight: "",
+    height: "",
+    bodyTemperature: "",
+    head: "",
+    body: "",
+    legs: "",
     expanded: null,
     history: [{ heart: 0, joint: 1, blood: 0, diabetes: 1, Renal: 0, description: 'ozil Welcome walid', family: 'fff' }]
   };
@@ -62,24 +66,28 @@ class PEinput extends React.Component {
   };
 
   handelSubmit = () => {
-    var obj={
-      title:this.state.title,
-      description:this.state.description,
-      id : this.props.patient.CaseId
+    var obj = {
+      weight: this.state.weight,
+      height: this.state.height,
+      bodyTemperature: this.state.bodyTemperature,
+      head: this.state.head,
+      body: this.state.body,
+      legs: this.state.legs,
+      id: this.props.patient.CaseId
     }
-    this.props.AddChiefComplaint(obj)
+    this.props.AddPhysicalExamination(obj)
   }
 
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
-    console.log("mmmmmmmmmmmmmm",this.props)
+    console.log("mmmmmmmmmmmmmm", this.props)
     return (
       <div className={classes.root}>
-        <ExpansionPanel  expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
-          <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />}>
-         
-            <Typography className={classes.secondaryHeading} justifyContent="center"><i style={{fontSize:'30px'}} class="material-icons"> playlist_add</i></Typography>
+        <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+
+            <Typography className={classes.secondaryHeading} justifyContent="center"><i style={{ fontSize: '30px' }} class="material-icons"> playlist_add</i></Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails >
             <Grid container spacing={12} className={classes.container}>
@@ -87,77 +95,77 @@ class PEinput extends React.Component {
                 <Grid md={3} item>
                   <TextField
                     id="standard-name"
-                    label="Title"
+                    label="weight"
                     className="input"
                     value={this.state.title}
-                    onChange={this.handleChange2('title')}
+                    onChange={this.handleChange2('weight')}
                     margin="normal"
                   />
                 </Grid>
                 <Grid md={3} item>
                   <TextField
                     id="standard-name"
-                    label="Description"
+                    label="height"
                     className="input"
                     value={this.state.description}
-                    onChange={this.handleChange2('description')}
+                    onChange={this.handleChange2('height')}
                     margin="normal"
-                    
+
                   />
                 </Grid>
                 <Grid md={3} item>
                   <TextField
                     id="standard-name"
-                    label="Description"
+                    label="bodyTemperature"
                     className="input"
                     value={this.state.description}
-                    onChange={this.handleChange2('description')}
+                    onChange={this.handleChange2('BodyTemperature')}
                     margin="normal"
-                    
+
                   />
                 </Grid>
-                
+
               </Grid>
               <Grid container md={12} item justify="flex-start" alignItems="flex-end" >
                 <Grid md={3} item>
                   <TextField
                     id="standard-name"
-                    label="Title"
+                    label="head"
                     className="input"
                     value={this.state.title}
-                    onChange={this.handleChange2('title')}
+                    onChange={this.handleChange2('head')}
                     margin="normal"
                   />
                 </Grid>
                 <Grid md={3} item>
                   <TextField
                     id="standard-name"
-                    label="Description"
+                    label="body"
                     className="input"
                     value={this.state.description}
-                    onChange={this.handleChange2('description')}
+                    onChange={this.handleChange2('body')}
                     margin="normal"
-                    
+
                   />
                 </Grid>
                 <Grid md={3} item>
                   <TextField
                     id="standard-name"
-                    label="Description"
+                    label="legs"
                     className="input"
                     value={this.state.description}
-                    onChange={this.handleChange2('description')}
+                    onChange={this.handleChange2('legs')}
                     margin="normal"
-                    
+
                   />
                 </Grid>
-                
+
               </Grid>
               <Grid md={2} item  >
-                   <Button onClick={this.handelSubmit} variant="contained" color="primary" className="button" >
-                    Add
+                <Button onClick={this.handelSubmit} variant="contained" color="primary" className="button" >
+                  Add
                     </Button>
-                </Grid>
+              </Grid>
             </Grid>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -166,25 +174,25 @@ class PEinput extends React.Component {
   }
 }
 
-// PEinput.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
+PEinput.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 //Note:add the redux state to the props
-// const mapStateToProps = (state) => {
-//   return {
-//     patient: state.patient
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    patient: state.patient
+  }
+}
 
 // Note: add the action to the props
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     AddChiefComplaint: (data) => dispatch(AddChiefComplaint(data)),
+const mapDispatchToProps = (dispatch) => {
+  return {
+    AddPhysicalExamination: (data) => dispatch(AddPhysicalExamination(data)),
 
-//   }
-// }
+  }
+}
 
-// export default compose( withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(PEinput);
+export default compose( withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(PEinput);
 
-export default compose (withStyles(styles))(PEinput);
+// export default compose(withStyles(styles))(PEinput);

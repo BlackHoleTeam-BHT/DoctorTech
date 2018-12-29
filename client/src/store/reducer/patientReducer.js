@@ -116,7 +116,13 @@ const patientReducer=(state=initState,action)=>{
       return{
         ...state,
         chiefComplaint:newChifComplaint
-
+      }   
+      case "AddPhysicalExamination":
+      var newPhysicalExamination=state.chiefComplaint
+      newPhysicalExamination.push(action.data)
+      return{
+        ...state,
+        physicalExamination:newPhysicalExamination
       }   
       default:
         return state;

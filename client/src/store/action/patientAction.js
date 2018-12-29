@@ -244,3 +244,28 @@ export const AddChiefComplaint=(data)=>{
   }
 
 }
+
+// Note: Add Physical Examination 
+export const AddPhysicalExamination=(data)=>{
+  console.log('action AddPhysicalExamination',data)
+ 
+  return(dispatch, getState)=>{
+
+    $.ajax({
+      type: "POST",
+      url: '/AddPhysicalExamination',
+      contentType:'application/json',
+      data:JSON.stringify({data:data}),
+      success: function (result) {
+        console.log('AddPhysicalExaminationServer?',GetCaseInfo)
+        data.insertId=result.insertId
+          dispatch({type:'AddPhysicalExamination',data:data})
+
+        // dispatch({type:'GetCaseInfo',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+    });
+  }
+}
