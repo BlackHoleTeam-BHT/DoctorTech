@@ -236,6 +236,24 @@ router.route('/patientInCassis')
     })
 
 
+    //Note :to add physical examination 
+    router.route('/AddPhysicalExamination')
+    .post(function(req,res){
+      const data=req.body.data
+      
+
+      console.log('status',req.body)
+      db.AddPhysicalExamination(data,function(err,result){
+        if(err){
+          throw err
+        }else{
+          res.send(result)
+        }
+      })
+    })
+
+
+
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
   done(null, user.id);

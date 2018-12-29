@@ -306,7 +306,7 @@ class PhysicalExamination extends React.Component {
           </Grid>
         </Grid>
         <div>
-        <PEinput />
+        {this.props.patient.SelectCase && <PEinput />}
         </div>
       </div>
       

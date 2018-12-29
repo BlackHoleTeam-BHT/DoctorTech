@@ -30,6 +30,7 @@ const initState={
       familyHistory:''
     }],
     PhysicalExamination:[{
+      id:1,
       weight:'',
       height:'',
       bodyTemperature:'',
@@ -118,7 +119,7 @@ const patientReducer=(state=initState,action)=>{
         chiefComplaint:newChifComplaint
       }   
       case "AddPhysicalExamination":
-      var newPhysicalExamination=state.chiefComplaint
+      var newPhysicalExamination=state.PhysicalExamination
       newPhysicalExamination.push(action.data)
       return{
         ...state,

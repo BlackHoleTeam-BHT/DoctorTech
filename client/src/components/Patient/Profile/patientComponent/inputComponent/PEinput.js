@@ -47,7 +47,7 @@ class PEinput extends React.Component {
   state = {
     weight: "",
     height: "",
-    bodyTemperature: "",
+    bodyTemperature: 0,
     head: "",
     body: "",
     legs: "",

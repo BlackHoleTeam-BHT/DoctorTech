@@ -244,6 +244,23 @@ const AddChiefComplaint = (data, callback) => {
 
 }
 
+//function to  add Physical Examination
+const AddPhysicalExamination = (data, callback) => {
+  const sql = `INSERT INTO PhysicalExamination (caseId,weight,height,bodyTemperature,headNotes,
+middleBodyNotes,bottomBodyNotes) VALUES ('${data.id}','${data.weight}','${data.height}','${data.bodyTemperature}','${data.head}','${data.body}','${data.legs}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from physicalExamination Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
+
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
 module.exports.isAccountExist = isAccountExist;
@@ -256,3 +273,4 @@ module.exports.selectPatientCassis = selectPatientCassis;
 module.exports.selectCaseInfo = selectCaseInfo;
 module.exports.UpdateAnalysisStatus = UpdateAnalysisStatus;
 module.exports.AddChiefComplaint = AddChiefComplaint;
+module.exports.AddPhysicalExamination=AddPhysicalExamination;
