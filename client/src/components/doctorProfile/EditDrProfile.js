@@ -22,12 +22,18 @@ class EditDrProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state ={
+      id: this.props.user.id,
       firstName: this.props.user.firstName,
       lastName: this.props.user.lastName,
       nationality: this.props.user.nationality,
       bDate: this.props.user.birthDate,
       bio: this.props.user.bio,
-      specialty: this.props.user.specialist
+      specialty: this.props.user.specialist,
+      phoneNumber: this.props.user.phoneNumber,
+      gender: this.props.user.gender,
+      location: this.props.user.location,
+      clinicName: this.props.user.clinicName,
+      clinicNumber: this.props.user.clinicNumber
     }
 
     this.toggle = this.toggle.bind(this);
@@ -48,6 +54,7 @@ class EditDrProfile extends React.Component {
   handlOnClick() {
     // function to update the data for dr so this function come from redux 
     // by map this function to props
+
     this.props.updateDoctorInfo(this.state)
     this.toggle()
   }

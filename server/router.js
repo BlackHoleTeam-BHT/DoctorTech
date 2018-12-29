@@ -139,7 +139,13 @@ router.route('/logout')
 router.route('/update-doctorinfo')
   .post(function (req, res) {
     console.log(req.body)
-   
+    db.updateDoctorInfo(req.body, function(err, result){
+      if(err) {
+        throw err;
+      } else {
+        console.log(result)
+      }
+    })
   })
 
 
