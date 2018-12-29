@@ -25,6 +25,7 @@ import { GetPatientCassis } from '../../../store/action/patientAction'
 import moment from 'moment'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { GetCaseInfo } from '../../../store/action/patientAction'
+import {Redirect} from 'react-router-dom';
 
 
 function TabContainer(props) {

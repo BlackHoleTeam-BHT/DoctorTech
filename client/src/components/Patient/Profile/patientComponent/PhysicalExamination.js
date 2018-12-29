@@ -28,17 +28,17 @@ const styles = theme => ({
         flexGrow: 1,
         marginTop: 5,
         marginLeft: 0,
-        maxWidth: '500'
+        maxWidth: '100%'
 
     },
     root2: {
         width: '100%',
-        maxWidth: 400,
+        maxWidth: "100%",
     },
     paper: {
         display: 'flex',
         height: 200,
-        width: 400,
+        width: "30%",
         marginTop: -3,
         marginLeft: 10,
         textAlign: 'center'
@@ -50,7 +50,7 @@ const styles = theme => ({
 
     },
     img: {
-        width: 400,
+        width: "100%",
         height: 200,
         cursor: 'pointer'
 
@@ -62,7 +62,7 @@ const styles = theme => ({
     },
     list2: {
         textAlign: 'justify',
-        maxWidth: 400,
+        maxWidth: "100%",
         wordWrap: 'break-word',
         color: 'red',
         width: 'auto',
@@ -73,12 +73,12 @@ const styles = theme => ({
     },
     list3: {
         textAlign: 'center',
-        maxWidth: 400,
+        maxWidth: "100%",
         wordWrap: 'break-word',
         color: 'red',
         width: 'auto',
-        marginTop: 50,
-        marginLeft: 35,
+        marginTop: 20,
+        marginLeft: 16,
         fontFamily: 'Oxygen',
         fontSize: '2em'
 
@@ -165,7 +165,6 @@ class PhysicalExamination extends React.Component {
         return (
 
             <div>
-
                 <Grid container className={classes.root} spacing={16}>
                     <Grid item xs={12}>
                         <Grid container className={classes.root} justify="center" spacing={Number(spacing)}>

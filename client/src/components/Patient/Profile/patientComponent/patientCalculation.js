@@ -12,7 +12,7 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: "60%",
+    width: "80%",
     marginTop: 40,
     marginLeft: 20,
     marginBottom: 10,
@@ -49,9 +49,9 @@ function PatientCalculation(props) {
   return (
     <div>
       <Paper className={classes.root} elevation={1}>
-
-        <Typography variant="h5" component="h3" className={classes.logo}>
+        <Typography variant="h5" component="h3" className="text-center">
           <img src={calculater} alt="" className={classes.img} />
+            Calculater
         </Typography>
         <Paper className={classes.root2} elevation={1}>
           <Typography component="p" >
