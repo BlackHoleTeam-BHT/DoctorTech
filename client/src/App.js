@@ -6,7 +6,11 @@ import SignIn from './components/auth/SignIn.js';
 import Signup from './components/auth/Signup.js';
 import Home from './components/layout/Home.js';
 import {connect} from 'react-redux'
+<<<<<<< HEAD
 import PatientProfile from './components/Patient/Profile/patientProfile.js';
+=======
+import PatientProfile from './components/Patient/Profile/patientProfile'
+>>>>>>> add the MHinput component
 
 class App extends Component {
   state = {

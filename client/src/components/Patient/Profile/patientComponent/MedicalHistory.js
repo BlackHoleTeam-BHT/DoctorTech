@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
 import {connect} from 'react-redux'
 import { compose } from 'redux'
+import MCInput from './inputComponent/MHinput'
 
 const styles = theme => ({
   root: {
@@ -97,6 +98,7 @@ class MedicalHistory extends React.Component {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
+        <MCInput></MCInput>
         
       </div>
     );
