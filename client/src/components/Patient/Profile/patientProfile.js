@@ -116,11 +116,11 @@ class PatientProfile extends React.Component {
 
     const { value } = this.state;
      // if the user has not login redirect for home page
-     if(!this.props.login) {
-      return (
-        <Redirect to = '/' />
-      )
-    }
+    //  if(!this.props.login) {
+    //   return (
+    //     <Redirect to = '/' />
+    //   )
+    //}
     return (
       <Grid container className={classes.root} spacing={16}>
         <Grid container md={12} item>

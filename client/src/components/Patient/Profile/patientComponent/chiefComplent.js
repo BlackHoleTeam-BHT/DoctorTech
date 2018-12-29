@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import logo from '../../../../image/chief2.jpg'
 import {connect} from 'react-redux'
 import { compose } from 'redux'
-
+import MCInput from './inputComponent/MCInput'
 
 //Note:page style
 const styles = theme => ({
@@ -58,6 +58,7 @@ class ChiefComplaint extends React.Component {
         const { classes } = this.props;
         console.log('CF',this.props.patient.chiefComplaint)
         return (
+            <div>
             <List className={classes.root}>
                 {this.props.patient.chiefComplaint.map((value, key) => {
                     return (
@@ -91,7 +92,11 @@ class ChiefComplaint extends React.Component {
                 })}
 
             </List>
+            
+            {this.props.patient.SelectCase && <MCInput />}
+        </div>
         );
+       
     }
 
 

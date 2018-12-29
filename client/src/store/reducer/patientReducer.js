@@ -12,6 +12,7 @@ const initState={
       maritalStatus:''
 
     }],
+    SelectCase:false,
     currentPatient:false,
     currentCase:[],
     chiefComplaint:[{
@@ -43,7 +44,8 @@ const initState={
     MedicalPrescription:[],
     PatientPlan:[{
       step:5
-    }]
+    }],
+    CaseId:0
 
 }
 
@@ -92,7 +94,9 @@ const patientReducer=(state=initState,action)=>{
         PhysicalExamination:action.data.PhysicalExamination,
         medicalAnalysis:action.data.medicalAnalysis,
         MedicalPrescription:action.data.MedicalPrescription,
-        PatientPlan:action.data.PatientPlane
+        PatientPlan:action.data.PatientPlane,
+        CaseId:action.data.CaseId,
+        SelectCase:true
 
       }
       case "UpdateAnalysisStatus":
@@ -105,6 +109,14 @@ const patientReducer=(state=initState,action)=>{
       return{
           ...state,
           medicalAnalysis:NewMedicalAnalysis
+      }
+      case "AddChiefComplaint":
+      var newChifComplaint=state.chiefComplaint
+      newChifComplaint.push(action.data)
+      return{
+        ...state,
+        chiefComplaint:newChifComplaint
+
       }   
       default:
         return state;

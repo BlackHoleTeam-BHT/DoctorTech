@@ -118,7 +118,7 @@ export const searchAboutPatient=(target)=>{
 
 // Note: Get the patient selected Case information by case id 
 export const GetCaseInfo=(CaseId)=>{
-  console.log('action GetCaseInfo',CaseId)
+  console.log('rrrrraction GetCaseInfo',CaseId)
 
   
   return(dispatch, getState)=>{
@@ -129,6 +129,7 @@ export const GetCaseInfo=(CaseId)=>{
       contentType:'application/json',
       data:JSON.stringify({id:CaseId}),
       success: function (data) {
+        data.CaseId=CaseId
         console.log('obj for chief',data)
         dispatch({type:'GetCaseInfo',data:data})
       },
@@ -198,6 +199,41 @@ export const UpdateAnalysisStatus=(Id,status)=>{
         if(result==1){
           dispatch({type:'UpdateAnalysisStatus',data:data})
         }
+        // dispatch({type:'GetCaseInfo',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}
+
+
+// Note: Add Pationt chief complaint 
+export const AddChiefComplaint=(data)=>{
+  console.log('action AddChiefComplaint',data)
+ 
+  return(dispatch, getState)=>{
+
+    $.ajax({
+      type: "POST",
+      url: '/AddChiefComplaint',
+      contentType:'application/json',
+      data:JSON.stringify({data:data}),
+      success: function (result) {
+        console.log('AddChiefComplaintServer?',GetCaseInfo)
+        data.insertId=result.insertId
+
+       
+        
+
+          dispatch({type:'AddChiefComplaint',data:data})
+        
         // dispatch({type:'GetCaseInfo',data:data})
       },
       error: (err) => {

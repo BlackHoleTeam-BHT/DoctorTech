@@ -217,6 +217,25 @@ router.route('/patientInCassis')
       })
     })
 
+
+
+    //Note :to add chief compliant 
+    router.route('/AddChiefComplaint')
+    .post(function(req,res){
+      const data=req.body.data
+      
+
+      console.log('status',req.body)
+      db.AddChiefComplaint(data,function(err,result){
+        if(err){
+          throw err
+        }else{
+          res.send(result)
+        }
+      })
+    })
+
+
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
