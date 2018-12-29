@@ -129,13 +129,15 @@ const selectCaseInfo = (CaseId, callback) => {
     MedicalHistory: '',
     PhysicalExamination: '',
     medicalAnalysis: '',
-    MedicalPrescription:''
+    MedicalPrescription:'',
+    PatientPlane:''
   }
   const sql1 = `SELECT * FROM ChiefComplaint WHERE caseId='${CaseId}' `
   const sql2 = `SELECT * FROM MedicalHistory WHERE caseId='${CaseId}' `
   const sql3 = `SELECT * FROM PhysicalExamination WHERE caseId='${CaseId}' `
   const sql4 = `SELECT * FROM MedicalAnalysis WHERE caseId='${CaseId}' `
   const sql5 = `SELECT * FROM MedicalPrescription WHERE caseId='${CaseId}' `
+  const sql6=`SELECT * FROM PatientPlane WHERE caseId='${CaseId}' `
   dbConnection.query(sql1, function (err, results) {
     if (err) {
       console.log("Error during select info  from ChiefComplaint Table \n" + err)
@@ -173,7 +175,18 @@ const selectCaseInfo = (CaseId, callback) => {
                       callback(err, null);
                     }else{
                       obj['MedicalPrescription'] = results
-                      callback(null, obj)
+                      
+                      dbConnection.query(sql6, function(err, results) {
+                        if (err) {
+                          console.log("Error during select info from PatientPlane Table \n" + err)
+                          callback(err, null);
+                        }else{
+                          obj['PatientPlane'] = results
+                          callback(null, obj)
+                        }
+
+
+                      })
 
                     }
 

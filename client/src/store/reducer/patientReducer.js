@@ -91,7 +91,8 @@ const patientReducer=(state=initState,action)=>{
         MedicalHistory:action.data.MedicalHistory,
         PhysicalExamination:action.data.PhysicalExamination,
         medicalAnalysis:action.data.medicalAnalysis,
-        MedicalPrescription:action.data.MedicalPrescription
+        MedicalPrescription:action.data.MedicalPrescription,
+        PatientPlan:action.data.PatientPlane
 
       }
       case "UpdateAnalysisStatus":
