@@ -38,7 +38,7 @@ const DrawerMenu = (props) => {
         </MenuItem>
         <MenuItem className={classes.menuItem}
            component={NavLink}
-            to="/dashxbard"
+            to={"/dashboard/"+ props.user.id + "/consultaion"}
         >
           Conslations
         </MenuItem>
