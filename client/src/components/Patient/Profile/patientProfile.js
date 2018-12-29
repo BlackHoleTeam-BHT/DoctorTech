@@ -19,10 +19,10 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-import { GetPatientCassis, GetUserInformation} from '../../../store/action/patientAction'
-
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { GetPatientCassis, GetUserInformation} from '../../../store/action/patientAction';
+import {Redirect} from 'react-router-dom';
 
 function TabContainer(props) {
   return (
@@ -106,6 +106,12 @@ class PatientProfile extends React.Component {
     const { classes } = this.props;
 
     const { value } = this.state;
+     // if the user has not login redirect for home page
+     if(!this.props.login) {
+      return (
+        <Redirect to = '/' />
+      )
+    }
     return (
       <Grid container className={classes.root} spacing={16}>
         <Grid container md={12} item>
@@ -196,7 +202,8 @@ PatientProfile.propTypes = {
 const mapStateToProps = (state) => {
   return {
     patient: state.patient,
-    patientProfile: state.patient.PatientProfile
+    patientProfile: state.patient.PatientProfile,
+    login: state.auth.login
 
   }
 }

@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux';
 import { getPatients } from '../../store/action/patientAction';
+import {Redirect} from 'react-router-dom';
 
 class Patients extends React.Component {
   constructor(props) {
@@ -16,12 +17,21 @@ class Patients extends React.Component {
     this.props.getPatients(this.props.user.id)
   }
 
+
+
   render() {
-    let patients  = []
-    if(this.props.isSearchNow) {
+    let patients = []
+    if (this.props.isSearchNow) {
       patients = this.props.patientSearchResults;
     } else {
       patients = this.props.patients;
+    }
+
+    // if the user has not login redirect for home page
+    if (!this.props.login) {
+      return (
+        <Redirect to='/' />
+      )
     }
     return (
       <div>
@@ -42,8 +52,9 @@ const mapStateToProps = (state) => {
   return {
     patients: state.patient.patients,
     patientSearchResults: state.patient.patientSearchResults,
-    isSearchNow : state.patient.isSearchNow,
-    user: state.auth.user
+    isSearchNow: state.patient.isSearchNow,
+    user: state.auth.user,
+    login: state.auth.login
   }
 }
 
