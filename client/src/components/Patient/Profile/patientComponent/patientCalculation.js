@@ -4,13 +4,15 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import calculater from '../../../../image/calculater.gif'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: "60%",
+    width: "80%",
     marginTop: 40,
     marginLeft: 20,
     marginBottom: 10,
@@ -32,49 +34,56 @@ const styles = theme => ({
   img: {
     width: 40,
     hieght: 40
+  },
+  content: {
+    marginLeft: 50,
   }
+
 
 });
 
 function PatientCalculation(props) {
   const { classes } = props;
+  console.log('calculation', props.patient.PhysicalExamination);
 
   return (
     <div>
       <Paper className={classes.root} elevation={1}>
-
-        <Typography variant="h5" className="text-center">
+        <Typography variant="h5" component="h3" className="text-center">
           <img src={calculater} alt="" className={classes.img} />
-          Calculater
+            Calculater
         </Typography>
         <Paper className={classes.root2} elevation={1}>
-          <Typography variant="h6" >
-            <i className="material-icons" style={{ marginRight: 10, marginTop: 10 }}>
+          <Typography component="p" >
+            <i class="material-icons">
               accessibility
-            </i>
-
+                        </i>
+            {!(props.patient.PhysicalExamination[0].weight == '') && <i className={classes.content}>{Math.round((props.patient.PhysicalExamination[0].weight / Math.pow(props.patient.PhysicalExamination[0].height, 2)) * 10000)}</i>}
           </Typography>
         </Paper>
         <Paper className={classes.root2} elevation={1}>
-          <Typography variant="h6">
-            <i className="material-icons" style={{ marginRight: 10, marginTop: 10 }}>
+          <Typography component="p1" >
+            <i class="material-icons">
               opacity
-            </i>
+                    </i>
+            {!(props.patient.PhysicalExamination[0].weight == '') && <i className={classes.content}>{props.patient.PhysicalExamination[0].diabetes}</i>}
           </Typography>
         </Paper>
 
         <Paper className={classes.root2} elevation={1}>
-          <Typography variant="h6" >
-            <i className="material-icons" style={{ marginRight: 10, marginTop: 10 }}>
+          <Typography component="p1" >
+            <i class="material-icons">
               colorize
-            </i>
-        </Typography>
+                    </i>
+            {!(props.patient.PhysicalExamination[0].weight == '') && <i className={classes.content}>{props.patient.PhysicalExamination[0].bodyTemperature}</i>}
+          </Typography>
         </Paper>
         <Paper className={classes.root2} elevation={1}>
-          <Typography variant="h6" >
-            <i className="material-icons" style={{ marginRight: 10, marginTop: 10 }}>
+          <Typography component="p1" >
+            <i class="material-icons">
               whatshot
-            </i>
+                    </i>
+            {!(props.patient.PhysicalExamination[0].weight == '') && <i className={classes.content}>{props.patient.PhysicalExamination[0].BloodPressure}</i>}
           </Typography>
         </Paper>
 
@@ -87,4 +96,12 @@ PatientCalculation.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PatientCalculation);
+
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+  return {
+    patient: state.patient
+  }
+}
+
+export default compose(withStyles(styles), connect(mapStateToProps))(PatientCalculation);

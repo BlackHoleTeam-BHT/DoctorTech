@@ -10,6 +10,7 @@ import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
 // Note:create the store and add the thunk Middleware
 const store=createStore(rootReducer,applyMiddleware(thunk))
 

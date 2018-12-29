@@ -12,7 +12,38 @@ const initState={
       maritalStatus:''
 
     }],
-    currentCase:[]
+    currentPatient:false,
+    currentCase:[],
+    chiefComplaint:[{
+      id:1,
+      title:'',
+      description:''
+    }],
+    MedicalHistory:[{
+      heartDisease:0,
+      joints:0,
+      bloodPressure:0,
+      diabetes:0,
+      renalDisease:0,
+      patientHistory:'',
+      familyHistory:''
+    }],
+    PhysicalExamination:[{
+      weight:'',
+      height:'',
+      bodyTemperature:'',
+      headNotes:'',
+      middleBodyNotes:'',
+      bottomBodyNotes:'',
+      diabetes:'',
+      BloodPressure:'',
+      BMI:''
+    }],
+    medicalAnalysis:[],
+    MedicalPrescription:[],
+    PatientPlan:[{
+      step:5
+    }]
 
 }
 
@@ -37,7 +68,8 @@ const patientReducer=(state=initState,action)=>{
       case "GetPatientCassis":
         return{
           ...state,
-          currentCase:action.data
+          currentCase:action.data,
+          currentPatient:true
         }    
 
       case "SEARCH_PATIENT":
@@ -51,6 +83,29 @@ const patientReducer=(state=initState,action)=>{
           ...state,
           isSearchNow: action.isSearchNow
         }
+  
+      case "GetCaseInfo":
+      return{
+        ...state,
+        chiefComplaint:action.data.ChiefComplaint,
+        MedicalHistory:action.data.MedicalHistory,
+        PhysicalExamination:action.data.PhysicalExamination,
+        medicalAnalysis:action.data.medicalAnalysis,
+        MedicalPrescription:action.data.MedicalPrescription,
+        PatientPlan:action.data.PatientPlane
+
+      }
+      case "UpdateAnalysisStatus":
+      var NewMedicalAnalysis=state.medicalAnalysis
+      for(var i=0;i<NewMedicalAnalysis.length;i++){
+        if(NewMedicalAnalysis[i].id==action.data.Id){
+          NewMedicalAnalysis[i].status=action.data.status
+        }
+      }
+      return{
+          ...state,
+          medicalAnalysis:NewMedicalAnalysis
+      }   
       default:
         return state;
     }

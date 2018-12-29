@@ -8,6 +8,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import logo from '../../../../image/chief2.jpg'
+import {connect} from 'react-redux'
+import { compose } from 'redux'
 
 
 //Note:page style
@@ -37,54 +39,60 @@ const styles = theme => ({
 
 class ChiefComplaint extends React.Component {
 
-  state = {
-    complaint: [{
-      id: 1,
-      title: 'Brunch this weekend?',
-      description: " — I'll be in your neighborhood doing errands this…",
-      date: '21/12/2018'
-    }, {
-      id: 2,
-      title: 'Main chief',
-      description: " — I'll be in your neighborhood doing errands this…",
-      date: '15/12/2018'
-    }]
-  }
+    state = {
+        complaint: [{
+            id: 1,
+            title: 'Brunch this weekend?',
+            description: " — I'll be in your neighborhood doing errands this…",
+            date: '21/12/2018'
+        }, {
+            id: 2,
+            title: 'Main chief',
+            description: " — I'll be in your neighborhood doing errands this…",
+            date: '15/12/2018'
+        }]
+    }
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <List className={classes.root}>
-        {this.state.complaint.map((value, key) => {
-          return (
-            <div key = {key}>
-              <ListItem alignItems="flex-start" key={key} >
-                <ListItemAvatar >
-                  <Avatar alt="Remy Sharp" src={logo} title={value.date} className={classes.img} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={value.title}
-                  secondary={
 
-                    <React.Fragment>
-                      <br />
-                      <Typography component="span" className={classes.inline} color="textPrimary">
-                        Complaint
-                      </Typography>
-                      {value.description}
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-              {key % 2 === 0 && <hr className={classes.hr} />}
-            </div>
-          )
+    render() {
+        const { classes } = this.props;
+        console.log('CF',this.props.patient.chiefComplaint)
+        return (
+            <List className={classes.root}>
+                {this.props.patient.chiefComplaint.map((value, key) => {
+                    return (
+                         <div>
+                             
+                        <ListItem alignItems="flex-start" key={key} >
+                            <ListItemAvatar >
+                                <Avatar alt="Remy Sharp" src={logo} title={value.date} className={classes.img} />
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={value.title}
+                                secondary={
+                                    
+                                    <React.Fragment>
+                                        <br/>
+                                        <Typography component="span" className={classes.inline} color="textPrimary">
+                                           Complaint - &nbsp;
+                                          </Typography>
+                                        {value.description}
+                                    </React.Fragment>
+                                }
+                            />
+                        </ListItem>
+                        { key % 2 == 0 && <hr  className={classes.hr}/>}
+                        </div>   
+                        
 
-        })}
 
-      </List>
-    );
-  }
+                    )
+
+                })}
+
+            </List>
+        );
+    }
 
 
 }
@@ -93,6 +101,15 @@ ChiefComplaint.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+    return {
+      patient: state.patient
+    }
+  }
+  
 
 
-export default withStyles(styles)(ChiefComplaint);
+
+
+export default compose(withStyles(styles),connect(mapStateToProps))(ChiefComplaint);

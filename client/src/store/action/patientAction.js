@@ -115,3 +115,99 @@ export const searchAboutPatient=(target)=>{
   }
 
 }
+
+// Note: Get the patient selected Case information by case id 
+export const GetCaseInfo=(CaseId)=>{
+  console.log('action GetCaseInfo',CaseId)
+
+  
+  return(dispatch, getState)=>{
+
+    $.ajax({
+      type: "POST",
+      url: '/GetCaseInfo',
+      contentType:'application/json',
+      data:JSON.stringify({id:CaseId}),
+      success: function (data) {
+        console.log('obj for chief',data)
+        dispatch({type:'GetCaseInfo',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}
+
+
+// Note: Update the Plan Step  
+export const UpdatePlanStep=(Id,step)=>{
+  console.log('UpdatePlanStep',Id,step)
+  const data={
+    Id:Id,
+    status:step
+  }
+  
+  return(dispatch, getState)=>{
+
+    // $.ajax({
+    //   type: "POST",
+    //   url: '/UpdateAnalysisStatus',
+    //   contentType:'application/json',
+    //   data:JSON.stringify({id:Id,status:status}),
+    //   success: function (result) {
+    //     console.log('UpdateAnalysisStatus',result)
+    //     if(result==1){
+    //       dispatch({type:'UpdateAnalysisStatus',data:data})
+    //     }
+    //     // dispatch({type:'GetCaseInfo',data:data})
+    //   },
+    //   error: (err) => {
+    //     console.log('server err',err)
+    //   }
+  
+    // });
+
+
+
+  }
+
+}
+// Note: Update the Medical Analysis status 
+export const UpdateAnalysisStatus=(Id,status)=>{
+  console.log('action UpdateAnalysisStatus',Id)
+  const data={
+    Id:Id,
+    status:status
+  }
+  
+  return(dispatch, getState)=>{
+
+    $.ajax({
+      type: "POST",
+      url: '/UpdateAnalysisStatus',
+      contentType:'application/json',
+      data:JSON.stringify({id:Id,status:status}),
+      success: function (result) {
+        console.log('UpdateAnalysisStatus',result)
+        if(result==1){
+          dispatch({type:'UpdateAnalysisStatus',data:data})
+        }
+        // dispatch({type:'GetCaseInfo',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}

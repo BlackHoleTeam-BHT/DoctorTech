@@ -46,7 +46,7 @@ class PatientCard extends React.Component {
     }
 
     //Note : to get the patient information
-    // this.props.GetPationInformation(this.props.id)
+    this.props.GetPationInformation(this.props.id)
 
   }
 
@@ -110,7 +110,7 @@ PatientCard.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    //patient: state.patient.PatientProfile
+    patient: state.patient.PatientProfile
   }
 }
 
