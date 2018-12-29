@@ -21,7 +21,7 @@ import Typography from '@material-ui/core/Typography';
 import '../../patient.css'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-
+import  PEinput  from './inputComponent/PEinput'
 
 const styles = theme => ({
   root: {
@@ -300,14 +300,17 @@ class PhysicalExamination extends React.Component {
                     <FormControlLabel value="40" control={<Radio />} label="40" />
                   </RadioGroup>
                 </Grid>
+                
               </Grid>
             </Paper>
           </Grid>
         </Grid>
-
-
-        
+        <div>
+        <PEinput />
+        </div>
       </div>
+      
+        
     );
   }
 }

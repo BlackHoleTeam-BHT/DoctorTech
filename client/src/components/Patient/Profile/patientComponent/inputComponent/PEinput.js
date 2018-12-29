@@ -94,7 +94,7 @@ class PEinput extends React.Component {
                     margin="normal"
                   />
                 </Grid>
-                <Grid md={6} item>
+                <Grid md={3} item>
                   <TextField
                     id="standard-name"
                     label="Description"
@@ -102,16 +102,62 @@ class PEinput extends React.Component {
                     value={this.state.description}
                     onChange={this.handleChange2('description')}
                     margin="normal"
-                    fullWidth
+                    
                   />
                 </Grid>
-                <Grid md={1} item></Grid>
-                <Grid md={2} item  >
+                <Grid md={3} item>
+                  <TextField
+                    id="standard-name"
+                    label="Description"
+                    className="input"
+                    value={this.state.description}
+                    onChange={this.handleChange2('description')}
+                    margin="normal"
+                    
+                  />
+                </Grid>
+                
+              </Grid>
+              <Grid container md={12} item justify="flex-start" alignItems="flex-end" >
+                <Grid md={3} item>
+                  <TextField
+                    id="standard-name"
+                    label="Title"
+                    className="input"
+                    value={this.state.title}
+                    onChange={this.handleChange2('title')}
+                    margin="normal"
+                  />
+                </Grid>
+                <Grid md={3} item>
+                  <TextField
+                    id="standard-name"
+                    label="Description"
+                    className="input"
+                    value={this.state.description}
+                    onChange={this.handleChange2('description')}
+                    margin="normal"
+                    
+                  />
+                </Grid>
+                <Grid md={3} item>
+                  <TextField
+                    id="standard-name"
+                    label="Description"
+                    className="input"
+                    value={this.state.description}
+                    onChange={this.handleChange2('description')}
+                    margin="normal"
+                    
+                  />
+                </Grid>
+                
+              </Grid>
+              <Grid md={2} item  >
                    <Button onClick={this.handelSubmit} variant="contained" color="primary" className="button" >
                     Add
                     </Button>
                 </Grid>
-              </Grid>
             </Grid>
           </ExpansionPanelDetails>
         </ExpansionPanel>
@@ -120,23 +166,25 @@ class PEinput extends React.Component {
   }
 }
 
-PEinput.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// PEinput.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 //Note:add the redux state to the props
-const mapStateToProps = (state) => {
-  return {
-    patient: state.patient
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     patient: state.patient
+//   }
+// }
 
 // Note: add the action to the props
-const mapDispatchToProps = (dispatch) => {
-  return {
-    AddChiefComplaint: (data) => dispatch(AddChiefComplaint(data)),
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     AddChiefComplaint: (data) => dispatch(AddChiefComplaint(data)),
 
-  }
-}
+//   }
+// }
 
-export default compose( withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(PEinput);
+// export default compose( withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(PEinput);
+
+export default compose (withStyles(styles))(PEinput);
