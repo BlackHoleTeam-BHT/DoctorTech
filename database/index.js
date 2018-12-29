@@ -228,6 +228,22 @@ const UpdateAnalysisStatus = (Id,status, callback) => {
 
 }
 
+//function to  add info MedicalHistory table
+const AddPatientHistory = (data, callback) => {
+  const sql = `INSERT INTO MedicalHistory (caseId,heartDisease,joints,bloodPressure,diabetes,renalDisease,patientHistory,familyHistory)
+   VALUES ('${data.CaseId}','${data.heartDisease}','${data.joints}','${data.bloodPressure}','${data.diabetes}',
+   '${data.renalDisease}','${data.patientHistory}','${data.familyHistory}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during insert info  to MedicalHistory Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
 
 //function to  add chief complaint
 const AddChiefComplaint = (data, callback) => {
@@ -307,3 +323,4 @@ module.exports.AddChiefComplaint = AddChiefComplaint;
 module.exports.AddPhysicalExamination=AddPhysicalExamination;
 module.exports.AddMedicalPrescription=AddMedicalPrescription;
 module.exports.AddMedicalAnalysis=AddMedicalAnalysis;
+module.exports.AddPatientHistory = AddPatientHistory;

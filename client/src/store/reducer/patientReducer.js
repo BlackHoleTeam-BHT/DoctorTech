@@ -47,8 +47,8 @@ const initState = {
     step: 5
   }],
   CaseId: 0
-
 }
+    
 
 const patientReducer = (state = initState, action) => {
   console.log('patient reducer', action)
@@ -141,9 +141,17 @@ const patientReducer = (state = initState, action) => {
         medicalAnalysis:newMedicalAnalysis
        
       }
-    default:
-      return state;
-  }
+
+      case "AddPatientHistory":
+      console.log('777',action.data)
+      return{
+        ...state,
+        MedicalHistory:[action.data]
+
+      } 
+      default:
+        return state;
+    }
 }
 
 export default patientReducer

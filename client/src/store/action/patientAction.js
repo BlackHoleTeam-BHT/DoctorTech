@@ -129,9 +129,9 @@ export const GetCaseInfo = (CaseId) => {
       contentType: 'application/json',
       data: JSON.stringify({ id: CaseId }),
       success: function (data) {
-        data.CaseId = CaseId
-        console.log('obj for chief', data)
-        dispatch({ type: 'GetCaseInfo', data: data })
+        data.CaseId=CaseId
+        console.log('obj for chief',data)
+        dispatch({type:'GetCaseInfo',data:data})
       },
       error: (err) => {
         console.log('server err', err)
@@ -327,4 +327,34 @@ var dateString = year + "-" +(month + 1) + "-" + date +" 00:00:00";
       }
     });
   }
+}
+
+
+// Note: Add patient history 
+export const AddPatientHistory=(data)=>{
+  console.log('action AddPatientHistory',data)
+
+  return(dispatch, getState)=>{
+    
+    $.ajax({
+      type: "POST",
+      url: '/AddPatientHistory',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function (result) {
+        var insertId=result.insertId
+        data['insertId']=insertId
+        console.log('AddPatientHistoryServer',data)
+        dispatch({type:'AddPatientHistory',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
 }

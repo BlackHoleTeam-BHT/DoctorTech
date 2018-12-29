@@ -282,6 +282,22 @@ router.route('/patientInCassis')
       })
     })
 
+//Note :Add AddPatientHistory
+router.route('/AddPatientHistory')
+.post(function(req,res){
+  const data=req.body
+ 
+  console.log('addddddddddd',req.body)
+
+
+  db.AddPatientHistory(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
 
 
 //Note: add the passport function 
