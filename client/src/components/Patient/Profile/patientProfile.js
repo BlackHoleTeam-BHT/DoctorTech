@@ -19,9 +19,13 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { compose } from 'redux'
-import {GetPatientCassis} from '../../../store/action/patientAction'
+import { GetPatientCassis } from '../../../store/action/patientAction'
+import moment from 'moment'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { GetCaseInfo } from '../../../store/action/patientAction'
+import {Redirect} from 'react-router-dom';
 
 
 function TabContainer(props) {
@@ -51,14 +55,14 @@ const styles = theme => ({
   },
   tab: {
 
-  },formControl: {
+  }, formControl: {
     margin: theme.spacing.unit,
     minWidth: 150,
   },
-  select:{
-    color:'red'
+  select: {
+    color: 'red'
   },
-  root2:{
+  root2: {
     display: 'flex',
     flexWrap: 'wrap',
   },
@@ -68,125 +72,138 @@ const styles = theme => ({
 })
 
 
-
 class PatientProfile extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       value: 0,
-      selectValue:''
+      selectValue: '',
+      selectDate: false
     };
 
     this.props.GetPatientCassis(this.props.match.params.id)
- 
 
-}
 
-  
+  }
+
+
 
   handleChange = (event, value) => {
     console.log(event.target, value)
     this.setState({ value });
   };
 
-  handleChangeSelect=(event)=>{
-    console.log('event',event.target.value)
-    this.setState({ [event.target.name]: event.target.value });
+  handleChangeSelect = (event, value) => {
+    console.log('event', value)
+    console.log('event gg', event.target)
+    this.setState({ [event.target.name]: event.target.value, selectDate: value.props.id });
+    this.props.GetCaseInfo(value.props.case)
+
+
 
   }
 
   componentDidMount() {
-    console.log('paramId',this.props.match.params.id)
-    console.log('x1',this.props)
-}
+    console.log('paramId', this.props.match.params.id)
+    console.log('x1', this.props)
+  }
 
 
   render() {
-    console.log('xxx',this.props)
+    console.log('chifcomplaint ', this.props.patient)
     const { classes } = this.props;
 
     const { value } = this.state;
+     // if the user has not login redirect for home page
+     if(!this.props.login) {
+      return (
+        <Redirect to = '/' />
+      )
+    }
     return (
       <Grid container className={classes.root} spacing={16}>
         <Grid container md={12} item>
           <Grid md={1} item></Grid>
-          <Grid md={5} item >
+          <Grid md={4} item >
             <PatientCard id={this.props.match.params.id}></PatientCard>
-            
+
             <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="age-simple">Select Case</InputLabel>
-            <Select
-            
-            
-            value={this.state.selectValue}
-            onChange={this.handleChangeSelect}
-            inputProps={{
-              name: 'selectValue',
-              id: 'age-simple',
-            }}
-          >
-              {this.props.patient.currentCase.map((value,key)=>{
-                return (
-                  <MenuItem key={key} value={value.patientId}>{value.title}</MenuItem>
-                )
-              })}
-       
-          </Select>
-          </FormControl>
-          
+              <InputLabel htmlFor="age-simple">Select Case</InputLabel>
+              <Select
+
+
+                value={this.state.selectValue}
+                onChange={this.handleChangeSelect}
+                inputProps={{
+                  name: 'selectValue',
+                  id: 'age-simple',
+                }}
+              >
+                {this.props.patient.currentCase.map((value, key) => {
+                  return (
+                    <MenuItem key={key} id={value.createdAt} case={value.id} value={value.patientId}>{value.title}</MenuItem>
+                  )
+                })}
+
+              </Select>
+            </FormControl>
+
           </Grid>
-          <Grid md={6} item right>
-            <PatientCalculation ></PatientCalculation>
+          <Grid md={1} style={{ justifyContent: 'center', margin: 'auto' }} item >{this.state.selectDate && moment(this.state.selectDate).fromNow()}{!(this.props.patient.currentPatient) && <CircularProgress disableShrink />}{!this.props.patient.currentPatient && 'Loading...'}</Grid>
+          <Grid md={6} item >
+            <PatientCalculation style={{  }}></PatientCalculation>
+          </Grid>
+          
           </Grid>
           <Grid container md={12} item>
             <Grid md={1} item></Grid>
+            <Grid md={10} sm={11} xs={11} item>
+              <NoSsr>
+                <div className={classes.root}>
+                  <AppBar position="static">
+                    <Tabs fullWidth className={classes.tab} value={value} onChange={this.handleChange}>
+                      <LinkTab label="Page One" href="page1" />
+                      <LinkTab label="Page Two" href="page2" />
+                      <LinkTab label="Page Three" href="page3" />
+                      <LinkTab label="Page four" href="page4" />
+                      <LinkTab label="Page four" href="page5" />
+                      <LinkTab label="Page four" href="page6" />
+                    </Tabs>
+                  </AppBar>
+                  {value === 0 && <TabContainer>
+                    <ChiefComplaint></ChiefComplaint>
+                  </TabContainer>}
 
-            <NoSsr>
-              <div className={classes.root}>
-                <AppBar position="static">
-                  <Tabs fullWidth className={classes.tab} value={value} onChange={this.handleChange}>
-                    <LinkTab label="Page One" href="page1" />
-                    <LinkTab label="Page Two" href="page2" />
-                    <LinkTab label="Page Three" href="page3" />
-                    <LinkTab label="Page four" href="page4" />
-                    <LinkTab label="Page four" href="page5" />
-                    <LinkTab label="Page four" href="page6" />
-                  </Tabs>
-                </AppBar>
-                {value === 0 && <TabContainer>
-                  <ChiefComplaint></ChiefComplaint>
-                </TabContainer>}
+                  {value === 1 && <TabContainer>
+                    <MedicalHistory></MedicalHistory>
+                  </TabContainer>}
 
-                {value === 1 && <TabContainer>
-                  <MedicalHistory></MedicalHistory>
-                </TabContainer>}
+                  {value === 2 && <TabContainer>
+                    <PhysicalExamination></PhysicalExamination>
+                  </TabContainer>}
 
-                {value === 2 && <TabContainer>
-                  <PhysicalExamination></PhysicalExamination>
-                </TabContainer>}
+                  {value === 3 && <TabContainer>
+                    <MedicalAnalysis></MedicalAnalysis>
+                  </TabContainer>}
 
-                {value === 3 && <TabContainer>
-                  <MedicalAnalysis></MedicalAnalysis>
-                </TabContainer>}
+                  {value === 4 && <TabContainer>
+                    <MedicalPrescription></MedicalPrescription>
+                  </TabContainer>}
 
-                {value === 4 && <TabContainer>
-                  <MedicalPrescription></MedicalPrescription>
-                </TabContainer>}
+                  {value === 5 && <TabContainer>
+                    <PatientPlan></PatientPlan>
+                  </TabContainer>}
 
-                {value === 5 && <TabContainer>
-                  <PatientPlan></PatientPlan>
-                </TabContainer>}
-
-              </div>
-            </NoSsr>
+                </div>
+              </NoSsr>
+            </Grid>
             <Grid md={1} item></Grid>
-
           </Grid>
 
 
 
-        </Grid>
+       
       </Grid>
     )
   }
@@ -201,20 +218,25 @@ PatientProfile.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patient: state.patient
+    patient: state.patient,
+    patientProfile: state.patient.PatientProfile,
+    login: state.auth.login
+
   }
 }
 
 // Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
-    GetPatientCassis: (id) => dispatch(GetPatientCassis(id))
+    GetPatientCassis: (id) => dispatch(GetPatientCassis(id)),
+    GetCaseInfo: (id) => dispatch(GetCaseInfo(id))
   }
 }
 
 
-export default compose(withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(PatientProfile);
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(PatientProfile);
 
 
 
 //this.props.match.params.id
+//BMI :Calculation: [weight (kg) / height (cm) / height (cm)] x 10,000

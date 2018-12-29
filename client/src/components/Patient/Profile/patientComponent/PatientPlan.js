@@ -8,6 +8,9 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import {UpdatePlanStep} from '../../../../store/action/patientAction'
 
 const styles = theme => ({
     root: {
@@ -26,27 +29,6 @@ const styles = theme => ({
     },
 });
 
-function getSteps() {
-    return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
-}
-
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
-        case 1:
-            return 'An ad group contains one or more ads which target a shared set of keywords.';
-        case 2:
-            return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
-        default:
-            return 'Unknown step';
-    }
-}
 
 class PatientPlan extends React.Component {
     state = {
@@ -56,20 +38,20 @@ class PatientPlan extends React.Component {
     };
 
     handleNext = () => {
-        this.setState(state => ({
-            activeStep: state.activeStep + 1,
-        }));
+        var CurrentStep=this.props.patient.PatientPlan[0].step
+        var id=this.props.patient.PatientPlan[0].id
+        this.props.UpdatePlanStep(id,CurrentStep+1)     
     };
 
     handleBack = () => {
-        this.setState(state => ({
-            activeStep: state.activeStep - 1,
-        }));
+        var CurrentStep=this.props.patient.PatientPlan[0].step
+        var id=this.props.patient.PatientPlan[0].id
+        this.props.UpdatePlanStep(id,CurrentStep-1)
     };
 
-    handleReset = () => {
+    handleOpen = () => {
         this.setState({
-            activeStep: 0,
+            activeStep: 3,
         });
     };
 
@@ -81,27 +63,23 @@ class PatientPlan extends React.Component {
 
     }
 
-
-    handleOpen=()=>{
-
-    }
-
     render() {
         const { classes } = this.props;
         const { activeStep } = this.state;
+        console.log('plan',this.props)
 
         return (
             <div className={classes.root}>
-                <Stepper activeStep={activeStep} orientation="vertical">
+            {this.props.patient.PatientPlan[0].step!=5 && <Stepper activeStep={activeStep} orientation="vertical">
 
                     <Step >
                         <StepLabel>Physical-Plan</StepLabel>
                         <StepContent>
-                            <Typography>{this.state.data[0]['physicalPlan']}</Typography>
+                            <Typography>{this.props.patient.PatientPlan[0].PhysicalPlan}</Typography>
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <Button
-                                        disabled={activeStep === 0}
+                                        disabled={this.props.patient.PatientPlan[0].step === 0}
                                         onClick={this.handleBack}
                                         className={classes.button}
                                     >
@@ -113,7 +91,7 @@ class PatientPlan extends React.Component {
                                         onClick={this.handleNext}
                                         className={classes.button}
                                     >
-                                        {activeStep === 2 ? 'Finish' : 'Next'}
+                                        {this.props.patient.PatientPlan[0].step === 2 ? 'Finish' : 'Next'}
                                     </Button>
                                 </div>
                             </div>
@@ -123,11 +101,11 @@ class PatientPlan extends React.Component {
                     <Step >
                         <StepLabel>Medical-Plan</StepLabel>
                         <StepContent>
-                            <Typography>{this.state.data[0]['MedicalPlan']}</Typography>
+                            <Typography>{this.props.patient.PatientPlan[0].MedicalPlan}</Typography>
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <Button
-                                        disabled={activeStep === 0}
+                                        disabled={this.props.patient.PatientPlan[0].step === 0}
                                         onClick={this.handleBack}
                                         className={classes.button}
                                     >
@@ -139,7 +117,7 @@ class PatientPlan extends React.Component {
                                         onClick={this.handleNext}
                                         className={classes.button}
                                     >
-                                        {activeStep === 2 ? 'Finish' : 'Next'}
+                                        {this.props.patient.PatientPlan[0].step === 2 ? 'Finish' : 'Next'}
                                     </Button>
                                 </div>
                             </div>
@@ -149,11 +127,11 @@ class PatientPlan extends React.Component {
                     <Step >
                         <StepLabel>Conclusion</StepLabel>
                         <StepContent>
-                            <Typography>{this.state.data[0]['Conclusion']}</Typography>
+                            <Typography>{this.props.patient.PatientPlan[0].Conclusion}</Typography>
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <Button
-                                        disabled={activeStep === 0}
+                                        disabled={this.props.patient.PatientPlan[0].step === 0}
                                         onClick={this.handleBack}
                                         className={classes.button}
                                     >
@@ -165,7 +143,7 @@ class PatientPlan extends React.Component {
                                         onClick={this.handleNext}
                                         className={classes.button}
                                     >
-                                        {activeStep === 2 ? 'Finish' : 'Next'}
+                                        {this.props.patient.PatientPlan[0].step === 2 ? 'Finish' : 'Next'}
                                     </Button>
                                 </div>
                             </div>
@@ -173,8 +151,8 @@ class PatientPlan extends React.Component {
                     </Step>
 
 
-                </Stepper>
-                {activeStep === 3 && (
+                </Stepper>}
+                {this.props.patient.PatientPlan[0].step === 3 && (
                     <Paper square elevation={0} className={classes.resetContainer}>
                         <Typography>The plan has been finished to close the profile please press the below button..</Typography>
                         <Button onClick={this.handleBack} className={classes.button}>
@@ -185,7 +163,7 @@ class PatientPlan extends React.Component {
                        </Button>
                     </Paper>
                 )}
-                {activeStep==4 && <Button onClick={this.handleOpen}>Open</Button>}
+                {this.props.patient.PatientPlan[0].step==4 && <Button onClick={this.handleOpen}>Open</Button>}
             </div>
         );
     }
@@ -195,4 +173,19 @@ PatientPlan.propTypes = {
     classes: PropTypes.object,
 };
 
-export default withStyles(styles)(PatientPlan);
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+    return {
+      patient: state.patient
+    }
+  }
+
+// Note: add the action to the props
+const mapDispatchToProps = (dispatch) => {
+    return {
+        UpdatePlanStep: (id,step) => dispatch(UpdatePlanStep(id,step))
+    }
+  }
+  
+
+export default compose(withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(PatientPlan);

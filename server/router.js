@@ -88,7 +88,7 @@ router.route('/login')
 
 // service to deal with  create patient request 
 router.route('/create-patient')
-  .post(function (req, res) {
+  .post(authenticationMiddleware(), function (req, res) {
     console.log(req.body);
     const patient = req.body;
     // to determind patient state if pending or in progress
@@ -99,14 +99,17 @@ router.route('/create-patient')
       // if id roles refer to assistent make the patient pending on pending list
       patient.id_Progress = 1
     }
-    db.insertIntoPatientTable(patient, function(err, res){
-        console.log(res);
+    db.insertIntoPatientTable(patient, function(err, insertId){
+        console.log(insertId);
+        res.send({
+          patientId: insertId
+        })
     });
   });
 
   // service to deal with getPatients request 
   router.route('/patients')
-  .post(function (req, res) {
+  .post(authenticationMiddleware(), function (req, res) {
     console.log(req.body);
     const doctorId = req.body.doctorId;
     db.selectAllPatientInfo(doctorId, function (err, results) {
@@ -120,11 +123,15 @@ router.route('/create-patient')
   
   })
 
-
-router.route('/delete')
-  .get(function (req, res) {
+// service to deal with logout request
+router.route('/logout')
+  .post(function (req, res) {
+    console.log("logout")
+    req.logout()
     req.session.destroy();
-    res.send('session has been deleted')
+    res.send({
+      state: 'logout'
+    })
   })
 
 router.route('/check')
@@ -178,6 +185,37 @@ router.route('/patientInCassis')
     }
   })
 })
+
+  //Note :to select the Case Info
+  router.route('/GetCaseInfo')
+  .post(function(req,res){
+    const CaseId=req.body.id
+    console.log('caseid',CaseId)
+    db.selectCaseInfo(CaseId,function(err,result){
+      if(err){
+        throw err
+      }else{
+        res.send(result)
+      }
+    })
+  })
+
+
+//Note :to update the medicalAnalysis Status
+    router.route('/UpdateAnalysisStatus')
+    .post(function(req,res){
+      const CaseId=req.body.id
+      const Status=req.body.status
+
+      console.log('status',req.body)
+      db.UpdateAnalysisStatus(CaseId,Status,function(err,result){
+        if(err){
+          throw err
+        }else{
+          res.send('1')
+        }
+      })
+    })
 
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {

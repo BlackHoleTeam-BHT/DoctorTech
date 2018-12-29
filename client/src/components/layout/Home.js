@@ -22,14 +22,14 @@ class Home extends React.Component {
                     sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
                     sed quia non numquam qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipiscil. sed quia non numquam qui ratione voluptatem sequi nesciunt. Neque porro quisquam</h2>
                   <Button outline color="info">our services</Button></Col>
-                <Col sm="4"><div className="img"> <img src={image} /> </div></Col>
+                <Col sm="4"><div className="img"> <img src={image} alt="" /> </div></Col>
               </Row>
             </Container>
             </div>
             <div className="last">
               <Container>
                 <Row>
-              <Col sm="3" > <img src={image2} /></Col>
+              <Col sm="3" > <img src={image2} alt=""/></Col>
               <Col sm="9">
               <h2>
               Why Choose Us</h2>
