@@ -229,9 +229,6 @@ export const AddChiefComplaint=(data)=>{
         console.log('AddChiefComplaintServer?',GetCaseInfo)
         data.insertId=result.insertId
 
-       
-        
-
           dispatch({type:'AddChiefComplaint',data:data})
         
         // dispatch({type:'GetCaseInfo',data:data})
