@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-class ModalExample extends React.Component {
+class EditDrProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +20,6 @@ class ModalExample extends React.Component {
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
@@ -74,4 +73,4 @@ class ModalExample extends React.Component {
   }
 }
 
-export default ModalExample;
+export default EditDrProfile;
