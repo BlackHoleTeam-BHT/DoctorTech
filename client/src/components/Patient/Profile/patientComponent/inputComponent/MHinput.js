@@ -40,17 +40,22 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
     },
-    formControl:{
-        margin:'auto'
+    formControl: {
+        margin: 'auto'
+    },
+    textField: {
+
     }
 });
 class MCInput extends React.Component {
     state = {
-        heartDisease:0,
-        bloodPressure:0,
-        renalDisease:0,
-        joints:0,
-        diabetes:0,
+        heartDisease: 0,
+        bloodPressure: 0,
+        renalDisease: 0,
+        joints: 0,
+        diabetes: 0,
+        PatientHistory:''
+
 
         expanded: null,
 
@@ -73,10 +78,16 @@ class MCInput extends React.Component {
         }
         this.props.AddChiefComplaint(obj)
     }
+
+    handleChangeCheckBox = name => event => {
+        this.setState({ [name]: event.target.checked });
+
+    }
+
     render() {
         const { classes } = this.props;
         const { expanded } = this.state;
-    
+
         return (
             <div className={classes.root}>
                 <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
@@ -90,66 +101,98 @@ class MCInput extends React.Component {
 
                                 <Grid item md={3}>
                                     <FormControlLabel
-                                    className={classes.formControl}
+                                        className={classes.formControl}
                                         control={
                                             <Checkbox
-                                                checked={this.state.checkedA}
-                                                onChange={this.handleChange('checkedA')}
-                                                value="checkedA"
+                                                checked={this.state.heartDisease}
+                                                onChange={this.handleChangeCheckBox('heartDisease')}
+                                                value="heartDisease"
                                             />
                                         }
                                         label="Heart-Diseases"
                                     />
-                                    </Grid>
-                                    <Grid item md={3}>
+                                </Grid>
+                                <Grid item md={3}>
                                     <FormControlLabel
                                         control={
                                             <Checkbox
-                                                checked={this.state.checkedA}
-                                                onChange={this.handleChange('checkedA')}
-                                                value="checkedA"
+                                                checked={this.state.bloodPressure}
+                                                onChange={this.handleChangeCheckBox('bloodPressure')}
+                                                value="bloodPressure"
                                             />
                                         }
                                         label="Blood-Pressure"
                                     />
-                                    </Grid>
-                                    <Grid item md={2}>
+                                </Grid>
+                                <Grid item md={2}>
                                     <FormControlLabel
                                         control={
                                             <Checkbox
-                                                checked={this.state.checkedA}
-                                                onChange={this.handleChange('checkedA')}
-                                                value="checkedA"
+                                                checked={this.state.joints}
+                                                onChange={this.handleChangeCheckBox('joints')}
+                                                value="joints"
                                             />
                                         }
                                         label="Joints"
                                     />
-                                    </Grid>
-                                    <Grid item md={2}>
+                                </Grid>
+                                <Grid item md={2}>
                                     <FormControlLabel
                                         control={
                                             <Checkbox
-                                                checked={this.state.checkedA}
-                                                onChange={this.handleChange('checkedA')}
-                                                value="checkedA"
+                                                checked={this.state.diabetes}
+                                                onChange={this.handleChangeCheckBox('diabetes')}
+                                                value="diabetes"
                                             />
                                         }
                                         label="Diabetes"
                                     />
-                                    </Grid>
-                                    <Grid item md={2}>
+                                </Grid>
+                                <Grid item md={2}>
                                     <FormControlLabel
                                         control={
                                             <Checkbox
-                                                checked={this.state.checkedA}
-                                                onChange={this.handleChange('checkedA')}
-                                                value="checkedA"
+                                                checked={this.state.renalDisease}
+                                                onChange={this.handleChangeCheckBox('renalDisease')}
+                                                value="renalDisease"
                                             />
                                         }
                                         label="Renal-Diseases"
                                     />
-                                    </Grid>
-                                
+                                </Grid>
+
+
+
+                            </Grid>
+                            <Grid container md={12} item  direction="column">
+
+                                <Grid item style={{ marginLeft: '50px' }} md={5}>
+                                    <TextField
+                                        onChange={this.handleChange}
+                                        value={this.state.insurance}
+                                        id="insurance"
+                                        label="Patient-History"
+                                        className={classes.textField}
+                                        type="text"
+                                        margin="normal"
+                                        fullWidth
+                                    />
+                                </Grid>
+                                <Grid item style={{marginLeft:'50px'}} md={5}>
+                                <TextField
+                                        onChange={this.handleChange}
+                                        value={this.state.insurance}
+                                        id="insurance"
+                                        label="Family-History"
+                                        className={classes.textField}
+                                        type="text"
+                                        margin="normal"
+                                        fullWidth
+                                    />
+
+
+                                </Grid>
+
 
                             </Grid>
                         </Grid>
