@@ -15,7 +15,7 @@ import { compose } from 'redux'
 import { createPatient } from '../../store/action/patientAction'
 import { connect } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import {Redirect} from 'react-router-dom'
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -99,6 +99,12 @@ class CreatePatient extends React.Component {
     console.log(this.props)
     if(this.props.patientID !== 0){
       this.props.history.push('/PatientProfile/' + this.props.patientID);
+    }
+   // if the user has not login redirect for home page
+    if(!this.props.login) {
+      return (
+        <Redirect to = '/' />
+      )
     }
     return (
       <div>
@@ -284,7 +290,8 @@ CreatePatient.propTypes = {
 const mapStateToProps = (state) => {
   return {
     patientID: state.patient.patientID,
-    user: state.auth.user
+    user: state.auth.user,
+    login: state.auth.login
   }
 }
 

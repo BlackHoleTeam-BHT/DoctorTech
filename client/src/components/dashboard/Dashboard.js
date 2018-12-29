@@ -19,6 +19,7 @@ import {compose} from 'redux';
 import Patients from '../Patient/Patients.js';
 import PatientProfile from '../Patient/Profile/patientProfile.js';
 import {logout} from '../../store/action/authActions.js';
+import {Redirect} from 'react-router-dom'
 const drawerWidth = 260;
 
 const styles = theme => ({
@@ -78,9 +79,13 @@ class Dashboard extends React.Component {
   }
   render() {
     const { classes, theme } = this.props;
-    
     if(this.props.logout) {
       this.props.history.push('/')
+    } 
+    if(!this.props.login) {
+      return (
+        <Redirect to = '/' />
+      )
     }
     return (
       <BrowserRouter>
@@ -160,7 +165,8 @@ Dashboard.propTypes = {
 const mapStateToProps = (state) => {
   return {
     user : state.auth.user,
-    logout: state.auth.logout
+    logout: state.auth.logout,
+    login: state.auth.login
   }
 }
 
