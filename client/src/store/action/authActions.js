@@ -75,5 +75,28 @@ export const logout = () => {
     }
 }
 
+// Note: Action function for dispatch
+export const updateDoctorInfo = (data) => {
+    console.log(data)
+    return (dispatch, getState) => {
+      //sync
+      $.ajax({
+        type: "POST",
+        url: '/update-doctorinfo',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: function (res) {
+            if(res.data) {
+                dispatch({ type: 'UPDATE_DOCTOR_INFO', data: res.data })
+            }
+        },
+        error: (err) => {
+          console.log("There is Error during update doctor info request", err)
+        }
+      });
+    }
+  }
+  
+
 
 

@@ -41,6 +41,11 @@ const authReducer = (state = initState, action) => {
           login:false
           
          }
+      case "UPDATE_DOCTOR_INFO":
+        return {
+          ...state,
+          user: action.data
+        }
 
       default:
         return state;

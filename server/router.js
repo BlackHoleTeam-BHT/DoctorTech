@@ -134,6 +134,15 @@ router.route('/logout')
     })
   })
 
+
+// this service to deal with update doctor info request 
+router.route('/update-doctorinfo')
+  .post(function (req, res) {
+    console.log(req.body)
+   
+  })
+
+
 router.route('/check')
   .get(authenticationMiddleware(), function (req, res) {
     res.send('autho')

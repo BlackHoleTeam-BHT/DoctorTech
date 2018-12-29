@@ -17,42 +17,40 @@ import {
 } from "reactstrap";
 import "../style/doctorProfile.css";
 import img from "../style/drSimson.jpg";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+import {openModal} from "../../store/action/doctorActions";
+import EditDrProfile from "./EditDrProfile";
 
 class DrProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
-      specialist: "",
-      phoneNumber: "",
-      nationality: "",
-      location: "",
-      bio: "",
-      modal: false
+   
     };
-    this.toggle = this.toggle.bind(this);
   }
 
-  toggle() {
-    this.setState({
-      modal: !this.state.modal
-    });
+  handleOpenModal() {
+    this.props.openModal(!this.props.isOpen);
   }
-
 
   render() {
-    console.log(this.props,"djhduhdgdjjduwg")
+    console.log(this.props, "djhduhdgdjjduwg");
     return (
       <Container>
+       
         <Row>
+          <EditDrProfile />
           <Col md="3">
             <img src={img} />
           </Col>
           <Col md="7">
             <div>
-              <Label>{"Fullname: "+ this.props.user.firstName +" "+this.props.user.lastName}</Label>
+              <Label>
+                {"Fullname: " +
+                  this.props.user.firstName +
+                  " " +
+                  this.props.user.lastName}
+              </Label>
             </div>
             <div>
               <Label>Phonenumber: {this.props.user.phoneNumber}</Label>
@@ -79,13 +77,17 @@ class DrProfile extends Component {
               <Label>Clinic number: {this.props.user.clinicNumber}</Label>
             </div>
             <div>
-              <Label style={{ marginRight: 10 }}>Rate: {this.props.user.rateAvg}</Label>
+              <Label style={{ marginRight: 10 }}>
+                Rate: {this.props.user.rateAvg}
+              </Label>
               <label>{this.props.user.numRater}</label>
             </div>
           </Col>
           <Col md="2">
             <div className="text-right">
-              <Button color="primary">Edit</Button>
+              <Button color="primary" onClick={this.handleOpenModal.bind(this)}>
+                Edit
+              </Button>
             </div>
           </Col>
         </Row>
@@ -96,11 +98,7 @@ class DrProfile extends Component {
               <label>Bio:</label>
             </div>
             <div className="text-center">
-              <p>
-                dghdghghdghgjdgjhdjhjhdkjjdjhubud uyui f fui eehe fvf ewkbhew
-                lvkg gffgwfbdjflk fkfjjgfjgjfg fjsgfhhng fukflgugjgjfg gfjgwfjjg
-                fweg kf jegfjgegf w
-              </p>
+              <p>{this.props.user.bio}</p>
             </div>
           </Card>
         </Row>
@@ -111,17 +109,17 @@ class DrProfile extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    user: state.auth.user
-  } 
-}
+    user: state.auth.user,
+    isOpen: state.doctor.isOpen
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
-return {
+const mapDispatchToProps = dispatch => {
+  return {
+    openModal: isOpen => dispatch(openModal(isOpen))
+  };
+};
 
-}
-
-} 
-
-export default connect(mapStateToProps)(DrProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(DrProfile);
