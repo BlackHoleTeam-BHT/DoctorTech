@@ -5,14 +5,14 @@ import DoctorListEntry from './DoctorListEntry';
 class DoctorList extends React.Component {
 
   render() {
-    let doctores = this.props.doctores;
     console.log(this.props)
+    let doctors = this.props.doctors;
     return (
       <Container>
         {/* to check if  there are doctor or not*/}
-        {doctores.length > 0 ? (
+        {doctors.length > 0 ? (
           
-          doctores && doctores.map((elem =>
+          doctors && doctors.map((elem =>
             <DoctorListEntry key={elem.id} doctor={elem} />
           ))
 
