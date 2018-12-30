@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
 import {connect} from 'react-redux';
-import {openSendConsult} from '../../store/action/doctorActions';
+import {openSendConsult, sendConsultation} from '../../store/action/doctorActions';
 
 class SendConsultation extends React.Component {
    
@@ -26,10 +26,12 @@ class SendConsultation extends React.Component {
   }
 
   handleOnSubmit() {
+    // confige the message to send it to server
     const  message = this.state;
     message.doctorId = this.props.user.id;
     message.targetDoctorId= this.props.targetDoctor.id;
     console.log(message);
+    this.props.sendConsultation(message);
     this.toggle();
   }
 
@@ -107,7 +109,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // to controll the model open and close
-    openSendConsult: (isOpen, targetDoctor) => dispatch(openSendConsult(isOpen, targetDoctor))
+    openSendConsult: (isOpen, targetDoctor) => dispatch(openSendConsult(isOpen, targetDoctor)),
+    sendConsultation: (data) => dispatch(sendConsultation(data))
   }
 }
 

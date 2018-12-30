@@ -46,8 +46,7 @@ class SignIn extends React.Component {
   render() {
     console.log('login',this.props)
     // to check if the user make sign up successfully
-    if (this.props.user !== null) {
-      console.log(this.props.user)
+    if (this.props.login) {
       this.props.history.push('/dashboard/' + this.props.user.id);
     }
     return (
@@ -123,6 +122,7 @@ const mapDipatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
+    login: state.auth.login,
     correctLogin: state.auth.correctLogin
   }
 }

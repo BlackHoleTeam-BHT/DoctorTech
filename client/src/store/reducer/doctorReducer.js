@@ -50,6 +50,10 @@ const doctorReducer = (state = initState, action) => {
          isSendConsultModelOpen: action.data,
          targetDoctor: action.targetDoctor
       }
+      case "SEND_CONSULTATION":
+      return {
+         ...state,
+      }
      default:
         return state;
     }

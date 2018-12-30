@@ -42,4 +42,19 @@ export const openSendConsult = (isOpen, targetDoctor) => {
         })
     }
 }
-  
+
+// this action to open model to send consultation in DoctorConsultation
+export const sendConsultation = (data) => {
+    return (dispatch, getState) => {
+      //sync
+      $.ajax({
+        url: '/send-consult',
+        type: "POST",
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: function (res) {
+          dispatch({ type: 'SEND_CONSULTATION', data: res.data })
+        }
+      });
+    }
+}
