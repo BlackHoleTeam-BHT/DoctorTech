@@ -180,7 +180,7 @@ class PhysicalExamination extends React.Component {
                       primary={<i className="fas fa-3x fa-weight"></i>}
                       secondary={
                         <div className={classes.list3}>
-                          {this.props.patient.PhysicalExamination[0].weight}<i style={{ color: 'blue' }}>Kg</i>
+                          {this.props.patient.PhysicalExamination.length  && this.props.patient.PhysicalExamination[0].weight}<i style={{ color: 'blue' }}>Kg</i>
                         </div>
                       }></ListItemText>
 
@@ -200,7 +200,7 @@ class PhysicalExamination extends React.Component {
                       primary={<b>Head</b>}
                       secondary={
                         <div className={classes.list2}>
-                          {this.props.patient.PhysicalExamination[0].headNotes}
+                          {this.props.patient.PhysicalExamination.length  && this.props.patient.PhysicalExamination[0].headNotes}
                         </div>
                       }></ListItemText>
 
@@ -218,7 +218,7 @@ class PhysicalExamination extends React.Component {
                       primary={<i className="fas fa-3x  fa-male icon"></i>}
                       secondary={
                         <div className={classes.list3}>
-                          {this.props.patient.PhysicalExamination[0].height}<i style={{ color: 'blue' }}>cm</i>
+                          {this.props.patient.PhysicalExamination.length  && this.props.patient.PhysicalExamination[0].height}<i style={{ color: 'blue' }}>cm</i>
                         </div>
                       }></ListItemText>
 
@@ -234,7 +234,7 @@ class PhysicalExamination extends React.Component {
                       primary={<b>Body</b>}
                       secondary={
                         <div className={classes.list2}>
-                          {this.props.patient.PhysicalExamination[0].middleBodyNotes}
+                          { this.props.patient.PhysicalExamination.length && this.props.patient.PhysicalExamination[0].middleBodyNotes}
                         </div>
                       }></ListItemText>
 
@@ -251,7 +251,7 @@ class PhysicalExamination extends React.Component {
                       primary={<i className="fas fa-3x fa-temperature-high icon"></i>}
                       secondary={
                         <div className={classes.list3}>
-                          {this.props.patient.PhysicalExamination[0].bodyTemperature}<i style={{ color: 'blue' }}>°C</i>
+                          { this.props.patient.PhysicalExamination.length && this.props.patient.PhysicalExamination[0].bodyTemperature}<i style={{ color: 'blue' }}>°C</i>
                         </div>
                       }></ListItemText>
 
@@ -267,7 +267,7 @@ class PhysicalExamination extends React.Component {
                       primary={<b>Legs</b>}
                       secondary={
                         <div className={classes.list2}>
-                          {this.props.patient.PhysicalExamination[0].bottomBodyNotes}
+                          {this.props.patient.PhysicalExamination.length && this.props.patient.PhysicalExamination[0].bottomBodyNotes}
                         </div>
                       }></ListItemText>
 

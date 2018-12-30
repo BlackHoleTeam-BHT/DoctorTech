@@ -94,7 +94,11 @@ class MCInput extends React.Component {
             diabetes:(this.state.diabetes)?1:0,
             patientHistory:this.state.PatientHistory,
             familyHistory:this.state.FamilyHistory,
+<<<<<<< HEAD
             CaseId:this.props.patient.CaseId 
+=======
+            CaseId:this.props.patient.currentCase[0].id 
+>>>>>>> (fix) fix the load  bug in the pathient component
         }
 
         this.setState({

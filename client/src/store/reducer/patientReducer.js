@@ -15,11 +15,7 @@ const initState = {
   SelectCase: false,
   currentPatient: false,
   currentCase: [],
-  chiefComplaint: [{
-    id: 1,
-    title: '',
-    description: ''
-  }],
+  chiefComplaint: [],
   MedicalHistory: [{
     heartDisease: 0,
     joints: 0,
@@ -29,18 +25,7 @@ const initState = {
     patientHistory: '',
     familyHistory: ''
   }],
-  PhysicalExamination: [{
-    id: 1,
-    weight: '',
-    height: '',
-    bodyTemperature: '',
-    headNotes: '',
-    middleBodyNotes: '',
-    bottomBodyNotes: '',
-    diabetes: '',
-    BloodPressure: '',
-    BMI: ''
-  }],
+  PhysicalExamination: [],
   medicalAnalysis: [],
   MedicalPrescription: [],
   PatientPlan: [{
