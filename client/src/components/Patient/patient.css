@@ -1,0 +1,9 @@
+.icon{
+  
+  /* margin: auto;
+  margin-bottom: 0;
+  margin-top: 0; */
+  display:"flex";
+  justify-content: 'center';
+  justify:'center'
+}

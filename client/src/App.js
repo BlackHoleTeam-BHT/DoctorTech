@@ -1,29 +1,42 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route} from 'react-router-dom'
-import Navbar from './components/layout/Navbar'
-import SignIn from './components/auth/SignIn'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Header from './components/layout/Header.js'
+import Dashboard from './components/dashboard/Dashboard.js';
+import SignIn from './components/auth/SignIn.js';
+import Signup from './components/auth/Signup.js';
+import Home from './components/layout/Home.js';
+import {connect} from 'react-redux'
+import PatientProfile from './components/Patient/Profile/patientProfile'
 
 class App extends Component {
- 
+  state = {
+    isLogin: true
+  }
   render() {
     return (
-      <div> 
-        <SignIn />
-      </div>
+      <BrowserRouter>
+        <div>
+          {!this.props.login ? <Header /> : ''}
+          <Switch>
+            {/* Router all the component  ToDO add the component */}
+            <Route exact path="/" component={Home} />
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/dashboard/:id" component={Dashboard} />
+            <Route path="/PatientProfile/:id" component={PatientProfile} />
 
-      // {/* <BrowserRouter>
-      //   <div className="App container">
-      //     <h1 className="center text-grey">Welcome with Doctor Tech</h1>
-      //     <h3 className="center text-grey"> My Team I wish you all the best.</h3>
-      //     <Navbar />
-      //     <Route />
-      //     <Route />
-      //     <Route />
-      //     <Route />
-      //   </div>
-      // </BrowserRouter> */}
-
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
-export default App;
+
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+  return {
+      user: state.auth.user,
+      login: state.auth.login
+  }
+}
+export default connect(mapStateToProps)(App);

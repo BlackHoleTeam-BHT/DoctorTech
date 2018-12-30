@@ -1,0 +1,23 @@
+.primaryColor{
+    background: #2caee2;
+}
+
+.mdFont{
+  font-size: 20px;
+  color: #ffffff;
+}
+.NavHover{
+  color: aliceblue;
+
+}
+
+.NavHover:hover {
+  background: white;
+  color: #2caee2;
+  text-decoration: none;
+}
+.active-style{
+    background: white;
+    color: #2caee2;
+    text-decoration: none;
+}
