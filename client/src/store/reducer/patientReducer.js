@@ -156,6 +156,22 @@ const patientReducer = (state = initState, action) => {
         ...state,
         PatientPlan:newPatientPlan
       }
+      case "ClosePatientProfile":
+      var Cases=state.currentCase
+      var newPatientPlan=state.PatientPlan
+      for(var i=0;i<Cases.length;i++){
+        if(Cases[i].id==action.data.CaseId){
+          Cases[i].isOpen=0
+        }
+      }
+      newPatientPlan[0].step=action.data.step
+
+      return{
+        ...state,
+        currentCase:Cases,
+        PatientPlan:newPatientPlan
+
+      }
       default:
         return state;
     }

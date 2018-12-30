@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import {UpdatePlanStep} from '../../../../store/action/patientAction'
+import {ClosePatientProfile} from '../../../../store/action/patientAction'
+
 
 const styles = theme => ({
     root: {
@@ -61,10 +63,19 @@ class PatientPlan extends React.Component {
         });
     };
 
-    handleCloseProfile = () => {
+    handleCloseProfile = (value) => {
+        console.log('id',id)
+        if(value===1){
+
         var CurrentStep=this.props.patient.PatientPlan[0].step
         var id=this.props.patient.PatientPlan[0].id
-        this.props.UpdatePlanStep(id,CurrentStep+1)   
+        var CaseId=this.props.patient.currentCase[0].id     
+        this.props.ClosePatientProfile(id,CurrentStep+1,CaseId) 
+
+        }else{
+            
+        }
+  
  
 
     }
@@ -164,7 +175,7 @@ class PatientPlan extends React.Component {
                         <Button onClick={this.handleBack} className={classes.button}>
                             Back
                           </Button>
-                        <Button color="primary" onClick={this.handleCloseProfile} className={classes.button}>
+                        <Button color="primary" id='1' onClick={()=>{this.handleCloseProfile(1)}} className={classes.button}>
                             Close Profile
                        </Button>
                     </Paper>
@@ -189,7 +200,8 @@ const mapStateToProps = (state) => {
 // Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
     return {
-        UpdatePlanStep: (id,step) => dispatch(UpdatePlanStep(id,step))
+        UpdatePlanStep: (id,step) => dispatch(UpdatePlanStep(id,step)),
+        ClosePatientProfile: (id,step,CaseId) => dispatch(ClosePatientProfile(id,step,CaseId))
     }
   }
   

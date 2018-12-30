@@ -357,3 +357,39 @@ export const AddPatientHistory=(data)=>{
   }
 
 }
+
+// Note: close the patient profile
+export const ClosePatientProfile=(Id,step,CaseId)=>{
+
+  const data = {
+    Id: Id,
+    step: step,
+    CaseId:CaseId
+  }
+
+  console.log('action ClosePatientProfile',data)
+
+  return(dispatch, getState)=>{
+    
+    $.ajax({
+      type: "POST",
+      url: '/ClosePatientProfile',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function (result) {
+        
+        
+        console.log('ClosePatientProfile',result)
+        dispatch({type:'ClosePatientProfile',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}

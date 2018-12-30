@@ -335,6 +335,22 @@ router.route('/UpdatePlanStep')
   })
 })
 
+
+//Note :Close patient profile
+router.route('/ClosePatientProfile')
+.post(function(req,res){
+  const data=req.body
+  
+ 
+  db.ClosePatientProfile(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
