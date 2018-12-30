@@ -66,6 +66,11 @@ class MCInput extends React.Component {
       description:this.state.description,
       id : this.props.patient.CaseId
     }
+
+    this.setState({
+      title:'',
+      description:''
+    })
     this.props.AddChiefComplaint(obj)
   }
 

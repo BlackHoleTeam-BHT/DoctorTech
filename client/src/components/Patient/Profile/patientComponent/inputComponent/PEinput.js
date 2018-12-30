@@ -80,7 +80,17 @@ class PEinput extends React.Component {
       BloodPressure:this.state.BloodPressure,
       diabetes:this.state.diabetes
     }
-    console.log(obj)
+    this.setState({
+      weight:null,
+      height:null,
+      bodyTemperature:null,
+      BloodPressure:null,
+      diabetes:null,
+      headNotes:'',
+      middleBodyNotes:'',
+      bottomBodyNotes:''
+    })
+  
     this.props.AddPhysicalExamination(obj)
   }
 

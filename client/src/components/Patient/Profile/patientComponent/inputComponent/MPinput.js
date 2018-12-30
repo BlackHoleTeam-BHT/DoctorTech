@@ -68,6 +68,11 @@ class MPinput extends React.Component {
         times:this.state.times,
       id : this.props.patient.CaseId
     }
+    this.setState({
+      name:'',
+      daysInterval:0,
+      times:0
+    })
     this.props.AddMedicalPrescription(obj)
   }
 

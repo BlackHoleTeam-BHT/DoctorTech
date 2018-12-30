@@ -65,9 +65,15 @@ class MAinput extends React.Component {
     var obj = {
       name: this.state.name,
       description: this.state.description,
-      status: this.state.status,
+      status: (this.state.status===0)?0:1,
       id: this.props.patient.CaseId
     }
+    this.setState({
+      name:'',
+      description:'',
+      status:0
+
+    })
     this.props.AddMedicalAnalysis(obj)
   }
 
