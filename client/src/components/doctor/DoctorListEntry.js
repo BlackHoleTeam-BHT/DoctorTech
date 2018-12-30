@@ -6,34 +6,34 @@ import {
   Card,
   Button
 } from '@material-ui/core';
-import patientImg from '../style/patient-icon.png'
-import { withRouter, Link } from 'react-router-dom'
+import patientImg from '../style/patient-icon.png';
+import { withRouter, Link } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {openSendConsult} from '../../store/action/doctorActions';
+
 //https://github.com/NdYAG/react-rater
 import Rater from 'react-rater'
 import 'react-rater/lib/react-rater.css'
 
 class DoctorListEntry extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      patient: props.patient,
-
-    }
-  }
   // function to deal with onClick on patient card to move to patient profile
   hanldOnClickPatient() {
     console.log(this.props.patient.id_Doctor);
     // this.props.history.push('/dashboard/'+ this.props.patient.id_Doctor +'/PatientProfile/' + this.props.patient.id);
   }
 
+  // open model to send consultation
   handlOnClickSend(){
-
+    console.log(this.props)
+    this.props.openSendConsult(!this.props.isOpen, this.props.doctor)
   }
 
   render() {
     return (
       <Grid style={{ display: 'flex', justifyContent: 'center', alignItems: "center", margin: 10 }}>
+        
         <Card style={{ width: "600px" }}>
           <CardContent>
             <Grid container>
@@ -74,5 +74,17 @@ class DoctorListEntry extends React.Component {
   }
 }
 
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+  return {
+    isOpen: state.doctor.isSendConsultModelOpen
+  }
+}
 
-export default withRouter(DoctorListEntry);
+//Note: add the action to the props
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openSendConsult: (isOpen, targetDoctor) => dispatch(openSendConsult(isOpen, targetDoctor))
+  }
+}
+export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(DoctorListEntry);

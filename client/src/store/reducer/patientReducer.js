@@ -1,34 +1,50 @@
-const initState = {
-  patient: null,
-  patientID: 0,
-  patients: [],
-  patientSearchResults: [],
-  isSearchNow: false,
-  PatientProfile: [{
-    firstName: '',
-    lastName: '',
-    age: '',
-    gender: '',
-    maritalStatus: ''
+const initState={
+    patient: {},
+    patientID: 0,
+    patients: [],
+    patientSearchResults : [],
+    isSearchNow: false,
+    PatientProfile:[{
+      firstName:'',
+      lastName:'',
+      age:'',
+      gender:'',
+      maritalStatus:''
 
-  }],
+    }],
+    currentPatient:false,
+    currentCase:[],
+    chiefComplaint:[{
+      id:1,
+      title:'',
+      description:''
+    }],
+    MedicalHistory:[{
+      heartDisease:0,
+      joints:0,
+      bloodPressure:0,
+      diabetes:0,
+      renalDisease:0,
+      patientHistory:'',
+      familyHistory:''
+    }],
+    PhysicalExamination:[{
+      weight:'',
+      height:'',
+      bodyTemperature:'',
+      headNotes:'',
+      middleBodyNotes:'',
+      bottomBodyNotes:'',
+      diabetes:'',
+      BloodPressure:'',
+      BMI:''
+    }],
+    medicalAnalysis:[],
+    MedicalPrescription:[],
+    PatientPlan:[{
+      step:5
+    }],
   SelectCase: false,
-  currentPatient: false,
-  currentCase: [],
-  chiefComplaint: [],
-  MedicalHistory: [{
-    heartDisease: 0,
-    joints: 0,
-    bloodPressure: 0,
-    diabetes: 0,
-    renalDisease: 0,
-    patientHistory: '',
-    familyHistory: ''
-  }],
-  PhysicalExamination: [],
-  medicalAnalysis: [],
-  MedicalPrescription: [],
-  PatientPlan: [],
   CaseId: 0
 }
     
@@ -141,7 +157,7 @@ const patientReducer = (state = initState, action) => {
       }
       case "ClosePatientProfile":
       var Cases=state.currentCase
-      var newPatientPlan=state.PatientPlan
+      var newPatientPlan = state.PatientPlan
       for(var i=0;i<Cases.length;i++){
         if(Cases[i].id==action.data.CaseId){
           Cases[i].isOpen=0

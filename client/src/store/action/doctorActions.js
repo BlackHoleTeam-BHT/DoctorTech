@@ -31,17 +31,15 @@ export const getDoctors = () => {
       });
     }
 }
-<<<<<<< HEAD
-  
-=======
 
-export const openSendConsult = (isOpen) => {
+// this action to open model to send consultation in DoctorConsultation
+export const openSendConsult = (isOpen, targetDoctor) => {
     return (dispatch, getState) => {
         dispatch({
             type:"OPEN_SEND_CONSULT_MODEL",
-            data: isOpen
+            data: isOpen,
+            targetDoctor:  targetDoctor
         })
     }
 }
   
->>>>>>> (feat) add and design model to send consultation for doctors and connect it with redux

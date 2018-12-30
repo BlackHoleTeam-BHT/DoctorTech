@@ -1,19 +1,44 @@
-import React from 'raect';
+import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
 import {connect} from 'react-redux';
 import {openSendConsult} from '../../store/action/doctorActions';
 
 class SendConsultation extends React.Component {
-  
-  toggle() {
-     this.props.openSendConsult(!this.props.isOpen)
+   
+  constructor(props) {
+    super(props);
+    this.state= {
+      subject: '',
+      description: '',
+    }
   }
+
+  // function to get the data from the form  
+  handleOnChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+  // func to close and open the model 
+  toggle() {
+    console.log(this.props)
+     this.props.openSendConsult(!this.props.isOpen, this.props.targetDoctor)
+  }
+
+  handleOnSubmit() {
+    const  message = this.state;
+    message.doctorId = this.props.user.id;
+    message.targetDoctorId= this.props.targetDoctor.id;
+    console.log(message);
+    this.toggle();
+  }
+
   render() {
    
     return (
       <div>
-        <Modal isOpen={this.props.isOpen} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Send Consultation</ModalHeader>
+        <Modal isOpen={this.props.isOpen} toggle={this.toggle.bind(this)} className={this.props.className}>
+          <ModalHeader onClick={this.toggle.bind(this)}>Send Consultation</ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
@@ -22,7 +47,8 @@ class SendConsultation extends React.Component {
                   type="text"
                   name="from"
                   id="from"
-                  value={this.state.from}
+                  readOnly="true"
+                  value={this.props.user.firstName + ' ' + this.props.user.lastName }
                 />
               </FormGroup>
               <FormGroup>
@@ -31,23 +57,36 @@ class SendConsultation extends React.Component {
                   type="text"
                   name="targetDoctor"
                   id="targetDoctor"
-                  value={this.state.targetDoctor}
+                  readOnly="true"
+                  value={"Dr. " +this.props.targetDoctor.firstName + ' ' + this.props.targetDoctor.lastName }
                 />
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="from">Message </Label>
+                <Label htmlFor="Subject">To </Label>
+                  <Input
+                  type="text"
+                  name="subject"
+                  id="subject"
+                  value={this.state.subject}
+                  onChange= {this.handleOnChange.bind(this)}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="from">Description </Label>
                   <Input
                   type="textarea"
-                  name="message"
-                  id="mesage"
-                  value={this.state.from}
+                  name="description"
+                  id="description"
+                  value ={this.state.description}
+                  onChange= {this.handleOnChange.bind(this)}
+
                 />
               </FormGroup>
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Send</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color="primary" onClick={this.handleOnSubmit.bind(this)}>Send</Button>{' '}
+            <Button color="secondary" onClick={this.toggle.bind(this)}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -58,15 +97,17 @@ class SendConsultation extends React.Component {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    doctors: state.doctor.doctors,
-    isOpen: state.doctor.isSendConsultModelOpen
+    user: state.auth.user,
+    isOpen: state.doctor.isSendConsultModelOpen,
+    targetDoctor: state.doctor.targetDoctor
   }
 }
 
 //Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
-    openSendConsult: (isOpen) => dispatch(openSendConsult(isOpen))
+    // to controll the model open and close
+    openSendConsult: (isOpen, targetDoctor) => dispatch(openSendConsult(isOpen, targetDoctor))
   }
 }
 

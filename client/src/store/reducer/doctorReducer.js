@@ -1,4 +1,5 @@
 const initState = {
+<<<<<<< HEAD
    isOpen: false,
    doctores: [],
    isSendConsultModelOpen: false
@@ -28,5 +29,31 @@ const doctorReducer = (state = initState, action) => {
 }
 
 
+=======
+    doctors: [],
+    isSendConsultModelOpen: false,
+    targetDoctor: {}
+}
+
+// this function to dealing with doctor action in redux
+const doctorReducer = (state = initState, action) => {
+   console.log(state)
+    switch (action.type) {
+     case "GET_DOCTORS":
+        return {
+           ...state,
+           doctors: action.data
+      }
+      case "OPEN_SEND_CONSULT_MODEL":
+      return {
+         ...state,
+         isSendConsultModelOpen: action.data,
+         targetDoctor: action.targetDoctor
+      }
+     default:
+        return state;
+    }
+  }
+>>>>>>> (feat) connect the model with SendConsultation
 
 export default doctorReducer

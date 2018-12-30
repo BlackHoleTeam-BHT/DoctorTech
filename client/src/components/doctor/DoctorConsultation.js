@@ -9,6 +9,7 @@ import { Redirect } from 'react-router-dom';
 import DoctorsSearch from './DoctorsSearch.js';
 import DoctorList from './DoctorsList';
 import {getDoctors} from '../../store/action/doctorActions';
+import SendConsultation from './SendConsultation.js';
 
 
 class DoctorConsultation extends React.Component {
@@ -28,6 +29,7 @@ class DoctorConsultation extends React.Component {
       <div>
         <Typography variant="h5" color="primary">Number of Doctors :</Typography>
         <Grid item sm={12} xs={12}>
+           <SendConsultation />
           <DoctorsSearch />
           <DoctorList doctors= {this.props.doctors} />
         </Grid>
