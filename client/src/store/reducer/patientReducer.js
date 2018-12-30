@@ -41,7 +41,12 @@ const initState = {
     BloodPressure: '',
     BMI: ''
   }],
-  medicalAnalysis: [],
+  medicalAnalysis: [{
+    id: 1,
+    name: "",
+    description: "",
+    status: 0,
+  }],
   MedicalPrescription: [{
     id: 1,
     name: "",
@@ -136,6 +141,13 @@ const patientReducer = (state = initState, action) => {
       return {
         ...state,
         MedicalPrescription: newMedicalPrescription
+      }
+    case "AddMedicalAnalysis":
+      var newMedicalAnalysis = state.medicalAnalysis
+      newMedicalAnalysis.push(action.data)
+      return {
+        ...state,
+        medicalAnalysis: newMedicalAnalysis
       }
     default:
       return state;

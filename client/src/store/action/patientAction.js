@@ -295,3 +295,29 @@ export const AddMedicalPrescription = (data) => {
     });
   }
 }
+
+
+// Note: Add Medical Analysis 
+export const AddMedicalAnalysis = (data) => {
+  console.log('action AddMedicalAnalysis', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/AddMedicalAnalysis',
+      contentType: 'application/json',
+      data: JSON.stringify({ data: data }),
+      success: function (result) {
+        console.log('AddMedicalAnalysisServer?', GetCaseInfo)
+        data.insertId = result.insertId
+        dispatch({ type: 'AddMedicalAnalysis', data: data })
+
+        // dispatch({type:'GetCaseInfo',data:data})
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+    });
+  }
+}

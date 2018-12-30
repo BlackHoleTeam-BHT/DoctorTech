@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import Button from '@material-ui/core/Button';
-import {AddMedicalAnalysis} from '../../../../../store/action/patientAction'
+import { AddMedicalAnalysis } from '../../../../../store/action/patientAction'
 import { timingSafeEqual } from 'crypto';
 
 const styles = theme => ({
@@ -28,7 +28,7 @@ const styles = theme => ({
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
-    margin:'auto'
+    margin: 'auto'
   },
   bItem: {
     marginLeft: 10,
@@ -45,9 +45,9 @@ const styles = theme => ({
 
 class MAinput extends React.Component {
   state = {
-    medicineName: "",
-    daysInterval: 0,
-    timesDay:0,
+    name: "",
+    description: "",
+    status: 0,
     expanded: null,
     history: [{ heart: 0, joint: 1, blood: 0, diabetes: 1, Renal: 0, description: 'ozil Welcome walid', family: 'fff' }]
   };
@@ -63,11 +63,11 @@ class MAinput extends React.Component {
   };
 
   handelSubmit = () => {
-    var obj={
-        name:this.state.name,
-        description:this.state.description,
-        status:this.state.status,
-      id : this.props.patient.CaseId
+    var obj = {
+      name: this.state.name,
+      description: this.state.description,
+      status: this.state.status,
+      id: this.props.patient.CaseId
     }
     this.props.AddMedicalPrescription(obj)
   }
@@ -75,13 +75,13 @@ class MAinput extends React.Component {
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
-    console.log("mmmmmmmmmmmmmm",this.props)
+    console.log("mmmmmmmmmmmmmm", this.props)
     return (
       <div className={classes.root}>
-        <ExpansionPanel  expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
-          <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />}>
-         
-            <Typography className={classes.secondaryHeading} justifyContent="center"><i style={{fontSize:'30px'}} class="material-icons"> playlist_add</i></Typography>
+        <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+
+            <Typography className={classes.secondaryHeading} justifyContent="center"><i style={{ fontSize: '30px' }} class="material-icons"> playlist_add</i></Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails >
             <Grid container spacing={12} className={classes.container}>
@@ -104,7 +104,7 @@ class MAinput extends React.Component {
                     value={this.state.description}
                     onChange={this.handleChange2('description')}
                     margin="normal"
-                    
+
                   />
                 </Grid>
                 <Grid md={2} item>
@@ -115,12 +115,12 @@ class MAinput extends React.Component {
                     value={this.state.status}
                     onChange={this.handleChange2('status')}
                     margin="normal"
-                    
+
                   />
                 </Grid>
 
                 <Grid md={2} item  >
-                   <Button onClick={this.handelSubmit} variant="contained" color="primary" className="button" >
+                  <Button onClick={this.handelSubmit} variant="contained" color="primary" className="button" >
                     Add
                     </Button>
                 </Grid>
@@ -152,4 +152,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default compose( withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(MAinput);
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(MAinput);
