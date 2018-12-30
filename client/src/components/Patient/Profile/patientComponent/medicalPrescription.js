@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import MPinput from '../patientComponent/inputComponent/MPinput'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -89,7 +90,7 @@ class MedicalPrescription extends React.Component {
                 </TableBody>
             </Table>     
         </Paper>
-
+                    <MPinput />
       </div>
     )
   }
