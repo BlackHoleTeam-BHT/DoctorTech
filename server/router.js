@@ -217,6 +217,89 @@ router.route('/patientInCassis')
       })
     })
 
+
+
+    //Note :to add chief compliant 
+    router.route('/AddChiefComplaint')
+    .post(function(req,res){
+      const data=req.body.data
+      
+
+      console.log('status',req.body)
+      db.AddChiefComplaint(data,function(err,result){
+        if(err){
+          throw err
+        }else{
+          res.send(result)
+        }
+      })
+    })
+
+
+    //Note :to add physical examination 
+    router.route('/AddPhysicalExamination')
+    .post(function(req,res){
+      const data=req.body.data
+      
+      console.log('status',req.body)
+      db.AddPhysicalExamination(data,function(err,result){
+        if(err){
+          throw err
+        }else{
+          res.send(result)
+        }
+      })
+    })
+
+
+    //Note :to add medical Prescription 
+    router.route('/AddMedicalPrescription')
+    .post(function(req,res){
+      const data=req.body.data
+      
+      console.log('status',req.body)
+      db.AddMedicalPrescription(data,function(err,result){
+        if(err){
+          throw err
+        }else{
+          res.send(result)
+        }
+      })
+    })
+
+    //Note :to add medical Analysis 
+    router.route('/AddMedicalAnalysis')
+    .post(function(req,res){
+      const data=req.body.data
+      
+      console.log('status',req.body)
+      db.AddMedicalAnalysis(data,function(err,result){
+        if(err){
+          throw err
+        }else{
+          res.send(result)
+        }
+      })
+    })
+
+//Note :Add AddPatientHistory
+router.route('/AddPatientHistory')
+.post(function(req,res){
+  const data=req.body
+ 
+  console.log('addddddddddd',req.body)
+
+
+  db.AddPatientHistory(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
+
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
   done(null, user.id);

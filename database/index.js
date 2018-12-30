@@ -228,6 +228,85 @@ const UpdateAnalysisStatus = (Id,status, callback) => {
 
 }
 
+//function to  add info MedicalHistory table
+const AddPatientHistory = (data, callback) => {
+  const sql = `INSERT INTO MedicalHistory (caseId,heartDisease,joints,bloodPressure,diabetes,renalDisease,patientHistory,familyHistory)
+   VALUES ('${data.CaseId}','${data.heartDisease}','${data.joints}','${data.bloodPressure}','${data.diabetes}',
+   '${data.renalDisease}','${data.patientHistory}','${data.familyHistory}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during insert info  to MedicalHistory Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
+//function to  add chief complaint
+const AddChiefComplaint = (data, callback) => {
+  const sql = `INSERT INTO ChiefComplaint (caseId,title,description) VALUES ('${data.id}','${data.description}','${data.title}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from ChiefComplaint Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
+//function to  add Physical Examination
+const AddPhysicalExamination = (data, callback) => {
+  const sql = `INSERT INTO PhysicalExamination (caseId,weight,height,bodyTemperature,headNotes,
+middleBodyNotes,bottomBodyNotes) VALUES ('${data.id}','${data.weight}','${data.height}','${data.bodyTemperature}','${data.head}','${data.body}','${data.legs}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from physicalExamination Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
+
+//function to  add medical Prescription
+const AddMedicalPrescription = (data, callback) => {
+  const sql = `INSERT INTO MedicalPrescription (caseId,name,daysInterval,times) VALUES ('${data.id}','${data.name}','${data.daysInterval}','${data.times}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from MedicalPrescription Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
+//function to  add medical Analysis
+const AddMedicalAnalysis = (data, callback) => {
+  const sql = `INSERT INTO MedicalAnalysis (caseId,name,description,status) VALUES ('${data.id}','${data.name}','${data.description}','${data.status}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from MedicalAnalysis Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
 
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
@@ -240,3 +319,8 @@ module.exports.selectPatientInfo = selectPatientInfo;
 module.exports.selectPatientCassis = selectPatientCassis;
 module.exports.selectCaseInfo = selectCaseInfo;
 module.exports.UpdateAnalysisStatus = UpdateAnalysisStatus;
+module.exports.AddChiefComplaint = AddChiefComplaint;
+module.exports.AddPhysicalExamination=AddPhysicalExamination;
+module.exports.AddMedicalPrescription=AddMedicalPrescription;
+module.exports.AddMedicalAnalysis=AddMedicalAnalysis;
+module.exports.AddPatientHistory = AddPatientHistory;
