@@ -120,7 +120,7 @@ class PatientProfile extends React.Component {
     //   return (
     //     <Redirect to = '/' />
     //   )
-    //}
+    // }
     return (
       <Grid container className={classes.root} spacing={16}>
         <Grid container md={12} item>

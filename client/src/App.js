@@ -6,7 +6,7 @@ import SignIn from './components/auth/SignIn.js';
 import Signup from './components/auth/Signup.js';
 import Home from './components/layout/Home.js';
 import {connect} from 'react-redux'
-import PatientProfile from './components/Patient/Profile/patientProfile.js';
+import PatientProfile from './components/Patient/Profile/patientProfile'
 
 class App extends Component {
   state = {
