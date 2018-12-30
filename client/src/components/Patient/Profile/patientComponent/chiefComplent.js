@@ -8,32 +8,33 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import logo from '../../../../image/chief2.jpg'
-
+import {connect} from 'react-redux'
+import { compose } from 'redux'
+import MCInput from './inputComponent/MCInput'
 
 //Note:page style
 const styles = theme => ({
-    root: {
-        width: '100%',
-        maxWidth: 500,
-        backgroundColor: theme.palette.background.paper,
-    },
-    inline: {
-        display: 'inline',
-    },
-    img: {
-        borderRadius: 0,
-        width: 100,
-        height: 100
+  root: {
+    width: '100%',
+    maxWidth: 500,
+    backgroundColor: theme.palette.background.paper,
+  },
+  inline: {
+    display: 'inline',
+  },
+  img: {
+    borderRadius: 0,
+    width: 100,
+    height: 100
 
-    },
-    hr:{
-        height: 4,
-        marginLeft: 15,
-        marginBottom:-3,
-        backgroundImage: '-webkit-linear-gradient(left, rgba(15,157,88,.8), rgba(15, 157, 88,.6), rgba(0,0,0,0))'
-    }
+  },
+  hr: {
+    height: 4,
+    marginLeft: 15,
+    marginBottom: -3,
+    backgroundImage: '-webkit-linear-gradient(left, rgba(15,157,88,.8), rgba(15, 157, 88,.6), rgba(0,0,0,0))'
+  }
 });
-
 
 
 class ChiefComplaint extends React.Component {
@@ -55,9 +56,11 @@ class ChiefComplaint extends React.Component {
 
     render() {
         const { classes } = this.props;
+        console.log('CF',this.props.patient.chiefComplaint)
         return (
+            <div>
             <List className={classes.root}>
-                {this.state.complaint.map((value, key) => {
+                {this.props.patient.chiefComplaint.map((value, key) => {
                     return (
                          <div>
                              
@@ -72,7 +75,7 @@ class ChiefComplaint extends React.Component {
                                     <React.Fragment>
                                         <br/>
                                         <Typography component="span" className={classes.inline} color="textPrimary">
-                                           Complaint
+                                           Complaint - &nbsp;
                                           </Typography>
                                         {value.description}
                                     </React.Fragment>
@@ -89,16 +92,29 @@ class ChiefComplaint extends React.Component {
                 })}
 
             </List>
+            
+            {this.props.patient.SelectCase && <MCInput />}
+        </div>
         );
+       
     }
 
 
 }
 
 ChiefComplaint.propTypes = {
-    classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+    return {
+      patient: state.patient
+    }
+  }
+  
 
 
-export default withStyles(styles)(ChiefComplaint);
+
+
+export default compose(withStyles(styles),connect(mapStateToProps))(ChiefComplaint);

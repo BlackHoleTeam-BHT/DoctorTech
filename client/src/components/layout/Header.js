@@ -18,10 +18,10 @@ class Header extends React.Component {
             <NavbarBrand href="/dashboard"> <h3 className="NavHover">Doctor Tech</h3></NavbarBrand>
             <Nav>
               <NavItem className="NavHover">
-                <NavLink exact href="/signup" activeStyle="active-style" className="mdFont" >Create account</NavLink>
+                <NavLink exact="true" href="/signup" className="mdFont" >Create account</NavLink>
               </NavItem>
               <NavItem className="NavHover">
-                <NavLink href="/signin" activeStyle="active-style" className="mdFont">Login</NavLink>
+                <NavLink exact="true" href="/signin"  className="mdFont">Login</NavLink>
               </NavItem>
             </Nav>
           </div>
