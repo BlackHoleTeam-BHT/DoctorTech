@@ -37,106 +37,106 @@ export const getPatients = (doctorId) => {
       }
     });
   }
-    }
+}
 
 
 
 // Note: Get the patient information based on ID
-export const GetUserInformation=(id)=>{
-  console.log('action','recived')
-  
-  return(dispatch, getState)=>{
+export const GetUserInformation = (id) => {
+  console.log('action', 'recived')
+
+  return (dispatch, getState) => {
 
     $.ajax({
       type: "POST",
       url: '/patientInformation',
-      contentType:'application/json',
-      data:JSON.stringify({id:id}),
+      contentType: 'application/json',
+      data: JSON.stringify({ id: id }),
       success: function (data) {
-      console.log()
-        dispatch({type:'GetUserInformation',data:data})
-       
+        console.log()
+        dispatch({ type: 'GetUserInformation', data: data })
+
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
       }
-  
+
     });
   }
 
 }
 
 // Note: Get the patient Casses based on ID
-export const GetPatientCassis=(id)=>{
-  console.log('action Casses',id)
-  return(dispatch, getState)=>{
+export const GetPatientCassis = (id) => {
+  console.log('action Casses', id)
+  return (dispatch, getState) => {
 
     $.ajax({
       type: "POST",
       url: '/patientInCassis',
-      contentType:'application/json',
-      data:JSON.stringify({id:id}),
+      contentType: 'application/json',
+      data: JSON.stringify({ id: id }),
       success: function (data) {
-        console.log('d',data)
-        dispatch({type:'GetPatientCassis',data:data})
+        console.log('d', data)
+        dispatch({ type: 'GetPatientCassis', data: data })
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
       }
-  
+
     });
   }
 }
 
 
 // Note: search about patient depend on id , name or phone number for patieb using filter to all patiens 
-export const searchAboutPatient=(target)=>{
-  return(dispatch, getState)=>{
-     console.log(getState())
+export const searchAboutPatient = (target) => {
+  return (dispatch, getState) => {
+    console.log(getState())
     let data = getState().patient.patients.filter((elem) => {
       let fullName = elem.firstName + ' ' + elem.middleName + ' ' + elem.lastName;
-        if(elem.id.toString().includes(target)) {
-          return true
-        } else if(fullName.toLowerCase().includes(target.toLowerCase())) {
-          return true
-        } else if(elem.phoneNumber.includes(target)) {
-          return true
-        }
-        return false;
-     })
-      console.log(data)
-    if(target){
+      if (elem.id.toString().includes(target)) {
+        return true
+      } else if (fullName.toLowerCase().includes(target.toLowerCase())) {
+        return true
+      } else if (elem.phoneNumber.includes(target)) {
+        return true
+      }
+      return false;
+    })
+    console.log(data)
+    if (target) {
       // if the target has data that is mean there is search process
-      dispatch({type:'SEARCH_PATIENT', data: data, isSearchNow: true})
+      dispatch({ type: 'SEARCH_PATIENT', data: data, isSearchNow: true })
     } else {
       // there is not search process
-      dispatch({type:'SEARCH_PATIENT_STOP', isSearchNow: false})
+      dispatch({ type: 'SEARCH_PATIENT_STOP', isSearchNow: false })
     }
   }
 
 }
 
 // Note: Get the patient selected Case information by case id 
-export const GetCaseInfo=(CaseId)=>{
-  console.log('rrrrraction GetCaseInfo',CaseId)
+export const GetCaseInfo = (CaseId) => {
+  console.log('rrrrraction GetCaseInfo', CaseId)
 
-  
-  return(dispatch, getState)=>{
+
+  return (dispatch, getState) => {
 
     $.ajax({
       type: "POST",
       url: '/GetCaseInfo',
-      contentType:'application/json',
-      data:JSON.stringify({id:CaseId}),
+      contentType: 'application/json',
+      data: JSON.stringify({ id: CaseId }),
       success: function (data) {
-        data.CaseId=CaseId
-        console.log('obj for chief',data)
-        dispatch({type:'GetCaseInfo',data:data})
+        data.CaseId = CaseId
+        console.log('obj for chief', data)
+        dispatch({ type: 'GetCaseInfo', data: data })
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
       }
-  
+
     });
 
 
@@ -147,14 +147,14 @@ export const GetCaseInfo=(CaseId)=>{
 
 
 // Note: Update the Plan Step  
-export const UpdatePlanStep=(Id,step)=>{
-  console.log('UpdatePlanStep',Id,step)
-  const data={
-    Id:Id,
-    status:step
+export const UpdatePlanStep = (Id, step) => {
+  console.log('UpdatePlanStep', Id, step)
+  const data = {
+    Id: Id,
+    status: step
   }
-  
-  return(dispatch, getState)=>{
+
+  return (dispatch, getState) => {
 
     // $.ajax({
     //   type: "POST",
@@ -171,7 +171,7 @@ export const UpdatePlanStep=(Id,step)=>{
     //   error: (err) => {
     //     console.log('server err',err)
     //   }
-  
+
     // });
 
 
@@ -180,31 +180,31 @@ export const UpdatePlanStep=(Id,step)=>{
 
 }
 // Note: Update the Medical Analysis status 
-export const UpdateAnalysisStatus=(Id,status)=>{
-  console.log('action UpdateAnalysisStatus',Id)
-  const data={
-    Id:Id,
-    status:status
+export const UpdateAnalysisStatus = (Id, status) => {
+  console.log('action UpdateAnalysisStatus', Id)
+  const data = {
+    Id: Id,
+    status: status
   }
-  
-  return(dispatch, getState)=>{
+
+  return (dispatch, getState) => {
 
     $.ajax({
       type: "POST",
       url: '/UpdateAnalysisStatus',
-      contentType:'application/json',
-      data:JSON.stringify({id:Id,status:status}),
+      contentType: 'application/json',
+      data: JSON.stringify({ id: Id, status: status }),
       success: function (result) {
-        console.log('UpdateAnalysisStatus',result)
-        if(result==1){
-          dispatch({type:'UpdateAnalysisStatus',data:data})
+        console.log('UpdateAnalysisStatus', result)
+        if (result == 1) {
+          dispatch({ type: 'UpdateAnalysisStatus', data: data })
         }
         // dispatch({type:'GetCaseInfo',data:data})
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
       }
-  
+
     });
 
 
@@ -215,28 +215,28 @@ export const UpdateAnalysisStatus=(Id,status)=>{
 
 
 // Note: Add Pationt chief complaint 
-export const AddChiefComplaint=(data)=>{
-  console.log('action AddChiefComplaint',data)
- 
-  return(dispatch, getState)=>{
+export const AddChiefComplaint = (data) => {
+  console.log('action AddChiefComplaint', data)
+
+  return (dispatch, getState) => {
 
     $.ajax({
       type: "POST",
       url: '/AddChiefComplaint',
-      contentType:'application/json',
-      data:JSON.stringify({data:data}),
+      contentType: 'application/json',
+      data: JSON.stringify({ data: data }),
       success: function (result) {
-        console.log('AddChiefComplaintServer?',GetCaseInfo)
-        data.insertId=result.insertId
+        console.log('AddChiefComplaintServer?', GetCaseInfo)
+        data.insertId = result.insertId
 
-          dispatch({type:'AddChiefComplaint',data:data})
-        
+        dispatch({ type: 'AddChiefComplaint', data: data })
+
         // dispatch({type:'GetCaseInfo',data:data})
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
       }
-  
+
     });
 
 
@@ -246,25 +246,51 @@ export const AddChiefComplaint=(data)=>{
 }
 
 // Note: Add Physical Examination 
-export const AddPhysicalExamination=(data)=>{
-  console.log('action AddPhysicalExamination',data)
- 
-  return(dispatch, getState)=>{
+export const AddPhysicalExamination = (data) => {
+  console.log('action AddPhysicalExamination', data)
+
+  return (dispatch, getState) => {
 
     $.ajax({
       type: "POST",
       url: '/AddPhysicalExamination',
-      contentType:'application/json',
-      data:JSON.stringify({data:data}),
+      contentType: 'application/json',
+      data: JSON.stringify({ data: data }),
       success: function (result) {
-        console.log('AddPhysicalExaminationServer?',GetCaseInfo)
-        data.insertId=result.insertId
-          dispatch({type:'AddPhysicalExamination',data:data})
+        console.log('AddPhysicalExaminationServer?', GetCaseInfo)
+        data.insertId = result.insertId
+        dispatch({ type: 'AddPhysicalExamination', data: data })
 
         // dispatch({type:'GetCaseInfo',data:data})
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
+      }
+    });
+  }
+}
+
+
+// Note: Add Medical Prescription 
+export const AddMedicalPrescription = (data) => {
+  console.log('action AddMedicalPrescription', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/AddMedicalPrescription',
+      contentType: 'application/json',
+      data: JSON.stringify({ data: data }),
+      success: function (result) {
+        console.log('AddMedicalPrescriptionServer?', GetCaseInfo)
+        data.insertId = result.insertId
+        dispatch({ type: 'AddMedicalPrescription', data: data })
+
+        // dispatch({type:'GetCaseInfo',data:data})
+      },
+      error: (err) => {
+        console.log('server err', err)
       }
     });
   }
