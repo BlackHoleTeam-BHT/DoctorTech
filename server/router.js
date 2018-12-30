@@ -267,6 +267,22 @@ router.route('/patientInCassis')
       })
     })
 
+    //Note :to add medical Analysis 
+    router.route('/AddMedicalAnalysis')
+    .post(function(req,res){
+      const data=req.body.data
+      
+      console.log('status',req.body)
+      db.AddMedicalAnalysis(data,function(err,result){
+        if(err){
+          throw err
+        }else{
+          res.send(result)
+        }
+      })
+    })
+
+
 
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
