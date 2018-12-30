@@ -143,11 +143,18 @@ router.route('/update-doctorinfo')
       if(err) {
         throw err;
       } else {
-        console.log(result)
+        // console.log(result)
+        db.selectDoctorInfo(req.body.id,function (err,result){
+          if(err) throw err;
+          if(result.length > 0){
+            res.send ({
+              data: result[0]
+            })
+          }
+        })
       }
     })
   })
-
 
 router.route('/check')
   .get(authenticationMiddleware(), function (req, res) {
