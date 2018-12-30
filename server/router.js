@@ -241,7 +241,6 @@ router.route('/patientInCassis')
     .post(function(req,res){
       const data=req.body.data
       
-
       console.log('status',req.body)
       db.AddPhysicalExamination(data,function(err,result){
         if(err){
@@ -252,6 +251,21 @@ router.route('/patientInCassis')
       })
     })
 
+
+    //Note :to add medical Prescription 
+    router.route('/AddMedicalPrescription')
+    .post(function(req,res){
+      const data=req.body.data
+      
+      console.log('status',req.body)
+      db.AddMedicalPrescription(data,function(err,result){
+        if(err){
+          throw err
+        }else{
+          res.send(result)
+        }
+      })
+    })
 
 
 //Note: add the passport function 
