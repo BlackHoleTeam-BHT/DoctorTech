@@ -45,9 +45,9 @@ const styles = theme => ({
 
 class MPinput extends React.Component {
   state = {
-    MedicineName: "",
-    DaysInterval: 0,
-    TimesDay:0,
+    medicineName: "",
+    daysInterval: 0,
+    timesDay:0,
     expanded: null,
     history: [{ heart: 0, joint: 1, blood: 0, diabetes: 1, Renal: 0, description: 'ozil Welcome walid', family: 'fff' }]
   };
@@ -64,12 +64,12 @@ class MPinput extends React.Component {
 
   handelSubmit = () => {
     var obj={
-        MedicineName:this.state.MedicineName,
-        DaysInterval:this.state.DaysInterval,
-        TimesDay:this.state.TimesDay,
+        name:this.state.name,
+        daysInterval:this.state.daysInterval,
+        times:this.state.times,
       id : this.props.patient.CaseId
     }
-    this.props.AddChiefComplaint(obj)
+    this.props.AddMedicalPrescription(obj)
   }
 
   render() {
@@ -89,20 +89,20 @@ class MPinput extends React.Component {
                 <Grid md={3} item>
                   <TextField
                     id="standard-name"
-                    label="MedicineName"
+                    label="name"
                     className="input"
-                    value={this.state.MedicineName}
-                    onChange={this.handleChange2('MedicineName')}
+                    value={this.state.name}
+                    onChange={this.handleChange2('name')}
                     margin="normal"
                   />
                 </Grid>
                 <Grid md={3} item>
                   <TextField
                     id="standard-name"
-                    label="DaysInterval"
+                    label="daysInterval"
                     className="input"
-                    value={this.state.DaysInterval}
-                    onChange={this.handleChange2('DaysInterval')}
+                    value={this.state.daysInterval}
+                    onChange={this.handleChange2('daysInterval')}
                     margin="normal"
                     
                   />
@@ -110,10 +110,10 @@ class MPinput extends React.Component {
                 <Grid md={3} item>
                   <TextField
                     id="standard-name"
-                    label="TimesDay"
+                    label="times"
                     className="input"
-                    value={this.state.TimesDay}
-                    onChange={this.handleChange2('TimesDay')}
+                    value={this.state.times}
+                    onChange={this.handleChange2('times')}
                     margin="normal"
                     
                   />

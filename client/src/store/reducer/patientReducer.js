@@ -44,9 +44,9 @@ const initState = {
   medicalAnalysis: [],
   MedicalPrescription: [{
     id: 1,
-    MedicineName: "",
-    DaysInterval: 0,
-    TimesDay: 0,
+    name: "",
+    daysInterval: 0,
+    times: 0,
   }],
   PatientPlan: [{
     step: 5
@@ -131,11 +131,11 @@ const patientReducer = (state = initState, action) => {
         physicalExamination: newPhysicalExamination
       }
     case "AddMedicalPrescription":
-      var newMedicalPrescription = state.medicalPrescription
+      var newMedicalPrescription = state.MedicalPrescription
       newMedicalPrescription.push(action.data)
       return {
         ...state,
-        medicalPrescription: newMedicalPrescription
+        MedicalPrescription: newMedicalPrescription
       }
     default:
       return state;
