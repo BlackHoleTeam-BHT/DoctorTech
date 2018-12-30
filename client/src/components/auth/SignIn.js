@@ -55,7 +55,7 @@ class SignIn extends React.Component {
               <div id="signinCss">
                 <h3>Hey there, welcome back.</h3>
                 <p>Enter your sign in details below:</p>
-                <FormGroup>
+                <FormGroup >
                   <Label for="Email">Email</Label>
                   <Input
                     type="email"
