@@ -149,6 +149,13 @@ const patientReducer = (state = initState, action) => {
         MedicalHistory:[action.data]
 
       } 
+      case "UpdatePlanStep":
+      var newPatientPlan=state.PatientPlan
+      newPatientPlan[0].step=action.data.step
+      return{
+        ...state,
+        PatientPlan:newPatientPlan
+      }
       default:
         return state;
     }

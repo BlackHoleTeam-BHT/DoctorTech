@@ -308,9 +308,6 @@ router.route('/patientInCassis')
 router.route('/AddPatientHistory')
 .post(function(req,res){
   const data=req.body
- 
-  console.log('addddddddddd',req.body)
-
 
   db.AddPatientHistory(data,function(err,result){
     if(err){
@@ -321,6 +318,22 @@ router.route('/AddPatientHistory')
   })
 })
 
+
+
+//Note :update patient plan (step)
+router.route('/UpdatePlanStep')
+.post(function(req,res){
+  const data=req.body
+  console.log('data',data)
+ 
+  db.UpdatePlanStep(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
 
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {

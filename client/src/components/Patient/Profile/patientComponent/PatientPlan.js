@@ -14,10 +14,11 @@ import {UpdatePlanStep} from '../../../../store/action/patientAction'
 
 const styles = theme => ({
     root: {
-        width: '90%',
+        width: '100%',
     },
     button: {
         marginTop: theme.spacing.unit,
+        
         marginRight: theme.spacing.unit,
 
     },
@@ -25,8 +26,13 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit * 2,
     },
     resetContainer: {
-        padding: theme.spacing.unit * 3,
-    },
+     padding: theme.spacing.unit * 3,
+    }, instructions: {
+        marginTop: theme.spacing.unit,
+        marginBottom: theme.spacing.unit,
+        wordWrap: 'break-word',
+        width:'60%'
+      },
 });
 
 
@@ -56,26 +62,26 @@ class PatientPlan extends React.Component {
     };
 
     handleCloseProfile = () => {
-        this.setState({
-            activeStep: 4
-        })
-
+        var CurrentStep=this.props.patient.PatientPlan[0].step
+        var id=this.props.patient.PatientPlan[0].id
+        this.props.UpdatePlanStep(id,CurrentStep+1)   
+ 
 
     }
 
     render() {
         const { classes } = this.props;
-        const { activeStep } = this.state;
+        const { activeStep  } = this.state;
         console.log('plan',this.props)
 
         return (
             <div className={classes.root}>
-            {this.props.patient.PatientPlan[0].step!=5 && <Stepper activeStep={activeStep} orientation="vertical">
+            {this.props.patient.PatientPlan[0].step!=5 && <Stepper activeStep={this.props.patient.PatientPlan[0].step} orientation="vertical">
 
                     <Step >
-                        <StepLabel>Physical-Plan</StepLabel>
+                        <StepLabel >Physical-Plan</StepLabel>
                         <StepContent>
-                            <Typography>{this.props.patient.PatientPlan[0].PhysicalPlan}</Typography>
+                            <Typography >{this.props.patient.PatientPlan[0].PhysicalPlan}</Typography>
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <Button
@@ -101,7 +107,7 @@ class PatientPlan extends React.Component {
                     <Step >
                         <StepLabel>Medical-Plan</StepLabel>
                         <StepContent>
-                            <Typography>{this.props.patient.PatientPlan[0].MedicalPlan}</Typography>
+                            <Typography >{this.props.patient.PatientPlan[0].MedicalPlan}</Typography>
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <Button

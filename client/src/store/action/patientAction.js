@@ -151,28 +151,27 @@ export const UpdatePlanStep = (Id, step) => {
   console.log('UpdatePlanStep', Id, step)
   const data = {
     Id: Id,
-    status: step
+    step: step
   }
 
   return (dispatch, getState) => {
 
-    // $.ajax({
-    //   type: "POST",
-    //   url: '/UpdateAnalysisStatus',
-    //   contentType:'application/json',
-    //   data:JSON.stringify({id:Id,status:status}),
-    //   success: function (result) {
-    //     console.log('UpdateAnalysisStatus',result)
-    //     if(result==1){
-    //       dispatch({type:'UpdateAnalysisStatus',data:data})
-    //     }
-    //     // dispatch({type:'GetCaseInfo',data:data})
-    //   },
-    //   error: (err) => {
-    //     console.log('server err',err)
-    //   }
+    $.ajax({
+      type: "POST",
+      url: '/UpdatePlanStep',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function (result) {
+        console.log('UpdatePlanStep',result)
+      
+         dispatch({type:'UpdatePlanStep',data:data})
+       
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
 
-    // });
+    });
 
 
 
