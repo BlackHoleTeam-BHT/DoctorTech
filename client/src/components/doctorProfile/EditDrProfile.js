@@ -1,5 +1,5 @@
-import React from 'react';
-import {connect} from "react-redux";
+import React from "react";
+import { connect } from "react-redux";
 import {
   Container,
   Row,
@@ -16,12 +16,12 @@ import {
   ModalFooter,
   TextArea
 } from "reactstrap";
-import {openModal} from "../../store/action/doctorActions";
-import {updateDoctorInfo} from '../../store/action/authActions'
+import { openModal } from "../../store/action/doctorActions";
+import { updateDoctorInfo } from "../../store/action/authActions";
 class EditDrProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state ={
+    this.state = {
       id: this.props.user.id,
       firstName: this.props.user.firstName,
       lastName: this.props.user.lastName,
@@ -34,7 +34,7 @@ class EditDrProfile extends React.Component {
       location: this.props.user.location,
       clinicName: this.props.user.clinicName,
       clinicNumber: this.props.user.clinicNumber
-    }
+    };
 
     this.toggle = this.toggle.bind(this);
   }
@@ -43,27 +43,27 @@ class EditDrProfile extends React.Component {
     this.props.openModal(!this.props.isOpen);
   }
 
-  handlOnChange(e) {
+  handleOnChange(e) {
     this.setState({
-      [e.target.id] : e.target.value
-    })
-    console.log(this.state)
+      [e.target.id]: e.target.value
+    });
+    console.log(this.state);
   }
 
   //  handle on click to send the data to server by using FUNCTION FROM authAction
   handlOnClick() {
-    // function to update the data for dr so this function come from redux 
+    // function to update the data for dr so this function come from redux
     // by map this function to props
 
-    this.props.updateDoctorInfo(this.state)
-    this.toggle()
+    this.props.updateDoctorInfo(this.state);
+    this.toggle();
   }
 
   render() {
     return (
-      <Container >
+      <Container>
         <Modal
-          style ={{marginTop:100}}
+          style={{ marginTop: 100 }}
           isOpen={this.props.isOpen}
           toggle={this.toggle}
           className={this.props.className}
@@ -74,41 +74,120 @@ class EditDrProfile extends React.Component {
               <Row>
                 <Col sm="12" md="6">
                   <Label for="firstName">First Name:</Label>
-                  <Input type="text" id="firstName" 
+                  <Input
+                    type="text"
+                    id="firstName"
                     value={this.state.firstName}
-                    onChange = {this.handlOnChange.bind(this)}
+                    onChange={this.handleOnChange.bind(this)}
                   />
                 </Col>
-                 <Col sm="12" md="6">
+                <Col sm="12" md="6">
                   <Label for="lastName">Last Name:</Label>
-                  <Input type="text" id="lastName"
-                     value={this.state.lastName}
-                     onChange = {this.handlOnChange.bind(this)}
+                  <Input
+                    type="text"
+                    id="lastName"
+                    value={this.state.lastName}
+                    onChange={this.handleOnChange.bind(this)}
                   />
-                 </Col>
-                 </Row>
-                 <Row>
-                   <Col>
+                </Col>
+              </Row>
+
+              <Row style={{ marginTop: 25 }}>
+                <Col>
                   <Label for="bDate" id="birthDate">
                     Birth Date
                   </Label>
-                  <Input type="date" name="bDate" max="1900-1-01" id="bDate" 
-                     value = {this.state.bDate}
-                     onChange = {this.handlOnChange.bind(this)}
+                  <Input
+                    type="date"
+                    name="bDate"
+                    max="1900-1-01"
+                    id="bDate"
+                    value={this.state.bDate}
+                    onChange={this.handleOnChange.bind(this)}
                   />
-
+                </Col>
+                <Col>
+                  <FormGroup>
+                    <Label for="gender">Gender</Label>
+                    <Input
+                      type="select"
+                      name="gender"
+                      id="gender"
+                      value={this.state.gender}
+                      onChange={this.handleOnChange.bind(this)}
+                    >
+                      <option>--select--</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
                   <Label for="nationality">Nationality</Label>
-                  <Input type="text" id="nationality" 
-                    value ={this.state.nationality}
-                    onChange = {this.handlOnChange.bind(this)}
+                  <Input
+                    type="text"
+                    id="nationality"
+                    value={this.state.nationality}
+                    onChange={this.handleOnChange.bind(this)}
                   />
+                </Col>
+                <Col>
+                  <Label for="phoneNumber">Phone Number</Label>
+                  <Input
+                    type="text"
+                    id="phoneNumber"
+                    value={this.state.phoneNumber}
+                    onChange={this.handleOnChange.bind(this)}
+                  />
+                </Col>
+              </Row>
 
+              <Row style={{ marginTop: 25 }}>
+                <Col>
+                  <Label for="clinicName">Clinic Name</Label>
+                  <Input
+                    type="text"
+                    id="clinicName"
+                    value={this.state.clinicName}
+                    onChange={this.handleOnChange.bind(this)}
+                  />
+                </Col>
+                <Col>
+                  <Label for="clinicNumber">Clinic Number</Label>
+                  <Input
+                    type="text"
+                    id="clinicNumber"
+                    value={this.state.clinicNumber}
+                    onChange={this.handleOnChange.bind(this)}
+                  />
+                </Col>
+              </Row>
+              <Col>
+                <Row style={{ marginTop: 25 }}>
+                  <Label for="clinicLocation">Clinic Location</Label>
+                  <Input
+                    type="text"
+                    id="clinicLocation"
+                    value={this.state.location}
+                    onChange={this.handleOnChange.bind(this)}
+                  />
+                </Row>
+              </Col>
+              <Col>
+                <Row style={{ marginTop: 25 }}>
                   <Label for="specialty">Specialty</Label>
-                  <Input type="text" id="specialty" 
-                    value ={this.state.specialty}
-                    onChange = {this.handlOnChange.bind(this)}
+                  <Input
+                    type="text"
+                    id="specialty"
+                    value={this.state.specialty}
+                    onChange={this.handleOnChange.bind(this)}
                   />
-
+                </Row>
+              </Col>
+              <Col>
+                <Row style={{ marginTop: 25 }}>
                   <Label for="bio">Bio</Label>
                   <Input
                     required
@@ -118,11 +197,11 @@ class EditDrProfile extends React.Component {
                     id="bio"
                     rows={4}
                     aria-multiline="true"
-                    value ={this.state.bio}
-                    onChange = {this.handlOnChange.bind(this)}
+                    value={this.state.bio}
+                    onChange={this.handleOnChange.bind(this)}
                   />
-                </Col>
-              </Row>
+                </Row>
+              </Col>
             </Container>
           </ModalBody>
           <ModalFooter>
@@ -139,21 +218,22 @@ class EditDrProfile extends React.Component {
   }
 }
 
-// map all state from redux to props 
-const mapStateToProps = (state) => {
+// map all state from redux to props
+const mapStateToProps = state => {
   return {
     user: state.auth.user,
     isOpen: state.doctor.isOpen
-
-  } 
-}
+  };
+};
 
 // map all dispatch action from redux to props
-const mapDispatchToProps = (dispatch) => {
-return {
-  openModal: (isOpen) => dispatch(openModal(isOpen)),
-  updateDoctorInfo : (data) => dispatch(updateDoctorInfo(data))
-}
-
-} 
-export default connect(mapStateToProps, mapDispatchToProps)(EditDrProfile);
+const mapDispatchToProps = dispatch => {
+  return {
+    openModal: isOpen => dispatch(openModal(isOpen)),
+    updateDoctorInfo: data => dispatch(updateDoctorInfo(data))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditDrProfile);
