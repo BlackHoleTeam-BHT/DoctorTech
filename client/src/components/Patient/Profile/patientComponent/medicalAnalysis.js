@@ -74,6 +74,7 @@ handleClose=(value)=>{
 
     return (
       <div>
+      <div>
         <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>
@@ -103,7 +104,10 @@ handleClose=(value)=>{
                 </TableBody>
             </Table>     
         </Paper>
-        {this.props.patient.SelectCase && <MAinput />}
+      </div>
+      <div>
+        <MAinput />
+      </div>
       </div>
     )
   }

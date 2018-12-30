@@ -69,7 +69,7 @@ class MAinput extends React.Component {
       status: this.state.status,
       id: this.props.patient.CaseId
     }
-    this.props.AddMedicalPrescription(obj)
+    this.props.AddMedicalAnalysis(obj)
   }
 
   render() {

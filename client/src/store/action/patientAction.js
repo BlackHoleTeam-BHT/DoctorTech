@@ -300,7 +300,14 @@ export const AddMedicalPrescription = (data) => {
 // Note: Add Medical Analysis 
 export const AddMedicalAnalysis = (data) => {
   console.log('action AddMedicalAnalysis', data)
+  var currentDate = new Date();
 
+var date = currentDate.getDate();
+var month = currentDate.getMonth(); //Be careful! January is 0 not 1
+var year = currentDate.getFullYear();
+
+var dateString = year + "-" +(month + 1) + "-" + date +" 00:00:00";
+  data['createdAt']=dateString
   return (dispatch, getState) => {
 
     $.ajax({
