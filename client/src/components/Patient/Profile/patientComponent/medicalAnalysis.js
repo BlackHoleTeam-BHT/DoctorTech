@@ -12,6 +12,7 @@ import Icon from '@material-ui/core/Icon';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import {UpdateAnalysisStatus} from '../../../../store/action/patientAction'
+import MAinput from './inputComponent/MAinput'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -102,6 +103,7 @@ handleClose=(value)=>{
                 </TableBody>
             </Table>     
         </Paper>
+        {this.props.patient.SelectCase && <MAinput />}
       </div>
     )
   }
