@@ -45,19 +45,22 @@ const styles = theme => ({
 
 class PEinput extends React.Component {
   state = {
-    weight: "",
-    height: "",
-    bodyTemperature: 0,
+    weight: null,
+    height: null,
+    bodyTemperature: null,
+    diabetes:null,
+    BloodPressure:null,
     head: "",
     body: "",
     legs: "",
     expanded: null,
-    history: [{ heart: 0, joint: 1, blood: 0, diabetes: 1, Renal: 0, description: 'ozil Welcome walid', family: 'fff' }]
+    
   };
   handleChange2 = name => event => {
     this.setState({
       [name]: event.target.value,
     });
+    
   };
   handleChange = panel => (event, expanded) => {
     this.setState({
@@ -73,8 +76,11 @@ class PEinput extends React.Component {
       head: this.state.head,
       body: this.state.body,
       legs: this.state.legs,
-      id: this.props.patient.CaseId
+      id: this.props.patient.currentCase[0].id,
+      BloodPressure:this.state.BloodPressure,
+      diabetes:this.state.diabetes
     }
+    console.log(obj)
     this.props.AddPhysicalExamination(obj)
   }
 
@@ -94,12 +100,14 @@ class PEinput extends React.Component {
               <Grid container md={12} item justify="flex-start" alignItems="flex-end" >
                 <Grid md={3} item>
                   <TextField
-                    id="standard-name"
+                    id="weight"
                     label="weight"
                     className="input"
-                    value={this.state.title}
+                    value={this.state.weight}
                     onChange={this.handleChange2('weight')}
                     margin="normal"
+                    type="number"
+                    
                   />
                 </Grid>
                 <Grid md={3} item>
@@ -107,9 +115,10 @@ class PEinput extends React.Component {
                     id="standard-name"
                     label="height"
                     className="input"
-                    value={this.state.description}
+                    value={this.state.height}
                     onChange={this.handleChange2('height')}
                     margin="normal"
+                    type="number"
 
                   />
                 </Grid>
@@ -118,16 +127,17 @@ class PEinput extends React.Component {
                     id="standard-name"
                     label="bodyTemperature"
                     className="input"
-                    value={this.state.description}
-                    onChange={this.handleChange2('BodyTemperature')}
+                    value={this.state.bodyTemperature}
+                    onChange={this.handleChange2('bodyTemperature')}
                     margin="normal"
+                    type="number"
 
                   />
                 </Grid>
 
               </Grid>
-              <Grid container md={12} item justify="flex-start" alignItems="flex-end" >
-                <Grid md={3} item>
+              <Grid container md={12} item  direction="column">
+                <Grid md={6} item>
                   <TextField
                     id="standard-name"
                     label="head"
@@ -135,26 +145,60 @@ class PEinput extends React.Component {
                     value={this.state.title}
                     onChange={this.handleChange2('head')}
                     margin="normal"
+                    fullWidth
                   />
                 </Grid>
-                <Grid md={3} item>
+                </Grid>
+                <Grid container md={12} item  direction="column">
+                <Grid md={6} item>
                   <TextField
                     id="standard-name"
                     label="body"
                     className="input"
-                    value={this.state.description}
+                    value={this.state.body}
                     onChange={this.handleChange2('body')}
                     margin="normal"
+                    fullWidth
+
+                  />
+                </Grid>
+                </Grid>
+                <Grid container md={12} item  direction="column">
+                <Grid md={6} item>
+                  <TextField
+                    id="standard-name"
+                    label="legs"
+                    className="input"
+                    value={this.state.legs}
+                    onChange={this.handleChange2('legs')}
+                    margin="normal"
+                    fullWidth
+
+                  />
+                </Grid>
+                </Grid>
+
+              
+              <Grid container md={12} item justify="flex-start" alignItems="flex-end" >
+              <Grid md={3} item>
+                  <TextField
+                    id="standard-name"
+                    label="diabetes"
+                    className="input"
+                    value={this.state.diabetes}
+                    onChange={this.handleChange2('diabetes')}
+                    margin="normal"
+                    type="number"
 
                   />
                 </Grid>
                 <Grid md={3} item>
                   <TextField
                     id="standard-name"
-                    label="legs"
+                    label="BloodPressure"
                     className="input"
-                    value={this.state.description}
-                    onChange={this.handleChange2('legs')}
+                    value={this.state.BloodPressure}
+                    onChange={this.handleChange2('BloodPressure')}
                     margin="normal"
 
                   />

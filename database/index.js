@@ -263,7 +263,9 @@ const AddChiefComplaint = (data, callback) => {
 //function to  add Physical Examination
 const AddPhysicalExamination = (data, callback) => {
   const sql = `INSERT INTO PhysicalExamination (caseId,weight,height,bodyTemperature,headNotes,
-middleBodyNotes,bottomBodyNotes) VALUES ('${data.id}','${data.weight}','${data.height}','${data.bodyTemperature}','${data.head}','${data.body}','${data.legs}') `
+middleBodyNotes,bottomBodyNotes,diabetes,BloodPressure) VALUES ('${data.id}','${data.weight}',
+'${data.height}','${data.bodyTemperature}','${data.head}','${data.body}',
+'${data.legs}','${data.diabetes}','${data.BloodPressure}') `
   dbConnection.query(sql, function (err, results) {
     if (err) {
       console.log("Error during update info  from physicalExamination Table \n" + err)

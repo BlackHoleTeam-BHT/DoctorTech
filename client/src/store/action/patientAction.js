@@ -258,7 +258,7 @@ export const AddPhysicalExamination = (data) => {
       success: function (result) {
         console.log('AddPhysicalExaminationServer?', GetCaseInfo)
         data.insertId = result.insertId
-        dispatch({ type: 'AddPhysicalExamination', data: data })
+        // dispatch({ type: 'AddPhysicalExamination', data: data })
 
         // dispatch({type:'GetCaseInfo',data:data})
       },
