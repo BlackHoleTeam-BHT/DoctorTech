@@ -260,6 +260,25 @@ middleBodyNotes,bottomBodyNotes) VALUES ('${data.id}','${data.weight}','${data.h
 
 }
 
+// MedicineName: "",
+// DaysInterval: 0,
+// TimesDay:0,
+
+//function to  add medical Prescription
+const AddMedicalPrescription = (data, callback) => {
+  const sql = `INSERT INTO MedicalPrescription (caseId,MedicineName,DaysInterval,TimesDay) VALUES ('${data.id}','${data.name}','${data.daysInterval}','${data.times}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from MedicalPrescription Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
 
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
@@ -274,3 +293,4 @@ module.exports.selectCaseInfo = selectCaseInfo;
 module.exports.UpdateAnalysisStatus = UpdateAnalysisStatus;
 module.exports.AddChiefComplaint = AddChiefComplaint;
 module.exports.AddPhysicalExamination=AddPhysicalExamination;
+module.export.AddMedicalPrescription=AddMedicalPrescription;
