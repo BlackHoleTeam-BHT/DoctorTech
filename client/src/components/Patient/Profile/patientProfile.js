@@ -96,8 +96,9 @@ class PatientProfile extends React.Component {
 
   handleChangeSelect = (event, value) => {
     console.log('event', value)
-    console.log('event gg', event.target)
+    console.log('event gg', value.props.case)
     this.setState({ [event.target.name]: event.target.value, selectDate: value.props.id });
+   
     this.props.GetCaseInfo(value.props.case)
 
 

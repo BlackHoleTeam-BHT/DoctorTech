@@ -83,7 +83,7 @@ class ChiefComplaint extends React.Component {
 
             </List>
             
-            {this.props.patient.SelectCase && <MCInput />}
+            {(this.props.patient.CaseId !=0) && <MCInput />}
         </div>
         );
        

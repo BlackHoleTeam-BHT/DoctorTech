@@ -160,12 +160,12 @@ class PhysicalExamination extends React.Component {
   render() {
     const { classes } = this.props;
     const { spacing } = this.state;
-    console.log('physical', this.props.patient.PhysicalExamination[0])
+    console.log('physical', this.props.patient.PhysicalExamination)
 
     return (
 
       <div>
-        <Grid container className={classes.root} spacing={16}>
+{   !(this.props.patient.PhysicalExamination.length == 0)   &&  <Grid container className={classes.root} spacing={16}>
           <Grid item xs={12}>
             <Grid container className={classes.root} justify="center" spacing={Number(spacing)}>
 
@@ -304,9 +304,9 @@ class PhysicalExamination extends React.Component {
               </Grid>
             </Paper>
           </Grid>
-        </Grid>
+        </Grid>}
         <div>
-          {this.props.patient.SelectCase && (this.props.patient.PhysicalExamination.length === 0)  && <PEinput />}
+          {(this.props.patient.CaseId != 0) && (this.props.patient.PhysicalExamination.length === 0)  && <PEinput />}
         </div>
       </div>
 

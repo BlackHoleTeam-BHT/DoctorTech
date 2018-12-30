@@ -264,8 +264,8 @@ const AddChiefComplaint = (data, callback) => {
 const AddPhysicalExamination = (data, callback) => {
   const sql = `INSERT INTO PhysicalExamination (caseId,weight,height,bodyTemperature,headNotes,
 middleBodyNotes,bottomBodyNotes,diabetes,BloodPressure) VALUES ('${data.id}','${data.weight}',
-'${data.height}','${data.bodyTemperature}','${data.head}','${data.body}',
-'${data.legs}','${data.diabetes}','${data.BloodPressure}') `
+'${data.height}','${data.bodyTemperature}','${data.headNotes}','${data.middleBodyNotes}',
+'${data.bottomBodyNotes}','${data.diabetes}','${data.BloodPressure}') `
   dbConnection.query(sql, function (err, results) {
     if (err) {
       console.log("Error during update info  from physicalExamination Table \n" + err)
@@ -383,6 +383,30 @@ const OpenPatientProfile = (data, callback) => {
 
 }
 
+
+
+
+//function to Add Patient Plan Profile
+const AddPatientPlan = (data, callback) => {
+  
+  const sql = `INSERT INTO PatientPlane (caseId,PhysicalPlan,MedicalPlan,Conclusion,step) 
+  VALUES ('${data.CaseId}','${data.PhysicalPlan}','${data.MedicalPlan}','${data.Conclusion}',0) `
+
+  dbConnection.query(sql, function(err, results) {
+    if (err) {
+      console.log("Error during insert into   PatientPlane   Table \n" + err)
+      callback(err, null);
+    } else{
+      callback(null, results)
+    }
+
+
+  })
+  
+
+
+}
+
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
 module.exports.isAccountExist = isAccountExist;
@@ -402,3 +426,4 @@ module.exports.AddPatientHistory = AddPatientHistory;
 module.exports.UpdatePlanStep = UpdatePlanStep;
 module.exports.ClosePatientProfile = ClosePatientProfile;
 module.exports.OpenPatientProfile = OpenPatientProfile;
+module.exports.AddPatientPlan = AddPatientPlan;

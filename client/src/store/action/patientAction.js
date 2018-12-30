@@ -256,11 +256,10 @@ export const AddPhysicalExamination = (data) => {
       contentType: 'application/json',
       data: JSON.stringify({ data: data }),
       success: function (result) {
-        console.log('AddPhysicalExaminationServer?', GetCaseInfo)
+        console.log('AddPhysicalExaminationServer?', result)
         data.insertId = result.insertId
-        // dispatch({ type: 'AddPhysicalExamination', data: data })
+        dispatch({ type: 'AddPhysicalExamination', data: data })
 
-        // dispatch({type:'GetCaseInfo',data:data})
       },
       error: (err) => {
         console.log('server err', err)
@@ -417,6 +416,38 @@ export const OpenPatientProfile=(Id,step,CaseId)=>{
         
         console.log('OpenPatientProfile',result)
         dispatch({type:'OpenPatientProfile',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}
+
+
+// Note: to add  patient plan
+export const AddPatientPlan=(data)=>{
+
+
+
+  console.log('action AddPatientPlan',data)
+
+  return(dispatch, getState)=>{
+    
+    $.ajax({
+      type: "POST",
+      url: '/AddPatientPlan',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function (result) {
+        
+        console.log('AddPatientPlan',result)
+        dispatch({type:'AddPatientPlan',data:data})
       },
       error: (err) => {
         console.log('server err',err)

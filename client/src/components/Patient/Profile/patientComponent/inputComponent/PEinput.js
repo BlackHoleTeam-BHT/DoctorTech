@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import Button from '@material-ui/core/Button';
 import { AddPhysicalExamination } from '../../../../../store/action/patientAction'
-import { timingSafeEqual } from 'crypto';
+
 
 const styles = theme => ({
   root: {
@@ -73,10 +73,10 @@ class PEinput extends React.Component {
       weight: this.state.weight,
       height: this.state.height,
       bodyTemperature: this.state.bodyTemperature,
-      head: this.state.head,
-      body: this.state.body,
-      legs: this.state.legs,
-      id: this.props.patient.currentCase[0].id,
+      headNotes: this.state.head,
+      middleBodyNotes: this.state.body,
+      bottomBodyNotes: this.state.legs,
+      id: this.props.patient.CaseId ,
       BloodPressure:this.state.BloodPressure,
       diabetes:this.state.diabetes
     }
@@ -87,7 +87,7 @@ class PEinput extends React.Component {
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
-    console.log("mmmmmmmmmmmmmm", this.props)
+  
     return (
       <div className={classes.root}>
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
@@ -142,7 +142,7 @@ class PEinput extends React.Component {
                     id="standard-name"
                     label="head"
                     className="input"
-                    value={this.state.title}
+                    value={this.state.head}
                     onChange={this.handleChange2('head')}
                     margin="normal"
                     fullWidth

@@ -28,9 +28,7 @@ const initState = {
   PhysicalExamination: [],
   medicalAnalysis: [],
   MedicalPrescription: [],
-  PatientPlan: [{
-    step: 5
-  }],
+  PatientPlan: [],
   CaseId: 0
 }
     
@@ -108,7 +106,7 @@ const patientReducer = (state = initState, action) => {
       newPhysicalExamination.push(action.data)
       return {
         ...state,
-        physicalExamination: newPhysicalExamination
+        physicalExamination:[action.data]
       }
     case "AddMedicalPrescription":
       var newMedicalPrescription = state.MedicalPrescription
@@ -171,8 +169,11 @@ const patientReducer = (state = initState, action) => {
         ...state,
         currentCase:Cases,
         PatientPlan:newPatientPlan
-
-
+      }
+      case "AddPatientPlan":
+      return{
+        ...state,
+        PatientPlan:[action.data]
       }
       default:
         return state;

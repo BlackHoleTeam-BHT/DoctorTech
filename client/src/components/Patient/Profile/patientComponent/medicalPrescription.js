@@ -90,7 +90,7 @@ class MedicalPrescription extends React.Component {
                 </TableBody>
             </Table>     
         </Paper>
-        {this.props.patient.SelectCase && <MPinput />}
+        {(this.props.patient.CaseId !=0) && <MPinput />}
       </div>
     )
   }
