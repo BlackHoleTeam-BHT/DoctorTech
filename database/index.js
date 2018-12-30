@@ -276,6 +276,21 @@ const AddMedicalPrescription = (data, callback) => {
 
 }
 
+//function to  add medical Analysis
+const AddMedicalAnalysis = (data, callback) => {
+  const sql = `INSERT INTO MedicalAnalysis (caseId,name,description,status) VALUES ('${data.id}','${data.name}','${data.description}','${data.status}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from MedicalAnalysis Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
 
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
@@ -291,3 +306,4 @@ module.exports.UpdateAnalysisStatus = UpdateAnalysisStatus;
 module.exports.AddChiefComplaint = AddChiefComplaint;
 module.exports.AddPhysicalExamination=AddPhysicalExamination;
 module.exports.AddMedicalPrescription=AddMedicalPrescription;
+module.exports.AddMedicalAnalysis=AddMedicalAnalysis;
