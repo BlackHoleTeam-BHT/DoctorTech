@@ -41,9 +41,9 @@ class DoctorListEntry extends React.Component {
                 <Typography variant="h5">
                    <Link to="/">{ "Dr. Mohammad Rawashdah"}</Link>
                 </Typography>
+                <Typography variant="body2">Speticialist</Typography>
                 <Typography variant="body2">phoneNumber</Typography>
                 <Typography variant="body2">Email: mmm@gmail.co</Typography>
-                <Typography variant="body2">Speticialist</Typography>
                 <Typography variant="body2">Age : 52</Typography>
                 <Typography variant="body1"> Rate :</Typography>
                 <Rater
@@ -62,7 +62,6 @@ class DoctorListEntry extends React.Component {
     )
   }
 }
-
 
 
 export default withRouter(DoctorListEntry);

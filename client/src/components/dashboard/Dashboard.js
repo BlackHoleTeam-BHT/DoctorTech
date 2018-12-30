@@ -20,10 +20,15 @@ import Patients from '../Patient/Patients.js';
 import PatientProfile from '../Patient/Profile/patientProfile.js';
 import {logout} from '../../store/action/authActions.js';
 import {Redirect} from 'react-router-dom'
+<<<<<<< HEAD
 import DrProfile from '../doctorProfile/DrProfile.js'
 import Consultaion from '../doctor/Consultaion.js';
 const drawerWidth = 260;
+=======
+import DoctorConsultation from '../doctor/DoctorConsultation.js'
+>>>>>>> (feat) doctorReducer and doctorAction to deal with doctor ation and make ajax request to get all the doctor from server
 
+const drawerWidth = 260;
 const styles = theme => ({
   root: {
     display: 'flex',

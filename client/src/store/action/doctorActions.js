@@ -14,4 +14,21 @@ export const openModal= (isOpen) => {
 
 }
 
-
+// this action in redux to get all doctor info in the same 
+export const getDoctors = () => {
+    return (dispatch, getState) => {
+      //sync
+      $.ajax({
+        type: "GET",
+        url: '/doctores',
+        contentType: 'application/json',
+        success: function (res) {
+          dispatch({ type: 'GET_DOCTORS', data: res.data })
+        },
+        error: (err) => {
+          console.log("Error during request the date from the server")
+        }
+      });
+    }
+}
+  

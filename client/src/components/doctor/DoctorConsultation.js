@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import DoctorsSearch from './DoctorsSearch.js';
 import DoctorList from './DoctorsList';
-class Consultion extends React.Component {
+class DoctorConsultation extends React.Component {
 
   render() {
     // if the user has not login redirect for home page
@@ -42,4 +42,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(Consultion);
+export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(DoctorConsultation);
