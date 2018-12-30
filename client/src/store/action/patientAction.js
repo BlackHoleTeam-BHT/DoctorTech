@@ -393,3 +393,39 @@ export const ClosePatientProfile=(Id,step,CaseId)=>{
   }
 
 }
+
+
+// Note: to open the patient profile
+export const OpenPatientProfile=(Id,step,CaseId)=>{
+
+  const data = {
+    Id: Id,
+    step: step,
+    CaseId:CaseId
+  }
+
+  console.log('action OpenPatientProfile',data)
+
+  return(dispatch, getState)=>{
+    
+    $.ajax({
+      type: "POST",
+      url: '/OpenPatientProfile',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function (result) {
+        
+        console.log('OpenPatientProfile',result)
+        dispatch({type:'OpenPatientProfile',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}

@@ -341,7 +341,7 @@ router.route('/ClosePatientProfile')
 .post(function(req,res){
   const data=req.body
   
- 
+
   db.ClosePatientProfile(data,function(err,result){
     if(err){
       throw err
@@ -350,6 +350,23 @@ router.route('/ClosePatientProfile')
     }
   })
 })
+
+
+//Note :open patient profile
+router.route('/OpenPatientProfile')
+.post(function(req,res){
+  const data=req.body
+  
+
+  db.OpenPatientProfile(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
 
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {

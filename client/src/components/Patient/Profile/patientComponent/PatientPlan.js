@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import {UpdatePlanStep} from '../../../../store/action/patientAction'
 import {ClosePatientProfile} from '../../../../store/action/patientAction'
+import {OpenPatientProfile} from '../../../../store/action/patientAction'
 
 
 const styles = theme => ({
@@ -57,27 +58,22 @@ class PatientPlan extends React.Component {
         this.props.UpdatePlanStep(id,CurrentStep-1)
     };
 
-    handleOpen = () => {
-        this.setState({
-            activeStep: 3,
-        });
+    handleOpenProfile = () => {
+        var CurrentStep=this.props.patient.PatientPlan[0].step
+        var id=this.props.patient.PatientPlan[0].id
+        var CaseId=this.props.patient.currentCase[0].id  
+        
+        this.props.OpenPatientProfile(id,CurrentStep-1,CaseId)
+
+
+
     };
 
-    handleCloseProfile = (value) => {
-        console.log('id',id)
-        if(value===1){
-
+    handleCloseProfile = () => {   
         var CurrentStep=this.props.patient.PatientPlan[0].step
         var id=this.props.patient.PatientPlan[0].id
         var CaseId=this.props.patient.currentCase[0].id     
         this.props.ClosePatientProfile(id,CurrentStep+1,CaseId) 
-
-        }else{
-            
-        }
-  
- 
-
     }
 
     render() {
@@ -175,12 +171,12 @@ class PatientPlan extends React.Component {
                         <Button onClick={this.handleBack} className={classes.button}>
                             Back
                           </Button>
-                        <Button color="primary" id='1' onClick={()=>{this.handleCloseProfile(1)}} className={classes.button}>
+                        <Button color="primary" id='1' onClick={this.handleCloseProfile} className={classes.button}>
                             Close Profile
                        </Button>
                     </Paper>
                 )}
-                {this.props.patient.PatientPlan[0].step==4 && <Button onClick={this.handleOpen}>Open</Button>}
+                {this.props.patient.PatientPlan[0].step==4 && <Button onClick={this.handleOpenProfile}>Open</Button>}
             </div>
         );
     }
@@ -201,7 +197,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         UpdatePlanStep: (id,step) => dispatch(UpdatePlanStep(id,step)),
-        ClosePatientProfile: (id,step,CaseId) => dispatch(ClosePatientProfile(id,step,CaseId))
+        ClosePatientProfile: (id,step,CaseId) => dispatch(ClosePatientProfile(id,step,CaseId)),
+        OpenPatientProfile:(id,step,CaseId) => dispatch(OpenPatientProfile(id,step,CaseId))
     }
   }
   
