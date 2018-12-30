@@ -97,15 +97,9 @@ class MedicalHistory extends React.Component {
               {this.props.patient.MedicalHistory[0].familyHistory}
             </Typography>
           </ExpansionPanelDetails>
-<<<<<<< HEAD
         </ExpansionPanel>}
         {(this.props.patient.SelectCase) && (this.props.patient.MedicalHistory.length===0) &&  <MCInput></MCInput>}
 
-=======
-        </ExpansionPanel>
-        <MCInput></MCInput>
-        
->>>>>>> add the MHinput component
       </div>
     );
   }
