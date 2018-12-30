@@ -44,6 +44,7 @@ class SignIn extends React.Component {
     console.log(this.props)
     // to check if the user make sign up successfully
     if (this.props.user !== null) {
+      console.log(this.props.user)
       this.props.history.push('/dashboard/' + this.props.user.id);
     }
     return (
