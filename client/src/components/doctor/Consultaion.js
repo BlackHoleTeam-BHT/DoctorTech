@@ -7,6 +7,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import DoctorsSearch from './DoctorsSearch.js';
+import DoctorList from './DoctorsList';
 class Consultion extends React.Component {
 
   render() {
@@ -20,6 +21,7 @@ class Consultion extends React.Component {
       <div>
         <Grid item sm={12} xs={12}>
           <DoctorsSearch />
+          <DoctorList />
         </Grid>
       </div>
     )
