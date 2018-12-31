@@ -412,7 +412,7 @@ const AddAppointment = (data, callback) => {
 
 //function to  add newCase 
 const AddnewCase = (data, callback) => {
-  const sql = `INSERT INTO PatientCases (patientId,title,description) VALUES ('${data.patientId}','${data.title}','${data.description}') `
+  const sql = `INSERT INTO PatientCases (patientId,title,description,isOpen) VALUES ('${data.patientId}','${data.title}','${data.description}','${data.isOpen}') `
   dbConnection.query(sql, function (err, results) {
     if (err) {
       console.log("Error during update info  from PatientCases Table \n" + err)

@@ -86,8 +86,8 @@ class Appointment extends React.Component {
     console.log("mmmmmmmmmmmmmm", this.props)
     return (
       <div>
-        <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
-        New Appointment
+        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+        Add Appointment
         </Button>
         <Dialog
           open={this.state.open}

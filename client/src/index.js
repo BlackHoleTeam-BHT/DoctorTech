@@ -8,7 +8,7 @@ import {Provider} from 'react-redux'
 import rootReducer from './store/reducer/rootReducer'
 import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Appointment from "./components/Patient/Profile/patientComponent/Appointment";
+
 
 
 

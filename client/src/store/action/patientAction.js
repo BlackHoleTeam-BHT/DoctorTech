@@ -390,11 +390,12 @@ export const AddnewCase = (data) => {
 
     $.ajax({
       type: "POST",
-      url: '/add-appointment',
+      url: '/newCase',
       contentType: 'application/json',
       data: JSON.stringify(data),
       success: function (result) {
         console.log('AddnewCaseServer', data)
+        data.id=result.insertId
         dispatch({ type: 'AddnewCase', data: data })
       },
       error: (err) => {

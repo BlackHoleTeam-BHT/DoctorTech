@@ -26,8 +26,8 @@ import moment from 'moment'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { GetCaseInfo } from '../../../store/action/patientAction'
 import { Redirect } from 'react-router-dom';
-import Appointment from './patientComponent/Appointment'
-import newCase from './patientComponent/newCase'
+import Appointment from './patientComponent/Appointment';
+import NewCase from './patientComponent/NewCase';
 
 function TabContainer(props) {
   return (
@@ -127,12 +127,26 @@ class PatientProfile extends React.Component {
       <Grid container className={classes.root} spacing={16}>
         <Grid container md={12} item>
           <Grid md={1} item></Grid>
+         
           <Grid md={4} item >
+          
             <PatientCard id={this.props.match.params.id}></PatientCard>
+           
+            <Grid md={12} item >
+          <div style={{ display: 'inline-flex' }}>
+            <div>
             <Appointment />
-            <newCase />
+            </div>
+            <div style={{ alignSelf: 'center',marginLeft:'10px' }}>
+            <NewCase />
+            </div>
+        </div>
+        </Grid>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-simple">Select Case</InputLabel>
+            
+              <InputLabel htmlFor="age-simple">Select Case</InputLabel>  
+              
+              
               <Select
 
 
@@ -151,14 +165,16 @@ class PatientProfile extends React.Component {
                 })}
 
               </Select>
+             
             </FormControl>
-
+           
           </Grid>
+         
           <Grid md={1} style={{ justifyContent: 'center', margin: 'auto' }} item >{this.state.selectDate && moment(this.state.selectDate).fromNow()}{!(this.props.patient.currentPatient) && <CircularProgress disableShrink />}{!this.props.patient.currentPatient && 'Loading...'}</Grid>
           <Grid md={6} item >
             <PatientCalculation style={{}}></PatientCalculation>
           </Grid>
-
+          
         </Grid>
         <Grid container md={12} item>
           <Grid md={1} item></Grid>

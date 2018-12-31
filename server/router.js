@@ -383,7 +383,10 @@ router.route('/AddPatientHistory')
     if(err){
       throw err
     }else{
-      res.send(result)
+      console.log("asdasdasdasd",result)
+      res.send({
+        insertId : result.insertId,
+      })
     }
   })
 })

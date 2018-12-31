@@ -47,11 +47,12 @@ const styles = theme => ({
 
 });
 
-class newCase extends React.Component {
+class NewCase extends React.Component {
   state = {
     open: false,
     title: "",
     description: "",
+    isOpen:true,
   };
 
   // take value from inputs
@@ -75,7 +76,7 @@ class newCase extends React.Component {
       title: this.state.title,
       description: this.state.description,
       patientId: this.props.patientProfile[0].id,
-
+      isOpen:1,
     }
 
     this.props.AddnewCase(obj)
@@ -86,8 +87,8 @@ class newCase extends React.Component {
     console.log("mmmmmmmmmmmmmm", this.props)
     return (
       <div>
-        <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
-           Add New Case
+        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+          Add Case
         </Button>
         <Dialog
           open={this.state.open}
@@ -141,7 +142,7 @@ class newCase extends React.Component {
   }
 }
 //this is for style (material.ui)
-newCase.propTypes = {
+NewCase.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
@@ -155,10 +156,10 @@ const mapStateToProps = (state) => {
 // Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
-    AddnewCase: (data) => dispatch(AddAppointment(data)),
+    AddnewCase: (data) => dispatch(AddnewCase(data)),
 
   }
 }
 
 
-export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(newCase);
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(NewCase);
