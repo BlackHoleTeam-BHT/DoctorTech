@@ -33,13 +33,21 @@ class SendConsultation extends React.Component {
     console.log(message);
     this.props.sendConsultation(message);
     this.toggle();
+    this.setState({
+      subject: '',
+      description: '',
+    })
   }
 
   render() {
    
     return (
-      <div>
-        <Modal isOpen={this.props.isOpen} toggle={this.toggle.bind(this)} className={this.props.className}>
+      <div >
+        <Modal isOpen={this.props.isOpen} 
+          toggle={this.toggle.bind(this)} 
+          className={this.props.className}
+          style ={{marginTop: 100}}
+        >
           <ModalHeader onClick={this.toggle.bind(this)}>Send Consultation</ModalHeader>
           <ModalBody>
             <Form>

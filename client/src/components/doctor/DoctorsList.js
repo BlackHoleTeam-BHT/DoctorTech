@@ -8,7 +8,7 @@ class DoctorList extends React.Component {
     console.log(this.props)
     let doctors = this.props.doctors;
     return (
-      <Container>
+      <Container style={{ position: 'relative',overflow: 'auto', maxHeight: 700}}>
         {/* to check if  there are doctor or not*/}
         {doctors.length > 0 ? (
           
