@@ -409,6 +409,22 @@ const AddAppointment = (data, callback) => {
 
 }
 
+
+//function to  add newCase 
+const AddnewCase = (data, callback) => {
+  const sql = `INSERT INTO PatientCases (patientId,title,description) VALUES ('${data.patientId}','${data.title}','${data.description}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from PatientCases Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
 //function to Update the patient Plan Step
 const UpdatePlanStep = (data, callback) => {
 
@@ -535,3 +551,4 @@ module.exports.selectConsultationInbox = selectConsultationInbox;
 module.exports.selectOneConsultation = selectOneConsultation;
 module.exports.updateDoctorInfo = updateDoctorInfo;
 module.exports.AddAppointment = AddAppointment;
+module.exports.AddnewCase = AddnewCase;

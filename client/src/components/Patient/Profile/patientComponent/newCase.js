@@ -74,7 +74,7 @@ class newCase extends React.Component {
     var obj = {
       title: this.state.title,
       description: this.state.description,
-      id_Patients: this.props.patientProfile[0].id,
+      patientId: this.props.patientProfile[0].id,
 
     }
 

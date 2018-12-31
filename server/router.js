@@ -405,6 +405,20 @@ router.route('/add-appointment')
 })
 
 
+//Note :Add addNewCase
+router.route('/newCase')
+.post(function(req,res){
+  const data=req.body
+
+  db.AddnewCase(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
 //Note :update patient plan (step)
 router.route('/UpdatePlanStep')
 .post(function(req,res){
