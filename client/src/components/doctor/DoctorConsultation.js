@@ -27,6 +27,10 @@ class DoctorConsultation extends React.Component {
       value: 0
     }
     this.props.getDoctors()
+    this.props.getConsultationInbox(this.props.user.id)
+    this.props.getConsultationOutbox(this.props.user.id);
+    
+
   }
 
   handleChange = (event, value) => {

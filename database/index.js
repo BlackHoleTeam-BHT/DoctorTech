@@ -61,6 +61,22 @@ const selectDoctorInfo = (doctorId, callback) => {
   })
 }
 
+// function to select  all the Doctors info from Doctor table
+const selectAllDoctors = (callback) => {
+  const sql = `select Doctors.*, Login.email, Login.id_Roles from Login 
+                 inner join Doctors
+                 on Login.id = Doctors.id LIMIT 25;`;
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during select info  from Doctor Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  })
+}
+
+
 // Function to insert patient to Patient table
 const insertIntoPatientTable = (patient, callback) => {
   const sql = `INSERT INTO Patients (firstName, middleName, lastName, age, gender,location, maritalStatus,
@@ -129,15 +145,15 @@ const selectCaseInfo = (CaseId, callback) => {
     MedicalHistory: '',
     PhysicalExamination: '',
     medicalAnalysis: '',
-    MedicalPrescription:'',
-    PatientPlane:''
+    MedicalPrescription: '',
+    PatientPlane: ''
   }
   const sql1 = `SELECT * FROM ChiefComplaint WHERE caseId='${CaseId}' `
   const sql2 = `SELECT * FROM MedicalHistory WHERE caseId='${CaseId}' `
   const sql3 = `SELECT * FROM PhysicalExamination WHERE caseId='${CaseId}' `
   const sql4 = `SELECT * FROM MedicalAnalysis WHERE caseId='${CaseId}' `
   const sql5 = `SELECT * FROM MedicalPrescription WHERE caseId='${CaseId}' `
-  const sql6=`SELECT * FROM PatientPlane WHERE caseId='${CaseId}' `
+  const sql6 = `SELECT * FROM PatientPlane WHERE caseId='${CaseId}' `
   dbConnection.query(sql1, function (err, results) {
     if (err) {
       console.log("Error during select info  from ChiefComplaint Table \n" + err)
@@ -173,14 +189,14 @@ const selectCaseInfo = (CaseId, callback) => {
                     if (err) {
                       console.log("Error during select info from MedicalPrescription Table \n" + err)
                       callback(err, null);
-                    }else{
+                    } else {
                       obj['MedicalPrescription'] = results
-                      
-                      dbConnection.query(sql6, function(err, results) {
+
+                      dbConnection.query(sql6, function (err, results) {
                         if (err) {
                           console.log("Error during select info from PatientPlane Table \n" + err)
                           callback(err, null);
-                        }else{
+                        } else {
                           obj['PatientPlane'] = results
                           callback(null, obj)
                         }
@@ -191,7 +207,7 @@ const selectCaseInfo = (CaseId, callback) => {
                     }
 
                   })
-                    
+
 
                 }
 
@@ -211,10 +227,8 @@ const selectCaseInfo = (CaseId, callback) => {
 
 }
 
-
-
 //function to  update the medicalAnalysis Status
-const UpdateAnalysisStatus = (Id,status, callback) => {
+const UpdateAnalysisStatus = (Id, status, callback) => {
   const sql = `UPDATE MedicalAnalysis SET STATUS='${status}' WHERE id='${Id}' `
   dbConnection.query(sql, function (err, results) {
     if (err) {
@@ -223,9 +237,59 @@ const UpdateAnalysisStatus = (Id,status, callback) => {
     } else {
       callback(null, results);
     }
+  });
+}
 
-  })
+// This function to add inside Consultions Table
+const insertConsultations = (data, callback) => {
+  const sql = `insert into Consultants (id_Doctors, id_targetDoctor, subject, description)
+                values("${data.doctorId}", "${data.targetDoctorId}", "${data.subject}", "${data.description}")`
+  dbConnection.query(sql, function (err, result) {
+    if (err) {
+      console.log("Error during insert into  Consultions Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
 
+  });
+}
+
+
+// function to get the consultations outbox from consultations table and doctors table
+const selectConsultationOutbox = (doctorId, callback) => {
+  const sql = `SELECT Doctors.*, Consultants.id_Doctors, Consultants.id_targetDoctor, Consultants.subject,
+              Consultants.description,Consultants.createdAt as createdAtConsult from Doctors 
+              INNER JOIN Consultants 
+              ON Doctors.id = Consultants.id_Doctors
+              and Consultants.id_Doctors = "${doctorId}";`;
+
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during select consultions outbox for doctor  \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
+// function to get the consultations outbox from consultations table and doctors table
+const selectConsultationInbox = (doctorId, callback) => {
+  const sql = `SELECT Doctors.*, Consultants.id_Doctors, Consultants.id_targetDoctor, Consultants.subject,
+              Consultants.description,Consultants.createdAt as createdAtConsult from Doctors 
+              INNER JOIN Consultants 
+              ON Doctors.id = Consultants.id_Doctors
+              and Consultants.id_targetDoctor = "${doctorId}";`;
+
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during select consultions outbox for doctor  \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
 }
 
 //function to  add info MedicalHistory table

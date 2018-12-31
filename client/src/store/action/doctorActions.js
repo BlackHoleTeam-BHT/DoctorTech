@@ -80,12 +80,15 @@ export const getConsultationInbox= (doctorId) => {
     return (dispatch, getState) => {
       //sync
       $.ajax({
-        url: 'get-consult-inbox',
+        url: '/get-consult-inbox',
         type: "POST",
         data: JSON.stringify({doctorId: doctorId}),
         contentType: 'application/json',
         success: function (res) {
           dispatch({ type: 'GET_CONSULTATIONS_INBOX', data: res.data })
+        },
+        error: (err) => {
+            console.log("errrrrr", err)
         }
       });
     }
