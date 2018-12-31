@@ -413,6 +413,7 @@ const ClosePatientProfile = (data, callback) => {
 
     }
   })
+}
 
   //function to open Patient Profile
   const OpenPatientProfile = (data, callback) => {

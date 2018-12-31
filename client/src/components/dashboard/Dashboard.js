@@ -20,13 +20,8 @@ import Patients from '../Patient/Patients.js';
 import PatientProfile from '../Patient/Profile/patientProfile.js';
 import {logout} from '../../store/action/authActions.js';
 import {Redirect} from 'react-router-dom'
-<<<<<<< HEAD
 import DrProfile from '../doctorProfile/DrProfile.js'
-import Consultaion from '../doctor/Consultaion.js';
-const drawerWidth = 260;
-=======
 import DoctorConsultation from '../doctor/DoctorConsultation.js'
->>>>>>> (feat) doctorReducer and doctorAction to deal with doctor ation and make ajax request to get all the doctor from server
 
 const drawerWidth = 260;
 const styles = theme => ({
@@ -153,7 +148,7 @@ class Dashboard extends React.Component {
             <Route exact path="/dashboard/:id/patients" component={Patients} />
             <Route path="/dashboard/:id/PatientProfile/:id" component={PatientProfile} />
             <Route exact path = "/dashboard/dr-profile" component = {DrProfile}/>
-            <Route path="/dashboard/:id/consultaion/" component={Consultaion} />
+            <Route path="/dashboard/:id/consultaion/" component={DoctorConsultation} />
 
           </main>
         </div>
