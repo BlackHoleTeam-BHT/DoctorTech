@@ -71,7 +71,17 @@ const patientReducer = (state = initState, action) => {
       return {
         ...state,
         currentCase: action.data,
-        currentPatient: true
+        currentPatient: true,
+
+        chiefComplaint:[],
+        MedicalHistory:[],
+        PhysicalExamination:[],
+        medicalAnalysis:[],
+        MedicalPrescription:[],
+        PatientPlan:[],
+        CaseId:0,
+        SelectCase:false
+        
       }
 
     case "SEARCH_PATIENT":

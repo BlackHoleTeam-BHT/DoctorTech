@@ -78,10 +78,11 @@ class Appointment extends React.Component {
     var obj = {
       date: this.state.date,
       notes: this.state.notes,
-      id_Patients: this.props.patient.id,
-      id_Doctors: this.props.doctors.id
+      id_Patients: this.props.id,
+      id_Doctors: this.props.id_Doctor
     }
-    this.props.AddChiefComplaint(obj)
+
+    //this.props.AddChiefComplaint(obj)
   }
 
   render() {
@@ -158,8 +159,7 @@ Appointment.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patient: state.patient,
-    doctors: state.users
+    patient: state.patient.PatientProfile
   }
 }
 
