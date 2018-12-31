@@ -31,6 +31,10 @@ const doctorReducer = (state = initState, action) => {
 
 =======
     doctors: [],
+    // array of all the consultations that the doctor sent it
+    consultsOutbox: [],
+    // array of all the consultations that the doctor recived it
+    consultsInbox: [],
     isSendConsultModelOpen: false,
     targetDoctor: {}
 }
@@ -54,6 +58,16 @@ const doctorReducer = (state = initState, action) => {
       return {
          ...state,
       }
+      case "GET_CONSULTATIONS_INBOX":
+         return {
+            ...state,
+            consultsInbox: action.data
+         }
+      case "GET_CONSULTATIONS_OUTBOX":
+         return {
+            ...state,
+            consultsOutbox: action.data
+         }   
      default:
         return state;
     }

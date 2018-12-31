@@ -58,3 +58,36 @@ export const sendConsultation = (data) => {
       });
     }
 }
+
+// this action to get consultions that the doctor send it to anoher doctor
+export const getConsultationOutbox= (doctorId) => {
+    return (dispatch, getState) => {
+      //sync
+      $.ajax({
+        url: '/get-consult-outbox',
+        type: "POST",
+        data: JSON.stringify({doctorId: doctorId}),
+        contentType: 'application/json',
+        success: function (res) {
+          dispatch({ type: 'GET_CONSULTATIONS_OUTBOX', data: res.data })
+        }
+      });
+    }
+}
+
+// this action to get consultions that the doctor recive it from anoher doctor 
+export const getConsultationInbox= (doctorId) => {
+    return (dispatch, getState) => {
+      //sync
+      $.ajax({
+        url: 'get-consult-inbox',
+        type: "POST",
+        data: JSON.stringify({doctorId: doctorId}),
+        contentType: 'application/json',
+        success: function (res) {
+          dispatch({ type: 'GET_CONSULTATIONS_INBOX', data: res.data })
+        }
+      });
+    }
+}
+

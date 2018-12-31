@@ -16,7 +16,7 @@ import PersonPinIcon from '@material-ui/icons/PersonPin';
 import { Redirect } from 'react-router-dom';
 import DoctorsSearch from './DoctorsSearch.js';
 import DoctorList from './DoctorsList';
-import { getDoctors } from '../../store/action/doctorActions';
+import { getDoctors, getConsultationInbox, getConsultationOutbox } from '../../store/action/doctorActions';
 import SendConsultation from './SendConsultation.js';
 import ConsultationList from './ConsultationList.js';
 
@@ -74,6 +74,7 @@ class DoctorConsultation extends React.Component {
 const mapStateToProps = (state) => {
   return {
     login: state.auth.login,
+    user: state.auth.user,
     doctors: state.doctor.doctors
   }
 }
@@ -81,7 +82,9 @@ const mapStateToProps = (state) => {
 //Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
-    getDoctors: () => dispatch(getDoctors())
+    getDoctors: () => dispatch(getDoctors()),
+    getConsultationOutbox:(doctorId) => dispatch(getConsultationOutbox(doctorId)),
+    getConsultationInbox: (doctorId) => dispatch(getConsultationInbox(doctorId))
   }
 }
 
