@@ -58,7 +58,7 @@ class SendConsultation extends React.Component {
                   name="from"
                   id="from"
                   readOnly="true"
-                  value={this.props.user.firstName + ' ' + this.props.user.lastName }
+                  value={"Dr. " +this.props.user.firstName + ' ' + this.props.user.lastName }
                 />
               </FormGroup>
               <FormGroup>
@@ -72,7 +72,7 @@ class SendConsultation extends React.Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="Subject">To </Label>
+                <Label htmlFor="Subject">Subject </Label>
                   <Input
                   type="text"
                   name="subject"
@@ -82,7 +82,7 @@ class SendConsultation extends React.Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="from">Description </Label>
+                <Label htmlFor="description">Description </Label>
                   <Input
                   type="textarea"
                   name="description"

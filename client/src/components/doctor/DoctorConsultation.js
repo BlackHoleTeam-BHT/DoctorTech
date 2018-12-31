@@ -25,10 +25,14 @@ class DoctorConsultation extends React.Component {
     this.state ={
       value: 0
     }
+    // this to get all doctors
     this.props.getDoctors()
-    this.props.getConsultationInbox(this.props.user.id)
+
+    // this to get consul
     this.props.getConsultationOutbox(this.props.user.id);
-    
+    setInterval(() => {
+      this.props.getConsultationInbox(this.props.user.id)
+    }, 3000)
 
   }
 
@@ -44,13 +48,6 @@ class DoctorConsultation extends React.Component {
     //   )
     // }
 
-    // change the consultations message to inbox or outbox depend on the tab index
-    let consults = [];
-    if(this.state.value === 0){
-      consults = this.props.consultsInbox;
-    } else {
-      consults = this.props.consultsOutbox;
-    }
     return (
       <Grid container>
         <Grid item sm={12} xs={12} md={8}>
@@ -73,7 +70,8 @@ class DoctorConsultation extends React.Component {
                 <Tab icon={<SendIcon />} />
               </Tabs>
             </Paper>
-            <ConsultationList consults = {consults}/>
+            {this.state.value === 0 && <ConsultationList consults = {this.props.consultsInbox}/>}
+            {this.state.value === 1 && <ConsultationList consults = {this.props.consultsOutbox}/>}
           </Card>
         </Grid>
       </Grid>
@@ -88,7 +86,7 @@ const mapStateToProps = (state) => {
     user: state.auth.user,
     doctors: state.doctor.doctors,
     consultsOutbox: state.doctor.consultsOutbox,
-    consultsInbox: state.doctor.consultsInbox
+    consultsInbox: state.doctor.consultsInbox,
   }
 }
 

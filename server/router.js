@@ -140,15 +140,23 @@ router.route('/doctores')
 router.route('/send-consult')
   .post(authenticationMiddleware(), function (req, res) {
     console.log(req.body);
-    db.insertConsultations(req.body, function(err, result){
+    db.insertConsultations(req.body, function(err, insertId){
       if(err) {
         throw err
       } else {
-        res.send({
-          data: 'done'
-        })
+        console.log(insertId)
+        db.selectOneConsultation(insertId, req.body.doctorId, function(err, results){
+          if(err) {
+            throw err;
+          } else {
+            console.log("GHellllll data",results)
+            res.send({
+              data: results[0]
+            });
+          }
+        });
       }
-    })
+    });
   });
 
 // service to deal with get consultation outbox request 
@@ -160,7 +168,6 @@ router.route('/get-consult-outbox')
     if (err) {
       throw err
     } else {
-      console.log(results);
       res.send({
         data: results
       });
@@ -175,7 +182,6 @@ router.route('/get-consult-inbox')
   console.log(req.body);
   let doctorId = req.body.doctorId
   db.selectConsultationInbox(doctorId, function(err, results){
-    console.log("sdsdsdsd",results);
     if (err) {
       throw err
     } else {

@@ -17,7 +17,7 @@ class ConsultationList extends React.Component {
       <List style={{width:"100%", maxWidth:"400",   position: 'relative',overflow: 'auto', maxHeight: 800}}>
         {
            this.props.consults && this.props.consults.map((elem) => (
-            <ConsultationListEntry key={elem.id} consults = {elem}/>
+            <ConsultationListEntry key={elem.consultId} consults = {elem}/>
           ))
         }
 

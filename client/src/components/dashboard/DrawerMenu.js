@@ -40,7 +40,7 @@ const DrawerMenu = (props) => {
            component={NavLink}
             to={"/dashboard/"+ props.user.id + "/consultaion"}
         >
-          Conslations
+          Consultations
         </MenuItem>
         <MenuItem className={classes.menuItem} 
           component={NavLink} 

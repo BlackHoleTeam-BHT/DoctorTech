@@ -55,9 +55,13 @@ const doctorReducer = (state = initState, action) => {
          targetDoctor: action.targetDoctor
       }
       case "SEND_CONSULTATION":
-      return {
-         ...state,
-      }
+          let data = state.consultsOutbox
+          data.unshift(action.data);
+          console.log(data)
+         return {
+            ...state,
+            consultsOutbox: data
+         }
       case "GET_CONSULTATIONS_INBOX":
          return {
             ...state,

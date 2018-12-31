@@ -3,7 +3,6 @@ import moment from 'moment';
 import {
   Grid,
   Typography,
-  Card,
   ListItem,
   ListItemAvatar,
   ListItemText,
@@ -34,7 +33,7 @@ class ConsultationListEntry extends React.Component {
               secondary={
                 <React.Fragment>
                   <Typography component="span" style={{ display: "inline" }} color="textPrimary">
-                    {this.props.consults.subject}
+                    {this.props.consults.subject +'   '}
                   </Typography>
                   {this.props.consults.description}
                 </React.Fragment>

@@ -53,7 +53,9 @@ export const sendConsultation = (data) => {
         data: JSON.stringify(data),
         contentType: 'application/json',
         success: function (res) {
-          dispatch({ type: 'SEND_CONSULTATION', data: res.data })
+            if(res.data) {
+              dispatch({ type: 'SEND_CONSULTATION', data: res.data })
+            }
         }
       });
     }
