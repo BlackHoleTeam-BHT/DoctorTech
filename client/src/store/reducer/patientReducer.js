@@ -213,6 +213,16 @@ const patientReducer = (state = initState, action) => {
 
       }
 
+      case "AddnewCase":
+      var AddnewCase = state.currentCase
+      AddnewCase.push(action.data)
+
+      return {
+        ...state,
+        currentCase: AddnewCase
+
+      }
+
     default:
       return state;
   }

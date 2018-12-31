@@ -50,8 +50,8 @@ const styles = theme => ({
 class newCase extends React.Component {
   state = {
     open: false,
-    date: "",
-    notes: "",
+    title: "",
+    description: "",
   };
 
   // take value from inputs

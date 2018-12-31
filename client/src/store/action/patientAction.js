@@ -382,6 +382,30 @@ export const AddAppointment = (data) => {
   }
 }
 
+// Note: Add new Case
+export const AddnewCase = (data) => {
+  console.log('action AddnewCase', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/add-appointment',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+        console.log('AddnewCaseServer', data)
+        dispatch({ type: 'AddnewCase', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+  }
+}
+
 // Note: close the patient profile
 export const ClosePatientProfile = (Id, step, CaseId) => {
 
