@@ -357,6 +357,33 @@ export const AddPatientHistory=(data)=>{
 
 }
 
+
+// Note: Add Appointment
+export const AddAppointment=(data)=>{
+  console.log('action AddAppointment',data)
+
+  return(dispatch, getState)=>{
+    
+    $.ajax({
+      type: "POST",
+      url: '/AddAppointment',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function (result) {
+        var insertId=result.insertId
+        data['insertId']=insertId
+        console.log('AddAppointmentServer',data)
+        dispatch({type:'AddAppointment',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+  }
+}
+
 // Note: close the patient profile
 export const ClosePatientProfile=(Id,step,CaseId)=>{
 
