@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Grid, Typography, Card, List
+   List
 } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
@@ -15,39 +15,11 @@ class ConsultationList extends React.Component {
     
     return (
       <List style={{width:"100%", maxWidth:"400",   position: 'relative',overflow: 'auto', maxHeight: 800}}>
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
-        <ConsultationListEntry />
+        {
+           this.props.consults && this.props.consults.map((elem) => (
+            <ConsultationListEntry key={elem.id} consults = {elem}/>
+          ))
+        }
 
       </List>
     )
@@ -58,7 +30,9 @@ class ConsultationList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     login: state.auth.login,
-    doctors: state.doctor.doctors
+    doctors: state.doctor.doctors,
+    consultsOutbox: state.doctor.consultsOutbox,
+    consultsInbox: state.doctor.consultsInbox
   }
 }
 

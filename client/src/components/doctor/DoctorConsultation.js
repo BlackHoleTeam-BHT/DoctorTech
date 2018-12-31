@@ -10,9 +10,8 @@ import {
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux';
-import PhoneIcon from '@material-ui/icons/Phone';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import SendIcon from '@material-ui/icons/Send';
 import { Redirect } from 'react-router-dom';
 import DoctorsSearch from './DoctorsSearch.js';
 import DoctorList from './DoctorsList';
@@ -44,6 +43,14 @@ class DoctorConsultation extends React.Component {
     //     <Redirect to='/' />
     //   )
     // }
+
+    // change the consultations message to inbox or outbox depend on the tab index
+    let consults = [];
+    if(this.state.value === 0){
+      consults = this.props.consultsInbox;
+    } else {
+      consults = this.props.consultsOutbox;
+    }
     return (
       <Grid container>
         <Grid item sm={12} xs={12} md={8}>
@@ -53,7 +60,7 @@ class DoctorConsultation extends React.Component {
           <DoctorList doctors={this.props.doctors} />
         </Grid>
         <Grid item sm={12} xs={12} md={4}>
-          <Card>
+          <Card style={{maxHeight: 850, height:"100%"}} >
             <Paper square style={{flexGrow:1,width:"100%"}}>
               <Tabs
                 value={this.state.value}
@@ -62,11 +69,11 @@ class DoctorConsultation extends React.Component {
                 indicatorColor="primary"
                 textColor="primary"
               >
-                <Tab icon={<FavoriteIcon />} label="Inbox" />
-                <Tab icon={<PersonPinIcon />} label="Outbox" />
+                <Tab icon={<InboxIcon />} />
+                <Tab icon={<SendIcon />} />
               </Tabs>
             </Paper>
-            <ConsultationList />
+            <ConsultationList consults = {consults}/>
           </Card>
         </Grid>
       </Grid>
@@ -79,7 +86,9 @@ const mapStateToProps = (state) => {
   return {
     login: state.auth.login,
     user: state.auth.user,
-    doctors: state.doctor.doctors
+    doctors: state.doctor.doctors,
+    consultsOutbox: state.doctor.consultsOutbox,
+    consultsInbox: state.doctor.consultsInbox
   }
 }
 

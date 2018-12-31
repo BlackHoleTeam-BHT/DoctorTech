@@ -261,7 +261,7 @@ const selectConsultationOutbox = (doctorId, callback) => {
   const sql = `SELECT Doctors.*, Consultants.id_Doctors, Consultants.id_targetDoctor, Consultants.subject,
               Consultants.description,Consultants.createdAt as createdAtConsult from Doctors 
               INNER JOIN Consultants 
-              ON Doctors.id = Consultants.id_Doctors
+              ON Doctors.id = Consultants.id_targetDoctor
               and Consultants.id_Doctors = "${doctorId}";`;
 
   dbConnection.query(sql, function (err, results) {
@@ -274,12 +274,12 @@ const selectConsultationOutbox = (doctorId, callback) => {
   });
 }
 
-// function to get the consultations outbox from consultations table and doctors table
+// function to get the consultations inbox from consultations table and doctors table
 const selectConsultationInbox = (doctorId, callback) => {
   const sql = `SELECT Doctors.*, Consultants.id_Doctors, Consultants.id_targetDoctor, Consultants.subject,
               Consultants.description,Consultants.createdAt as createdAtConsult from Doctors 
               INNER JOIN Consultants 
-              ON Doctors.id = Consultants.id_Doctors
+              ON Doctors.id = Consultants.id_targetDoctor
               and Consultants.id_targetDoctor = "${doctorId}";`;
 
   dbConnection.query(sql, function (err, results) {

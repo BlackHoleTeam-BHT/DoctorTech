@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {
   Grid,
   Typography,
@@ -7,7 +8,8 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
-  Button
+  Button,
+  Divider
 } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
@@ -19,32 +21,35 @@ class ConsultationListEntry extends React.Component {
   render() {
 
     return (
-      <Card style={{ margin: 5 }}>
+      <div>
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar style={{background:"orange"}}>M</Avatar>
+            <Avatar style={{ background: "orange" }}>
+              {this.props.consults.firstName[0] + '' + this.props.consults.lastName[0]}
+            </Avatar>
           </ListItemAvatar>
           <Grid item md={9} >
             <ListItemText
-              primary="Brunch this weekend?"
+              primary={this.props.consults.firstName + ' ' + this.props.consults.lastName}
               secondary={
                 <React.Fragment>
                   <Typography component="span" style={{ display: "inline" }} color="textPrimary">
-                    Ali Connors
+                    {this.props.consults.subject}
                   </Typography>
-                  {" — I'll be in your neighborhood doing errands this…in your neighborhood doing errands thisin your neighborhood doing errands this…"}
+                  {this.props.consults.description}
                 </React.Fragment>
               }
             />
           </Grid>
           <Grid item md={3}>
             <Typography component="span" color="textPrimary">
-              2day ago
-             </Typography>
-             <Button variant="outlined" style={{marginLeft: 25,marginTop:40, paddingRight:40, width:70, height:25}}>Reply</Button>
+              {moment(this.props.consults.createdAtConsult).fromNow()}
+            </Typography>
+            <Button variant="outlined" style={{ marginLeft: 25, marginTop: 25, paddingRight: 40, width: 70, height: 25 }}>Reply</Button>
           </Grid>
         </ListItem>
-      </Card>
+        <Divider />
+       </div>
     )
   }
 }

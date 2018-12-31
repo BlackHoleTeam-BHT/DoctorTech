@@ -179,7 +179,6 @@ router.route('/get-consult-inbox')
     if (err) {
       throw err
     } else {
-      
       res.send({
         data: results
       });
