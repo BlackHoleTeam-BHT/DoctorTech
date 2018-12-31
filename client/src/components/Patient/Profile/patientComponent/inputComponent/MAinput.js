@@ -49,7 +49,6 @@ class MAinput extends React.Component {
     description: "",
     status: 0,
     expanded: null,
-    history: [{ heart: 0, joint: 1, blood: 0, diabetes: 1, Renal: 0, description: 'ozil Welcome walid', family: 'fff' }]
   };
   handleChange2 = name => event => {
     this.setState({
@@ -66,16 +65,22 @@ class MAinput extends React.Component {
     var obj = {
       name: this.state.name,
       description: this.state.description,
-      status: this.state.status,
+      status: (this.state.status===0)?0:1,
       id: this.props.patient.CaseId
     }
+    this.setState({
+      name:'',
+      description:'',
+      status:0
+
+    })
     this.props.AddMedicalAnalysis(obj)
   }
 
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
-    console.log("mmmmmmmmmmmmmm", this.props)
+    
     return (
       <div className={classes.root}>
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>

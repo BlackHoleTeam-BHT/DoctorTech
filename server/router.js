@@ -286,9 +286,6 @@ router.route('/patientInCassis')
 router.route('/AddPatientHistory')
 .post(function(req,res){
   const data=req.body
- 
-  console.log('addddddddddd',req.body)
-
 
   db.AddPatientHistory(data,function(err,result){
     if(err){
@@ -300,13 +297,106 @@ router.route('/AddPatientHistory')
 })
 
 
+
+//Note :update patient plan (step)
+router.route('/UpdatePlanStep')
+.post(function(req,res){
+  const data=req.body
+  console.log('data',data)
+ 
+  db.UpdatePlanStep(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
+
+//Note :Close patient profile
+router.route('/ClosePatientProfile')
+.post(function(req,res){
+  const data=req.body
+  
+
+  db.ClosePatientProfile(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
+
+//Note :open patient profile
+router.route('/OpenPatientProfile')
+.post(function(req,res){
+  const data=req.body
+  
+
+  db.OpenPatientProfile(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
+
+//Note :Add  Patient Plan 
+router.route('/AddPatientPlan')
+.post(function(req,res){
+  const data=req.body
+  
+
+  db.AddPatientPlan(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
+//Note :check user session 
+router.route('/CheckSession')
+.get(function(req,res){
+  if(req.isAuthenticated()){
+    db.selectDoctorInfo(req.user.id, function (err, results){
+      if (err){
+        throw err;
+      }else{
+        res.send({
+          data: null || results[0],
+          state: "LOGIN_SUCCESS"
+        })
+
+      }
+
+      
+      
+     })
+    console.log('user login',req.user.id)
+  
+
+  }else{
+    res.send('0')
+  }
+  
+
+})
+
+
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-  var query = `select * from login where id=\"${id}\"`
+  var query = `select * from Login where id=\"${id}\"`
   dbConnection.query(query, function (err, data) {
     if (err) {
       return done(null, err)

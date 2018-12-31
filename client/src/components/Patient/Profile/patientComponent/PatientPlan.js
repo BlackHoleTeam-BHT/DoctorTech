@@ -11,13 +11,18 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import {UpdatePlanStep} from '../../../../store/action/patientAction'
+import {ClosePatientProfile} from '../../../../store/action/patientAction'
+import {OpenPatientProfile} from '../../../../store/action/patientAction'
+import PPinput from './inputComponent/PPinput'
+
 
 const styles = theme => ({
     root: {
-        width: '90%',
+        width: '100%',
     },
     button: {
         marginTop: theme.spacing.unit,
+        
         marginRight: theme.spacing.unit,
 
     },
@@ -25,8 +30,13 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit * 2,
     },
     resetContainer: {
-        padding: theme.spacing.unit * 3,
-    },
+     padding: theme.spacing.unit * 3,
+    }, instructions: {
+        marginTop: theme.spacing.unit,
+        marginBottom: theme.spacing.unit,
+        wordWrap: 'break-word',
+        width:'60%'
+      },
 });
 
 
@@ -49,33 +59,37 @@ class PatientPlan extends React.Component {
         this.props.UpdatePlanStep(id,CurrentStep-1)
     };
 
-    handleOpen = () => {
-        this.setState({
-            activeStep: 3,
-        });
+    handleOpenProfile = () => {
+        var CurrentStep=this.props.patient.PatientPlan[0].step
+        var id=this.props.patient.PatientPlan[0].id
+        var CaseId=this.props.patient.CaseId
+        
+        this.props.OpenPatientProfile(id,CurrentStep-1,CaseId)
+
+
+
     };
 
-    handleCloseProfile = () => {
-        this.setState({
-            activeStep: 4
-        })
-
-
+    handleCloseProfile = () => {   
+        var CurrentStep=this.props.patient.PatientPlan[0].step
+        var id=this.props.patient.PatientPlan[0].id
+        var CaseId=this.props.patient.CaseId     
+        this.props.ClosePatientProfile(id,CurrentStep+1,CaseId) 
     }
 
     render() {
         const { classes } = this.props;
-        const { activeStep } = this.state;
+        const { activeStep  } = this.state;
         console.log('plan',this.props)
 
         return (
             <div className={classes.root}>
-            {this.props.patient.PatientPlan[0].step!=5 && <Stepper activeStep={activeStep} orientation="vertical">
+            {!(this.props.patient.PatientPlan.length===0) && <Stepper activeStep={this.props.patient.PatientPlan[0].step} orientation="vertical">
 
                     <Step >
-                        <StepLabel>Physical-Plan</StepLabel>
+                        <StepLabel >Physical-Plan</StepLabel>
                         <StepContent>
-                            <Typography>{this.props.patient.PatientPlan[0].PhysicalPlan}</Typography>
+                            <Typography >{this.props.patient.PatientPlan[0].PhysicalPlan}</Typography>
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <Button
@@ -101,7 +115,7 @@ class PatientPlan extends React.Component {
                     <Step >
                         <StepLabel>Medical-Plan</StepLabel>
                         <StepContent>
-                            <Typography>{this.props.patient.PatientPlan[0].MedicalPlan}</Typography>
+                            <Typography >{this.props.patient.PatientPlan[0].MedicalPlan}</Typography>
                             <div className={classes.actionsContainer}>
                                 <div>
                                     <Button
@@ -152,18 +166,19 @@ class PatientPlan extends React.Component {
 
 
                 </Stepper>}
-                {this.props.patient.PatientPlan[0].step === 3 && (
+                {!(this.props.patient.PatientPlan.length===0) && this.props.patient.PatientPlan[0].step === 3 && (
                     <Paper square elevation={0} className={classes.resetContainer}>
                         <Typography>The plan has been finished to close the profile please press the below button..</Typography>
                         <Button onClick={this.handleBack} className={classes.button}>
                             Back
                           </Button>
-                        <Button color="primary" onClick={this.handleCloseProfile} className={classes.button}>
+                        <Button color="primary" id='1' onClick={this.handleCloseProfile} className={classes.button}>
                             Close Profile
                        </Button>
                     </Paper>
                 )}
-                {this.props.patient.PatientPlan[0].step==4 && <Button onClick={this.handleOpen}>Open</Button>}
+                {!(this.props.patient.PatientPlan.length===0) && this.props.patient.PatientPlan[0].step==4 && <Button onClick={this.handleOpenProfile}>Open</Button>}
+                {(this.props.patient.PatientPlan.length===0) && (this.props.patient.CaseId != 0) && <PPinput></PPinput>}
             </div>
         );
     }
@@ -183,7 +198,9 @@ const mapStateToProps = (state) => {
 // Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
     return {
-        UpdatePlanStep: (id,step) => dispatch(UpdatePlanStep(id,step))
+        UpdatePlanStep: (id,step) => dispatch(UpdatePlanStep(id,step)),
+        ClosePatientProfile: (id,step,CaseId) => dispatch(ClosePatientProfile(id,step,CaseId)),
+        OpenPatientProfile:(id,step,CaseId) => dispatch(OpenPatientProfile(id,step,CaseId))
     }
   }
   

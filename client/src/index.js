@@ -9,6 +9,8 @@ import rootReducer from './store/reducer/rootReducer'
 import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MCInput from './components/Patient/Profile/patientComponent/inputComponent/MCInput'
+import DrProfile from './components/doctorProfile/DrProfile.js';
+
 
 
 // Note:create the store and add the thunk Middleware

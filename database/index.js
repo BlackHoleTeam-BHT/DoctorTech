@@ -263,7 +263,9 @@ const AddChiefComplaint = (data, callback) => {
 //function to  add Physical Examination
 const AddPhysicalExamination = (data, callback) => {
   const sql = `INSERT INTO PhysicalExamination (caseId,weight,height,bodyTemperature,headNotes,
-middleBodyNotes,bottomBodyNotes) VALUES ('${data.id}','${data.weight}','${data.height}','${data.bodyTemperature}','${data.head}','${data.body}','${data.legs}') `
+middleBodyNotes,bottomBodyNotes,diabetes,BloodPressure) VALUES ('${data.id}','${data.weight}',
+'${data.height}','${data.bodyTemperature}','${data.headNotes}','${data.middleBodyNotes}',
+'${data.bottomBodyNotes}','${data.diabetes}','${data.BloodPressure}') `
   dbConnection.query(sql, function (err, results) {
     if (err) {
       console.log("Error during update info  from physicalExamination Table \n" + err)
@@ -308,6 +310,103 @@ const AddMedicalAnalysis = (data, callback) => {
 }
 
 
+//function to Update the patient Plan Step
+const UpdatePlanStep = (data, callback) => {
+  
+  const sql = `UPDATE PatientPlane SET step='${data.step}' WHERE id='${data.Id}' `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from MedicalAnalysis Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
+
+//function to Close Patient Profile
+const ClosePatientProfile = (data, callback) => {
+  
+  const sql = `UPDATE PatientCases SET isOpen=0 WHERE id='${data.CaseId}'  `
+
+  UpdatePlanStep(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+
+      dbConnection.query(sql, function (err, results) {
+        if (err) {
+          console.log("Error during update info  from PatientCases close Table \n" + err)
+          callback(err, null);
+        } else {
+          callback(null, results);
+        }
+    
+      })
+
+    }
+  })
+  
+
+
+}
+
+
+
+//function to open Patient Profile
+const OpenPatientProfile = (data, callback) => {
+  
+  const sql = `UPDATE PatientCases SET isOpen=1 WHERE id='${data.CaseId}' `
+
+  UpdatePlanStep(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+
+      dbConnection.query(sql, function (err, results) {
+        if (err) {
+          console.log("Error during update info  from PatientCases open  Table \n" + err)
+          callback(err, null);
+        } else {
+          console.log('rrr',results)
+          callback(null, results);
+        }
+    
+      })
+
+    }
+  })
+  
+
+
+}
+
+
+
+
+//function to Add Patient Plan Profile
+const AddPatientPlan = (data, callback) => {
+  
+  const sql = `INSERT INTO PatientPlane (caseId,PhysicalPlan,MedicalPlan,Conclusion,step) 
+  VALUES ('${data.CaseId}','${data.PhysicalPlan}','${data.MedicalPlan}','${data.Conclusion}',0) `
+
+  dbConnection.query(sql, function(err, results) {
+    if (err) {
+      console.log("Error during insert into   PatientPlane   Table \n" + err)
+      callback(err, null);
+    } else{
+      callback(null, results)
+    }
+
+
+  })
+  
+
+
+}
+
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
 module.exports.isAccountExist = isAccountExist;
@@ -324,3 +423,7 @@ module.exports.AddPhysicalExamination=AddPhysicalExamination;
 module.exports.AddMedicalPrescription=AddMedicalPrescription;
 module.exports.AddMedicalAnalysis=AddMedicalAnalysis;
 module.exports.AddPatientHistory = AddPatientHistory;
+module.exports.UpdatePlanStep = UpdatePlanStep;
+module.exports.ClosePatientProfile = ClosePatientProfile;
+module.exports.OpenPatientProfile = OpenPatientProfile;
+module.exports.AddPatientPlan = AddPatientPlan;
