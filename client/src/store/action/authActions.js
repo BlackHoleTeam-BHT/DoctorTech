@@ -100,3 +100,25 @@ export const updateDoctorInfo = (data) => {
 
 
 
+
+// check the user session
+export const CheckSession = () => {
+    return (dispatch, getState) => {
+        $.ajax({
+            url: '/CheckSession',
+            type: 'GET',
+            success: (res) => {
+             console.log('login',res)
+                if(res != 0){
+                    dispatch({ type: 'LOGIN', data: res.data, correctLogin: true})    
+                }
+             
+                
+            },
+            error: (error) => {
+               console.log("Error during CheckSession")
+            }
+        })
+
+    }
+}

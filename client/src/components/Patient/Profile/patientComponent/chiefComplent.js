@@ -40,17 +40,7 @@ const styles = theme => ({
 class ChiefComplaint extends React.Component {
 
     state = {
-        complaint: [{
-            id: 1,
-            title: 'Brunch this weekend?',
-            description: " — I'll be in your neighborhood doing errands this…",
-            date: '21/12/2018'
-        }, {
-            id: 2,
-            title: 'Main chief',
-            description: " — I'll be in your neighborhood doing errands this…",
-            date: '15/12/2018'
-        }]
+
     }
 
 
@@ -82,7 +72,7 @@ class ChiefComplaint extends React.Component {
                                 }
                             />
                         </ListItem>
-                        { key % 2 == 0 && <hr  className={classes.hr}/>}
+                         <hr  className={classes.hr}/>
                         </div>   
                         
 
@@ -93,7 +83,7 @@ class ChiefComplaint extends React.Component {
 
             </List>
             
-            {this.props.patient.SelectCase && <MCInput />}
+            {(this.props.patient.CaseId !=0) && <MCInput />}
         </div>
         );
        

@@ -58,7 +58,7 @@ function PatientCalculation(props) {
             <i class="material-icons">
               accessibility
                         </i>
-            {!(props.patient.PhysicalExamination[0].weight == '') && <i className={classes.content}>{Math.round((props.patient.PhysicalExamination[0].weight / Math.pow(props.patient.PhysicalExamination[0].height, 2)) * 10000)}</i>}
+            {!(props.patient.PhysicalExamination.length == 0) && <i className={classes.content}>{Math.round((props.patient.PhysicalExamination[0].weight / Math.pow(props.patient.PhysicalExamination[0].height, 2)) * 10000)}</i>}
           </Typography>
         </Paper>
         <Paper className={classes.root2} elevation={1}>
@@ -66,7 +66,7 @@ function PatientCalculation(props) {
             <i class="material-icons">
               opacity
                     </i>
-            {!(props.patient.PhysicalExamination[0].weight == '') && <i className={classes.content}>{props.patient.PhysicalExamination[0].diabetes}</i>}
+            {!(props.patient.PhysicalExamination.length == 0) && <i className={classes.content}>{props.patient.PhysicalExamination[0].diabetes}</i>}
           </Typography>
         </Paper>
 
@@ -75,7 +75,7 @@ function PatientCalculation(props) {
             <i class="material-icons">
               colorize
                     </i>
-            {!(props.patient.PhysicalExamination[0].weight == '') && <i className={classes.content}>{props.patient.PhysicalExamination[0].bodyTemperature}</i>}
+            {!(props.patient.PhysicalExamination.length == 0) && <i className={classes.content}>{props.patient.PhysicalExamination[0].bodyTemperature}</i>}
           </Typography>
         </Paper>
         <Paper className={classes.root2} elevation={1}>
@@ -83,7 +83,7 @@ function PatientCalculation(props) {
             <i class="material-icons">
               whatshot
                     </i>
-            {!(props.patient.PhysicalExamination[0].weight == '') && <i className={classes.content}>{props.patient.PhysicalExamination[0].BloodPressure}</i>}
+            {!(props.patient.PhysicalExamination.length == 0) && <i className={classes.content}>{props.patient.PhysicalExamination[0].BloodPressure}</i>}
           </Typography>
         </Paper>
 

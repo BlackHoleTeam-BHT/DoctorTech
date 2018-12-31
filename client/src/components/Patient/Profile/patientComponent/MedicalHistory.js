@@ -34,7 +34,6 @@ const styles = theme => ({
 class MedicalHistory extends React.Component {
   state = {
     expanded: null,
-    history: [{ heart: 0, joint: 1, blood: 0, diabetes: 1, Renal: 0, description: 'ozil Welcome walid', family: 'fff' }]
   };
 
   handleChange = panel => (event, expanded) => {
@@ -49,7 +48,7 @@ class MedicalHistory extends React.Component {
     console.log('historu', this.props.patient.MedicalHistory)
     return (
       <div className={classes.root}>
-        {(this.props.patient.MedicalHistory.length!=0) && (this.props.patient.SelectCase) && <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+        {(this.props.patient.MedicalHistory.length!=0) && (this.props.patient.CaseId !=0) && <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>Chronic Diseases</Typography>
             <Typography className={classes.secondaryHeading}><i class="fas fa-2x fa-briefcase-medical"></i></Typography>
@@ -72,7 +71,7 @@ class MedicalHistory extends React.Component {
 
           </ExpansionPanelDetails>
         </ExpansionPanel>}
-        {(this.props.patient.MedicalHistory.length!=0) && (this.props.patient.SelectCase)&& <ExpansionPanel expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
+        {(this.props.patient.MedicalHistory.length!=0) && (this.props.patient.CaseId !=0) && <ExpansionPanel expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>Patient History</Typography>
             <Typography className={classes.secondaryHeading}>
@@ -85,7 +84,7 @@ class MedicalHistory extends React.Component {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>}
-       {(this.props.patient.MedicalHistory.length!=0) &&(this.props.patient.SelectCase) && <ExpansionPanel expanded={expanded === 'panel3'} onChange={this.handleChange('panel3')}>
+       {(this.props.patient.MedicalHistory.length!=0) && (this.props.patient.CaseId !=0) && <ExpansionPanel expanded={expanded === 'panel3'} onChange={this.handleChange('panel3')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>Family History</Typography>
             <Typography className={classes.secondaryHeading}>
@@ -98,7 +97,7 @@ class MedicalHistory extends React.Component {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>}
-        {(this.props.patient.SelectCase) && (this.props.patient.MedicalHistory.length===0) &&  <MCInput></MCInput>}
+        {(this.props.patient.CaseId !=0) && (this.props.patient.MedicalHistory.length===0) &&  <MCInput></MCInput>}
 
       </div>
     );
