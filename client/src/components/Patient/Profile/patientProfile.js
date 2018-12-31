@@ -27,6 +27,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { GetCaseInfo } from '../../../store/action/patientAction'
 import { Redirect } from 'react-router-dom';
 import Appointment from './patientComponent/Appointment'
+import newCase from './patientComponent/newCase'
 
 function TabContainer(props) {
   return (
@@ -128,7 +129,8 @@ class PatientProfile extends React.Component {
           <Grid md={1} item></Grid>
           <Grid md={4} item >
             <PatientCard id={this.props.match.params.id}></PatientCard>
-
+            <Appointment />
+            <newCase />
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="age-simple">Select Case</InputLabel>
               <Select
@@ -141,6 +143,7 @@ class PatientProfile extends React.Component {
                   id: 'age-simple',
                 }}
               >
+              
                 {this.props.patient.currentCase.map((value, key) => {
                   return (
                     <MenuItem key={key} id={value.createdAt} case={value.id} value={value.patientId}>{value.title}</MenuItem>
@@ -202,7 +205,7 @@ class PatientProfile extends React.Component {
           <Grid md={1} item></Grid>
         </Grid>
 
-        <Appointment />
+        
 
 
       </Grid>

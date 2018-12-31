@@ -47,7 +47,7 @@ const styles = theme => ({
 
 });
 
-class Appointment extends React.Component {
+class newCase extends React.Component {
   state = {
     open: false,
     date: "",
@@ -87,17 +87,17 @@ class Appointment extends React.Component {
     return (
       <div>
         <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
-        New Appointment
+        New Case
         </Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">New Appointment</DialogTitle>
+          <DialogTitle id="form-dialog-title">New Case</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Please enter new Appointment time and date .
+              Please enter new Case  .
             </DialogContentText>
 
             <Grid container md={12} item ustify="space-around"  >
@@ -134,8 +134,8 @@ class Appointment extends React.Component {
 
           </DialogContent>
           <DialogActions>
-            <Button onClick={(event)=>{this.handelSubmit();this.handleClose()}} color="primary" variant="contained"> 
-            {/* <Button onClick={this.handelSubmit} color="primary" variant="contained"> */}
+            {/* <Button onClick={(event)=>{this.handelSubmit();this.handleClose()}} color="primary" variant="contained"> */}
+            <Button onClick={this.handelSubmit} color="primary" variant="contained">
               Add
             </Button>
             <Button onClick={this.handleClose} color="primary" variant="contained">
@@ -148,7 +148,7 @@ class Appointment extends React.Component {
   }
 }
 //this is for style (material.ui)
-Appointment.propTypes = {
+newCase.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
@@ -162,10 +162,10 @@ const mapStateToProps = (state) => {
 // Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
-    AddAppointment: (data) => dispatch(AddAppointment(data)),
+    AddnewCase: (data) => dispatch(AddAppointment(data)),
 
   }
 }
 
 
-export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(Appointment);
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(newCase);
