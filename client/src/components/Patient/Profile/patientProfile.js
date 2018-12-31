@@ -25,8 +25,8 @@ import { GetPatientCassis } from '../../../store/action/patientAction'
 import moment from 'moment'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { GetCaseInfo } from '../../../store/action/patientAction'
-import {Redirect} from 'react-router-dom';
-
+import { Redirect } from 'react-router-dom';
+import Appointment from './patientComponent/Appointment'
 
 function TabContainer(props) {
   return (
@@ -98,7 +98,7 @@ class PatientProfile extends React.Component {
     console.log('event', value)
     console.log('event gg', value.props.case)
     this.setState({ [event.target.name]: event.target.value, selectDate: value.props.id });
-   
+
     this.props.GetCaseInfo(value.props.case)
 
 
@@ -116,7 +116,7 @@ class PatientProfile extends React.Component {
     const { classes } = this.props;
 
     const { value } = this.state;
-     // if the user has not login redirect for home page
+    // if the user has not login redirect for home page
     //  if(!this.props.login) {
     //   return (
     //     <Redirect to = '/' />
@@ -153,58 +153,58 @@ class PatientProfile extends React.Component {
           </Grid>
           <Grid md={1} style={{ justifyContent: 'center', margin: 'auto' }} item >{this.state.selectDate && moment(this.state.selectDate).fromNow()}{!(this.props.patient.currentPatient) && <CircularProgress disableShrink />}{!this.props.patient.currentPatient && 'Loading...'}</Grid>
           <Grid md={6} item >
-            <PatientCalculation style={{  }}></PatientCalculation>
-          </Grid>
-          
-          </Grid>
-          <Grid container md={12} item>
-            <Grid md={1} item></Grid>
-            <Grid md={10} sm={11} xs={11} item>
-              <NoSsr>
-                <div className={classes.root}>
-                  <AppBar position="static">
-                    <Tabs fullWidth className={classes.tab} value={value} onChange={this.handleChange}>
-                      <LinkTab label="Page One" href="page1" />
-                      <LinkTab label="Page Two" href="page2" />
-                      <LinkTab label="Page Three" href="page3" />
-                      <LinkTab label="Page four" href="page4" />
-                      <LinkTab label="Page four" href="page5" />
-                      <LinkTab label="Page four" href="page6" />
-                    </Tabs>
-                  </AppBar>
-                  {value === 0 && <TabContainer>
-                    <ChiefComplaint></ChiefComplaint>
-                  </TabContainer>}
-
-                  {value === 1 && <TabContainer>
-                    <MedicalHistory></MedicalHistory>
-                  </TabContainer>}
-
-                  {value === 2 && <TabContainer>
-                    <PhysicalExamination></PhysicalExamination>
-                  </TabContainer>}
-
-                  {value === 3 && <TabContainer>
-                    <MedicalAnalysis></MedicalAnalysis>
-                  </TabContainer>}
-
-                  {value === 4 && <TabContainer>
-                    <MedicalPrescription></MedicalPrescription>
-                  </TabContainer>}
-
-                  {value === 5 && <TabContainer>
-                    <PatientPlan></PatientPlan>
-                  </TabContainer>}
-
-                </div>
-              </NoSsr>
-            </Grid>
-            <Grid md={1} item></Grid>
+            <PatientCalculation style={{}}></PatientCalculation>
           </Grid>
 
+        </Grid>
+        <Grid container md={12} item>
+          <Grid md={1} item></Grid>
+          <Grid md={10} sm={11} xs={11} item>
+            <NoSsr>
+              <div className={classes.root}>
+                <AppBar position="static">
+                  <Tabs fullWidth className={classes.tab} value={value} onChange={this.handleChange}>
+                    <LinkTab label="Page One" href="page1" />
+                    <LinkTab label="Page Two" href="page2" />
+                    <LinkTab label="Page Three" href="page3" />
+                    <LinkTab label="Page four" href="page4" />
+                    <LinkTab label="Page four" href="page5" />
+                    <LinkTab label="Page four" href="page6" />
+                  </Tabs>
+                </AppBar>
+                {value === 0 && <TabContainer>
+                  <ChiefComplaint></ChiefComplaint>
+                </TabContainer>}
+
+                {value === 1 && <TabContainer>
+                  <MedicalHistory></MedicalHistory>
+                </TabContainer>}
+
+                {value === 2 && <TabContainer>
+                  <PhysicalExamination></PhysicalExamination>
+                </TabContainer>}
+
+                {value === 3 && <TabContainer>
+                  <MedicalAnalysis></MedicalAnalysis>
+                </TabContainer>}
+
+                {value === 4 && <TabContainer>
+                  <MedicalPrescription></MedicalPrescription>
+                </TabContainer>}
+
+                {value === 5 && <TabContainer>
+                  <PatientPlan></PatientPlan>
+                </TabContainer>}
+
+              </div>
+            </NoSsr>
+          </Grid>
+          <Grid md={1} item></Grid>
+        </Grid>
+
+        <Appointment />
 
 
-       
       </Grid>
     )
   }

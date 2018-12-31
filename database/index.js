@@ -384,7 +384,7 @@ const updateDoctorInfo = (newData, callback) => {
   ,phoneNumber= "${ newData.phoneNumber}", bio="${newData.bio}" , gender= "${newData.gender}", birthDate = "${newData.bDate}", nationality = "${newData.nationality}",
   location = "${newData.location}", clinicName = "${newData.clinicName}", clinicNumber = "${newData.clinicNumber}" where id = ${newData.id};`;
 
-  dbConnection.query(sql, function(err, result) {
+  dbConnection.query(sql, function (err, result) {
     if (err) {
       console.log("Error during update the doctor data info ", err);
       callback(err, null);
@@ -393,6 +393,21 @@ const updateDoctorInfo = (newData, callback) => {
     }
   });
 };
+
+//function to  add Appointment 
+const AddAppointment = (data, callback) => {
+  const sql = `INSERT INTO Appointment (id_Doctors,id_Patients,notes,date) VALUES ('${data.id_Doctors}','${data.id_Patients}','${data.notes}','${data.date}') `
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update info  from Appointment Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+
+  })
+
+}
 
 //function to Update the patient Plan Step
 const UpdatePlanStep = (data, callback) => {
@@ -435,85 +450,88 @@ const ClosePatientProfile = (data, callback) => {
   })
 }
 
-  //function to open Patient Profile
-  const OpenPatientProfile = (data, callback) => {
+//function to open Patient Profile
+const OpenPatientProfile = (data, callback) => {
 
-    const sql = `UPDATE PatientCases SET isOpen=1 WHERE id='${data.CaseId}' `
+  const sql = `UPDATE PatientCases SET isOpen=1 WHERE id='${data.CaseId}' `
 
-    UpdatePlanStep(data, function (err, result) {
-      if (err) {
-        throw err
-      } else {
+  UpdatePlanStep(data, function (err, result) {
+    if (err) {
+      throw err
+    } else {
 
-        dbConnection.query(sql, function (err, results) {
-          if (err) {
-            console.log("Error during update info  from PatientCases open  Table \n" + err)
-            callback(err, null);
-          } else {
-            console.log('rrr', results)
-            callback(null, results);
-          }
+      dbConnection.query(sql, function (err, results) {
+        if (err) {
+          console.log("Error during update info  from PatientCases open  Table \n" + err)
+          callback(err, null);
+        } else {
+          console.log('rrr', results)
+          callback(null, results);
+        }
 
-        })
+      })
 
-      }
-    })
+    }
+  })
 
-  }
+}
 
-  //function to Add Patient Plan Profile
-  const AddPatientPlan = (data, callback) => {
+//function to Add Patient Plan Profile
+const AddPatientPlan = (data, callback) => {
 
-    const sql = `INSERT INTO PatientPlane (caseId,PhysicalPlan,MedicalPlan,Conclusion,step. createdAt) 
+  const sql = `INSERT INTO PatientPlane (caseId,PhysicalPlan,MedicalPlan,Conclusion,step. createdAt) 
                 VALUES ('${data.CaseId}','${data.PhysicalPlan}','${data.MedicalPlan}','${data.Conclusion}', 0, "${moment().format()}");`
 
-    dbConnection.query(sql, function (err, results) {
-      if (err) {
-        console.log("Error during insert into   PatientPlane   Table \n" + err)
-        callback(err, null);
-      } else {
-        callback(null, results)
-      }
-    })
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during insert into   PatientPlane   Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results)
+    }
+  })
 
-  }
+}
 
-  //function to  add info MedicalHistory table
-  const AddPatientHistory = (data, callback) => {
-    const sql = `INSERT INTO MedicalHistory (caseId,heartDisease,joints,bloodPressure,diabetes,renalDisease,patientHistory,familyHistory, createdAt)
+//function to  add info MedicalHistory table
+const AddPatientHistory = (data, callback) => {
+  const sql = `INSERT INTO MedicalHistory (caseId,heartDisease,joints,bloodPressure,diabetes,renalDisease,patientHistory,familyHistory, createdAt)
    VALUES ('${data.CaseId}','${data.heartDisease}','${data.joints}','${data.bloodPressure}','${data.diabetes}',
    '${data.renalDisease}','${data.patientHistory}','${data.familyHistory}', "${moment().format()}") `
-    dbConnection.query(sql, function (err, results) {
-      if (err) {
-        console.log("Error during insert info  to MedicalHistory Table \n" + err)
-        callback(err, null);
-      } else {
-        callback(null, results);
-      }
-    })
-  }
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during insert info  to MedicalHistory Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  })
+}
 
-  module.exports.isAccountExist = isAccountExist;
-  module.exports.insertUserInfo = insertUserInfo;
-  module.exports.selectDoctorInfo = selectDoctorInfo;
-  module.exports.insertIntoPatientTable = insertIntoPatientTable;
-  module.exports.selectAllPatientInfo = selectAllPatientInfo;
-  module.exports.selectPatientInfo = selectPatientInfo;
-  module.exports.selectPatientCassis = selectPatientCassis;
-  module.exports.selectCaseInfo = selectCaseInfo;
-  module.exports.UpdateAnalysisStatus = UpdateAnalysisStatus;
-  module.exports.AddChiefComplaint = AddChiefComplaint;
-  module.exports.AddPhysicalExamination = AddPhysicalExamination;
-  module.exports.AddMedicalPrescription = AddMedicalPrescription;
-  module.exports.AddMedicalAnalysis = AddMedicalAnalysis;
-  module.exports.AddPatientHistory = AddPatientHistory;
-  module.exports.UpdatePlanStep = UpdatePlanStep;
-  module.exports.ClosePatientProfile = ClosePatientProfile;
-  module.exports.OpenPatientProfile = OpenPatientProfile;
-  module.exports.AddPatientPlan = AddPatientPlan;
-  module.exports.selectAllDoctors = selectAllDoctors;
-  module.exports.insertConsultations = insertConsultations;
-  module.exports.selectConsultationOutbox = selectConsultationOutbox;
-  module.exports.selectConsultationInbox = selectConsultationInbox;
-  module.exports.selectOneConsultation = selectOneConsultation;
-  module.exports.updateDoctorInfo = updateDoctorInfo;
+//callback(null, obj);
+//dbConnection.query(sql1, function(err, results) {})
+module.exports.isAccountExist = isAccountExist;
+module.exports.insertUserInfo = insertUserInfo;
+module.exports.selectDoctorInfo = selectDoctorInfo;
+module.exports.insertIntoPatientTable = insertIntoPatientTable;
+module.exports.selectAllPatientInfo = selectAllPatientInfo;
+module.exports.selectPatientInfo = selectPatientInfo;
+module.exports.selectPatientCassis = selectPatientCassis;
+module.exports.selectCaseInfo = selectCaseInfo;
+module.exports.UpdateAnalysisStatus = UpdateAnalysisStatus;
+module.exports.AddChiefComplaint = AddChiefComplaint;
+module.exports.AddPhysicalExamination = AddPhysicalExamination;
+module.exports.AddMedicalPrescription = AddMedicalPrescription;
+module.exports.AddMedicalAnalysis = AddMedicalAnalysis;
+module.exports.AddPatientHistory = AddPatientHistory;
+module.exports.UpdatePlanStep = UpdatePlanStep;
+module.exports.ClosePatientProfile = ClosePatientProfile;
+module.exports.OpenPatientProfile = OpenPatientProfile;
+module.exports.AddPatientPlan = AddPatientPlan;
+module.exports.selectAllDoctors = selectAllDoctors;
+module.exports.insertConsultations = insertConsultations;
+module.exports.selectConsultationOutbox = selectConsultationOutbox;
+module.exports.selectConsultationInbox = selectConsultationInbox;
+module.exports.selectOneConsultation = selectOneConsultation;
+module.exports.updateDoctorInfo = updateDoctorInfo;
+module.exports.AddAppointment = AddAppointment;

@@ -11,7 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-
+import { AddAppointment } from '../../../../store/action/patientAction';
 
 const styles = theme => ({
   root: {
@@ -55,16 +55,12 @@ class Appointment extends React.Component {
   };
 
   // take value from inputs
-  handleChange2 = name => event => {
+  handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     });
   };
-  handleChange = panel => (event, expanded) => {
-    this.setState({
-      expanded: expanded ? panel : false,
-    });
-  };
+
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -78,11 +74,11 @@ class Appointment extends React.Component {
     var obj = {
       date: this.state.date,
       notes: this.state.notes,
-      id_Patients: this.props.id,
-      id_Doctors: this.props.id_Doctor
+      id_Patients: this.props.patientProfile[0].id,
+      id_Doctors: this.props.patientProfile[0].id_Doctor
     }
 
-    //this.props.AddChiefComplaint(obj)
+    this.props.AddAppointment(obj)
   }
 
   render() {
@@ -113,7 +109,7 @@ class Appointment extends React.Component {
                 type="datetime-local"
                 value={this.state.date}
                 defaultValue="2019-03-01T10:30"
-                onChange={this.handleChange2('date')}
+                onChange={this.handleChange('date')}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true,
@@ -131,7 +127,7 @@ class Appointment extends React.Component {
                 margin="normal"
                 variant="outlined"
                 value={this.state.notes}
-                onChange={this.handleChange2('notes')}
+                onChange={this.handleChange('notes')}
               />
             </Grid>
 
@@ -151,7 +147,7 @@ class Appointment extends React.Component {
     );
   }
 }
-
+//this is for style (material.ui)
 Appointment.propTypes = {
   classes: PropTypes.object.isRequired,
 };
@@ -159,18 +155,17 @@ Appointment.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patient: state.patient.PatientProfile
+    patientProfile: state.patient.PatientProfile
   }
 }
 
 // Note: add the action to the props
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     AddAppointment: (data) => dispatch(AddAppointment(data)),
+const mapDispatchToProps = (dispatch) => {
+  return {
+    AddAppointment: (data) => dispatch(AddAppointment(data)),
 
-//   }
-// }
+  }
+}
 
 
-// export default compose(withStyles(styles), connect(mapStateToProps,mapDispatchToProps))(Appointment);
-export default compose(withStyles(styles), connect(mapStateToProps))(Appointment);
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(Appointment);
