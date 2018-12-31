@@ -40,7 +40,7 @@ class DoctorListEntry extends React.Component {
               <Grid item xs={12} sm={12} md={2}>
                 <img src={patientImg} alt="Not found" width="120px" height="100px" />
               </Grid>
-              <Grid item xs={12} sm={12} md={8}>
+              <Grid item xs={12} sm={12} md={7}>
                 <Typography variant="h5">
                   <Link to="/">{"Dr." + this.props.doctor.firstName + ' ' + this.props.doctor.lastName}</Link>
                 </Typography>
@@ -57,10 +57,10 @@ class DoctorListEntry extends React.Component {
                   />
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={12} md={2}>
+              <Grid item xs={12} sm={12} md={3}>
                 <Button 
                   variant="outlined" color="secondary" 
-                  style={{ marginTop: 20, paddingRight: 40, width: 100 }}
+                  style={{ marginTop: 20, paddingRight: 40, width: 80 }}
                   onClick = {this.handlOnClickSend.bind(this)}
                 >
                  Send

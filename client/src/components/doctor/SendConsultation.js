@@ -32,7 +32,7 @@ class SendConsultation extends React.Component {
     message.targetDoctorId= this.props.targetDoctor.id;
     console.log(message);
     this.props.sendConsultation(message);
-    this.toggle();
+     this.toggle();
     this.setState({
       subject: '',
       description: '',
@@ -40,7 +40,6 @@ class SendConsultation extends React.Component {
   }
 
   render() {
-   
     return (
       <div >
         <Modal isOpen={this.props.isOpen} 
@@ -48,7 +47,7 @@ class SendConsultation extends React.Component {
           className={this.props.className}
           style ={{marginTop: 100}}
         >
-          <ModalHeader onClick={this.toggle.bind(this)}>Send Consultation</ModalHeader>
+          <ModalHeader toggle={this.toggle.bind(this)}>Send Consultation</ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
@@ -57,7 +56,7 @@ class SendConsultation extends React.Component {
                   type="text"
                   name="from"
                   id="from"
-                  readOnly="true"
+                  readOnly
                   value={"Dr. " +this.props.user.firstName + ' ' + this.props.user.lastName }
                 />
               </FormGroup>
@@ -67,7 +66,7 @@ class SendConsultation extends React.Component {
                   type="text"
                   name="targetDoctor"
                   id="targetDoctor"
-                  readOnly="true"
+                  readOnly
                   value={"Dr. " +this.props.targetDoctor.firstName + ' ' + this.props.targetDoctor.lastName }
                 />
               </FormGroup>

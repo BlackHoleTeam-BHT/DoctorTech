@@ -54,8 +54,8 @@ class DoctorSearch extends React.Component {
     return (
       <div className="text-center">
         <div style={{margin: "20px"}} >
-          <Typography variant="display1">
-            search about Doctors for consultaions
+          <Typography variant="h6">
+            search about doctors for consultation
           </Typography>
           <div style={{display:"flex", justifyContent:"center" , marginTop:"40px"}}>
             <Paper className={classes.root} elevation={1}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-   List
+  List, Paper
 } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
@@ -10,18 +10,18 @@ import ConsultationListEntry from './ConsultationListEntry';
 
 
 class ConsultationList extends React.Component {
- 
-  render() {
-    
-    return (
-      <List style={{width:"100%", maxWidth:"400",   position: 'relative',overflow: 'auto', maxHeight: 800}}>
-        {
-           this.props.consults && this.props.consults.map((elem) => (
-            <ConsultationListEntry key={elem.consultId} consults = {elem}/>
-          ))
-        }
 
-      </List>
+  render() {
+
+    return (
+        <List style={{ width: "100%", maxWidth: "100%", position: 'relative', overflow: 'auto', height: "810px" }}>
+          {
+            this.props.consults && this.props.consults.map((elem) => (
+              <ConsultationListEntry key={elem.consultId} consults={elem} />
+            ))
+          }
+
+        </List>
     )
   }
 }

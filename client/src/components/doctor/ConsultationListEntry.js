@@ -27,28 +27,33 @@ class ConsultationListEntry extends React.Component {
               {this.props.consults.firstName[0] + '' + this.props.consults.lastName[0]}
             </Avatar>
           </ListItemAvatar>
-          <Grid item md={9} >
-            <ListItemText
-              primary={this.props.consults.firstName + ' ' + this.props.consults.lastName}
-              secondary={
-                <React.Fragment>
-                  <Typography component="span" style={{ display: "inline" }} color="textPrimary">
-                    {this.props.consults.subject +'   '}
-                  </Typography>
-                  {this.props.consults.description}
-                </React.Fragment>
-              }
-            />
-          </Grid>
-          <Grid item md={3}>
-            <Typography component="span" color="textPrimary">
-              {moment(this.props.consults.createdAtConsult).fromNow()}
-            </Typography>
-            <Button variant="outlined" style={{ marginLeft: 25, marginTop: 25, paddingRight: 40, width: 70, height: 25 }}>Reply</Button>
+          <Grid container>
+            <Grid item md={8} >
+              <ListItemText
+                primary={this.props.consults.firstName + ' ' + this.props.consults.lastName}
+                secondary={
+                  <div>
+                    <Typography component="span" color="textPrimary">
+                      {this.props.consults.subject + '   '}
+                    </Typography>
+                    <Typography>
+                    {this.props.consults.description}
+                    </Typography>
+                    
+                  </div>
+                }
+              />
+            </Grid>
+            <Grid item md={4}>
+              <Typography component="span" color="textPrimary">
+                {moment(this.props.consults.createdAtConsult).fromNow()}
+              </Typography>
+              <Button variant="outlined" style={{ marginLeft: 25, marginTop: 10, paddingRight: 40, width: 70, height: 25 }}>Reply</Button>
+            </Grid>
           </Grid>
         </ListItem>
         <Divider />
-       </div>
+      </div>
     )
   }
 }

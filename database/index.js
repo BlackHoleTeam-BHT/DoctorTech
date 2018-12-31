@@ -1,5 +1,5 @@
 const dbConnection = require('./config');
-
+const moment = require('moment');
 // function to check if the account exist in database
 const isAccountExist = (user, callback) => {
   const sql = `select * from Login where email = "${user.email}";`;
@@ -241,8 +241,9 @@ const UpdateAnalysisStatus = (Id, status, callback) => {
 
 // This function to add inside Consultions Table
 const insertConsultations = (data, callback) => {
-  const sql = `insert into Consultants (id_Doctors, id_targetDoctor, subject, description)
-                values("${data.doctorId}", "${data.targetDoctorId}", "${data.subject}", "${data.description}")`
+  let time = new Date().toISOString();
+  const sql = `insert into Consultants (id_Doctors, id_targetDoctor, subject, description,createdAt)
+                values("${data.doctorId}", "${data.targetDoctorId}", "${data.subject}", "${data.description}", "${moment().format()}")`
   dbConnection.query(sql, function (err, result) {
     if (err) {
       console.log("Error during insert into  Consultions Table \n" + err)

@@ -30,9 +30,10 @@ class DoctorConsultation extends React.Component {
 
     // this to get consul
     this.props.getConsultationOutbox(this.props.user.id);
+    this.props.getConsultationInbox(this.props.user.id);
     setInterval(() => {
       this.props.getConsultationInbox(this.props.user.id)
-    }, 3000)
+    }, 30000)
 
   }
 
@@ -50,14 +51,13 @@ class DoctorConsultation extends React.Component {
 
     return (
       <Grid container>
-        <Grid item sm={12} xs={12} md={8}>
-          <Typography variant="h5" color="primary">Number of Doctors :</Typography>
+        <Grid item sm={12} xs={12} md={7}>
           <SendConsultation />
           <DoctorsSearch />
           <DoctorList doctors={this.props.doctors} />
         </Grid>
-        <Grid item sm={12} xs={12} md={4}>
-          <Card style={{maxHeight: 850, height:"100%"}} >
+        <Grid item sm={12} xs={12} md={5}>
+          <Card>
             <Paper square style={{flexGrow:1,width:"100%"}}>
               <Tabs
                 value={this.state.value}

@@ -1,7 +1,10 @@
 const initState = {
    isOpen: false,
-   doctores: [],
-   isSendConsultModelOpen: false
+   doctors: [],
+   isSendConsultModelOpen: false,
+   targetDoctor: {},
+   consultsOutbox:[],
+   consultsInbox:[],
 };
 
 // this function to dealing with doctor action in redux
@@ -10,7 +13,7 @@ const doctorReducer = (state = initState, action) => {
       case "GET_DOCTORS":
          return {
             ...state,
-            doctores: action.data
+            doctors: action.data
          }
       case "OPEN_MODAL":
          return {
@@ -20,7 +23,25 @@ const doctorReducer = (state = initState, action) => {
       case "OPEN_SEND_CONSULT_MODEL":
          return {
             ...state,
-            isSendConsultModelOpen: action.data
+            isSendConsultModelOpen: action.data,
+            targetDoctor: action.targetDoctor
+         }
+      case "SEND_CONSULTATION":
+         let data= state.consultsOutbox;
+         data.unshift(action.data);
+         return {
+            ...state,
+            consultsOutbox: data
+         }
+      case "GET_CONSULTATIONS_OUTBOX":
+         return {
+            ...state,
+            consultsOutbox:action.data
+         }
+      case "GET_CONSULTATIONS_INBOX":
+         return {
+            ...state,
+            consultsInbox:action.data
          }
       default:
          return state;
