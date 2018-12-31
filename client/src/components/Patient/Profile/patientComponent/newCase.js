@@ -11,7 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { AddAppointment } from '../../../../store/action/patientAction';
+import { AddnewCase } from '../../../../store/action/patientAction';
 
 const styles = theme => ({
   root: {
@@ -72,13 +72,13 @@ class newCase extends React.Component {
 
   handelSubmit = () => {
     var obj = {
-      date: this.state.date,
-      notes: this.state.notes,
+      title: this.state.title,
+      description: this.state.description,
       id_Patients: this.props.patientProfile[0].id,
-      id_Doctors: this.props.patientProfile[0].id_Doctor
+
     }
 
-    this.props.AddAppointment(obj)
+    this.props.AddnewCase(obj)
   }
 
   render() {
@@ -87,7 +87,7 @@ class newCase extends React.Component {
     return (
       <div>
         <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
-        New Case
+           Add New Case
         </Button>
         <Dialog
           open={this.state.open}
@@ -102,40 +102,33 @@ class newCase extends React.Component {
 
             <Grid container md={12} item ustify="space-around"  >
 
-              <TextField
-
-                id="datetime-local"
-                label="Add Appointment"
-                type="datetime-local"
-                value={this.state.date}
-                defaultValue="2019-03-01T10:30"
-                onChange={this.handleChange('date')}
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+            <TextField
+          id="standard-name"
+          label="title"
+          className={classes.textField}
+          value={this.state.name}
+          onChange={this.handleChange('title')}
+          margin="normal"
+        />
+  
             </Grid>
 
             <Grid md={12} item>
               <TextField
                 id="outlined-multiline-static"
-                label="Add Notes"
+                label="Add description"
                 multiline
                 rows="8"
                 className={classes.textField}
                 margin="normal"
                 variant="outlined"
                 value={this.state.notes}
-                onChange={this.handleChange('notes')}
+                onChange={this.handleChange('description')}
               />
             </Grid>
-
-
           </DialogContent>
           <DialogActions>
-            {/* <Button onClick={(event)=>{this.handelSubmit();this.handleClose()}} color="primary" variant="contained"> */}
-            <Button onClick={this.handelSubmit} color="primary" variant="contained">
+             <Button onClick={(event)=>{this.handelSubmit();this.handleClose()}} color="primary" variant="contained"> 
               Add
             </Button>
             <Button onClick={this.handleClose} color="primary" variant="contained">
