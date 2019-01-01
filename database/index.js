@@ -32,9 +32,9 @@ const insertUserInfo = (user, callback) => {
 // function to insert into Doctors table depend on id_roles
 const insertIntoDoctorTable = (user, insertId, callback) => {
   const sql = `INSERT INTO Doctors (id, firstName, lastName, specialist, phoneNumber,
-                bio, location, clinicNumber, clinicName) 
+                bio, location, clinicNumber, clinicName, createdAt) 
                 VALUES ('${insertId}','${user.firstName}','${user.lastName}','${user.specialist}',
-                '${user.phoneNumber}','${user.bio}','${user.location}','${user.clinicNumber}','${user.clinicName}');`;
+                '${user.phoneNumber}','${user.bio}','${user.location}','${user.clinicNumber}','${user.clinicName}', "${moment().format()}");`;
   dbConnection.query(sql, function (err, result, feilds) {
     if (err) {
       console.log("Error during insert into Doctor Table \n" + err)
@@ -80,9 +80,9 @@ const selectAllDoctors = (callback) => {
 // Function to insert patient to Patient table
 const insertIntoPatientTable = (patient, callback) => {
   const sql = `INSERT INTO Patients (firstName, middleName, lastName, age, gender,location, maritalStatus,
-               phoneNumber, email, insurance, id_Progress, id_Doctor) VALUES ('${patient.firstName}', '${patient.MiddleName}'
+               phoneNumber, email, insurance, id_Progress, id_Doctor, createdAt) VALUES ('${patient.firstName}', '${patient.MiddleName}'
                , '${patient.lastName}', '${patient.age}', '${patient.gender}', '${patient.location}', '${patient.maritalStatus}',
-               '${patient.Phone}', '${patient.email}', ${patient.insurance}, '${patient.id_Progress}', '${patient.id_Doctor}');`;
+               '${patient.Phone}', '${patient.email}', ${patient.insurance}, '${patient.id_Progress}', '${patient.id_Doctor}', "${moment().format()}");`;
   dbConnection.query(sql, function (err, result) {
     if (err) {
       console.log("Error during insert into patient table  \n" + err)
@@ -314,7 +314,8 @@ const selectOneConsultation = (consultId, doctorId, callback) => {
 
 //function to  add chief complaint
 const AddChiefComplaint = (data, callback) => {
-  const sql = `INSERT INTO ChiefComplaint (caseId,title,description) VALUES ('${data.id}','${data.description}','${data.title}') `
+  const sql = `INSERT INTO ChiefComplaint (caseId,title,description, createdAt) 
+               VALUES ('${data.id}','${data.description}','${data.title}',"${moment().format()}") `
   dbConnection.query(sql, function (err, results) {
     if (err) {
       console.log("Error during update info  from ChiefComplaint Table \n" + err)
@@ -329,9 +330,9 @@ const AddChiefComplaint = (data, callback) => {
 //function to  add Physical Examination
 const AddPhysicalExamination = (data, callback) => {
   const sql = `INSERT INTO PhysicalExamination (caseId,weight,height,bodyTemperature,headNotes,
-                    middleBodyNotes,bottomBodyNotes,diabetes,BloodPressure) VALUES ('${data.id}','${data.weight}',
+                    middleBodyNotes,bottomBodyNotes,diabetes,BloodPressure, createdAt) VALUES ('${data.id}','${data.weight}',
                     '${data.height}','${data.bodyTemperature}','${data.headNotes}','${data.middleBodyNotes}',
-                    '${data.bottomBodyNotes}','${data.diabetes}','${data.BloodPressure}') `
+                    '${data.bottomBodyNotes}','${data.diabetes}','${data.BloodPressure}', "${moment().format()}") `
   dbConnection.query(sql, function (err, results) {
     if (err) {
       console.log("Error during update info  from physicalExamination Table \n" + err)
@@ -346,7 +347,8 @@ const AddPhysicalExamination = (data, callback) => {
 
 //function to  add medical Prescription
 const AddMedicalPrescription = (data, callback) => {
-  const sql = `INSERT INTO MedicalPrescription (caseId,name,daysInterval,times) VALUES ('${data.id}','${data.name}','${data.daysInterval}','${data.times}') `
+  const sql = `INSERT INTO MedicalPrescription (caseId,name, daysInterval, times, createdAt)
+   VALUES ('${data.id}','${data.name}','${data.daysInterval}','${data.times}', "${moment().format()}") `
   dbConnection.query(sql, function (err, results) {
     if (err) {
       console.log("Error during update info  from MedicalPrescription Table \n" + err)
@@ -362,7 +364,8 @@ const AddMedicalPrescription = (data, callback) => {
 
 //function to  add medical Analysis
 const AddMedicalAnalysis = (data, callback) => {
-  const sql = `INSERT INTO MedicalAnalysis (caseId,name,description,status) VALUES ('${data.id}','${data.name}','${data.description}','${data.status}') `
+  const sql = `INSERT INTO MedicalAnalysis (caseId,name,description,status, createdAt)
+               VALUES ('${data.id}','${data.name}','${data.description}','${data.status}', "${moment().format()}") `
   dbConnection.query(sql, function (err, results) {
     if (err) {
       console.log("Error during update info  from MedicalAnalysis Table \n" + err)
@@ -445,8 +448,8 @@ const ClosePatientProfile = (data, callback) => {
   //function to Add Patient Plan Profile
   const AddPatientPlan = (data, callback) => {
 
-    const sql = `INSERT INTO PatientPlane (caseId,PhysicalPlan,MedicalPlan,Conclusion,step) 
-                VALUES ('${data.CaseId}','${data.PhysicalPlan}','${data.MedicalPlan}','${data.Conclusion}',0) `
+    const sql = `INSERT INTO PatientPlane (caseId,PhysicalPlan,MedicalPlan,Conclusion,step. createdAt) 
+                VALUES ('${data.CaseId}','${data.PhysicalPlan}','${data.MedicalPlan}','${data.Conclusion}', 0, "${moment().format()}");`
 
     dbConnection.query(sql, function (err, results) {
       if (err) {
@@ -461,9 +464,9 @@ const ClosePatientProfile = (data, callback) => {
 
   //function to  add info MedicalHistory table
   const AddPatientHistory = (data, callback) => {
-    const sql = `INSERT INTO MedicalHistory (caseId,heartDisease,joints,bloodPressure,diabetes,renalDisease,patientHistory,familyHistory)
+    const sql = `INSERT INTO MedicalHistory (caseId,heartDisease,joints,bloodPressure,diabetes,renalDisease,patientHistory,familyHistory, createdAt)
    VALUES ('${data.CaseId}','${data.heartDisease}','${data.joints}','${data.bloodPressure}','${data.diabetes}',
-   '${data.renalDisease}','${data.patientHistory}','${data.familyHistory}') `
+   '${data.renalDisease}','${data.patientHistory}','${data.familyHistory}', "${moment().format()}") `
     dbConnection.query(sql, function (err, results) {
       if (err) {
         console.log("Error during insert info  to MedicalHistory Table \n" + err)
