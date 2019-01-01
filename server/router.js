@@ -444,11 +444,7 @@ router.route('/CheckSession')
           data: null || results[0],
           state: "LOGIN_SUCCESS"
         })
-
       }
-
-      
-      
      })
     console.log('user login',req.user.id)
   
@@ -456,8 +452,6 @@ router.route('/CheckSession')
   }else{
     res.send('0')
   }
-  
-
 })
 
 

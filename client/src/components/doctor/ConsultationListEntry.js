@@ -13,15 +13,19 @@ import {
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux';
-import { getDoctors } from '../../store/action/doctorActions';
-
+import { getDoctors, openShowConsultationDelials } from '../../store/action/doctorActions';
 class ConsultationListEntry extends React.Component {
 
+  // function to open consultion inside ShowConsultationDetials dialog
+  handlonClick(){
+    console.log(this.props)
+    this.props.openShowConsultationDelials(!this.props.isShowConsultDetialsOpen, this.props.consults)
+  }
   render() {
 
     return (
       <div>
-        <ListItem alignItems="flex-start">
+        <ListItem alignItems="flex-start" button onClick={this.handlonClick.bind(this)}>
           <ListItemAvatar>
             <Avatar style={{ background: "orange" }}>
               {this.props.consults.firstName[0] + '' + this.props.consults.lastName[0]}
@@ -48,7 +52,7 @@ class ConsultationListEntry extends React.Component {
               <Typography component="span" color="textPrimary">
                 {moment(this.props.consults.createdAtConsult).fromNow()}
               </Typography>
-              <Button variant="outlined" style={{ marginLeft: 25, marginTop: 10, paddingRight: 40, width: 70, height: 25 }}>Reply</Button>
+              {/* <Button variant="outlined" style={{ marginLeft: 25, marginTop: 10, paddingRight: 40, width: 70, height: 25 }}>Reply</Button> */}
             </Grid>
           </Grid>
         </ListItem>
@@ -62,14 +66,16 @@ class ConsultationListEntry extends React.Component {
 const mapStateToProps = (state) => {
   return {
     login: state.auth.login,
-    doctors: state.doctor.doctors
+    doctors: state.doctor.doctors,
+    isOpen: state.doctor.isShowConsultDetialsOpen,
   }
 }
 
 //Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
-    getDoctors: () => dispatch(getDoctors())
+    getDoctors: () => dispatch(getDoctors()),
+    openShowConsultationDelials:  (isOpen, targetConsult) => dispatch(openShowConsultationDelials(isOpen, targetConsult))
   }
 }
 

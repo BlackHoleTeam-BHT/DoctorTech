@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  Grid, 
+  Grid,
   Typography,
-   Card,
-   Tab,
-   Tabs,
-   Paper
+  Card,
+  Tab,
+  Tabs,
+  Paper
 } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
@@ -18,11 +18,11 @@ import DoctorList from './DoctorsList';
 import { getDoctors, getConsultationInbox, getConsultationOutbox } from '../../store/action/doctorActions';
 import SendConsultation from './SendConsultation.js';
 import ConsultationList from './ConsultationList.js';
-
+import ShowConsultationDetials from './ShowConsultationDetials';
 class DoctorConsultation extends React.Component {
   constructor(props) {
     super(props)
-    this.state ={
+    this.state = {
       value: 0
     }
     // this to get all doctors
@@ -51,6 +51,7 @@ class DoctorConsultation extends React.Component {
 
     return (
       <Grid container>
+        <ShowConsultationDetials />
         <Grid item sm={12} xs={12} md={7}>
           <SendConsultation />
           <DoctorsSearch />
@@ -58,7 +59,7 @@ class DoctorConsultation extends React.Component {
         </Grid>
         <Grid item sm={12} xs={12} md={5}>
           <Card>
-            <Paper square style={{flexGrow:1,width:"100%"}}>
+            <Paper square style={{ flexGrow: 1, width: "100%" }}>
               <Tabs
                 value={this.state.value}
                 onChange={this.handleChange}
@@ -70,8 +71,8 @@ class DoctorConsultation extends React.Component {
                 <Tab icon={<SendIcon />} />
               </Tabs>
             </Paper>
-            {this.state.value === 0 && <ConsultationList consults = {this.props.consultsInbox}/>}
-            {this.state.value === 1 && <ConsultationList consults = {this.props.consultsOutbox}/>}
+            {this.state.value === 0 && <ConsultationList consults={this.props.consultsInbox} />}
+            {this.state.value === 1 && <ConsultationList consults={this.props.consultsOutbox} />}
           </Card>
         </Grid>
       </Grid>
@@ -94,7 +95,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getDoctors: () => dispatch(getDoctors()),
-    getConsultationOutbox:(doctorId) => dispatch(getConsultationOutbox(doctorId)),
+    getConsultationOutbox: (doctorId) => dispatch(getConsultationOutbox(doctorId)),
     getConsultationInbox: (doctorId) => dispatch(getConsultationInbox(doctorId))
   }
 }

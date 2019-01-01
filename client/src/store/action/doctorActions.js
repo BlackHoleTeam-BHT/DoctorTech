@@ -96,3 +96,16 @@ export const getConsultationInbox= (doctorId) => {
     }
 }
 
+// this action to open ShowConsultationDelials dialog to show consultation detials 
+export const openShowConsultationDelials = (isOpen, targetConsult) => {
+  return (dispatch, getState) => {
+      dispatch({
+          type:"OPEN_SHOWCONSULT_DETIALS",
+          data: isOpen,
+          targetConsult:  targetConsult
+      })
+  }
+}
+
+
+
