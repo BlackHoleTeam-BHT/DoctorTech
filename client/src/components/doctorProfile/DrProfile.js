@@ -151,7 +151,7 @@ class DrProfile extends Component {
                     {this.props.user.firstName + " " + this.props.user.lastName}
                   </div>
                 </div>
-                <hr />
+                <hr className= "style14" />
 
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
@@ -161,7 +161,7 @@ class DrProfile extends Component {
                     {this.props.user.birthDate}
                   </div>
                 </div>
-                <hr />
+                <hr className= "style14" />
 
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
@@ -169,7 +169,7 @@ class DrProfile extends Component {
                   </div>
                   <div className="col-md-8 col-6">{this.props.user.gender}</div>
                 </div>
-                <hr />
+                <hr className= "style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Nationality</Label>
@@ -178,7 +178,7 @@ class DrProfile extends Component {
                     {this.props.user.nationality}
                   </div>
                 </div>
-                <hr />
+                <hr className= "style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Phone Number</Label>
@@ -187,7 +187,7 @@ class DrProfile extends Component {
                     {this.props.user.phoneNumber}
                   </div>
                 </div>
-                <hr />
+                <hr className= "style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Specialty</Label>
@@ -196,7 +196,7 @@ class DrProfile extends Component {
                     {this.props.user.specialist}
                   </div>
                 </div>
-                <hr />
+                <hr className= "style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Clinic Name</Label>
@@ -205,7 +205,7 @@ class DrProfile extends Component {
                     {this.props.user.clinicName}
                   </div>
                 </div>
-                <hr />
+                <hr className= "style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Clinic Number</Label>
@@ -214,7 +214,7 @@ class DrProfile extends Component {
                     {this.props.user.clinicNumber}
                   </div>
                 </div>
-                <hr />
+                <hr className= "style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>
@@ -225,7 +225,7 @@ class DrProfile extends Component {
                     {this.props.user.location}
                   </div>
                 </div>
-                <hr />
+                <hr className= "style14" />
                 <Button color="primary" onClick={this.handleOpenModal.bind(this)}>
                 Edit
               </Button>
