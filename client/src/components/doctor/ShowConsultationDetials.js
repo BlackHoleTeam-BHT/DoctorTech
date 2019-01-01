@@ -13,7 +13,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import { compose } from 'redux'
 import { connect } from 'react-redux';
-import { openShowConsultationDelials } from '../../store/action/doctorActions';
+import { openShowConsultationDelials, openSendConsult } from '../../store/action/doctorActions';
 import { Grid, Avatar } from '@material-ui/core';
 import moment from 'moment';
 const styles = {
@@ -42,6 +42,12 @@ class ShowConsultationDetials extends React.Component {
 
   };
 
+// function to replay on doctor close ShowConsDetails comp and open sendConsults model
+  handleReply () {
+    this.handleClose()
+    this.props.openSendConsult(true, this.props.targetConsult);
+  }
+
   render() {
     const { classes } = this.props;
     console.log(this.props)
@@ -55,20 +61,32 @@ class ShowConsultationDetials extends React.Component {
         >
           <AppBar className={classes.appBar}>
             <Toolbar>
-              <IconButton color="inherit" style={{ paddingRight: 40 }} onClick={this.handleClose} aria-label="Close">
+              <IconButton color="inherit"
+                style={{ paddingRight: 40 }}
+                onClick={this.handleClose}
+                aria-label="Close">
                 <CloseIcon />
               </IconButton>
-              <Typography variant="h6" color="inherit" className={classes.flex}>
-                {this.props.targetConsult.subject + ' - ' + this.props.targetConsult.firstName + ' ' + this.props.targetConsult.lastName}
-              </Typography>
-              <Button variant="raised" color="default" style={{paddingRight:40, marginLeft:12, height:20}}>
-                     Reply
+
+              <Button variant="outlined"
+                onClick={this.handleReply.bind(this)}
+                color="inherit"
+                style={{ paddingRight: 40, marginLeft: 12, height: 20, fontSize: 17 }}
+              >
+                Reply
               </Button>
             </Toolbar>
           </AppBar>
           <div>
+
             <Grid container style={{ paddingTop: 50 }} className={classes.center}>
+
               <Grid container md={9}  >
+                <Grid item xs={12} sm={12} md={12} style={{ marginBottom: 15, marginLeft: 10 }}>
+                  <Typography variant="h4" color="inherit" className={classes.flex}>
+                    {"Subject: " + this.props.targetConsult.subject}
+                  </Typography>
+                </Grid>
                 <Grid item xs={12} sm={12} md={9} className={classes.flex}>
                   <AccountCircle style={{ display: "inline", marginRight: 10, fontSize: 40, color: "#eeeeee" }} />
                   <Typography variant="h6" color="primary" style={{ display: "inline" }}>
@@ -86,9 +104,23 @@ class ShowConsultationDetials extends React.Component {
                     {moment(this.props.targetConsult.createdAtConsult).fromNow()}
                   </Typography>
                 </Grid>
-              </Grid>
-              <Grid container >
 
+                <Grid item xs={12} sm={12} md={12} style={{ marginTop: 10 }} >
+                  <Divider />
+                  <pre style={{
+                    fontSize: 18, marginLeft: 50, marginRight: 50, marginTop: 20,
+                    maxHeight: "600px",
+                    whiteSpace: "pre-wrap",
+                    display: "block",
+                    fontFamily: "Serif",
+                    overflow: "auto",
+                    height: "100%"
+                  }}>
+                    {
+                      this.props.targetConsult.description
+                    }
+                  </pre>
+                </Grid>
               </Grid>
             </Grid>
           </div>
@@ -113,6 +145,7 @@ const mapStateToProps = (state) => {
 //Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
+    openSendConsult: (isOpen, targetDoctor) => dispatch(openSendConsult(isOpen, targetDoctor)),
     openShowConsultationDelials: (isOpen, targetConsult) => dispatch(openShowConsultationDelials(isOpen, targetConsult))
   }
 }
