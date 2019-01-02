@@ -25,8 +25,9 @@ import { GetPatientCassis } from '../../../store/action/patientAction'
 import moment from 'moment'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { GetCaseInfo } from '../../../store/action/patientAction'
-import {Redirect} from 'react-router-dom';
-
+import { Redirect } from 'react-router-dom';
+import Appointment from './patientComponent/Appointment';
+import NewCase from './patientComponent/NewCase';
 
 function TabContainer(props) {
   return (
@@ -95,10 +96,10 @@ class PatientProfile extends React.Component {
   };
 
   handleChangeSelect = (event, value) => {
-    console.log('event', value)
-    console.log('event gg', value.props.case)
+    console.log('event', event.target.name)
+    console.log('event gg', event.target.value)
     this.setState({ [event.target.name]: event.target.value, selectDate: value.props.id });
-   
+
     this.props.GetCaseInfo(value.props.case)
 
 
@@ -116,7 +117,7 @@ class PatientProfile extends React.Component {
     const { classes } = this.props;
 
     const { value } = this.state;
-     // if the user has not login redirect for home page
+    // if the user has not login redirect for home page
     //  if(!this.props.login) {
     //   return (
     //     <Redirect to = '/' />
@@ -126,11 +127,26 @@ class PatientProfile extends React.Component {
       <Grid container className={classes.root} spacing={16}>
         <Grid container md={12} item>
           <Grid md={1} item></Grid>
+         
           <Grid md={4} item >
+          
             <PatientCard id={this.props.match.params.id}></PatientCard>
-
+           
+            <Grid md={12} item >
+          <div style={{ display: 'inline-flex' }}>
+            <div>
+            <Appointment />
+            </div>
+            <div style={{ alignSelf: 'center',marginLeft:'10px' }}>
+            <NewCase />
+            </div>
+        </div>
+        </Grid>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-simple">Select Case</InputLabel>
+            
+              <InputLabel htmlFor="age-simple">Select Case</InputLabel>  
+              
+              
               <Select
 
 
@@ -141,70 +157,73 @@ class PatientProfile extends React.Component {
                   id: 'age-simple',
                 }}
               >
+              
                 {this.props.patient.currentCase.map((value, key) => {
                   return (
-                    <MenuItem key={key} id={value.createdAt} case={value.id} value={value.patientId}>{value.title}</MenuItem>
+                    <MenuItem key={key} name="" id={value.createdAt} case={value.id} value={key}>{value.title}</MenuItem>
                   )
                 })}
 
               </Select>
+             
             </FormControl>
-
+           
           </Grid>
+         
           <Grid md={1} style={{ justifyContent: 'center', margin: 'auto' }} item >{this.state.selectDate && moment(this.state.selectDate).fromNow()}{!(this.props.patient.currentPatient) && <CircularProgress disableShrink />}{!this.props.patient.currentPatient && 'Loading...'}</Grid>
           <Grid md={6} item >
-            <PatientCalculation style={{  }}></PatientCalculation>
+            <PatientCalculation style={{}}></PatientCalculation>
           </Grid>
           
+        </Grid>
+        <Grid container md={12} item>
+          <Grid md={1} item></Grid>
+          <Grid md={10} sm={11} xs={11} item>
+            <NoSsr>
+              <div className={classes.root}>
+                <AppBar position="static">
+                  <Tabs fullWidth className={classes.tab} value={value} onChange={this.handleChange}>
+                    <LinkTab label="chief Complent" href="page1" />
+                    <LinkTab label="Medical History" href="page2" />
+                    <LinkTab label="Physical Examination" href="page3" />
+                    <LinkTab label="Medical Analysis" href="page4" />
+                    <LinkTab label="Medical Prescription" href="page5" />
+                    <LinkTab label="Patient Plan" href="page6" />
+                  </Tabs>
+                </AppBar>
+                {value === 0 && <TabContainer>
+                  <ChiefComplaint></ChiefComplaint>
+                </TabContainer>}
+
+                {value === 1 && <TabContainer>
+                  <MedicalHistory></MedicalHistory>
+                </TabContainer>}
+
+                {value === 2 && <TabContainer>
+                  <PhysicalExamination></PhysicalExamination>
+                </TabContainer>}
+
+                {value === 3 && <TabContainer>
+                  <MedicalAnalysis></MedicalAnalysis>
+                </TabContainer>}
+
+                {value === 4 && <TabContainer>
+                  <MedicalPrescription></MedicalPrescription>
+                </TabContainer>}
+
+                {value === 5 && <TabContainer>
+                  <PatientPlan></PatientPlan>
+                </TabContainer>}
+
+              </div>
+            </NoSsr>
           </Grid>
-          <Grid container md={12} item>
-            <Grid md={1} item></Grid>
-            <Grid md={10} sm={11} xs={11} item>
-              <NoSsr>
-                <div className={classes.root}>
-                  <AppBar position="static">
-                    <Tabs fullWidth className={classes.tab} value={value} onChange={this.handleChange}>
-                      <LinkTab label="Page One" href="page1" />
-                      <LinkTab label="Page Two" href="page2" />
-                      <LinkTab label="Page Three" href="page3" />
-                      <LinkTab label="Page four" href="page4" />
-                      <LinkTab label="Page four" href="page5" />
-                      <LinkTab label="Page four" href="page6" />
-                    </Tabs>
-                  </AppBar>
-                  {value === 0 && <TabContainer>
-                    <ChiefComplaint></ChiefComplaint>
-                  </TabContainer>}
+          <Grid md={1} item></Grid>
+        </Grid>
 
-                  {value === 1 && <TabContainer>
-                    <MedicalHistory></MedicalHistory>
-                  </TabContainer>}
-
-                  {value === 2 && <TabContainer>
-                    <PhysicalExamination></PhysicalExamination>
-                  </TabContainer>}
-
-                  {value === 3 && <TabContainer>
-                    <MedicalAnalysis></MedicalAnalysis>
-                  </TabContainer>}
-
-                  {value === 4 && <TabContainer>
-                    <MedicalPrescription></MedicalPrescription>
-                  </TabContainer>}
-
-                  {value === 5 && <TabContainer>
-                    <PatientPlan></PatientPlan>
-                  </TabContainer>}
-
-                </div>
-              </NoSsr>
-            </Grid>
-            <Grid md={1} item></Grid>
-          </Grid>
+        
 
 
-
-       
       </Grid>
     )
   }

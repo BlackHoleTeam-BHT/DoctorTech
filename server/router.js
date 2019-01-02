@@ -383,12 +383,44 @@ router.route('/AddPatientHistory')
     if(err){
       throw err
     }else{
+      console.log("asdasdasdasd",result)
+      res.send({
+        insertId : result.insertId,
+      })
+    }
+  })
+})
+
+
+
+//Note :Add addAppointment
+router.route('/add-appointment')
+.post(function(req,res){
+  const data=req.body
+
+  db.AddAppointment(data,function(err,result){
+    if(err){
+      throw err
+    }else{
       res.send(result)
     }
   })
 })
 
 
+//Note :Add addNewCase
+router.route('/newCase')
+.post(function(req,res){
+  const data=req.body
+
+  db.AddnewCase(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
 
 //Note :update patient plan (step)
 router.route('/UpdatePlanStep')

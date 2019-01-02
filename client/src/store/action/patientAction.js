@@ -129,9 +129,9 @@ export const GetCaseInfo = (CaseId) => {
       contentType: 'application/json',
       data: JSON.stringify({ id: CaseId }),
       success: function (data) {
-        data.CaseId=CaseId
-        console.log('obj for chief',data)
-        dispatch({type:'GetCaseInfo',data:data})
+        data.CaseId = CaseId
+        console.log('obj for chief', data)
+        dispatch({ type: 'GetCaseInfo', data: data })
       },
       error: (err) => {
         console.log('server err', err)
@@ -159,16 +159,16 @@ export const UpdatePlanStep = (Id, step) => {
     $.ajax({
       type: "POST",
       url: '/UpdatePlanStep',
-      contentType:'application/json',
-      data:JSON.stringify(data),
+      contentType: 'application/json',
+      data: JSON.stringify(data),
       success: function (result) {
-        console.log('UpdatePlanStep',result)
-      
-         dispatch({type:'UpdatePlanStep',data:data})
-       
+        console.log('UpdatePlanStep', result)
+
+        dispatch({ type: 'UpdatePlanStep', data: data })
+
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
       }
 
     });
@@ -300,12 +300,12 @@ export const AddMedicalAnalysis = (data) => {
   console.log('action AddMedicalAnalysis', data)
   var currentDate = new Date();
 
-var date = currentDate.getDate();
-var month = currentDate.getMonth(); //Be careful! January is 0 not 1
-var year = currentDate.getFullYear();
+  var date = currentDate.getDate();
+  var month = currentDate.getMonth(); //Be careful! January is 0 not 1
+  var year = currentDate.getFullYear();
 
-var dateString = year + "-" +(month + 1) + "-" + date +" 00:00:00";
-  data['createdAt']=dateString
+  var dateString = year + "-" + (month + 1) + "-" + date + " 00:00:00";
+  data['createdAt'] = dateString
   return (dispatch, getState) => {
 
     $.ajax({
@@ -329,26 +329,26 @@ var dateString = year + "-" +(month + 1) + "-" + date +" 00:00:00";
 
 
 // Note: Add patient history 
-export const AddPatientHistory=(data)=>{
-  console.log('action AddPatientHistory',data)
+export const AddPatientHistory = (data) => {
+  console.log('action AddPatientHistory', data)
 
-  return(dispatch, getState)=>{
-    
+  return (dispatch, getState) => {
+
     $.ajax({
       type: "POST",
       url: '/AddPatientHistory',
-      contentType:'application/json',
-      data:JSON.stringify(data),
+      contentType: 'application/json',
+      data: JSON.stringify(data),
       success: function (result) {
-        var insertId=result.insertId
-        data['insertId']=insertId
-        console.log('AddPatientHistoryServer',data)
-        dispatch({type:'AddPatientHistory',data:data})
+        var insertId = result.insertId
+        data['insertId'] = insertId
+        console.log('AddPatientHistoryServer', data)
+        dispatch({ type: 'AddPatientHistory', data: data })
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
       }
-  
+
     });
 
 
@@ -357,34 +357,84 @@ export const AddPatientHistory=(data)=>{
 
 }
 
+
+// Note: Add Appointment
+export const AddAppointment = (data) => {
+  console.log('action AddAppointment', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/add-appointment',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+        console.log('AddAppointmentServer', data)
+        dispatch({ type: 'AddAppointment', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+  }
+}
+
+// Note: Add new Case
+export const AddnewCase = (data) => {
+  console.log('action AddnewCase', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/newCase',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+        console.log('AddnewCaseServer', data)
+        data.id=result.insertId
+        dispatch({ type: 'AddnewCase', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+  }
+}
+
 // Note: close the patient profile
-export const ClosePatientProfile=(Id,step,CaseId)=>{
+export const ClosePatientProfile = (Id, step, CaseId) => {
 
   const data = {
     Id: Id,
     step: step,
-    CaseId:CaseId
+    CaseId: CaseId
   }
 
-  console.log('action ClosePatientProfile',data)
+  console.log('action ClosePatientProfile', data)
 
-  return(dispatch, getState)=>{
-    
+  return (dispatch, getState) => {
+
     $.ajax({
       type: "POST",
       url: '/ClosePatientProfile',
-      contentType:'application/json',
-      data:JSON.stringify(data),
+      contentType: 'application/json',
+      data: JSON.stringify(data),
       success: function (result) {
-        
-        
-        console.log('ClosePatientProfile',result)
-        dispatch({type:'ClosePatientProfile',data:data})
+
+
+        console.log('ClosePatientProfile', result)
+        dispatch({ type: 'ClosePatientProfile', data: data })
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
       }
-  
+
     });
 
 
@@ -395,32 +445,32 @@ export const ClosePatientProfile=(Id,step,CaseId)=>{
 
 
 // Note: to open the patient profile
-export const OpenPatientProfile=(Id,step,CaseId)=>{
+export const OpenPatientProfile = (Id, step, CaseId) => {
 
   const data = {
     Id: Id,
     step: step,
-    CaseId:CaseId
+    CaseId: CaseId
   }
 
-  console.log('action OpenPatientProfile',data)
+  console.log('action OpenPatientProfile', data)
 
-  return(dispatch, getState)=>{
-    
+  return (dispatch, getState) => {
+
     $.ajax({
       type: "POST",
       url: '/OpenPatientProfile',
-      contentType:'application/json',
-      data:JSON.stringify(data),
+      contentType: 'application/json',
+      data: JSON.stringify(data),
       success: function (result) {
-        
-        console.log('OpenPatientProfile',result)
-        dispatch({type:'OpenPatientProfile',data:data})
+
+        console.log('OpenPatientProfile', result)
+        dispatch({ type: 'OpenPatientProfile', data: data })
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
       }
-  
+
     });
 
 
@@ -431,28 +481,28 @@ export const OpenPatientProfile=(Id,step,CaseId)=>{
 
 
 // Note: to add  patient plan
-export const AddPatientPlan=(data)=>{
+export const AddPatientPlan = (data) => {
 
 
 
-  console.log('action AddPatientPlan',data)
+  console.log('action AddPatientPlan', data)
 
-  return(dispatch, getState)=>{
-    
+  return (dispatch, getState) => {
+
     $.ajax({
       type: "POST",
       url: '/AddPatientPlan',
-      contentType:'application/json',
-      data:JSON.stringify(data),
+      contentType: 'application/json',
+      data: JSON.stringify(data),
       success: function (result) {
-        
-        console.log('AddPatientPlan',result)
-        dispatch({type:'AddPatientPlan',data:data})
+
+        console.log('AddPatientPlan', result)
+        dispatch({ type: 'AddPatientPlan', data: data })
       },
       error: (err) => {
-        console.log('server err',err)
+        console.log('server err', err)
       }
-  
+
     });
 
 
