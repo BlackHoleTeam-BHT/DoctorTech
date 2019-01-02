@@ -96,8 +96,8 @@ class PatientProfile extends React.Component {
   };
 
   handleChangeSelect = (event, value) => {
-    console.log('event', value)
-    console.log('event gg', value.props.case)
+    console.log('event', event.target.name)
+    console.log('event gg', event.target.value)
     this.setState({ [event.target.name]: event.target.value, selectDate: value.props.id });
 
     this.props.GetCaseInfo(value.props.case)
@@ -160,7 +160,7 @@ class PatientProfile extends React.Component {
               
                 {this.props.patient.currentCase.map((value, key) => {
                   return (
-                    <MenuItem key={key} id={value.createdAt} case={value.id} value={value.patientId}>{value.title}</MenuItem>
+                    <MenuItem key={key} name="" id={value.createdAt} case={value.id} value={key}>{value.title}</MenuItem>
                   )
                 })}
 
@@ -183,12 +183,12 @@ class PatientProfile extends React.Component {
               <div className={classes.root}>
                 <AppBar position="static">
                   <Tabs fullWidth className={classes.tab} value={value} onChange={this.handleChange}>
-                    <LinkTab label="Page One" href="page1" />
-                    <LinkTab label="Page Two" href="page2" />
-                    <LinkTab label="Page Three" href="page3" />
-                    <LinkTab label="Page four" href="page4" />
-                    <LinkTab label="Page four" href="page5" />
-                    <LinkTab label="Page four" href="page6" />
+                    <LinkTab label="chief Complent" href="page1" />
+                    <LinkTab label="Medical History" href="page2" />
+                    <LinkTab label="Physical Examination" href="page3" />
+                    <LinkTab label="Medical Analysis" href="page4" />
+                    <LinkTab label="Medical Prescription" href="page5" />
+                    <LinkTab label="Patient Plan" href="page6" />
                   </Tabs>
                 </AppBar>
                 {value === 0 && <TabContainer>
