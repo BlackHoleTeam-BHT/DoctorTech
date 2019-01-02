@@ -5,6 +5,9 @@ const initState = {
    targetDoctor: {},
    consultsOutbox:[],
    consultsInbox:[],
+   isShowConsultDetialsOpen: false,
+   targetConsult:{}
+
 };
 
 // this function to dealing with doctor action in redux
@@ -42,6 +45,12 @@ const doctorReducer = (state = initState, action) => {
          return {
             ...state,
             consultsInbox:action.data
+         }
+      case "OPEN_SHOWCONSULT_DETIALS":
+         return {
+            ...state,
+            isShowConsultDetialsOpen:action.data,
+            targetConsult: action.targetConsult
          }
       default:
          return state;
