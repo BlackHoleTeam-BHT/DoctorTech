@@ -151,28 +151,27 @@ export const UpdatePlanStep = (Id, step) => {
   console.log('UpdatePlanStep', Id, step)
   const data = {
     Id: Id,
-    status: step
+    step: step
   }
 
   return (dispatch, getState) => {
 
-    // $.ajax({
-    //   type: "POST",
-    //   url: '/UpdateAnalysisStatus',
-    //   contentType:'application/json',
-    //   data:JSON.stringify({id:Id,status:status}),
-    //   success: function (result) {
-    //     console.log('UpdateAnalysisStatus',result)
-    //     if(result==1){
-    //       dispatch({type:'UpdateAnalysisStatus',data:data})
-    //     }
-    //     // dispatch({type:'GetCaseInfo',data:data})
-    //   },
-    //   error: (err) => {
-    //     console.log('server err',err)
-    //   }
+    $.ajax({
+      type: "POST",
+      url: '/UpdatePlanStep',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+        console.log('UpdatePlanStep', result)
 
-    // });
+        dispatch({ type: 'UpdatePlanStep', data: data })
+
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
 
 
 
@@ -257,11 +256,10 @@ export const AddPhysicalExamination = (data) => {
       contentType: 'application/json',
       data: JSON.stringify({ data: data }),
       success: function (result) {
-        console.log('AddPhysicalExaminationServer?', GetCaseInfo)
+        console.log('AddPhysicalExaminationServer?', result)
         data.insertId = result.insertId
         dispatch({ type: 'AddPhysicalExamination', data: data })
 
-        // dispatch({type:'GetCaseInfo',data:data})
       },
       error: (err) => {
         console.log('server err', err)
@@ -302,12 +300,12 @@ export const AddMedicalAnalysis = (data) => {
   console.log('action AddMedicalAnalysis', data)
   var currentDate = new Date();
 
-var date = currentDate.getDate();
-var month = currentDate.getMonth(); //Be careful! January is 0 not 1
-var year = currentDate.getFullYear();
+  var date = currentDate.getDate();
+  var month = currentDate.getMonth(); //Be careful! January is 0 not 1
+  var year = currentDate.getFullYear();
 
-var dateString = year + "-" +(month + 1) + "-" + date +" 00:00:00";
-  data['createdAt']=dateString
+  var dateString = year + "-" + (month + 1) + "-" + date + " 00:00:00";
+  data['createdAt'] = dateString
   return (dispatch, getState) => {
 
     $.ajax({
@@ -327,4 +325,188 @@ var dateString = year + "-" +(month + 1) + "-" + date +" 00:00:00";
       }
     });
   }
+}
+
+
+// Note: Add patient history 
+export const AddPatientHistory = (data) => {
+  console.log('action AddPatientHistory', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/AddPatientHistory',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+        var insertId = result.insertId
+        data['insertId'] = insertId
+        console.log('AddPatientHistoryServer', data)
+        dispatch({ type: 'AddPatientHistory', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+
+
+  }
+
+}
+
+
+// Note: Add Appointment
+export const AddAppointment = (data) => {
+  console.log('action AddAppointment', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/add-appointment',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+        console.log('AddAppointmentServer', data)
+        dispatch({ type: 'AddAppointment', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+  }
+}
+
+// Note: Add new Case
+export const AddnewCase = (data) => {
+  console.log('action AddnewCase', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/newCase',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+        console.log('AddnewCaseServer', data)
+        data.id=result.insertId
+        dispatch({ type: 'AddnewCase', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+  }
+}
+
+// Note: close the patient profile
+export const ClosePatientProfile = (Id, step, CaseId) => {
+
+  const data = {
+    Id: Id,
+    step: step,
+    CaseId: CaseId
+  }
+
+  console.log('action ClosePatientProfile', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/ClosePatientProfile',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+
+
+        console.log('ClosePatientProfile', result)
+        dispatch({ type: 'ClosePatientProfile', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+
+
+  }
+
+}
+
+
+// Note: to open the patient profile
+export const OpenPatientProfile = (Id, step, CaseId) => {
+
+  const data = {
+    Id: Id,
+    step: step,
+    CaseId: CaseId
+  }
+
+  console.log('action OpenPatientProfile', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/OpenPatientProfile',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+
+        console.log('OpenPatientProfile', result)
+        dispatch({ type: 'OpenPatientProfile', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+
+
+  }
+
+}
+
+
+// Note: to add  patient plan
+export const AddPatientPlan = (data) => {
+
+
+
+  console.log('action AddPatientPlan', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/AddPatientPlan',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+
+        console.log('AddPatientPlan', result)
+        dispatch({ type: 'AddPatientPlan', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+
+
+  }
+
 }

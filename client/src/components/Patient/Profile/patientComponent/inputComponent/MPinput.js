@@ -49,7 +49,6 @@ class MPinput extends React.Component {
     daysInterval: 0,
     timesDay:0,
     expanded: null,
-    history: [{ heart: 0, joint: 1, blood: 0, diabetes: 1, Renal: 0, description: 'ozil Welcome walid', family: 'fff' }]
   };
   handleChange2 = name => event => {
     this.setState({
@@ -69,13 +68,18 @@ class MPinput extends React.Component {
         times:this.state.times,
       id : this.props.patient.CaseId
     }
+    this.setState({
+      name:'',
+      daysInterval:0,
+      times:0
+    })
     this.props.AddMedicalPrescription(obj)
   }
 
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
-    console.log("mmmmmmmmmmmmmm",this.props)
+
     return (
       <div className={classes.root}>
         <ExpansionPanel  expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>

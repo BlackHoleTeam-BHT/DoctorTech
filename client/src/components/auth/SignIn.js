@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import {signIn} from '../../store/action/authActions';
+import {CheckSession} from '../../store/action/authActions'
 import '../style/SignIn.css'
 import image from '../style/doctor2.jpg'
 import {
@@ -14,6 +15,7 @@ import {
   Alert
 } from "reactstrap";
 
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +24,7 @@ class SignIn extends React.Component {
       password: "",
       isLoggedIn: false
     };
+    this.props.CheckSession()
   }
   // this function to get datan from
   handleChange = e => {
@@ -41,9 +44,9 @@ class SignIn extends React.Component {
   };
 
   render() {
-    console.log(this.props)
+    console.log('login',this.props)
     // to check if the user make sign up successfully
-    if (this.props.user !== null) {
+    if (this.props.login) {
       this.props.history.push('/dashboard/' + this.props.user.id);
     }
     return (
@@ -55,6 +58,7 @@ class SignIn extends React.Component {
               <div id="signinCss">
                 <h3>Hey there, welcome back.</h3>
                 <p>Enter your sign in details below:</p>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                 <FormGroup >
                   <Label for="Email">Email</Label>
                   <Input
@@ -81,11 +85,13 @@ class SignIn extends React.Component {
                   <Button
                     color="primary"
                     id="btn"
-                    onClick={this.handleSubmit.bind(this)}
+                    type="submit"
+                    
                   >
                     Sign In
                   </Button>
                 </FormGroup>
+                </form>
                 <div className="text-center" style ={{marginTop: 20}}>
                   <a href="/signup">Create new account ? Sign up</a>
                 </div>
@@ -108,13 +114,15 @@ class SignIn extends React.Component {
 // map dispatch (actions) from reducer to component props
 const mapDipatchToProps = (dispatch) => {
   return {
-    signIn: (user) => dispatch(signIn(user))
+    signIn: (user) => dispatch(signIn(user)),
+    CheckSession: () => dispatch(CheckSession())
   }
 }
 // map state from reducer to component props
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
+    login: state.auth.login,
     correctLogin: state.auth.correctLogin
   }
 }

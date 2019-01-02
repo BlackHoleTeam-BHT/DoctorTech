@@ -63,10 +63,6 @@ handleClose=(value)=>{
 
 
 
-  result = [{ name: 'blood test', description: ' blood test analysis ', date: '01/01/2018', Status: '0' },
-  { name: 'blood test', description: ' blood test analysis ', date: '01/01/2018', Status: '1' }]
-
-
   render() {
 
     const { classes } = this.props;
@@ -106,7 +102,7 @@ handleClose=(value)=>{
         </Paper>
       </div>
       <div>
-        <MAinput />
+        {(this.props.patient.CaseId !=0) && <MAinput />}
       </div>
       </div>
     )

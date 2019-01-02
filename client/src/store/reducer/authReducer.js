@@ -1,6 +1,6 @@
 
 const initState = {
-  user: null,
+  user: {},
   userExist: false,
   correctLogin: true,
   logout: false,
@@ -41,6 +41,11 @@ const authReducer = (state = initState, action) => {
           login:false
           
          }
+      case "UPDATE_DOCTOR_INFO":
+        return {
+          ...state,
+          user: action.data
+        }
 
       default:
         return state;

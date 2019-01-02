@@ -15,9 +15,7 @@ const DrawerMenu = (props) => {
   console.log(props)
   return (
     <div>
-      <div className={classes.toolbar}>
-      
-      </div>
+      <div className={classes.toolbar} />
       <Divider />
       <MenuList>
         <MenuItem 
@@ -40,9 +38,9 @@ const DrawerMenu = (props) => {
         </MenuItem>
         <MenuItem className={classes.menuItem}
            component={NavLink}
-            to="/dashxbard"
+            to={"/dashboard/"+ props.user.id + "/consultaion"}
         >
-          Conslations
+          Consultations
         </MenuItem>
         <MenuItem className={classes.menuItem} 
           component={NavLink} 
@@ -50,12 +48,19 @@ const DrawerMenu = (props) => {
         >
           Smart prediction
         </MenuItem>
-        <Divider />
+        <MenuItem
+          className={classes.menuItem}
+          component={NavLink}
+          to="/dashboard/dr-profile"
+        >
+          Dr Profile
+        </MenuItem>
 
+        <Divider />
       </MenuList>
     </div>
-  )
-}
+  );
+};
 
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {

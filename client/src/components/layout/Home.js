@@ -5,8 +5,24 @@ import '../style/Home.css';
 import Footer from './Footer';
 import image from '../style/d3.jpg'
 import image2 from '../style/d4.jpg'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import {CheckSession} from '../../store/action/authActions'
 class Home extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+  
+    }
+
+  }
+
+
+
   render() {
+
+    console.log(this.props)
     return (
       <div>
         <div >
@@ -47,4 +63,21 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+
+// map dispatch (actions) from reducer to component props
+const mapDipatchToProps = (dispatch) => {
+  return {
+    CheckSession: () => dispatch(CheckSession())
+  }
+}
+// map state from reducer to component props
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+    correctLogin: state.auth.correctLogin
+  }
+}
+
+
+
+export default connect(mapStateToProps,mapDipatchToProps) (Home)
