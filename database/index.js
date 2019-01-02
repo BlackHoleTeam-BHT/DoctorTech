@@ -495,7 +495,7 @@ const OpenPatientProfile = (data, callback) => {
 //function to Add Patient Plan Profile
 const AddPatientPlan = (data, callback) => {
 
-  const sql = `INSERT INTO PatientPlane (caseId,PhysicalPlan,MedicalPlan,Conclusion,step. createdAt) 
+  const sql = `INSERT INTO PatientPlane (caseId,PhysicalPlan,MedicalPlan,Conclusion,step, createdAt) 
                 VALUES ('${data.CaseId}','${data.PhysicalPlan}','${data.MedicalPlan}','${data.Conclusion}', 0, "${moment().format()}");`
 
   dbConnection.query(sql, function (err, results) {
