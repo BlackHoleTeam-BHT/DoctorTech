@@ -5,7 +5,7 @@
   "engines": {
     "node": "10.x"
   },
-  "scripnpm run serverts": {
+  "scripts": {
     "server": "nodemon server",
     "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
