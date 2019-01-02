@@ -378,6 +378,22 @@ const AddMedicalAnalysis = (data, callback) => {
 
 }
 
+// function to update doctor info
+const updateDoctorInfo = (newData, callback) => {
+  let sql = `update Doctors set firstName = "${newData.firstName}", lastName="${newData.lastName}", specialist = "${newData.specialty}" 
+  ,phoneNumber= "${ newData.phoneNumber}", bio="${newData.bio}" , gender= "${newData.gender}", birthDate = "${newData.bDate}", nationality = "${newData.nationality}",
+  location = "${newData.location}", clinicName = "${newData.clinicName}", clinicNumber = "${newData.clinicNumber}" where id = ${newData.id};`;
+
+  dbConnection.query(sql, function(err, result) {
+    if (err) {
+      console.log("Error during update the doctor data info ", err);
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
+
 //function to Update the patient Plan Step
 const UpdatePlanStep = (data, callback) => {
 
@@ -500,3 +516,4 @@ const ClosePatientProfile = (data, callback) => {
   module.exports.selectConsultationOutbox = selectConsultationOutbox;
   module.exports.selectConsultationInbox = selectConsultationInbox;
   module.exports.selectOneConsultation = selectOneConsultation;
+  module.exports.updateDoctorInfo = updateDoctorInfo;

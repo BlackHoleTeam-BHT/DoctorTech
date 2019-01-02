@@ -272,6 +272,27 @@ router.route('/GetCaseInfo')
   })
 
 
+  // this service to deal with update doctor info request 
+router.route('/update-doctorinfo')
+.post(function (req, res) {
+  console.log(req.body)
+  db.updateDoctorInfo(req.body, function(err, result){
+    if(err) {
+      throw err;
+    } else {
+      // console.log(result)
+      db.selectDoctorInfo(req.body.id,function (err,result){
+        if(err) throw err;
+        if(result.length > 0){
+          res.send ({
+            data: result[0]
+          })
+        }
+      })
+    }
+  })
+})
+
 //Note :to update the medicalAnalysis Status
 router.route('/UpdateAnalysisStatus')
   .post(function (req, res) {
