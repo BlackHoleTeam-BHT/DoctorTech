@@ -87,18 +87,29 @@ class MCInput extends React.Component {
     handelSubmit = (e) => {
         e.preventDefault();
         var obj={
-            heartDisease:(this.state.heartDisease)?1:this.state.heartDisease,
-            bloodPressure:(this.state.bloodPressure)?1:this.state.bloodPressure,
-            renalDisease:(this.state.renalDisease)?1:this.state.renalDisease,
-            joints:(this.state.joints)?1:this.state.joints,
-            diabetes:(this.state.diabetes)?1:this.state.diabetes,
+            heartDisease:(this.state.heartDisease)?1:0,
+            bloodPressure:(this.state.bloodPressure)?1:0,
+            renalDisease:(this.state.renalDisease)?1:0,
+            joints:(this.state.joints)?1:0,
+            diabetes:(this.state.diabetes)?1:0,
             patientHistory:this.state.PatientHistory,
             familyHistory:this.state.FamilyHistory,
-            CaseId:this.props.patient.SelectCase
+            CaseId:this.props.patient.CaseId 
         }
+
+        this.setState({
+            heartDisease:0,
+            bloodPressure:0,
+            renalDisease:0,
+            joints:0,
+            diabetes:0,
+            patientHistory:'',
+            familyHistory:''
+        })
     
         console.log('ozil',obj)
         this.props.AddPatientHistory(obj)
+        // this.props.patient.currentCase[0].id 
     }
     //to handle the check box change
     handleChangeCheckBox = name => event => {

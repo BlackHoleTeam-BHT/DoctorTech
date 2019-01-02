@@ -1,51 +1,50 @@
-const initState = {
-  patient: null,
-  patientID: 0,
-  patients: [],
-  patientSearchResults: [],
-  isSearchNow: false,
-  PatientProfile: [{
-    firstName: '',
-    lastName: '',
-    age: '',
-    gender: '',
-    maritalStatus: ''
+const initState={
+    patient: {},
+    patientID: 0,
+    patients: [],
+    patientSearchResults : [],
+    isSearchNow: false,
+    PatientProfile:[{
+      firstName:'',
+      lastName:'',
+      age:'',
+      gender:'',
+      maritalStatus:''
 
-  }],
+    }],
+    currentPatient:false,
+    currentCase:[],
+    chiefComplaint:[{
+      id:1,
+      title:'',
+      description:''
+    }],
+    MedicalHistory:[{
+      heartDisease:0,
+      joints:0,
+      bloodPressure:0,
+      diabetes:0,
+      renalDisease:0,
+      patientHistory:'',
+      familyHistory:''
+    }],
+    PhysicalExamination:[{
+      weight:'',
+      height:'',
+      bodyTemperature:'',
+      headNotes:'',
+      middleBodyNotes:'',
+      bottomBodyNotes:'',
+      diabetes:'',
+      BloodPressure:'',
+      BMI:''
+    }],
+    medicalAnalysis:[],
+    MedicalPrescription:[],
+    PatientPlan:[{
+      step:5
+    }],
   SelectCase: false,
-  currentPatient: false,
-  currentCase: [],
-  chiefComplaint: [{
-    id: 1,
-    title: '',
-    description: ''
-  }],
-  MedicalHistory: [{
-    heartDisease: 0,
-    joints: 0,
-    bloodPressure: 0,
-    diabetes: 0,
-    renalDisease: 0,
-    patientHistory: '',
-    familyHistory: ''
-  }],
-  PhysicalExamination: [{
-    id: 1,
-    weight: '',
-    height: '',
-    bodyTemperature: '',
-    headNotes: '',
-    middleBodyNotes: '',
-    bottomBodyNotes: '',
-    diabetes: '',
-    BloodPressure: '',
-    BMI: ''
-  }],
-  medicalAnalysis: [],
-  MedicalPrescription: [],
-  PatientPlan: [{
-    step: 5
-  }],
   CaseId: 0
 }
     
@@ -123,7 +122,7 @@ const patientReducer = (state = initState, action) => {
       newPhysicalExamination.push(action.data)
       return {
         ...state,
-        physicalExamination: newPhysicalExamination
+        physicalExamination:[action.data]
       }
     case "AddMedicalPrescription":
       var newMedicalPrescription = state.MedicalPrescription
@@ -149,6 +148,49 @@ const patientReducer = (state = initState, action) => {
         MedicalHistory:[action.data]
 
       } 
+      case "UpdatePlanStep":
+      var newPatientPlan=state.PatientPlan
+      newPatientPlan[0].step=action.data.step
+      return{
+        ...state,
+        PatientPlan:newPatientPlan
+      }
+      case "ClosePatientProfile":
+      var Cases=state.currentCase
+      var newPatientPlan = state.PatientPlan
+      for(var i=0;i<Cases.length;i++){
+        if(Cases[i].id==action.data.CaseId){
+          Cases[i].isOpen=0
+        }
+      }
+      newPatientPlan[0].step=action.data.step
+
+      return{
+        ...state,
+        currentCase:Cases,
+        PatientPlan:newPatientPlan
+
+      }
+      case "OpenPatientProfile":
+      var newPatientPlan=state.PatientPlan
+      newPatientPlan[0].step=action.data.step
+      var Cases=state.currentCase
+      for(var i=0;i<Cases.length;i++){
+        if(Cases[i].id==action.data.CaseId){
+          Cases[i].isOpen=1
+        }
+      }
+
+      return{
+        ...state,
+        currentCase:Cases,
+        PatientPlan:newPatientPlan
+      }
+      case "AddPatientPlan":
+      return{
+        ...state,
+        PatientPlan:[action.data]
+      }
       default:
         return state;
     }

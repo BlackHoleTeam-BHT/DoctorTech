@@ -151,28 +151,27 @@ export const UpdatePlanStep = (Id, step) => {
   console.log('UpdatePlanStep', Id, step)
   const data = {
     Id: Id,
-    status: step
+    step: step
   }
 
   return (dispatch, getState) => {
 
-    // $.ajax({
-    //   type: "POST",
-    //   url: '/UpdateAnalysisStatus',
-    //   contentType:'application/json',
-    //   data:JSON.stringify({id:Id,status:status}),
-    //   success: function (result) {
-    //     console.log('UpdateAnalysisStatus',result)
-    //     if(result==1){
-    //       dispatch({type:'UpdateAnalysisStatus',data:data})
-    //     }
-    //     // dispatch({type:'GetCaseInfo',data:data})
-    //   },
-    //   error: (err) => {
-    //     console.log('server err',err)
-    //   }
+    $.ajax({
+      type: "POST",
+      url: '/UpdatePlanStep',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function (result) {
+        console.log('UpdatePlanStep',result)
+      
+         dispatch({type:'UpdatePlanStep',data:data})
+       
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
 
-    // });
+    });
 
 
 
@@ -257,11 +256,10 @@ export const AddPhysicalExamination = (data) => {
       contentType: 'application/json',
       data: JSON.stringify({ data: data }),
       success: function (result) {
-        console.log('AddPhysicalExaminationServer?', GetCaseInfo)
+        console.log('AddPhysicalExaminationServer?', result)
         data.insertId = result.insertId
         dispatch({ type: 'AddPhysicalExamination', data: data })
 
-        // dispatch({type:'GetCaseInfo',data:data})
       },
       error: (err) => {
         console.log('server err', err)
@@ -346,6 +344,110 @@ export const AddPatientHistory=(data)=>{
         data['insertId']=insertId
         console.log('AddPatientHistoryServer',data)
         dispatch({type:'AddPatientHistory',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}
+
+// Note: close the patient profile
+export const ClosePatientProfile=(Id,step,CaseId)=>{
+
+  const data = {
+    Id: Id,
+    step: step,
+    CaseId:CaseId
+  }
+
+  console.log('action ClosePatientProfile',data)
+
+  return(dispatch, getState)=>{
+    
+    $.ajax({
+      type: "POST",
+      url: '/ClosePatientProfile',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function (result) {
+        
+        
+        console.log('ClosePatientProfile',result)
+        dispatch({type:'ClosePatientProfile',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}
+
+
+// Note: to open the patient profile
+export const OpenPatientProfile=(Id,step,CaseId)=>{
+
+  const data = {
+    Id: Id,
+    step: step,
+    CaseId:CaseId
+  }
+
+  console.log('action OpenPatientProfile',data)
+
+  return(dispatch, getState)=>{
+    
+    $.ajax({
+      type: "POST",
+      url: '/OpenPatientProfile',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function (result) {
+        
+        console.log('OpenPatientProfile',result)
+        dispatch({type:'OpenPatientProfile',data:data})
+      },
+      error: (err) => {
+        console.log('server err',err)
+      }
+  
+    });
+
+
+
+  }
+
+}
+
+
+// Note: to add  patient plan
+export const AddPatientPlan=(data)=>{
+
+
+
+  console.log('action AddPatientPlan',data)
+
+  return(dispatch, getState)=>{
+    
+    $.ajax({
+      type: "POST",
+      url: '/AddPatientPlan',
+      contentType:'application/json',
+      data:JSON.stringify(data),
+      success: function (result) {
+        
+        console.log('AddPatientPlan',result)
+        dispatch({type:'AddPatientPlan',data:data})
       },
       error: (err) => {
         console.log('server err',err)

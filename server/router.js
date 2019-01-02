@@ -92,36 +92,107 @@ router.route('/create-patient')
     console.log(req.body);
     const patient = req.body;
     // to determind patient state if pending or in progress
-    if(patient.id_Roles === 1) {
+    if (patient.id_Roles === 1) {
       // if id roles refer to doctor make the patient in progress
       patient.id_Progress = 2
     } else {
       // if id roles refer to assistent make the patient pending on pending list
       patient.id_Progress = 1
     }
-    db.insertIntoPatientTable(patient, function(err, insertId){
-        console.log(insertId);
-        res.send({
-          patientId: insertId
-        })
+    db.insertIntoPatientTable(patient, function (err, insertId) {
+      console.log(insertId);
+      res.send({
+        patientId: insertId
+      })
     });
   });
 
-  // service to deal with getPatients request 
-  router.route('/patients')
+// service to deal with getPatients request 
+router.route('/patients')
   .post(authenticationMiddleware(), function (req, res) {
     console.log(req.body);
     const doctorId = req.body.doctorId;
     db.selectAllPatientInfo(doctorId, function (err, results) {
-      if(err) throw errr;
-      if(results.length > 0) {
+      if (err) throw errr;
+      if (results.length > 0) {
         res.send({
           data: results
-        })
+        });
+      }
+    });
+  });
+///doctores
+
+// service to deal with getDoctores request 
+router.route('/doctores')
+  .get(authenticationMiddleware(), function (req, res) {
+    db.selectAllDoctors(function (err, results) {
+      if (err) throw errr;
+      if (results.length > 0) {
+        res.send({
+          data: results
+        });
       }
     })
+  });
+
+// service to deal with getDoctores request 
+router.route('/send-consult')
+  .post(authenticationMiddleware(), function (req, res) {
+    console.log(req.body);
+    db.insertConsultations(req.body, function(err, insertId){
+      if(err) {
+        throw err
+      } else {
+        console.log(insertId)
+        db.selectOneConsultation(insertId, req.body.doctorId, function(err, results){
+          if(err) {
+            throw err;
+          } else {
+            console.log("GHellllll data",results)
+            res.send({
+              data: results[0]
+            });
+          }
+        });
+      }
+    });
+  });
+
+// service to deal with get consultation outbox request 
+router.route('/get-consult-outbox')
+.post(authenticationMiddleware(), function (req, res) {
+  console.log(req.body);
+  let doctorId = req.body.doctorId
+  db.selectConsultationOutbox(doctorId, function(err, results){
+    if (err) {
+      throw err
+    } else {
+      res.send({
+        data: results
+      });
+    }
+  });
   
-  })
+});
+
+// service to deal with get consultation inbox request 
+router.route('/get-consult-inbox')
+.post(authenticationMiddleware(), function (req, res) {
+  console.log(req.body);
+  let doctorId = req.body.doctorId
+  db.selectConsultationInbox(doctorId, function(err, results){
+    if (err) {
+      throw err
+    } else {
+      res.send({
+        data: results
+      });
+    }
+  });
+  
+});
+
 
 // service to deal with logout request
 router.route('/logout')
@@ -131,28 +202,6 @@ router.route('/logout')
     req.session.destroy();
     res.send({
       state: 'logout'
-    })
-  })
-
-
-// this service to deal with update doctor info request 
-router.route('/update-doctorinfo')
-  .post(function (req, res) {
-    console.log(req.body)
-    db.updateDoctorInfo(req.body, function(err, result){
-      if(err) {
-        throw err;
-      } else {
-        // console.log(result)
-        db.selectDoctorInfo(req.body.id,function (err,result){
-          if(err) throw err;
-          if(result.length > 0){
-            res.send ({
-              data: result[0]
-            })
-          }
-        })
-      }
     })
   })
 
@@ -183,61 +232,82 @@ function authenticationMiddleware() {
 
 //Note :to select the patient information
 router.route('/patientInformation')
-  .post(function(req,res){
-    const id=req.body.id
-    db.selectPatientInfo(id,function(err,result){
-      if(err){
+  .post(function (req, res) {
+    const id = req.body.id
+    db.selectPatientInfo(id, function (err, result) {
+      if (err) {
         throw err
-      }else{
+      } else {
         res.send(result)
       }
     })
   })
 
-  //Note :to select the patient Cassis
+//Note :to select the patient Cassis
 router.route('/patientInCassis')
-.post(function(req,res){
-  const id=req.body.id
-  console.log(id)
-  db.selectPatientCassis(id,function(err,result){
-    if(err){
-      throw err
-    }else{
-      res.send(result)
+  .post(function (req, res) {
+    const id = req.body.id
+    console.log(id)
+    db.selectPatientCassis(id, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
+    })
+  })
+
+//Note :to select the Case Info
+router.route('/GetCaseInfo')
+  .post(function (req, res) {
+    const CaseId = req.body.id
+    console.log('caseid', CaseId)
+    db.selectCaseInfo(CaseId, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
+    })
+  })
+
+
+  // this service to deal with update doctor info request 
+router.route('/update-doctorinfo')
+.post(function (req, res) {
+  console.log(req.body)
+  db.updateDoctorInfo(req.body, function(err, result){
+    if(err) {
+      throw err;
+    } else {
+      // console.log(result)
+      db.selectDoctorInfo(req.body.id,function (err,result){
+        if(err) throw err;
+        if(result.length > 0){
+          res.send ({
+            data: result[0]
+          })
+        }
+      })
     }
   })
 })
 
-  //Note :to select the Case Info
-  router.route('/GetCaseInfo')
-  .post(function(req,res){
-    const CaseId=req.body.id
-    console.log('caseid',CaseId)
-    db.selectCaseInfo(CaseId,function(err,result){
-      if(err){
+//Note :to update the medicalAnalysis Status
+router.route('/UpdateAnalysisStatus')
+  .post(function (req, res) {
+    const CaseId = req.body.id
+    const Status = req.body.status
+
+    console.log('status', req.body)
+    db.UpdateAnalysisStatus(CaseId, Status, function (err, result) {
+      if (err) {
         throw err
-      }else{
-        res.send(result)
+      } else {
+        res.send('1')
       }
     })
   })
-
-
-//Note :to update the medicalAnalysis Status
-    router.route('/UpdateAnalysisStatus')
-    .post(function(req,res){
-      const CaseId=req.body.id
-      const Status=req.body.status
-
-      console.log('status',req.body)
-      db.UpdateAnalysisStatus(CaseId,Status,function(err,result){
-        if(err){
-          throw err
-        }else{
-          res.send('1')
-        }
-      })
-    })
 
 
 
@@ -308,9 +378,6 @@ router.route('/patientInCassis')
 router.route('/AddPatientHistory')
 .post(function(req,res){
   const data=req.body
- 
-  console.log('addddddddddd',req.body)
-
 
   db.AddPatientHistory(data,function(err,result){
     if(err){
@@ -322,20 +389,106 @@ router.route('/AddPatientHistory')
 })
 
 
+
+//Note :update patient plan (step)
+router.route('/UpdatePlanStep')
+.post(function(req,res){
+  const data=req.body
+  console.log('data',data)
+ 
+  db.UpdatePlanStep(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
+
+//Note :Close patient profile
+router.route('/ClosePatientProfile')
+.post(function(req,res){
+  const data=req.body
+  
+
+  db.ClosePatientProfile(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
+
+//Note :open patient profile
+router.route('/OpenPatientProfile')
+.post(function(req,res){
+  const data=req.body
+  
+
+  db.OpenPatientProfile(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
+
+//Note :Add  Patient Plan 
+router.route('/AddPatientPlan')
+.post(function(req,res){
+  const data=req.body
+  
+
+  db.AddPatientPlan(data,function(err,result){
+    if(err){
+      throw err
+    }else{
+      res.send(result)
+    }
+  })
+})
+
+//Note :check user session 
+router.route('/CheckSession')
+.get(function(req,res){
+  if(req.isAuthenticated()){
+    db.selectDoctorInfo(req.user.id, function (err, results){
+      if (err){
+        throw err;
+      }else{
+        res.send({
+          data: null || results[0],
+          state: "LOGIN_SUCCESS"
+        })
+      }
+     })
+    console.log('user login',req.user.id)
+  
+
+  }else{
+    res.send('0')
+  }
+})
+
+
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-  var query = `select * from login where id=\"${id}\"`
+  var query = `select * from Login where id=\"${id}\"`
   dbConnection.query(query, function (err, data) {
     if (err) {
       return done(null, err)
     }
     done(null, data[0]);
-  })
-
+  });
 });
 
 

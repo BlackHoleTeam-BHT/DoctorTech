@@ -48,7 +48,6 @@ class MCInput extends React.Component {
     title: "",
     description: "",
     expanded: null,
-    history: [{ heart: 0, joint: 1, blood: 0, diabetes: 1, Renal: 0, description: 'ozil Welcome walid', family: 'fff' }]
   };
   handleChange2 = name => event => {
     this.setState({
@@ -67,13 +66,17 @@ class MCInput extends React.Component {
       description:this.state.description,
       id : this.props.patient.CaseId
     }
+
+    this.setState({
+      title:'',
+      description:''
+    })
     this.props.AddChiefComplaint(obj)
   }
 
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
-    console.log("mmmmmmmmmmmmmm",this.props)
     return (
       <div className={classes.root}>
         <ExpansionPanel  expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
