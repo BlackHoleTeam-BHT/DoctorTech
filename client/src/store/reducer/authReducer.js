@@ -1,6 +1,6 @@
 
 const initState = {
-  user: null,
+  user: {},
   userExist: false,
   correctLogin: true,
   logout: false,

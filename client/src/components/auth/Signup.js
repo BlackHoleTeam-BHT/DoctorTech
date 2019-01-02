@@ -36,7 +36,7 @@ class Signup extends Component {
 
   render() {
     // to check if the user make sign up successfully
-    if (this.props.user !== null) {
+    if (!this.props.login) {
       this.props.history.push('/dashboard/' + this.props.user.id);
     }
     return (
@@ -139,7 +139,8 @@ const mapDipatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
-    userExist: state.auth.userExist
+    userExist: state.auth.userExist,
+    login: state.auth.user 
   }
 }
 
