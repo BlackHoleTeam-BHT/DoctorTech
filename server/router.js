@@ -2,8 +2,24 @@ const express = require('express');
 const passport = require('passport');
 const dbConnection = require('../database/config');
 const db = require('../database/index.js')
+const request = require('request')
 // Note: define the router
 var router = express.Router();
+
+
+// router.route('/machine')
+// .get(function(req, res) {
+//   console.log(66666666)
+//   const options = {  
+//     url: 'http://127.0.0.1:8000/ml/',
+//     method: 'POST',
+//     data: JSON.stringify({a: 1}),
+//     contentType: 'application/json'
+// };
+// request(options, function(err, res, body) {  
+//   console.log(body);
+// });
+// })
 
 // dealing with sign up request 
 router.route('/sign-up')
@@ -256,6 +272,8 @@ router.route('/patientInCassis')
       }
     })
   })
+
+ 
 
 //Note :to select the Case Info
 router.route('/GetCaseInfo')
