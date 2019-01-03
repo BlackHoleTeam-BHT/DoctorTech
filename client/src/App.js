@@ -7,6 +7,7 @@ import Signup from './components/auth/Signup.js';
 import Home from './components/layout/Home.js';
 import {connect} from 'react-redux'
 import DoctorConsultation from './components/doctor/DoctorConsultation.js';
+import PatientProfile from './components/Patient/Profile/patientProfile'
 
 class App extends Component {
   state = {
@@ -24,6 +25,8 @@ class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/dashboard/:id" component={Dashboard} />
             <Route path="/consultaion" component={DoctorConsultation} />
+            <Route path="/PatientProfile/:id" component={PatientProfile} />
+
           </Switch>
         </div>
       </BrowserRouter>

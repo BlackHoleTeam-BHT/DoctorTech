@@ -117,7 +117,7 @@ class PatientProfile extends React.Component {
     const { classes } = this.props;
 
     const { value } = this.state;
-    // if the user has not login redirect for home page
+     // if the user has not login redirect for home page
     //  if(!this.props.login) {
     //   return (
     //     <Redirect to = '/' />
