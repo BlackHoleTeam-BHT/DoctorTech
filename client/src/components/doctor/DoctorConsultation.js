@@ -33,7 +33,7 @@ class DoctorConsultation extends React.Component {
     this.props.getConsultationInbox(this.props.user.id);
     setInterval(() => {
       this.props.getConsultationInbox(this.props.user.id)
-    }, 30000)
+    }, 2000)
 
   }
 

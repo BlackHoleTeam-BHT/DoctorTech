@@ -99,7 +99,7 @@ class CreatePatient extends React.Component {
     const { classes } = this.props;
     console.log(this.props)
     if(this.props.patientID !== 0){
-      this.props.history.push('/PatientProfile/' + this.props.patientID);
+      this.props.history.push('/dashboard/'+ this.props.user.id +'/PatientProfile/' + this.props.patientID);
     }
    // if the user has not login redirect for home page
     if(!this.props.login) {
