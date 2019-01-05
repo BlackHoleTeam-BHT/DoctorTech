@@ -18,6 +18,7 @@ import {
 } from "reactstrap";
 import { openModal } from "../../store/action/doctorActions";
 import { updateDoctorInfo } from "../../store/action/authActions";
+
 class EditDrProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -51,7 +52,7 @@ class EditDrProfile extends React.Component {
   }
 
   //  handle on click to send the data to server by using FUNCTION FROM authAction
-  handlOnClick() {
+  handleOnClick() {
     // function to update the data for dr so this function come from redux
     // by map this function to props
 
@@ -128,6 +129,7 @@ class EditDrProfile extends React.Component {
                   <Label for="nationality">Nationality</Label>
                   <Input
                     type="text"
+                    name = "nationality"
                     id="nationality"
                     value={this.state.nationality}
                     onChange={this.handleOnChange.bind(this)}
@@ -138,6 +140,7 @@ class EditDrProfile extends React.Component {
                   <Input
                     type="text"
                     id="phoneNumber"
+                    name = "phoneNumber"
                     value={this.state.phoneNumber}
                     onChange={this.handleOnChange.bind(this)}
                   />
@@ -150,6 +153,7 @@ class EditDrProfile extends React.Component {
                   <Input
                     type="text"
                     id="clinicName"
+                    name = "clinicName"
                     value={this.state.clinicName}
                     onChange={this.handleOnChange.bind(this)}
                   />
@@ -159,6 +163,7 @@ class EditDrProfile extends React.Component {
                   <Input
                     type="text"
                     id="clinicNumber"
+                    name = "clinicNumber"
                     value={this.state.clinicNumber}
                     onChange={this.handleOnChange.bind(this)}
                   />
@@ -169,7 +174,8 @@ class EditDrProfile extends React.Component {
                   <Label for="clinicLocation">Clinic Location</Label>
                   <Input
                     type="text"
-                    id="clinicLocation"
+                    id = "location"
+                    name = "clinicLocation"
                     value={this.state.location}
                     onChange={this.handleOnChange.bind(this)}
                   />
@@ -181,6 +187,7 @@ class EditDrProfile extends React.Component {
                   <Input
                     type="text"
                     id="specialty"
+
                     value={this.state.specialty}
                     onChange={this.handleOnChange.bind(this)}
                   />
@@ -205,7 +212,7 @@ class EditDrProfile extends React.Component {
             </Container>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.handlOnClick.bind(this)}>
+            <Button color="primary" onClick={this.handleOnClick.bind(this)}>
               Save
             </Button>{" "}
             <Button color="secondary" onClick={this.toggle}>
