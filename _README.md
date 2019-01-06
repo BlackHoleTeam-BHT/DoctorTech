@@ -1,6 +1,6 @@
 DoctoTech
 
-> Is a management application specialy designed for doctors, covers the convenience of health care technology to make work easy for doctors. DoctorTech helps in controlling manual tasks and arrange records with efficiency.
+> Is an e-health platform specialy designed for doctors,that covers the convenience of health care technology to make work easy for doctors, by controlling manual tasks with efficiency. In addition to taking the advantage of artificial intelligence to assess the health status of patients.
 
 ## Team
 
@@ -17,11 +17,16 @@ DoctoTech
 - Add patient electronic medical records by simple way.
 - Track feedback and response from patients inorder to follow up their health status.
 - Board of consultants where doctors can send for each other an advisory opinion.
-- Intuitive "disease prediction system" this is what makes our application stand out than other health care platforms, by using the power of AI and machine learning to assess health status for patients.
+- Intuitive "disease prediction system" this is what makes our application stand out than other health care platforms, by using the power of AI and machine learning to assess health status of patients.
 
-1. [Requirements](#requirements)
+1. [Requirements]
+Node.js & npm
+Mysql
+Django
+sqlite3
 1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
+    1. [Installing Dependencies]
+    npm install
     1. [Tasks](#tasks)
 1. [Team] 
 walid-hajhussien
