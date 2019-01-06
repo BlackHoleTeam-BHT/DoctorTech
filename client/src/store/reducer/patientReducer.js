@@ -47,7 +47,7 @@ const initState={
   SelectCase: false,
   CaseId: 0
 }
-    
+
 
 const patientReducer = (state = initState, action) => {
   console.log('patient reducer', action)
@@ -71,7 +71,17 @@ const patientReducer = (state = initState, action) => {
       return {
         ...state,
         currentCase: action.data,
-        currentPatient: true
+        currentPatient: true,
+
+        chiefComplaint: [],
+        MedicalHistory: [],
+        PhysicalExamination: [],
+        medicalAnalysis: [],
+        MedicalPrescription: [],
+        PatientPlan: [],
+        CaseId: 0,
+        SelectCase: false
+
       }
 
     case "SEARCH_PATIENT":
@@ -122,7 +132,7 @@ const patientReducer = (state = initState, action) => {
       newPhysicalExamination.push(action.data)
       return {
         ...state,
-        physicalExamination:[action.data]
+        physicalExamination: [action.data]
       }
     case "AddMedicalPrescription":
       var newMedicalPrescription = state.MedicalPrescription
@@ -134,66 +144,90 @@ const patientReducer = (state = initState, action) => {
     case "AddMedicalAnalysis":
       var newMedicalAnalysis = state.medicalAnalysis
       newMedicalAnalysis.push(action.data)
-      
+
       return {
         ...state,
-        medicalAnalysis:newMedicalAnalysis
-       
+        medicalAnalysis: newMedicalAnalysis
+
       }
 
-      case "AddPatientHistory":
-      console.log('777',action.data)
-      return{
+    case "AddPatientHistory":
+      console.log('777', action.data)
+      return {
         ...state,
-        MedicalHistory:[action.data]
+        MedicalHistory: [action.data]
 
-      } 
-      case "UpdatePlanStep":
-      var newPatientPlan=state.PatientPlan
-      newPatientPlan[0].step=action.data.step
-      return{
-        ...state,
-        PatientPlan:newPatientPlan
       }
-      case "ClosePatientProfile":
-      var Cases=state.currentCase
+    case "UpdatePlanStep":
       var newPatientPlan = state.PatientPlan
-      for(var i=0;i<Cases.length;i++){
-        if(Cases[i].id==action.data.CaseId){
-          Cases[i].isOpen=0
+      newPatientPlan[0].step = action.data.step
+      return {
+        ...state,
+        PatientPlan: newPatientPlan
+      }
+    case "ClosePatientProfile":
+      var Cases = state.currentCase
+      var newPatientPlan = state.PatientPlan
+      for (var i = 0; i < Cases.length; i++) {
+        if (Cases[i].id == action.data.CaseId) {
+          Cases[i].isOpen = 0
         }
       }
-      newPatientPlan[0].step=action.data.step
+      newPatientPlan[0].step = action.data.step
 
-      return{
+      return {
         ...state,
-        currentCase:Cases,
-        PatientPlan:newPatientPlan
+        currentCase: Cases,
+        PatientPlan: newPatientPlan
 
       }
-      case "OpenPatientProfile":
-      var newPatientPlan=state.PatientPlan
-      newPatientPlan[0].step=action.data.step
-      var Cases=state.currentCase
-      for(var i=0;i<Cases.length;i++){
-        if(Cases[i].id==action.data.CaseId){
-          Cases[i].isOpen=1
+    case "OpenPatientProfile":
+      var newPatientPlan = state.PatientPlan
+      newPatientPlan[0].step = action.data.step
+      var Cases = state.currentCase
+      for (var i = 0; i < Cases.length; i++) {
+        if (Cases[i].id == action.data.CaseId) {
+          Cases[i].isOpen = 1
         }
       }
 
-      return{
+      return {
         ...state,
-        currentCase:Cases,
-        PatientPlan:newPatientPlan
+        currentCase: Cases,
+        PatientPlan: newPatientPlan
       }
-      case "AddPatientPlan":
-      return{
+    case "AddPatientPlan":
+      return {
         ...state,
-        PatientPlan:[action.data]
+        PatientPlan: [action.data]
       }
-      default:
-        return state;
-    }
+
+
+    case "AddAppointment":
+      var newAppointment = state.Appointment
+      newAppointment.push(action.data)
+
+      return {
+        ...state,
+        Appointment: newAppointment
+
+      }
+
+      case "AddnewCase":
+      var AddnewCase = state.currentCase
+      AddnewCase.push(action.data)
+
+      return {
+        ...state,
+        currentCase: AddnewCase
+
+      }
+
+    default:
+      return state;
+  }
+
+
 }
 
 export default patientReducer

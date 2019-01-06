@@ -103,7 +103,7 @@ class DrProfile extends Component {
         <div className="row" style={{ marginTop: 20, marginLeft: 2 }}>
           <Nav tabs>
             <NavItem>
-              <NavLink
+              <NavLink id = "d"
                 className={classnames({ active: this.state.activeTab === "1" })}
                 onClick={() => {
                   this.toggle("1");
@@ -113,7 +113,7 @@ class DrProfile extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink
+              <NavLink id = "d"
                 className={classnames({ active: this.state.activeTab === "2" })}
                 onClick={() => {
                   this.toggle("2");
@@ -123,7 +123,7 @@ class DrProfile extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink
+              <NavLink id = "d"
                 className={classnames({ active: this.state.activeTab === "3" })}
                 onClick={() => {
                   this.toggle("3");
@@ -217,9 +217,7 @@ class DrProfile extends Component {
                 <hr className= "style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
-                    <Label style={{ fontWeight: "bold" }}>
-                      Clinic Location
-                    </Label>
+                    <Label style={{ fontWeight: "bold" }}>Location</Label>
                   </div>
                   <div className="col-md-8 col-6">
                     {this.props.user.location}

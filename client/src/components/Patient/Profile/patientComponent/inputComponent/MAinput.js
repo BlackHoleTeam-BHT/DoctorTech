@@ -86,7 +86,7 @@ class MAinput extends React.Component {
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
 
-            <Typography className={classes.secondaryHeading} justifyContent="center"><i style={{ fontSize: '30px' }} class="material-icons"> playlist_add</i></Typography>
+            <Typography className={classes.secondaryHeading} justifyContent="center" style={{ display: 'inline-flex' }}><i style={{ fontSize: '30px'}} class="material-icons"> playlist_add</i> <h5 style={{ alignSelf: 'center',marginLeft:'10px' }}>Add Medical Analysis</h5> </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails >
             <Grid container spacing={12} className={classes.container}>

@@ -22,6 +22,7 @@ import {logout} from '../../store/action/authActions.js';
 import {Redirect} from 'react-router-dom'
 import DrProfile from '../doctorProfile/DrProfile.js'
 import DoctorConsultation from '../doctor/DoctorConsultation.js'
+import Diabetes from '../disease/diabetes';
 
 const drawerWidth = 260;
 const styles = theme => ({
@@ -149,6 +150,7 @@ class Dashboard extends React.Component {
             <Route path="/dashboard/:id/PatientProfile/:id" component={PatientProfile} />
             <Route exact path = "/dashboard/dr-profile" component = {DrProfile}/>
             <Route path="/dashboard/:id/consultaion/" component={DoctorConsultation} />
+            <Route path = "/dashboard/diabetes" component={Diabetes} />
 
           </main>
         </div>

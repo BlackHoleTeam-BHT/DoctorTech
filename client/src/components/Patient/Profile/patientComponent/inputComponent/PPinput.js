@@ -69,6 +69,7 @@ class PPinput extends React.Component {
         MedicalPlan: this.state.MedicalPlan,
         Conclusion: this.state.Conclusion,
         CaseId: this.props.patient.CaseId ,
+        step:0
     }
 
     this.setState({

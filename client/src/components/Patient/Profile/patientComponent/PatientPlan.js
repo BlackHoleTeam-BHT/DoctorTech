@@ -78,6 +78,7 @@ class PatientPlan extends React.Component {
     }
 
     render() {
+        console.log('bug',this.props.patient.PatientPlan[0])
         const { classes } = this.props;
         const { activeStep  } = this.state;
         console.log('plan',this.props)
