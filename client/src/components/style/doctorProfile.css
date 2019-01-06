@@ -5,11 +5,11 @@
    margin-top: 20px;
 }
 /*horizontal line */
-.style14{
+/* .style14{
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-}
+} */
 
 .image-container {
     position: relative;
@@ -41,4 +41,21 @@
 
 .image-container:hover .middle {
     opacity: 1;
+}
+
+#rere {
+    color: black;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 18px 20px;
+    font-size: 20px;
+
+  }
+
+#d {
+    cursor: pointer;
+    padding: 18px 20px;
+    font-size: 20px;
 }
