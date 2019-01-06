@@ -1,5 +1,6 @@
 const initState = {
-    diabetes: {}
+    diabetes: {},
+    Health:[]
   }
  
   const diabetesReducer = (state =initState , action) => {
@@ -8,9 +9,20 @@ const initState = {
               ...state,
               diabetes: action.data
           }
+          case "Health":
+          return{
+              ...state,
+              Health:action.data
+
+          }
+          case "ClearHealth":
+          return{
+              ...state,
+              Health:[]
+          }
 
           default : return {
-              state
+              ...state
           }
       } 
   }

@@ -44,9 +44,7 @@ export const Health= (data) => {
           calories:Math.round(values.calories),
           distance:Math.round(values.distance)
         }
-
-        console.log(data)
-        // dispatch({ type: 'GET_CONSULTATIONS_OUTBOX', data: res.data })
+         dispatch({type:'Health', data: data })
       }
     });
   }
