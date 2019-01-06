@@ -28,17 +28,7 @@ const initState={
       patientHistory:'',
       familyHistory:''
     }],
-    PhysicalExamination:[{
-      weight:'',
-      height:'',
-      bodyTemperature:'',
-      headNotes:'',
-      middleBodyNotes:'',
-      bottomBodyNotes:'',
-      diabetes:'',
-      BloodPressure:'',
-      BMI:''
-    }],
+    PhysicalExamination:[],
     medicalAnalysis:[],
     MedicalPrescription:[],
     PatientPlan:[{

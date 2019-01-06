@@ -532,11 +532,9 @@ router.route('/Diabetes').get(function(req,response){
   })
 })
 
-//Health test 
-
-router.route('/Health').get(function(req,response){
-  console.log(55555555)
-  var obj=JSON.stringify({wight:100,height:160})
+//Get the Health predict from python server 
+router.route('/Health').post(function(req,response){
+  var obj=JSON.stringify({wight:req.body.weight,height:req.body.height})
   request.post('http://127.0.0.1:8000/health/predict/', {form:obj},function(err,res,body){
     console.log(body)
     response.send(body)
