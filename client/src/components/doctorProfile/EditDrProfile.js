@@ -101,7 +101,7 @@ class EditDrProfile extends React.Component {
                   <Input
                     type="date"
                     name="bDate"
-                    max="1900-1-01"
+                    max="01-1-1900"
                     id="bDate"
                     value={this.state.bDate}
                     onChange={this.handleOnChange.bind(this)}

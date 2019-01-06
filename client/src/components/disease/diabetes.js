@@ -1,7 +1,46 @@
 import React, { Component } from "react";
-import { Container, Row, Col, FormGroup, Label, Input, Button, Alert,Form } from 'reactstrap';
+import  {connect}  from "react-redux";
+import { diabetes } from '../../store/action/diseaseActions';
+import {
+  Container,
+  Row,
+  Col,
+  Label,
+  Input,
+  Button,
+  Alert,
+  Form
+} from "reactstrap";
 
-export default class Diabetes extends Component {
+
+class Diabetes extends Component {
+constructor(props){
+  super(props)
+  this.state = {
+
+    diabetesPedigree: "",
+    bloodPressure: "",
+    skinThickness: "",
+    pregnancies: "",
+    glucose: "",
+    insulin: "",
+    age: "",
+    BMI: ""
+  }
+  this.handleChange = this.handleChange.bind(this)
+}
+
+handleChange = (e) => {
+this.setState({
+  [e.target.id]: e.target.value
+})
+}
+
+handleSubmit = (e) => {
+  e.preventDefault()
+  this.props.diabetes(this.state)
+}
+
   render() {
     return (
       <div>
@@ -9,68 +48,76 @@ export default class Diabetes extends Component {
           <div className="row justify-content-center">
             <div className="col-md-8">
               <div className="card">
-                <div className="card-header">Diabetes Predictor</div>
+                <div className="text-center">
+                  <div className="card-header">Diabetes Predictor</div>
+                </div>
                 <div className="card-body">
                   <Form>
-									<div className="form-group row">
-                      <Label
-                        for="diabetes_pedigree"
-                        className="col-md-4 col-form-label text-md-right"
-                      >
-											Diabetes Pedigree Function
-                      </Label>
-                      <div className="col-md-6">
-                        <Input
-                          type="number"
-                          id="diabetes_pedigree"
-                          className="form-control"
-                          name="diabetes_pedigree"
-													required
-                        />
-                      </div>
-                    </div>
-              
                     <div className="form-group row">
                       <Label
-                        for="blood_pressure"
+                        for="diabetesPedigree"
                         className="col-md-4 col-form-label text-md-right"
                       >
-											Blood Pressure
+                        Diabetes Pedigree Function
                       </Label>
                       <div className="col-md-6">
                         <Input
                           type="number"
-                          id="blood_pressure"
+                          id="diabetesPedigree"
                           className="form-control"
-                          name="blood_pressure"
-													required
+													placeholder="diabetes pedigree"
+                          name="diabetesPedigree"
+                          required
+                          onChange= {this.handleChange}
+                          value = {this.state.value}
+                          
                         />
                       </div>
                     </div>
-
                     <div className="form-group row">
                       <Label
-                        for="skin_thickness"
+                        for="bloodPressure"
                         className="col-md-4 col-form-label text-md-right"
                       >
-											Skin Thickness
+                        Blood Pressure
                       </Label>
                       <div className="col-md-6">
                         <Input
                           type="number"
-                          id="skin_thickness"
+                          id="bloodPressure"
                           className="form-control"
-													name= "skin_thickness"
-													required
+                          name="bloodPressure"
+                          required
+                          onChange = {this.handleChange}
+                          value = {this.state.value}
                         />
                       </div>
                     </div>
-										<div className="form-group row">
+                    <div className="form-group row">
+                      <Label
+                        for="skinThickness"
+                        className="col-md-4 col-form-label text-md-right"
+                      >
+                        Skin Thickness
+                      </Label>
+                      <div className="col-md-6">
+                        <Input
+                          type="number"
+                          id="skinThickness"
+                          className="form-control"
+                          name="skinThickness"
+                          required
+                          onChange = {this.handleChange}
+                          value = {this.state.value}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group row">
                       <Label
                         for="pregnancies"
                         className="col-md-4 col-form-label text-md-right"
                       >
-											Pregnancies
+                        Pregnancies
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -78,16 +125,18 @@ export default class Diabetes extends Component {
                           id="pregnancies"
                           className="form-control"
                           name="pregnancies"
-													required
+                          required
+                          onChange = {this.handleChange}
+                          value = {this.state.value}
                         />
                       </div>
                     </div>
-										<div className="form-group row">
+                    <div className="form-group row">
                       <Label
                         for="glucose"
                         className="col-md-4 col-form-label text-md-right"
                       >
-											Glucose
+                        Glucose
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -95,34 +144,36 @@ export default class Diabetes extends Component {
                           id="glucose"
                           className="form-control"
                           name="glucose"
-													required
+                          required
+                          onChange = {this.handleChange}
+                          value = {this.state.value}
                         />
                       </div>
                     </div>
-
                     <div className="form-group row">
                       <Label
                         for="insulin"
                         className="col-md-4 col-form-label text-md-right"
                       >
-											Insulin
+                        Insulin
                       </Label>
                       <div className="col-md-6">
                         <Input
                           type="number"
                           id="insulin"
-													name="insulin"
+                          name="insulin"
                           className="form-control"
-													required
+                          required
+                          onChange = {this.handleChange}
                         />
                       </div>
                     </div>
-										<div className="form-group row">
+                    <div className="form-group row">
                       <Label
                         for="age"
                         className="col-md-4 col-form-label text-md-right"
                       >
-											Age
+                        Age
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -130,7 +181,8 @@ export default class Diabetes extends Component {
                           id="age"
                           className="form-control"
                           name="age"
-													required
+                          required
+                          onChange = {this.handleChange}
                         />
                       </div>
                     </div>
@@ -139,7 +191,7 @@ export default class Diabetes extends Component {
                         for="BMI"
                         className="col-md-4 col-form-label text-md-right"
                       >
-											BMI
+                        BMI
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -147,13 +199,14 @@ export default class Diabetes extends Component {
                           id="BMI"
                           className="form-control"
                           name="BMI"
-													required
+                          required
+                          onChange = {this.handleChange}
                         />
                       </div>
                     </div>
-									
+
                     <div className="col-md-6 offset-md-4">
-                      <Button type="submit" color ="primary">
+                      <Button type="submit" color="primary" onClick={this.handleSubmit}>
                         Predict
                       </Button>
                     </div>
@@ -164,6 +217,20 @@ export default class Diabetes extends Component {
           </div>
         </Container>
       </div>
-    );
+    )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    diabetes: state.diabetes
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    diabetes: (diabetes) => dispatch(diabetes(diabetes))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Diabetes)
