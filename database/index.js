@@ -279,7 +279,7 @@ const selectConsultationInbox = (doctorId, callback) => {
   const sql = `SELECT Doctors.*, Consultants.id as consultId,Consultants.id_Doctors, Consultants.id_targetDoctor, Consultants.subject,
               Consultants.description,Consultants.createdAt as createdAtConsult from Doctors 
               INNER JOIN Consultants 
-              ON Doctors.id = Consultants.id_targetDoctor
+              ON Doctors.id = Consultants.id_Doctors
               and Consultants.id_targetDoctor = "${doctorId}" order by createdAtConsult DESC;`;
 
   dbConnection.query(sql, function (err, results) {

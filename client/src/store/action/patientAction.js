@@ -122,7 +122,7 @@ export const GetCaseInfo = (CaseId) => {
 
 
   return (dispatch, getState) => {
-
+    // dispatch({ type: 'ClearHealth' })
     $.ajax({
       type: "POST",
       url: '/GetCaseInfo',

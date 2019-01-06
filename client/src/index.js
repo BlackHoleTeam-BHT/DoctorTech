@@ -8,7 +8,9 @@ import {Provider} from 'react-redux'
 import rootReducer from './store/reducer/rootReducer'
 import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import MCInput from './components/Patient/Profile/patientComponent/inputComponent/MCInput'
+import Diabetes from './components/disease/diabetes'
+import Indicator from './components/Patient/Profile/patientComponent/Indicator'
 
 
 

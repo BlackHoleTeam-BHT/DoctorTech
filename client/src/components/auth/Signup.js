@@ -51,13 +51,13 @@ class Signup extends Component {
                   <Col xs="12" sm="6">
                     <FormGroup>
                       <Label for="text" >First Name</Label>
-                      <Input type="text" name="firstName" id="firstName" placeholder="your first name" value={this.state.value} onChange={this.takeValue} />
+                      <Input type="text" name="firstName" id="firstName" placeholder="enter your first name" value={this.state.value} onChange={this.takeValue} />
                     </FormGroup>
                   </Col>
                   <Col xs="12" sm="6">
                     <FormGroup>
                       <Label for="text" >Last Name</Label>
-                      <Input type="text" name="lastName" id="lastName" placeholder="your last name" value={this.state.value} onChange={this.takeValue} />
+                      <Input type="text" name="lastName" id="lastName" placeholder="enter your last name" value={this.state.value} onChange={this.takeValue} />
                     </FormGroup>
                   </Col>
                 </Row>
@@ -65,45 +65,45 @@ class Signup extends Component {
                   <Col xs="12" sm="6">
                     <FormGroup>
                       <Label for="text" >Specialist</Label>
-                      <Input type="text" name="specialist" id="specialist" placeholder="your specialist" value={this.state.value} onChange={this.takeValue} />
+                      <Input type="text" name="specialist" id="specialist" placeholder="enter your specialty" value={this.state.value} onChange={this.takeValue} />
                     </FormGroup>
                   </Col>
                   <Col xs="12" sm="6">
                     <FormGroup>
                       <Label for="text" >Phone Number</Label>
-                      <Input type="number" name="phoneNumber" id="phoneNumber" placeholder="your phone num" value={this.state.value} onChange={this.takeValue} />
+                      <Input type="number" name="phoneNumber" id="phoneNumber" placeholder="enter your phone number" value={this.state.value} onChange={this.takeValue} />
                     </FormGroup>
                   </Col>
                 </Row>
                 <FormGroup>
                   <Label for="Email">Email</Label>
-                  <Input type="email" name="email" id="email" placeholder="input your Email" value={this.state.value} onChange={this.takeValue} />
+                  <Input type="email" name="email" id="email" placeholder="enter your Email" value={this.state.value} onChange={this.takeValue} />
                 </FormGroup>
                 <FormGroup>
                   <Label for="Password">Password</Label>
-                  <Input type="password" name="password" id="password" placeholder="input your password" value={this.state.value} onChange={this.takeValue} />
+                  <Input type="password" name="password" id="password" placeholder="enter your password" value={this.state.value} onChange={this.takeValue} />
                 </FormGroup>
                 <Row>
                   <Col xs="12" sm="6">
                     <FormGroup>
-                      <Label for="text" >ClinicName</Label>
-                      <Input type="text" name="clinicName" id="clinicName" placeholder="your clinic name" value={this.state.value} onChange={this.takeValue} />
+                      <Label for="text" >Clinic Name</Label>
+                      <Input type="text" name="clinicName" id="clinicName" placeholder="enetr your clinic name" value={this.state.value} onChange={this.takeValue} />
                     </FormGroup>
                   </Col>
                   <Col xs="12" sm="6">
                     <FormGroup>
                       <Label for="text" >Clinic Number</Label>
-                      <Input type="number" name="clinicNumber" id="clinicNumber" placeholder="your clinic num" value={this.state.value} onChange={this.takeValue} />
+                      <Input type="number" name="clinicNumber" id="clinicNumber" placeholder="enter your clinic number" value={this.state.value} onChange={this.takeValue} />
                     </FormGroup>
                   </Col>
                 </Row>
                 <FormGroup>
                   <Label for="location">Location</Label>
-                  <Input type="location" name="location" id="location" placeholder="input your location" value={this.state.value} onChange={this.takeValue} />
+                  <Input type="location" name="location" id="location" placeholder="enter your clinic location" value={this.state.value} onChange={this.takeValue} />
                 </FormGroup>
                 <FormGroup>
                   <Label for="bio">BIO</Label>
-                  <Input type="textarea" name="bio" id="bio" placeholder="input your BIO" value={this.state.value} onChange={this.takeValue} />
+                  <Input type="textarea" name="bio" id="bio" placeholder="enter your biography" value={this.state.value} onChange={this.takeValue} />
                 </FormGroup>
                 <div>
                   <FormGroup>
@@ -111,12 +111,12 @@ class Signup extends Component {
                   </FormGroup>
                 </div>
                 <div className="text-center">
-                  <a href="/signin">Already I have account ? Login </a>
+                  <a href="/signin">Already have an account ? Login </a>
                 </div>
                 <div className="text-center" style={{ marginTop: 20 }}>
                   {this.props.userExist &&
                     <Alert color="danger">
-                      This user already exist!
+                      This user is already exist!
                     </Alert>
                   }
                 </div>
