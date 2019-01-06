@@ -1,12 +1,13 @@
-# Project Name
+DoctoTech
 
-> Pithy project description
+> DoctorTech is a web application designed for doctors, featuring multiple services for doctors what make it special that it has diseases prediction feature.
+
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Waleed Haj Hussein
+  - __Scrum Master__: Mohammed Rawashdeh
+  - __Development Team Members__: Mahmoud Zaid, Dana Amer
 
 ## Table of Contents
 
