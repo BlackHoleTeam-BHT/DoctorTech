@@ -15,7 +15,21 @@ router.route('/breast-cancer')
     request.post('http://localhost:8000/breast-cancer/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
       console.log("Success " + body);
     });
+  });
+  
+// this service to deal with predicate HeartAttack
+router.route('/heart-attack')
+  .get(function (req, res) {
+    let featuresObj = req.body;
+    let features = [featuresObj['age'], featuresObj['sex'], featuresObj['cp'], featuresObj['trestbps'], featuresObj['chol'],
+    featuresObj['fbs'], featuresObj['restecg'], featuresObj['thalach'], featuresObj['exang'], featuresObj['oldpeak'],
+    featuresObj['slop'], featuresObj['ca'], featuresObj['thal']];
+    request.post('http://localhost:8000/heart-attack/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
+      console.log("Success " + body);
+    });
   })
+
+
 
 // dealing with sign up request 
 router.route('/sign-up')
@@ -329,8 +343,13 @@ router.route('/UpdateAnalysisStatus')
 router.route('/AddChiefComplaint')
   .post(function (req, res) {
     const data = req.body.data
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> (feat) add heart-attack service to deal with predict functionality and mke cnnection with django server
     console.log('status', req.body)
     db.AddChiefComplaint(data, function (err, result) {
       if (err) {
