@@ -6,20 +6,16 @@ const request = require('request')
 // Note: define the router
 var router = express.Router();
 
-
-// router.route('/machine')
-// .get(function(req, res) {
-//   console.log(66666666)
-//   const options = {  
-//     url: 'http://127.0.0.1:8000/ml/',
-//     method: 'POST',
-//     data: JSON.stringify({a: 1}),
-//     contentType: 'application/json'
-// };
-// request(options, function(err, res, body) {  
-//   console.log(body);
-// });
-// })
+// this service to deal with predicate BreastCancer
+router.route('/breast-cancer')
+  .get(function (req, res) {
+    let featuresObj = req.body;
+    let features = [featuresObj['Age'], featuresObj['BMI'], featuresObj['Glucose'], featuresObj['Insulin'], featuresObj['HOMA'],
+    featuresObj['Leptin'], featuresObj['Adiponectin'], featuresObj['Resistin'], featuresObj['MCP.1']];
+    request.post('http://localhost:8000/breast-cancer/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
+      console.log("Success " + body);
+    });
+  })
 
 // dealing with sign up request 
 router.route('/sign-up')
@@ -156,16 +152,16 @@ router.route('/doctores')
 router.route('/send-consult')
   .post(authenticationMiddleware(), function (req, res) {
     console.log(req.body);
-    db.insertConsultations(req.body, function(err, insertId){
-      if(err) {
+    db.insertConsultations(req.body, function (err, insertId) {
+      if (err) {
         throw err
       } else {
         console.log(insertId)
-        db.selectOneConsultation(insertId, req.body.doctorId, function(err, results){
-          if(err) {
+        db.selectOneConsultation(insertId, req.body.doctorId, function (err, results) {
+          if (err) {
             throw err;
           } else {
-            console.log("GHellllll data",results)
+            console.log("GHellllll data", results)
             res.send({
               data: results[0]
             });
@@ -177,37 +173,37 @@ router.route('/send-consult')
 
 // service to deal with get consultation outbox request 
 router.route('/get-consult-outbox')
-.post(authenticationMiddleware(), function (req, res) {
-  console.log(req.body);
-  let doctorId = req.body.doctorId
-  db.selectConsultationOutbox(doctorId, function(err, results){
-    if (err) {
-      throw err
-    } else {
-      res.send({
-        data: results
-      });
-    }
+  .post(authenticationMiddleware(), function (req, res) {
+    console.log(req.body);
+    let doctorId = req.body.doctorId
+    db.selectConsultationOutbox(doctorId, function (err, results) {
+      if (err) {
+        throw err
+      } else {
+        res.send({
+          data: results
+        });
+      }
+    });
+
   });
-  
-});
 
 // service to deal with get consultation inbox request 
 router.route('/get-consult-inbox')
-.post(authenticationMiddleware(), function (req, res) {
-  console.log(req.body);
-  let doctorId = req.body.doctorId
-  db.selectConsultationInbox(doctorId, function(err, results){
-    if (err) {
-      throw err
-    } else {
-      res.send({
-        data: results
-      });
-    }
+  .post(authenticationMiddleware(), function (req, res) {
+    console.log(req.body);
+    let doctorId = req.body.doctorId
+    db.selectConsultationInbox(doctorId, function (err, results) {
+      if (err) {
+        throw err
+      } else {
+        res.send({
+          data: results
+        });
+      }
+    });
+
   });
-  
-});
 
 
 // service to deal with logout request
@@ -273,7 +269,7 @@ router.route('/patientInCassis')
     })
   })
 
- 
+
 
 //Note :to select the Case Info
 router.route('/GetCaseInfo')
@@ -290,26 +286,26 @@ router.route('/GetCaseInfo')
   })
 
 
-  // this service to deal with update doctor info request 
+// this service to deal with update doctor info request 
 router.route('/update-doctorinfo')
-.post(function (req, res) {
-  console.log(req.body)
-  db.updateDoctorInfo(req.body, function(err, result){
-    if(err) {
-      throw err;
-    } else {
-      // console.log(result)
-      db.selectDoctorInfo(req.body.id,function (err,result){
-        if(err) throw err;
-        if(result.length > 0){
-          res.send ({
-            data: result[0]
-          })
-        }
-      })
-    }
+  .post(function (req, res) {
+    console.log(req.body)
+    db.updateDoctorInfo(req.body, function (err, result) {
+      if (err) {
+        throw err;
+      } else {
+        // console.log(result)
+        db.selectDoctorInfo(req.body.id, function (err, result) {
+          if (err) throw err;
+          if (result.length > 0) {
+            res.send({
+              data: result[0]
+            })
+          }
+        })
+      }
+    })
   })
-})
 
 //Note :to update the medicalAnalysis Status
 router.route('/UpdateAnalysisStatus')
@@ -329,201 +325,200 @@ router.route('/UpdateAnalysisStatus')
 
 
 
-    //Note :to add chief compliant 
-    router.route('/AddChiefComplaint')
-    .post(function(req,res){
-      const data=req.body.data
-      
+//Note :to add chief compliant 
+router.route('/AddChiefComplaint')
+  .post(function (req, res) {
+    const data = req.body.data
 
-      console.log('status',req.body)
-      db.AddChiefComplaint(data,function(err,result){
-        if(err){
-          throw err
-        }else{
-          res.send(result)
-        }
-      })
+
+    console.log('status', req.body)
+    db.AddChiefComplaint(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
     })
+  })
 
 
-    //Note :to add physical examination 
-    router.route('/AddPhysicalExamination')
-    .post(function(req,res){
-      const data=req.body.data
-      
-      console.log('status',req.body)
-      db.AddPhysicalExamination(data,function(err,result){
-        if(err){
-          throw err
-        }else{
-          res.send(result)
-        }
-      })
+//Note :to add physical examination 
+router.route('/AddPhysicalExamination')
+  .post(function (req, res) {
+    const data = req.body.data
+
+    console.log('status', req.body)
+    db.AddPhysicalExamination(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
     })
+  })
 
 
-    //Note :to add medical Prescription 
-    router.route('/AddMedicalPrescription')
-    .post(function(req,res){
-      const data=req.body.data
-      
-      console.log('status',req.body)
-      db.AddMedicalPrescription(data,function(err,result){
-        if(err){
-          throw err
-        }else{
-          res.send(result)
-        }
-      })
+//Note :to add medical Prescription 
+router.route('/AddMedicalPrescription')
+  .post(function (req, res) {
+    const data = req.body.data
+
+    console.log('status', req.body)
+    db.AddMedicalPrescription(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
     })
+  })
 
-    //Note :to add medical Analysis 
-    router.route('/AddMedicalAnalysis')
-    .post(function(req,res){
-      const data=req.body.data
-      
-      console.log('status',req.body)
-      db.AddMedicalAnalysis(data,function(err,result){
-        if(err){
-          throw err
-        }else{
-          res.send(result)
-        }
-      })
+//Note :to add medical Analysis 
+router.route('/AddMedicalAnalysis')
+  .post(function (req, res) {
+    const data = req.body.data
+
+    console.log('status', req.body)
+    db.AddMedicalAnalysis(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
     })
+  })
 
 //Note :Add AddPatientHistory
 router.route('/AddPatientHistory')
-.post(function(req,res){
-  const data=req.body
+  .post(function (req, res) {
+    const data = req.body
 
-  db.AddPatientHistory(data,function(err,result){
-    if(err){
-      throw err
-    }else{
-      console.log("asdasdasdasd",result)
-      res.send({
-        insertId : result.insertId,
-      })
-    }
+    db.AddPatientHistory(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        console.log("asdasdasdasd", result)
+        res.send({
+          insertId: result.insertId,
+        })
+      }
+    })
   })
-})
 
 
 
 //Note :Add addAppointment
 router.route('/add-appointment')
-.post(function(req,res){
-  const data=req.body
+  .post(function (req, res) {
+    const data = req.body
 
-  db.AddAppointment(data,function(err,result){
-    if(err){
-      throw err
-    }else{
-      res.send(result)
-    }
+    db.AddAppointment(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
+    })
   })
-})
 
 
 //Note :Add addNewCase
 router.route('/newCase')
-.post(function(req,res){
-  const data=req.body
+  .post(function (req, res) {
+    const data = req.body
 
-  db.AddnewCase(data,function(err,result){
-    if(err){
-      throw err
-    }else{
-      res.send(result)
-    }
+    db.AddnewCase(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
+    })
   })
-})
 
 //Note :update patient plan (step)
 router.route('/UpdatePlanStep')
-.post(function(req,res){
-  const data=req.body
-  console.log('data',data)
- 
-  db.UpdatePlanStep(data,function(err,result){
-    if(err){
-      throw err
-    }else{
-      res.send(result)
-    }
+  .post(function (req, res) {
+    const data = req.body
+    console.log('data', data)
+
+    db.UpdatePlanStep(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
+    })
   })
-})
 
 
 //Note :Close patient profile
 router.route('/ClosePatientProfile')
-.post(function(req,res){
-  const data=req.body
-  
+  .post(function (req, res) {
+    const data = req.body
 
-  db.ClosePatientProfile(data,function(err,result){
-    if(err){
-      throw err
-    }else{
-      res.send(result)
-    }
+
+    db.ClosePatientProfile(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
+    })
   })
-})
 
 
 //Note :open patient profile
 router.route('/OpenPatientProfile')
-.post(function(req,res){
-  const data=req.body
-  
+  .post(function (req, res) {
+    const data = req.body
 
-  db.OpenPatientProfile(data,function(err,result){
-    if(err){
-      throw err
-    }else{
-      res.send(result)
-    }
+
+    db.OpenPatientProfile(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
+    })
   })
-})
 
 
 //Note :Add  Patient Plan 
 router.route('/AddPatientPlan')
-.post(function(req,res){
-  const data=req.body
-  
+  .post(function (req, res) {
+    const data = req.body
 
-  db.AddPatientPlan(data,function(err,result){
-    if(err){
-      throw err
-    }else{
-      res.send(result)
-    }
+
+    db.AddPatientPlan(data, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send(result)
+      }
+    })
   })
-})
 
 //Note :check user session 
 router.route('/CheckSession')
-.get(function(req,res){
-  if(req.isAuthenticated()){
-    db.selectDoctorInfo(req.user.id, function (err, results){
-      if (err){
-        throw err;
-      }else{
-        res.send({
-          data: null || results[0],
-          state: "LOGIN_SUCCESS"
-        })
-      }
-     })
-    console.log('user login',req.user.id)
-  
+  .get(function (req, res) {
+    if (req.isAuthenticated()) {
+      db.selectDoctorInfo(req.user.id, function (err, results) {
+        if (err) {
+          throw err;
+        } else {
+          res.send({
+            data: null || results[0],
+            state: "LOGIN_SUCCESS"
+          })
+        }
+      })
+      console.log('user login', req.user.id)
 
-  }else{
-    res.send('0')
-  }
-})
+    } else {
+      res.send('0')
+    }
+  })
 
 
 //Note: add the passport function 

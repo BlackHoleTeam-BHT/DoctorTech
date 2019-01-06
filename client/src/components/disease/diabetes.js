@@ -223,14 +223,14 @@ handleSubmit = (e) => {
 
 const mapStateToProps = (state) => {
   return {
-    diabetes: state.diabetes
+    diabetes: state.disease.diabetes
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    diabetes: (diabetes) => dispatch(diabetes(diabetes))
-  }
+    diabetes: (data) => dispatch(diabetes(data))
+  } 
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Diabetes)
