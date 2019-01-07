@@ -3,6 +3,7 @@ const initState = {
   user: {},
   userExist: false,
   correctLogin: true,
+  isNotConfirmEmail:false,
   logout: false,
   login: false
 }
@@ -18,7 +19,8 @@ const authReducer = (state = initState, action) => {
       }
       case "LOGIN_NOT_SUCCESS": return {
         ...state,
-        correctLogin: action.correctLogin
+        correctLogin: action.correctLogin,
+        isNotConfirmEmail:false
       }
       case "SIGN_UP":
         return {
@@ -45,6 +47,13 @@ const authReducer = (state = initState, action) => {
         return {
           ...state,
           user: action.data
+        }
+        case "Email_Not_Confirm":
+        return{
+          ...state,
+          isNotConfirmEmail:true,
+          correctLogin:true
+
         }
 
       default:

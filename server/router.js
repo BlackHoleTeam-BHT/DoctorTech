@@ -93,8 +93,9 @@ router.route('/login')
       if (err) {
         throw err;
       } else if (result.length > 0) {
+      
         // if result array more than zero we check on password
-        if (user.password === result[0].password) {
+        if (user.password === result[0].password && result[0].is_confirm===1) {
           // if password correct select user info
           let user = result[0];
           db.selectDoctorInfo(user.id, function (err, results) {
@@ -111,7 +112,13 @@ router.route('/login')
               });
             }
           });
-        } else {
+        } else if(user.password === result[0].password && result[0].is_confirm===0){
+          res.send({
+            data: null,
+            state: "Not_Confirm"
+          });
+
+        }else{
           // if the password not match user password
           res.send({
             data: null,
