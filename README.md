@@ -14,9 +14,10 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+1. [DatabaseSchema](#databaseSchema)
 1. [Team](#team)
 1. [Contributing](#contributing)
+
 
 ## Usage
 
@@ -54,6 +55,11 @@ npm install
 npm start
 
 After running all these commands the dev environment should be running
+
+## DatabaseSchema
+
+![docdb](https://user-images.githubusercontent.com/34889770/50775647-5f54be00-129f-11e9-8836-a70bbe77b4d8.jpg)
+
 
 ### Roadmap
 
