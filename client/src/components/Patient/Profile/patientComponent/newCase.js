@@ -52,7 +52,7 @@ class NewCase extends React.Component {
     open: false,
     title: "",
     description: "",
-    isOpen:true,
+    isOpen: true,
   };
 
   // take value from inputs
@@ -76,7 +76,7 @@ class NewCase extends React.Component {
       title: this.state.title,
       description: this.state.description,
       patientId: this.props.patientProfile[0].id,
-      isOpen:1,
+      isOpen: 1,
     }
 
     this.props.AddnewCase(obj)
@@ -103,15 +103,15 @@ class NewCase extends React.Component {
 
             <Grid container md={12} item ustify="space-around"  >
 
-            <TextField
-          id="standard-name"
-          label="title"
-          className={classes.textField}
-          value={this.state.name}
-          onChange={this.handleChange('title')}
-          margin="normal"
-        />
-  
+              <TextField
+                id="standard-name"
+                label="title"
+                className={classes.textField}
+                value={this.state.name}
+                onChange={this.handleChange('title')}
+                margin="normal"
+              />
+
             </Grid>
 
             <Grid md={12} item>
@@ -129,7 +129,7 @@ class NewCase extends React.Component {
             </Grid>
           </DialogContent>
           <DialogActions>
-             <Button onClick={(event)=>{this.handelSubmit();this.handleClose()}} color="primary" variant="contained"> 
+            <Button onClick={(event) => { this.handelSubmit(); this.handleClose() }} color="primary" variant="contained">
               Add
             </Button>
             <Button onClick={this.handleClose} color="primary" variant="contained">

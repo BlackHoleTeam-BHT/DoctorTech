@@ -53,9 +53,6 @@ class MedicalPrescription extends React.Component {
   result = [{ name: 'AXI', DaysInterval: '30', time: '3' },
   { name: 'AUB', DaysInterval: '10', time: '1' }]
 
-
-
-
   render() {
 
     const { classes } = this.props;
@@ -64,33 +61,33 @@ class MedicalPrescription extends React.Component {
     return (
       <div>
         <Paper className={classes.root}>
-            <Table className={classes.table}>
-                <TableHead>
-                    <TableRow >
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}}>Medicine Name</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Days Interval</CustomTableCell>
-                        <CustomTableCell style={{ fontSize: '15px' , textAlign:"center"}} >Times/day</CustomTableCell>
-                        
-                        
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {this.props.patient.MedicalPrescription.map((row,key)=> {
-                        return (
-                            <TableRow className={classes.row} key={key}>
-                                <CustomTableCell style={{  textAlign:"center"}} component="th" scope="row">{row.name}</CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} >{row.daysInterval}</CustomTableCell>
-                                <CustomTableCell style={{  textAlign:"center"}} >{row.times}</CustomTableCell>
-                                
-                                
-                               
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>     
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow >
+                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }}>Medicine Name</CustomTableCell>
+                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Days Interval</CustomTableCell>
+                <CustomTableCell style={{ fontSize: '15px', textAlign: "center" }} >Times/day</CustomTableCell>
+
+
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.props.patient.MedicalPrescription.map((row, key) => {
+                return (
+                  <TableRow className={classes.row} key={key}>
+                    <CustomTableCell style={{ textAlign: "center" }} component="th" scope="row">{row.name}</CustomTableCell>
+                    <CustomTableCell style={{ textAlign: "center" }} >{row.daysInterval}</CustomTableCell>
+                    <CustomTableCell style={{ textAlign: "center" }} >{row.times}</CustomTableCell>
+
+
+
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
         </Paper>
-        {(this.props.patient.CaseId !=0) && <MPinput />}
+        {(this.props.patient.CaseId != 0) && <MPinput />}
       </div>
     )
   }
@@ -103,9 +100,9 @@ MedicalPrescription.propTypes = {
 
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
-    return {
-      patient: state.patient
-    }
+  return {
+    patient: state.patient
   }
+}
 
-export default compose(withStyles(styles),connect(mapStateToProps))(MedicalPrescription);
+export default compose(withStyles(styles), connect(mapStateToProps))(MedicalPrescription);

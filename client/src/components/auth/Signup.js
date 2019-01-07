@@ -5,6 +5,7 @@ import '../style/SignUp.css'
 import { signUp } from '../../store/action/authActions';
 import image from '../style/doctor.jpg'
 import SweetAlert from 'sweetalert2-react'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 class Signup extends Component {
   constructor(props) {
@@ -21,8 +22,10 @@ class Signup extends Component {
       bio: "",
       location: "",
       show: false,
-      next: false
+      progress: false,
+
     }
+
   }
   // function to get data from form
   takeValue = (e) => {
@@ -33,6 +36,10 @@ class Signup extends Component {
   // funcation to submit data to server and signup
   submitValue = (e) => {
     e.preventDefault()
+    this.setState({
+      progress:true
+    })
+
     // call sign up function from props that was maped from redux dispatch
     this.props.signUp(this.state)
   }
@@ -134,6 +141,7 @@ class Signup extends Component {
             </Col>
           </Row>
         </Container>
+        {this.state.progress && !this.props.userExist && !this.props.login && <LinearProgress></LinearProgress>}
       </div>
     )
   }

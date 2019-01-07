@@ -90,7 +90,7 @@ router.route('/sign-up')
                     html: `<p>Thanks for Register</p> <h1>To confirm your email please press the link below:<h1><br>
                        <a href=${link}>Confirm</a>" `// html body
                   };
-
+                  //Note : to send email to the client 
                   transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
                       console.log(error);
