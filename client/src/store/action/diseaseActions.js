@@ -20,7 +20,6 @@ export const diabetes = (data) => {
     }
   }
 
-<<<<<<< HEAD
 
   // this action to get the patient Health predict
 export const Health= (data) => {
@@ -51,7 +50,6 @@ export const Health= (data) => {
     });
   }
 }
-=======
  //  This action to make request to server to predicat breast cancer
   export const predictBreastCancer = (data) => {
     return (dispatch, getState) => {
@@ -71,4 +69,3 @@ export const Health= (data) => {
       });
     }
   }
->>>>>>> (feat)n add smart prediction component and add BreastCancer compo and connect with redux and server

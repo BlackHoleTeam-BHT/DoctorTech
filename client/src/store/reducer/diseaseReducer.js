@@ -1,54 +1,37 @@
 const initState = {
-<<<<<<< HEAD
-    diabetes: {},
-    Health:[]
-  }
- 
-  const diabetesReducer = (state =initState , action) => {
-      switch(action.type){
-          case "DIABETES": return {
-              ...state,
-              diabetes: action.data
-          }
-          case "Health":
-          return{
-              ...state,
-              Health:action.data
-
-          }
-          case "ClearHealth":
-          return{
-              ...state,
-              Health:[]
-          }
-
-          default : return {
-              ...state
-          }
-      } 
-=======
   diabetes: {},
+  Health: [],
   breastCancerPredictions: {}
+
 }
 
-const diabetesReducer = (state = initState, action) => {
+const disesesReducer = (state = initState, action) => {
   switch (action.type) {
-    case "DIABETES":
+    case "DIABETES": return {
+      ...state,
+      diabetes: action.data
+    }
+    case "Health":
       return {
         ...state,
-        diabetes: action.data
+        Health: action.data
+      }
+    case "ClearHealth":
+      return {
+        ...state,
+        Health: []
       }
     case "BREAST_CANCER":
       return {
         ...state,
         breastCancerPredictions: action.data
       }
-    default:
-      return {
-        state
-      }
->>>>>>> (feat)n add smart prediction component and add BreastCancer compo and connect with redux and server
+
+    default: return {
+      ...state
+    }
   }
+
 }
 
-export default diabetesReducer
+export default disesesReducer

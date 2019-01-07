@@ -10,16 +10,11 @@ var router = express.Router();
 router.route('/breast-cancer')
   .post(function (req, res) {
     let featuresObj = req.body;
-<<<<<<< HEAD
-    let features = [featuresObj['Age'], featuresObj['BMI'], featuresObj['Glucose'], featuresObj['Insulin'], featuresObj['HOMA'],
-    featuresObj['Leptin'], featuresObj['Adiponectin'], featuresObj['Resistin'], featuresObj['MCP.1']];
-=======
     // recieve the data and config it to be ready to machine learning
     let features = [parseFloat(featuresObj['Age']), parseFloat(featuresObj['BMI']), parseFloat(featuresObj['Glucose']),
     parseFloat( featuresObj['Insulin'] ), parseFloat(featuresObj['HOMA']), parseFloat(featuresObj['Leptin']), 
     parseFloat(featuresObj['Adiponectin']), parseFloat(featuresObj['Resistin']), parseFloat(featuresObj['MCP1'])];
     console.log (features)
->>>>>>> (feat)n add smart prediction component and add BreastCancer compo and connect with redux and server
     request.post('http://localhost:8000/breast-cancer/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
       console.log("Success " + body);
     });
@@ -543,7 +538,6 @@ router.route('/CheckSession')
 //Database test
 
 router.route('/Diabetes').get(function(req,response){
-  console.log(4444444)
   //Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age
   var obj=JSON.stringify({value:[[6,148,72,35,0,40.6,0.627,50]]})
   request.post('http://127.0.0.1:8000/diabetes/predict/', {form:obj},function(err,res,body){
