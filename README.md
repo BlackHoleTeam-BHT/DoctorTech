@@ -5,7 +5,7 @@
 ## Team
 
   - __Product Owner__: Walid HajHussien()
-  - __Scrum Master__: <a name="#"></a>[Mohammad Al-Rawashdah]
+  - __Scrum Master__: <a name="#">[Mohammad Al-Rawashdah]</a>
   - __Development Team Members__: Mahmoud Zaid(), Dana Amer()
 
 ## Table of Contents
