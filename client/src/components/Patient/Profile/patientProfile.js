@@ -30,6 +30,7 @@ import Appointment from './patientComponent/Appointment';
 import NewCase from './patientComponent/NewCase';
 import Indicator from './patientComponent/Indicator'
 import {Health} from '../../../store/action/diseaseActions'
+import { GetUserInformation } from '../../../store/action/patientAction'
 
 function TabContainer(props) {
   return (
@@ -85,6 +86,7 @@ class PatientProfile extends React.Component {
       selectDate: false
     };
 
+    this.props.GetPationInformation(this.props.match.params.id)
     this.props.GetPatientCassis(this.props.match.params.id)
 
 
@@ -115,7 +117,7 @@ class PatientProfile extends React.Component {
 
 
   render() {
-    console.log('chifcomplaint ', this.props)
+    console.log('chifcomplaint ', this.props.patient.selectPatient)
     const { classes } = this.props;
 
     const { value } = this.state;
@@ -126,7 +128,9 @@ class PatientProfile extends React.Component {
     //   )
     // }
     return (
-      <Grid container className={classes.root} spacing={16}>
+      <div>
+      {!this.props.patient.selectPatient && <CircularProgress style={{position: 'absolute',top: '50%',left: '50%'}} size={200} disableShrink />}
+      {this.props.patient.selectPatient && <Grid container className={classes.root} spacing={16}>
         <Grid container md={12} item>
           <Grid md={1} item></Grid>
 
@@ -231,7 +235,8 @@ class PatientProfile extends React.Component {
 
 
 
-      </Grid>
+      </Grid>}
+      </div>
     )
   }
 
@@ -257,7 +262,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     GetPatientCassis: (id) => dispatch(GetPatientCassis(id)),
     GetCaseInfo: (id) => dispatch(GetCaseInfo(id)),
-    Health:(data) => dispatch(Health(data))
+    Health:(data) => dispatch(Health(data)),
+    GetPationInformation: (id) => dispatch(GetUserInformation(id))
   }
 }
 
