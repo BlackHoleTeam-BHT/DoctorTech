@@ -30,6 +30,7 @@
     "supertest": "^3.3.0"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "chai-http": "^4.2.0",
     "cookie-parser": "^1.4.3",

@@ -4,8 +4,12 @@ const dbConnection = require('../database/config');
 const db = require('../database/index.js')
 const request = require('request')
 const nodemailer = require('nodemailer');
+var bcrypt = require('bcryptjs');
 // Note: define the router
 var router = express.Router();
+
+
+
 
 //Email config
 let transporter = nodemailer.createTransport({
@@ -17,6 +21,7 @@ let transporter = nodemailer.createTransport({
     pass: '0781401852' // generated ethereal password
   }
 })
+
 
 
 
@@ -56,67 +61,67 @@ router.route('/sign-up')
     //add user role
     user.id_Roles = 1;
     let email = user.email
-    console.log('email', email)
-    // check if the account exist
-    db.isAccountExist(user, function (err, result) {
-      if (err) {
-        throw err
-      } else if (result.length === 0) {
-        // insert Doctor  info
-        db.insertUserInfo(user, function (err, insertId) {
-          console.log(insertId)
-          db.selectDoctorInfo(insertId, function (err, results) {
-            let user = results[0];
-            if (err) throw err;
-            req.login(user, function (done) {
 
-              let link = 'http://127.0.0.1:5000/confirmEmail/' + results[0].id
+    bcrypt.hash(user.password, 12)
+      .then(function (hashedPassword) {
+        user.password = hashedPassword
 
-              // setup email data with unicode symbols
-              let mailOptions = {
-                from: 'DoctorTech-Team', // sender address
-                to: email, // list of receivers
-                subject: 'Confirmation Email', // Subject line
-                text: 'to confirm your email please press the link below', // plain text body
-                html: `<p>Thanks for Register</p> <h1>To confirm your email please press the link below:<h1><br>
+        // check if the account exist
+        db.isAccountExist(user, function (err, result) {
+          if (err) {
+            throw err
+          } else if (result.length === 0) {
+            // insert Doctor  info
+            db.insertUserInfo(user, function (err, insertId) {
+              console.log(insertId)
+              db.selectDoctorInfo(insertId, function (err, results) {
+                let user = results[0];
+                if (err) throw err;
+                req.login(user, function (done) {
+
+                  let link = 'http://127.0.0.1:5000/confirmEmail/' + results[0].id
+
+                  // setup email data with unicode symbols
+                  let mailOptions = {
+                    from: 'DoctorTech-Team', // sender address
+                    to: email, // list of receivers
+                    subject: 'Confirmation Email', // Subject line
+                    text: 'to confirm your email please press the link below', // plain text body
+                    html: `<p>Thanks for Register</p> <h1>To confirm your email please press the link below:<h1><br>
                        <a href=${link}>Confirm</a>" `// html body
-              };
+                  };
 
-              transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                  console.log(error);
-                  res.send({
-                    state: "USER_NOT_EXIST",
-                    data: results[0],
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      console.log(error);
+                      res.send({
+                        state: "USER_NOT_EXIST",
+                        data: results[0],
+                      });
+
+                    } else {
+                      console.log('the email has been sent', results[0].id)
+                      res.send({
+                        state: "USER_NOT_EXIST",
+                        data: results[0],
+                      });
+
+                    }
                   });
 
-                } else {
-                  console.log('the email has been sent', results[0].id)
-                  res.send({
-                    state: "USER_NOT_EXIST",
-                    data: results[0],
-                  });
-
-                }
-
-
-
+                });
               });
-
-
-
-
             });
-          });
+          } else {
+            console.log(" Exist")
+            res.send({
+              state: "USER_EXIST",
+              data: null
+            });
+          }
         });
-      } else {
-        console.log(" Exist")
-        res.send({
-          state: "USER_EXIST",
-          data: null
-        });
-      }
-    });
+
+      })
   })
 
 
@@ -130,36 +135,41 @@ router.route('/login')
       } else if (result.length > 0) {
 
         // if result array more than zero we check on password
-        if (user.password === result[0].password && result[0].is_confirm === 1) {
-          // if password correct select user info
-          let user = result[0];
-          db.selectDoctorInfo(user.id, function (err, results) {
-            if (err) {
-              throw err
+        bcrypt.compare(user.password, result[0].password, function (err, data) {
+          if (data) {
+            if (result[0].is_confirm === 1) {
+              let user = result[0];
+              db.selectDoctorInfo(user.id, function (err, results) {
+                if (err) {
+                  throw err
+                } else {
+                  // add session for the user
+                  req.login(user, function (done) {
+                    console.log("user login Success")
+                    res.send({
+                      data: null || results[0],
+                      state: "LOGIN_SUCCESS"
+                    })
+                  });
+                }
+              });
+
             } else {
-              // add session for the user
-              req.login(user, function (done) {
-                console.log("user login Success")
-                res.send({
-                  data: null || results[0],
-                  state: "LOGIN_SUCCESS"
-                })
+              res.send({
+                data: null,
+                state: "Not_Confirm"
               });
             }
-          });
-        } else if (user.password === result[0].password && result[0].is_confirm === 0) {
-          res.send({
-            data: null,
-            state: "Not_Confirm"
-          });
 
-        } else {
-          // if the password not match user password
-          res.send({
-            data: null,
-            state: "PASSWORD_NOT_CORRECT"
-          });
-        }
+          } else {
+            res.send({
+              data: null,
+              state: "PASSWORD_NOT_CORRECT"
+            });
+          }
+
+        })
+
       } else {
         // if the user not exist
         res.send({
@@ -642,6 +652,21 @@ router.route('/email').get(function (req, res) {
 
 })
 
+// to confirm the email  
+router.route('/confirmEmail/:id').get(function (req, res) {
+  console.log('params', req.params)
+  let id = req.params.id
+  db.ConfirmationEmail(id, function (err, result) {
+    if (err) {
+      throw err
+    } else {
+      res.redirect('http://localhost:3000/signin')
+    }
+  })
+
+  // res.send(`<p>the email has been confirmed press in the below link to login</p>
+  // <a href="http://localhost:3000/signin">Login</a>`)
+})
 
 
 //Note: add the passport function 
