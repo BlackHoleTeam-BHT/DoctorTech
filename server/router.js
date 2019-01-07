@@ -3,8 +3,22 @@ const passport = require('passport');
 const dbConnection = require('../database/config');
 const db = require('../database/index.js')
 const request = require('request')
+const nodemailer = require('nodemailer');
 // Note: define the router
 var router = express.Router();
+
+//Email config
+let transporter=nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587, 
+  secure: false, // true for 465, false for other ports
+  auth: {
+      user:'DoctorTechApp@gmail.com', // generated ethereal user
+      pass:'0781401852' // generated ethereal password
+  }
+})
+
+
 
 // this service to deal with predicate BreastCancer
 router.route('/breast-cancer')
@@ -536,7 +550,6 @@ router.route('/CheckSession')
   })
 
 //Database test
-
 router.route('/Diabetes').get(function(req,response){
   //Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age
   var obj=JSON.stringify({value:[[6,148,72,35,0,40.6,0.627,50]]})
@@ -553,6 +566,38 @@ router.route('/Health').post(function(req,response){
     console.log(body)
     response.send(body)
   })
+})
+
+
+//Email test 
+router.route('/email').get(function(req,res){
+
+   // setup email data with unicode symbols
+   let mailOptions = {
+    from: 'DoctorTech-Team', // sender address
+    to: 'eng.waleed_com@yahoo.com', // list of receivers
+    subject: 'Thanks for Register', // Subject line
+    text: 'to confirm your email please press the link below', // plain text body
+    html: '<b>Hello world?</b>' // html body
+};
+
+
+transporter.sendMail(mailOptions, (error, info) => {
+  if (error) {
+       console.log(error);
+       res.send('Email Error')
+
+  }
+  console.log('Message sent: %s', info.messageId);
+  // Preview only available when sending through an Ethereal account
+  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  res.send('Sent')
+
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+});
+
+    
 })
 
 
