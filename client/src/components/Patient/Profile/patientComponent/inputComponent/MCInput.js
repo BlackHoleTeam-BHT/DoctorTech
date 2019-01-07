@@ -48,6 +48,7 @@ class MCInput extends React.Component {
     title: "",
     description: "",
     expanded: null,
+    fill:false
   };
   handleChange2 = name => event => {
     this.setState({
@@ -66,12 +67,23 @@ class MCInput extends React.Component {
       description:this.state.description,
       id : this.props.patient.CaseId
     }
+    if(obj.title===''  || obj.description===''){
+      this.setState({
+        fill:true
+      })
+    }else{
 
-    this.setState({
-      title:'',
-      description:''
-    })
-    this.props.AddChiefComplaint(obj)
+      this.setState({
+        title:'',
+        description:'',
+        fill:false
+      })
+      this.props.AddChiefComplaint(obj)
+
+
+    }
+
+
   }
 
   render() {
@@ -108,14 +120,20 @@ class MCInput extends React.Component {
                     fullWidth
                   />
                 </Grid>
-                <Grid md={1} item></Grid>
+                <Grid md={1} item>
+                </Grid>
                 <Grid md={2} item  >
                    <Button onClick={this.handelSubmit} variant="contained" color="primary" className="button" >
                     Add
                     </Button>
                 </Grid>
+                <Grid md={5} item  >
+                {this.state.fill && <p style={{color:'red'}}>Please fill all the information..!</p>}
+
+                </Grid>
               </Grid>
             </Grid>
+           
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>

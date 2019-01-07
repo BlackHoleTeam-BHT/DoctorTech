@@ -110,6 +110,7 @@ class PEinput extends React.Component {
               <Grid container md={12} item justify="flex-start" alignItems="flex-end" >
                 <Grid md={3} item>
                   <TextField
+                  required
                     id="weight"
                     label="weight"
                     className="input"
@@ -122,6 +123,7 @@ class PEinput extends React.Component {
                 </Grid>
                 <Grid md={3} item>
                   <TextField
+                  required
                     id="standard-name"
                     label="height"
                     className="input"

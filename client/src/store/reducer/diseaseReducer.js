@@ -1,30 +1,37 @@
 const initState = {
-    diabetes: {},
-    Health:[]
+  diabetes: {},
+  Health: [],
+  breastCancerPredictions: {}
+
+}
+
+const disesesReducer = (state = initState, action) => {
+  switch (action.type) {
+    case "DIABETES": return {
+      ...state,
+      diabetes: action.data
+    }
+    case "Health":
+      return {
+        ...state,
+        Health: action.data
+      }
+    case "ClearHealth":
+      return {
+        ...state,
+        Health: []
+      }
+    case "BREAST_CANCER":
+      return {
+        ...state,
+        breastCancerPredictions: action.data
+      }
+
+    default: return {
+      ...state
+    }
   }
- 
-  const diabetesReducer = (state =initState , action) => {
-      switch(action.type){
-          case "DIABETES": return {
-              ...state,
-              diabetes: action.data
-          }
-          case "Health":
-          return{
-              ...state,
-              Health:action.data
 
-          }
-          case "ClearHealth":
-          return{
-              ...state,
-              Health:[]
-          }
+}
 
-          default : return {
-              ...state
-          }
-      } 
-  }
-
-  export default diabetesReducer
+export default disesesReducer
