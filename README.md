@@ -1,4 +1,4 @@
-#DoctoTech
+# DoctoTech
 
 > Is an e-health platform specialy designed for doctors,that covers the convenience of health care technology to make work easy for doctors, by controlling manual tasks with efficiency. In addition to taking the advantage of artificial intelligence to assess the health status of patients.
 
