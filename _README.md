@@ -1,6 +1,6 @@
 DoctoTech
 
-> Is an e-health platform specialy designed for doctors,that covers the convenience of health care technology to make work easy for doctors, by controlling manual tasks with efficiency. In addition to, taking the advantage of artificial intelligence to assess the health status of patients.
+> Is an e-health platform specialy designed for doctors,that covers the convenience of health care technology to make work easy for doctors, by controlling manual tasks with efficiency. In addition to taking the advantage of artificial intelligence to assess the health status of patients.
 
 ## Team
 
@@ -25,8 +25,8 @@ Mysql
 Django 
 Machine learning
 Sqlite3
-ReactJs & React-Redux
-MaterialUi
+ReactJS & React-Redux
+Material-ui
 reactStrap
 
 1. [Development](#development)
@@ -40,16 +40,15 @@ Mahmoud-Zaid94
 DanaAmer
 1. [Contributing](#contributing)
 
-## Usage
-
-> Some usage instructions
 
 ## Requirements
 
 - Node 0.10.x
-- mysql 2.16.x
-- react 16.7.x
-- express 4.16.x
+- Mysql 2.16.0
+- React 16.7.0
+- Express 4.16.4
+- React-redux 6.0.0
+- Bootstrap 4.2.1
 
 ## Development
 
@@ -64,7 +63,7 @@ Then the user will have to run the client from the client directory on another s
 npm install
 npm start
 
-After running all these command the dev environment should be running
+After running all these commands the dev environment should be running
 
 ### Roadmap
 
