@@ -58,14 +58,20 @@ router.route('/breast-cancer')
     let featuresObj = req.body;
     // recieve the data and config it to be ready to machine learning
     let features = [parseFloat(featuresObj['Age']), parseFloat(featuresObj['BMI']), parseFloat(featuresObj['Glucose']),
-    parseFloat( featuresObj['Insulin'] ), parseFloat(featuresObj['HOMA']), parseFloat(featuresObj['Leptin']), 
+    parseFloat(featuresObj['Insulin']), parseFloat(featuresObj['HOMA']), parseFloat(featuresObj['Leptin']),
     parseFloat(featuresObj['Adiponectin']), parseFloat(featuresObj['Resistin']), parseFloat(featuresObj['MCP1'])];
-    console.log (features)
-    request.post('http://localhost:8000/breast-cancer/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
-      console.log("Success " + body);
+
+    request.post('http://localhost:8000/breast-cancer/', { form: JSON.stringify({ features: features }) }, function (err, response, body) {
+      let result = JSON.parse(body);
+      res.send({
+        data: {
+          predicate: result.predicate === 1 ? 'Negative': 'Positive',
+          accuracy : result.accuracy
+        }
+      });
     });
   });
-  
+
 // this service to deal with predicate HeartAttack
 router.route('/heart-attack')
   .post(function (req, res) {
@@ -78,7 +84,6 @@ router.route('/heart-attack')
     //   console.log("Success " + body);
     // });
   })
-
 
 
 // dealing with sign up request 
@@ -630,7 +635,12 @@ router.route('/CheckSession')
   })
 
 //Database test
+<<<<<<< HEAD
 router.route('/Diabetes').get(function(req,response){
+=======
+
+router.route('/diabetes').post(function (req, response) {
+>>>>>>> (feat) add Tap component for Snmart predications and connect Breat Cancer directly with algorthim
   //Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age
   var obj = JSON.stringify({ value: [[6, 148, 72, 35, 0, 40.6, 0.627, 50]] })
   request.post('http://127.0.0.1:8000/diabetes/predict/', { form: obj }, function (err, res, body) {

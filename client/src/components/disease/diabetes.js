@@ -8,7 +8,6 @@ import {
   Label,
   Input,
   Button,
-  Alert,
   Form
 } from "reactstrap";
 
@@ -70,7 +69,6 @@ handleSubmit = (e) => {
                           required
                           onChange= {this.handleChange}
                           value = {this.state.value}
-                          
                         />
                       </div>
                     </div>
