@@ -44,7 +44,7 @@ const DrawerMenu = (props) => {
         </MenuItem>
         <MenuItem className={classes.menuItem} 
           component={NavLink} 
-          to="/dashboard/diabetes" 
+          to={"/dashboard/"+ props.user.id + "/samrt-prediction"}
         >
           Smart prediction
         </MenuItem>
