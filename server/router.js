@@ -8,14 +8,36 @@ var router = express.Router();
 
 // this service to deal with predicate BreastCancer
 router.route('/breast-cancer')
-  .get(function (req, res) {
+  .post(function (req, res) {
     let featuresObj = req.body;
+<<<<<<< HEAD
     let features = [featuresObj['Age'], featuresObj['BMI'], featuresObj['Glucose'], featuresObj['Insulin'], featuresObj['HOMA'],
     featuresObj['Leptin'], featuresObj['Adiponectin'], featuresObj['Resistin'], featuresObj['MCP.1']];
+=======
+    // recieve the data and config it to be ready to machine learning
+    let features = [parseFloat(featuresObj['Age']), parseFloat(featuresObj['BMI']), parseFloat(featuresObj['Glucose']),
+    parseFloat( featuresObj['Insulin'] ), parseFloat(featuresObj['HOMA']), parseFloat(featuresObj['Leptin']), 
+    parseFloat(featuresObj['Adiponectin']), parseFloat(featuresObj['Resistin']), parseFloat(featuresObj['MCP1'])];
+    console.log (features)
+>>>>>>> (feat)n add smart prediction component and add BreastCancer compo and connect with redux and server
     request.post('http://localhost:8000/breast-cancer/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
       console.log("Success " + body);
     });
+  });
+  
+// this service to deal with predicate HeartAttack
+router.route('/heart-attack')
+  .get(function (req, res) {
+    let featuresObj = req.body;
+    let features = [featuresObj['age'], featuresObj['sex'], featuresObj['cp'], featuresObj['trestbps'], featuresObj['chol'],
+    featuresObj['fbs'], featuresObj['restecg'], featuresObj['thalach'], featuresObj['exang'], featuresObj['oldpeak'],
+    featuresObj['slop'], featuresObj['ca'], featuresObj['thal']];
+    request.post('http://localhost:8000/heart-attack/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
+      console.log("Success " + body);
+    });
   })
+
+
 
 // dealing with sign up request 
 router.route('/sign-up')
@@ -329,8 +351,6 @@ router.route('/UpdateAnalysisStatus')
 router.route('/AddChiefComplaint')
   .post(function (req, res) {
     const data = req.body.data
-
-
     console.log('status', req.body)
     db.AddChiefComplaint(data, function (err, result) {
       if (err) {
