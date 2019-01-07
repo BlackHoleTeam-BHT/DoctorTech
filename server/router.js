@@ -8,13 +8,13 @@ const nodemailer = require('nodemailer');
 var router = express.Router();
 
 //Email config
-let transporter=nodemailer.createTransport({
+let transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 587, 
+  port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
-      user:'DoctorTechApp@gmail.com', // generated ethereal user
-      pass:'0781401852' // generated ethereal password
+    user: 'DoctorTechApp@gmail.com', // generated ethereal user
+    pass: '0781401852' // generated ethereal password
   }
 })
 
@@ -55,6 +55,8 @@ router.route('/sign-up')
     const user = req.body;
     //add user role
     user.id_Roles = 1;
+    let email = user.email
+    console.log('email', email)
     // check if the account exist
     db.isAccountExist(user, function (err, result) {
       if (err) {
@@ -67,10 +69,43 @@ router.route('/sign-up')
             let user = results[0];
             if (err) throw err;
             req.login(user, function (done) {
-              res.send({
-                state: "USER_NOT_EXIST",
-                data: results[0],
+
+              let link = 'http://127.0.0.1:5000/confirmEmail/' + results[0].id
+
+              // setup email data with unicode symbols
+              let mailOptions = {
+                from: 'DoctorTech-Team', // sender address
+                to: email, // list of receivers
+                subject: 'Confirmation Email', // Subject line
+                text: 'to confirm your email please press the link below', // plain text body
+                html: `<p>Thanks for Register</p> <h1>To confirm your email please press the link below:<h1><br>
+                       <a href=${link}>Confirm</a>" `// html body
+              };
+
+              transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                  console.log(error);
+                  res.send({
+                    state: "USER_NOT_EXIST",
+                    data: results[0],
+                  });
+
+                } else {
+                  console.log('the email has been sent', results[0].id)
+                  res.send({
+                    state: "USER_NOT_EXIST",
+                    data: results[0],
+                  });
+
+                }
+
+
+
               });
+
+
+
+
             });
           });
         });
@@ -93,9 +128,9 @@ router.route('/login')
       if (err) {
         throw err;
       } else if (result.length > 0) {
-      
+
         // if result array more than zero we check on password
-        if (user.password === result[0].password && result[0].is_confirm===1) {
+        if (user.password === result[0].password && result[0].is_confirm === 1) {
           // if password correct select user info
           let user = result[0];
           db.selectDoctorInfo(user.id, function (err, results) {
@@ -112,13 +147,13 @@ router.route('/login')
               });
             }
           });
-        } else if(user.password === result[0].password && result[0].is_confirm===0){
+        } else if (user.password === result[0].password && result[0].is_confirm === 0) {
           res.send({
             data: null,
             state: "Not_Confirm"
           });
 
-        }else{
+        } else {
           // if the password not match user password
           res.send({
             data: null,
@@ -559,17 +594,17 @@ router.route('/CheckSession')
 //Database test
 router.route('/Diabetes').get(function(req,response){
   //Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age
-  var obj=JSON.stringify({value:[[6,148,72,35,0,40.6,0.627,50]]})
-  request.post('http://127.0.0.1:8000/diabetes/predict/', {form:obj},function(err,res,body){
+  var obj = JSON.stringify({ value: [[6, 148, 72, 35, 0, 40.6, 0.627, 50]] })
+  request.post('http://127.0.0.1:8000/diabetes/predict/', { form: obj }, function (err, res, body) {
     console.log(body)
     response.send(body)
   })
 })
 
 //Get the Health predict from python server 
-router.route('/Health').post(function(req,response){
-  var obj=JSON.stringify({wight:req.body.weight,height:req.body.height})
-  request.post('http://127.0.0.1:8000/health/predict/', {form:obj},function(err,res,body){
+router.route('/Health').post(function (req, response) {
+  var obj = JSON.stringify({ wight: req.body.weight, height: req.body.height })
+  request.post('http://127.0.0.1:8000/health/predict/', { form: obj }, function (err, res, body) {
     console.log(body)
     response.send(body)
   })
@@ -577,34 +612,34 @@ router.route('/Health').post(function(req,response){
 
 
 //Email test 
-router.route('/email').get(function(req,res){
+router.route('/email').get(function (req, res) {
 
-   // setup email data with unicode symbols
-   let mailOptions = {
+  // setup email data with unicode symbols
+  let mailOptions = {
     from: 'DoctorTech-Team', // sender address
     to: 'eng.waleed_com@yahoo.com', // list of receivers
     subject: 'Thanks for Register', // Subject line
     text: 'to confirm your email please press the link below', // plain text body
     html: '<b>Hello world?</b>' // html body
-};
+  };
 
 
-transporter.sendMail(mailOptions, (error, info) => {
-  if (error) {
-       console.log(error);
-       res.send('Email Error')
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.send('Email Error')
 
-  }
-  console.log('Message sent: %s', info.messageId);
-  // Preview only available when sending through an Ethereal account
-  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-  res.send('Sent')
+    }
+    console.log('Message sent: %s', info.messageId);
+    // Preview only available when sending through an Ethereal account
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    res.send('Sent')
 
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-});
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  });
 
-    
+
 })
 
 
