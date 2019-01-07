@@ -520,6 +520,28 @@ router.route('/CheckSession')
     }
   })
 
+//Database test
+
+router.route('/Diabetes').get(function(req,response){
+  console.log(4444444)
+  //Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age
+  var obj=JSON.stringify({value:[[6,148,72,35,0,40.6,0.627,50]]})
+  request.post('http://127.0.0.1:8000/diabetes/predict/', {form:obj},function(err,res,body){
+    console.log(body)
+    response.send(body)
+  })
+})
+
+//Get the Health predict from python server 
+router.route('/Health').post(function(req,response){
+  var obj=JSON.stringify({wight:req.body.weight,height:req.body.height})
+  request.post('http://127.0.0.1:8000/health/predict/', {form:obj},function(err,res,body){
+    console.log(body)
+    response.send(body)
+  })
+})
+
+
 
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {

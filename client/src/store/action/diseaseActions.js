@@ -18,3 +18,34 @@ export const diabetes = (data) => {
       });
     }
   }
+
+
+  // this action to get the patient Health predict
+export const Health= (data) => {
+  return (dispatch, getState) => {
+  
+    var obj={
+      weight:parseInt(data.weight),
+      height:parseInt(data.height)
+    }
+    $.ajax({
+      url: '/Health',
+      type: "POST",
+      data: JSON.stringify(obj),
+      contentType: 'application/json',
+      success: function (res) {
+        var values=JSON.parse(res)
+        
+        var data={
+          MaxWight:Math.round(values.MaxWight),
+          MinWight:Math.round(values.MinWight),
+          OverWight:Math.round(values.OverWight),
+          loseWight:Math.round(values.loseWight),
+          calories:Math.round(values.calories),
+          distance:Math.round(values.distance)
+        }
+         dispatch({type:'Health', data: data })
+      }
+    });
+  }
+}
