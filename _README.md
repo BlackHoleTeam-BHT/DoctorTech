@@ -1,11 +1,11 @@
 DoctoTech
 
-> Is an e-health platform specialy designed for doctors,that covers the convenience of health care technology to make work easy for doctors, by controlling manual tasks with efficiency. In addition to taking the advantage of artificial intelligence to assess the health status of patients.
+> Is an e-health platform specialy designed for doctors,that covers the convenience of health care technology to make work easy for doctors, by controlling manual tasks with efficiency. In addition to, taking the advantage of artificial intelligence to assess the health status of patients.
 
 ## Team
 
-  - __Product Owner__: Waleed HajHussein
-  - __Scrum Master__: Mohammed Rawashdeh
+  - __Product Owner__: Walid HajHussien
+  - __Scrum Master__: Mohammad Al-Rawashdah
   - __Development Team Members__: Mahmoud Zaid, Dana Amer
 
 ## Table of Contents
@@ -20,10 +20,15 @@ DoctoTech
 - Intuitive "disease prediction system" this is what makes our application stand out than other health care platforms, by using the power of AI and machine learning to assess health status of patients.
 
 1. [Requirements]
-Node.js & npm
+Node.js with express framework
 Mysql
-Django
-sqlite3
+Django 
+Machine learning
+Sqlite3
+ReactJs & React-Redux
+MaterialUi
+reactStrap
+
 1. [Development](#development)
     1. [Installing Dependencies]
     npm install
@@ -63,7 +68,7 @@ After running all these command the dev environment should be running
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap https://waffle.io/BlackHoleTeam-BHT/DoctorTech
 
 
 ## Contributing
