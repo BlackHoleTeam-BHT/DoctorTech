@@ -57,7 +57,7 @@ After running all these commands the dev environment should be running
 
 ### Roadmap
 
-View the project roadmap [here] https://waffle.io/BlackHoleTeam-BHT/DoctorTech
+View the project roadmap [https://waffle.io/BlackHoleTeam-BHT/DoctorTech] 
 
 
 ## Contributing
