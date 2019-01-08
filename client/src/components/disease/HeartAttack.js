@@ -43,11 +43,20 @@ class HeartAttack extends Component {
             <div className="col-md-8">
               <div className="card">
                 <div className="text-center">
-                  <div className="card-header" style ={{fontWeight: "bold", backgroundColor:"#d5f3f6", height:50, fontSize:20  }}>Heart Attack Predictor</div>
+                  <div
+                    className="card-header"
+                    style={{
+                      fontWeight: "bold",
+                      backgroundColor: "#d5f3f6",
+                      height: 50,
+                      fontSize: 20
+                    }}
+                  >
+                    Heart Attack Predictor
+                  </div>
                 </div>
                 <div className="card-body">
                   <Form onSubmit={this.handleSubmit}>
-
                     <div className="form-group row">
                       <Label
                         for="Age"
@@ -92,10 +101,32 @@ class HeartAttack extends Component {
                     </div>
                     <div className="form-group row">
                       <Label
+                        for="Ca"
+                        className="col-md-4 col-form-label text-md-right"
+                      >
+                        Major Vessels
+                      </Label>
+                      <div className="col-md-6">
+                        <Input
+                          type="number"
+                          id="Ca"
+                          className="form-control"
+                          name="Ca"
+                          onChange={this.handleChange}
+                          value={this.state.value}
+                          required
+                        />
+                        <small id="ca" class="form-text text-muted">
+                          number of major vessels (0-3) colored by flourosopy
+                        </small>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <Label
                         for="Cpt"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                        Chest Pain type
+                        Chest Pain Type
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -177,7 +208,7 @@ class HeartAttack extends Component {
                         for="Restecg"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                      Resting Electrocardiographic
+                        Resting Electrocardiographic
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -191,30 +222,15 @@ class HeartAttack extends Component {
                         >
                           <option>--select--</option>
                           <option>Normal</option>
-                          <option>ST-T wave abnormality(T wave inversions and/or ST elevation or depression of > 0.05 mV)</option>
-                          <option>probable or definite left ventricular hypertrophy by Estes' criteria</option>
+                          <option>
+                            ST-T wave abnormality(T wave inversions and/or ST
+                            elevation or depression of > 0.05 mV)
+                          </option>
+                          <option>
+                            Probable or definite left ventricular hypertrophy by
+                            Estes' criteria
+                          </option>
                         </Input>
-                      </div>
-                    </div>
-                    <div className="form-group row">
-                      <Label
-                        for="Ca"
-                        className="col-md-4 col-form-label text-md-right"
-                      >
-                        ca
-                      </Label>
-                      <div className="col-md-6">
-                        <Input
-                          type="number"
-                          id="Ca"
-                          className="form-control"
-                          name="Ca"
-                          onChange={this.handleChange}
-                          value={this.state.value}
-                          required
-                        />
-                        <small id="emailHelp" class="form-text text-muted">number of major vessels (0-3) colored by flourosopy</small>
-
                       </div>
                     </div>
                     <div className="form-group row">
@@ -239,13 +255,13 @@ class HeartAttack extends Component {
                           <option>Greater than 120 mg/dl</option>
                         </Input>
                       </div>
-                      </div>
+                    </div>
                     <div className="form-group row">
                       <Label
                         for="Exang"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                      Exercise Induced Angina
+                        Exercise Induced Angina
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -280,8 +296,9 @@ class HeartAttack extends Component {
                           onChange={this.handleChange}
                           required
                         />
-                        <small id="oldp" class="form-text text-muted">ST depression induced by exercise relative to rest</small>
-
+                        <small id="oldp" class="form-text text-muted">
+                          ST depression induced by exercise relative to rest
+                        </small>
                       </div>
                     </div>
 
@@ -290,7 +307,7 @@ class HeartAttack extends Component {
                         for="Slope"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                      Slope
+                        Slope
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -306,34 +323,40 @@ class HeartAttack extends Component {
                           <option>Upsloping</option>
                           <option>Flat</option>
                           <option>Downsloping</option>
-
                         </Input>
-                        <small id="slope" class="form-text text-muted">the slope of the peak exercise ST segment</small>
+                        <small id="slope" class="form-text text-muted">
+                          the slope of the peak exercise ST segment
+                        </small>
                       </div>
                     </div>
 
                     <div className="form-group row">
                       <Label
-                        for="Thal"
+                        for="Thalium"
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Thalium Heart Scan
                       </Label>
                       <div className="col-md-6">
                         <Input
-                          type="number"
-                          id="Thal"
+                          type="select"
+                          id="Thalium"
                           className="form-control"
-                          name="Thal"
+                          name="Thalium"
                           onChange={this.handleChange}
                           value={this.state.value}
                           required
-                        />
+                        >
+                          <option>--select--</option>
+                          <option>Normal(no cold spots)</option>
+                          <option>Fixed defect (cold spots during rest and exercise)</option>
+                          <option>Reversible defect (when cold spots only appear during exercise)</option>
+                        </Input>
                       </div>
                     </div>
 
                     <div className="col-md-6 offset-md-4">
-                      <Button type="submit" color="primary" >
+                      <Button type="submit" color="primary">
                         Predict
                       </Button>
                     </div>
