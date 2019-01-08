@@ -49,7 +49,7 @@ class HeartAttack extends Component {
                       fontWeight: "bold",
                       backgroundColor: "#d5f3f6",
                       height: 50,
-                      fontSize: 20
+                      fontSize: 25
                     }}
                   >
                     Heart Attack Predictor
