@@ -325,7 +325,7 @@ class HeartAttack extends Component {
                           <option>Downsloping</option>
                         </Input>
                         <small id="slope" class="form-text text-muted">
-                          the slope of the peak exercise ST segment
+                          The slope of the peak exercise ST segment
                         </small>
                       </div>
                     </div>

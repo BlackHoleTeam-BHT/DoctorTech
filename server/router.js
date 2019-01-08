@@ -23,8 +23,6 @@ let transporter = nodemailer.createTransport({
 })
 
 
-
-
 // this service to deal with predicate BreastCancer
 router.route('/breast-cancer')
   .post(function (req, res) {
