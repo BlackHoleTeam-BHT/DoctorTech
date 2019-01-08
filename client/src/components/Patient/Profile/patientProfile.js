@@ -188,8 +188,8 @@ class PatientProfile extends React.Component {
             <Grid md={10} sm={11} xs={11} item>
               <NoSsr>
                 <div className={classes.root}>
-                  <AppBar position="static" style={{background:"#2caee2"}}>
-                    <Tabs fullWidth className={classes.tab} value={value} onChange={this.handleChange}>
+                  <AppBar position="static" style={{background:"#2ec8a6"}}>
+                    <Tabs fullWidth className={classes.tab} value={value} indicatorColor="#2ec8a6" onChange={this.handleChange}>
                       <LinkTab label="chief Complent" href="page1" />
                       <LinkTab label="Medical History" href="page2" />
                       <LinkTab label="Physical Examination" href="page3" />

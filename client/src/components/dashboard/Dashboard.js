@@ -40,7 +40,7 @@ const styles = theme => ({
     },
   },
   appBar: {
-    background: "#2caee2",
+    background: "#2ec8a6",
     marginLeft: drawerWidth,
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -105,14 +105,22 @@ class Dashboard extends React.Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" color="inherit" className={classes.grow}>
+              <Typography variant="h5" color="inherit" className={classes.grow}>
                 Doctor Tech
               </Typography>
-              <Avatar className={classes.avtar} >Dr</Avatar>
-              <Typography variant="body2" color="inherit">
+              <Avatar style={{background:"#1c947c", color: "#ff0f"}} className={classes.avtar} >Dr</Avatar>
+              <Typography variant="h5"
+                 color="inherit" 
+                 className={classes.grow}
+                 style= {{fontSize: 18, fontWeight: 'bold'}}
+              >
                 {this.props.user.firstName + ' ' + this.props.user.lastName}
               </Typography>
-              <Button color="inherit" onClick={this.logout.bind(this)}>Logout</Button>
+              <Button
+                color="inherit" 
+                onClick={this.logout.bind(this)}
+                style= {{fontSize: 18, fontWeight: 'bold'}}
+              >Logout</Button>
             </Toolbar>
           </AppBar>
           <nav className={classes.drawer}>

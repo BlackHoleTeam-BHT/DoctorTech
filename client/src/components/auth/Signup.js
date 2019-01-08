@@ -37,7 +37,7 @@ class Signup extends Component {
   submitValue = (e) => {
     e.preventDefault()
     this.setState({
-      progress:true
+      progress: true
     })
 
     // call sign up function from props that was maped from redux dispatch
@@ -52,75 +52,81 @@ class Signup extends Component {
   render() {
     return (
       <div>
-        <Container>
+        <div>
           <Row>
-            <Col md="6" sm="12" id="RightUp">  <img src={image} /> </Col>
-            <Col md="6" sm="12">
+            <Col md="6" sm="12" xs="12" id="RightUp">
+              <div>
+                <img src={image} alt="" />
+              </div>
+            </Col>
+            <Col md="6" sm="12" xs="12">
               <div id="signUpCss">
-                <h4 className="text-center">Sign Up </h4>
-                <Row>
-                  <Col xs="12" sm="6">
-                    <FormGroup>
-                      <Label for="text" >First Name</Label>
-                      <Input type="text" name="firstName" id="firstName" placeholder="enter your first name" value={this.state.value} onChange={this.takeValue} />
-                    </FormGroup>
-                  </Col>
-                  <Col xs="12" sm="6">
-                    <FormGroup>
-                      <Label for="text" >Last Name</Label>
-                      <Input type="text" name="lastName" id="lastName" placeholder="enter your last name" value={this.state.value} onChange={this.takeValue} />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs="12" sm="6">
-                    <FormGroup>
-                      <Label for="text" >Specialist</Label>
-                      <Input type="text" name="specialist" id="specialist" placeholder="enter your specialty" value={this.state.value} onChange={this.takeValue} />
-                    </FormGroup>
-                  </Col>
-                  <Col xs="12" sm="6">
-                    <FormGroup>
-                      <Label for="text" >Phone Number</Label>
-                      <Input type="number" name="phoneNumber" id="phoneNumber" placeholder="enter your phone number" value={this.state.value} onChange={this.takeValue} />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <FormGroup>
-                  <Label for="Email">Email</Label>
-                  <Input type="email" name="email" id="email" placeholder="enter your Email" value={this.state.value} onChange={this.takeValue} />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="Password">Password</Label>
-                  <Input type="password" name="password" id="password" placeholder="enter your password" value={this.state.value} onChange={this.takeValue} />
-                </FormGroup>
-                <Row>
-                  <Col xs="12" sm="6">
-                    <FormGroup>
-                      <Label for="text" >Clinic Name</Label>
-                      <Input type="text" name="clinicName" id="clinicName" placeholder="enetr your clinic name" value={this.state.value} onChange={this.takeValue} />
-                    </FormGroup>
-                  </Col>
-                  <Col xs="12" sm="6">
-                    <FormGroup>
-                      <Label for="text" >Clinic Number</Label>
-                      <Input type="number" name="clinicNumber" id="clinicNumber" placeholder="enter your clinic number" value={this.state.value} onChange={this.takeValue} />
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <FormGroup>
-                  <Label for="location">Location</Label>
-                  <Input type="location" name="location" id="location" placeholder="enter your clinic location" value={this.state.value} onChange={this.takeValue} />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="bio">BIO</Label>
-                  <Input type="textarea" name="bio" id="bio" placeholder="enter your biography" value={this.state.value} onChange={this.takeValue} />
-                </FormGroup>
-                <div>
+                <h1 className="text-center">Sign Up </h1>
+                <form onSubmit={this.submitValue}>
+                  <Row>
+                    <Col xs="12" sm="12" md="6">
+                      <FormGroup>
+                        <Label for="text" >First Name</Label>
+                        <Input type="text" name="firstName" required id="firstName" placeholder="enter your first name" value={this.state.value} onChange={this.takeValue} />
+                      </FormGroup>
+                    </Col>
+                    <Col xs="12" sm="12" md="6">
+                      <FormGroup>
+                        <Label for="text" >Last Name</Label>
+                        <Input type="text" name="lastName" required id="lastName" placeholder="enter your last name" value={this.state.value} onChange={this.takeValue} />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs="12" sm="12" md="6">
+                      <FormGroup>
+                        <Label for="text" >Specialist</Label>
+                        <Input type="text" name="specialist" required id="specialist" placeholder="enter your specialty" value={this.state.value} onChange={this.takeValue} />
+                      </FormGroup>
+                    </Col>
+                    <Col xs="12" sm="12" md="6">
+                      <FormGroup>
+                        <Label for="text" >Phone Number</Label>
+                        <Input type="number" name="phoneNumber" required id="phoneNumber" placeholder="enter your phone number" value={this.state.value} onChange={this.takeValue} />
+                      </FormGroup>
+                    </Col>
+                  </Row>
                   <FormGroup>
-                    <Button color="primary" id="btn" onClick={this.submitValue}>Sign up</Button>
+                    <Label for="Email">Email</Label>
+                    <Input type="email" name="email" id="email" required placeholder="enter your Email" value={this.state.value} onChange={this.takeValue} />
                   </FormGroup>
-                </div>
+                  <FormGroup>
+                    <Label for="Password">Password</Label>
+                    <Input type="password" name="password" id="password" required placeholder="enter your password" value={this.state.value} onChange={this.takeValue} />
+                  </FormGroup>
+                  <Row>
+                    <Col xs="12" sm="12" md="6">
+                      <FormGroup>
+                        <Label for="text" >Clinic Name</Label>
+                        <Input type="text" name="clinicName" id="clinicName" required placeholder="enetr your clinic name" value={this.state.value} onChange={this.takeValue} />
+                      </FormGroup>
+                    </Col>
+                    <Col xs="12" sm="12" md="6">
+                      <FormGroup>
+                        <Label for="text" >Clinic Number</Label>
+                        <Input type="number" name="clinicNumber" id="clinicNumber" required placeholder="enter your clinic number" value={this.state.value} onChange={this.takeValue} />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <FormGroup>
+                    <Label for="location">Location</Label>
+                    <Input type="location" name="location" id="location" required placeholder="enter your clinic location" value={this.state.value} onChange={this.takeValue} />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="bio">BIO</Label>
+                    <Input type="textarea" name="bio" id="bio" required placeholder="enter your biography" value={this.state.value} onChange={this.takeValue} />
+                  </FormGroup>
+                  <div>
+                    <FormGroup>
+                      <Button color="primary" id="btn" type="submit" >Sign up</Button>
+                    </FormGroup>
+                  </div>
+                </form>
                 <div className="text-center">
                   <a href="/signin">Already have an account ? Login </a>
                 </div>
@@ -133,14 +139,14 @@ class Signup extends Component {
                   <SweetAlert
                     show={this.props.login}
                     title="Confirmation Email"
-                    text={"the confirmation Email has been sent to your Email: "+this.props.user.email}
+                    text={"the confirmation Email has been sent to your Email: " + this.props.user.email}
                     onConfirm={this.onConfirmAlert}
                   />
                 </div>
               </div>
             </Col>
           </Row>
-        </Container>
+        </div>
         {this.state.progress && !this.props.userExist && !this.props.login && <LinearProgress></LinearProgress>}
       </div>
     )

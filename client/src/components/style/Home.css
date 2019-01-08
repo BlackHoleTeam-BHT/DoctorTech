@@ -1,6 +1,6 @@
 
 button{
-	color:#2caee2
+	color:#2ec8a6
 }
 img {
     width: 100%;
@@ -8,17 +8,51 @@ img {
   }
 
   .carousel-caption{
-    right: 50% !important;
-    bottom: 50% !important;
-    left: 0 !important;
+		width: 25%;
+    top: 30% !important;
+		left: 200 !important;
+		font-size: 22px;
     color: rebeccapurple !important
-  }
+	}
+	
+	.carousalContainer {
+		position: relative;
+	}
+	.cover {
+		background: #2ec8a6;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		position: absolute;
+		opacity: 0.25;
+	}
+  .descCarousal {
+		width: 35%;
+		top: 26%;
+		left: 15%;
+		text-align: center;
+		position: absolute;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		font-size: 25px;
+	}
+ 
+
+	.descCarousal .btnStartNow {
+		 background: #2ec8a6;
+		 color: #ffffff;
+		 font-weight: bold;
+		 font-size: 20px;
+		 padding-left: 20px;
+		 padding-right: 20px;
+		 border-radius: 50px ;
+	}
 
  .who{
   font-family: 'Playball', cursive;
     font-size:30px;
     margin-bottom: 15px;
-    color: #55b6c7;
+    color: #2ec8a6;
   }
 
 .footer-bottom {
@@ -141,6 +175,8 @@ img {
 	font-size:15px;
 }
 
+
+
 /* span{
   padding-left: 35px;
 } */
@@ -181,18 +217,18 @@ img {
   padding:50px;
 }
 .whof{
-  font-family: Impact, Charcoal, sans-serif;
+  font-family: "Gill Sans";
   font-size: 25px ;
 
 }
 .whos{
-
-  font-size: 20px ;
+  font-family: 'Trebuchet MS';
+  font-size: 17px ;
   padding-bottom: 15px;
   
 }
 .img{
-  width: 360px;
+  width: 400px;
 }
 
 .last{

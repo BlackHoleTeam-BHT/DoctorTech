@@ -48,7 +48,7 @@ handleSubmit = (e) => {
                   <div className="card-header">Diabetes Predictor</div>
                 </div>
                 <div className="card-body">
-                  <Form>
+                  <form onSubmit={this.handleSubmit}>
                     <div className="form-group row">
                       <Label
                         for="DiabetesPedigreeFunction"
@@ -205,11 +205,11 @@ handleSubmit = (e) => {
                     </div>
 
                     <div className="col-md-6 offset-md-4">
-                      <Button type="submit" color="primary" onClick={this.handleSubmit}>
+                      <Button type="submit" color="primary" >
                         Predict
                       </Button>
                     </div>
-                  </Form>
+                  </form>
                 </div>
               </div>
             </div>
