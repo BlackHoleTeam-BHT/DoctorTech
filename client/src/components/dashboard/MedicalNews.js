@@ -20,6 +20,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {MedicalNewsAPI} from '../../store/action/API'
 import Grid from '@material-ui/core/Grid';
+import ScrollDialog from './view/Dialog'
 
 const styles = theme => ({
   card: {
@@ -31,6 +32,8 @@ const styles = theme => ({
   },
   actions: {
     display: 'flex',
+   
+    
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -44,6 +47,8 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500],
+    width: 60,
+    height: 60,
   },
 });
 
@@ -60,11 +65,13 @@ class RecipeReviewCard extends React.Component {
 
     return (
         <Grid container className={classes.root} spacing={16}>
-      <Card className={classes.card}>
+{    this.props.Articles.map((value,key)=>{
+        return (        
+        <Card className={classes.card} key={key}>
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>
-              R
+              {value.title[0].toUpperCase()}
             </Avatar>
           }
           action={
@@ -72,18 +79,17 @@ class RecipeReviewCard extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title={value.title}
+          subheader={value.publishedAt.slice(0,10)}
         />
         <CardMedia
           className={classes.media}
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGTVf63Vm3XgOncMVSOy0-jSxdMT8KVJIc8WiWaevuWiPGe0Pm"
+          image={value.urlToImage}
           title="Paella dish"
         />
         <CardContent>
           <Typography component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                {value.description}
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
@@ -93,10 +99,13 @@ class RecipeReviewCard extends React.Component {
           <IconButton aria-label="Share">
             <ShareIcon />
           </IconButton>
-         <button class="btn btn-info"  style={{marginLeft: 'auto'}}>show</button>
+          <span style={{marginLeft: 'auto'}}>
+          <ScrollDialog  content={value.content}></ScrollDialog>
+          </span>
+        
         </CardActions>
+      </Card> )})}
 
-      </Card>
       </Grid>
     );
   }
