@@ -24,6 +24,7 @@ import DrProfile from '../doctorProfile/DrProfile.js'
 import DoctorConsultation from '../doctor/DoctorConsultation.js'
 import SmartPredict from '../disease/SmartPredict.js';
 
+import InteractiveList from './InteractiveList'
 const drawerWidth = 260;
 const styles = theme => ({
   root: {
@@ -145,6 +146,7 @@ class Dashboard extends React.Component {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             {/*  Router for Drawer menu TODO add the compnent */}
+            <Route exact path="/dashboard/:id/" component={InteractiveList} />
             <Route exact path="/dashboard/:id/add-patient" component={CreatePatient} />
             <Route exact path="/dashboard/:id/patients" component={Patients} />
             <Route path="/dashboard/:id/PatientProfile/:id" component={PatientProfile} />
@@ -154,6 +156,8 @@ class Dashboard extends React.Component {
           </main>
         </div>
       </BrowserRouter>
+      
+      
     );
   }
 }

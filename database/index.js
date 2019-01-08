@@ -94,6 +94,8 @@ const insertIntoPatientTable = (patient, callback) => {
   })
 }
 
+
+
 //function to  select Patient information based on the ID
 const selectAllPatientInfo = (doctorId, callback) => {
   const sql = `SELECT * FROM Patients WHERE id_Doctor = '${doctorId}' order by createdAt DESC;`;
@@ -544,6 +546,22 @@ const ConfirmationEmail = (id, callback) => {
 
 }
 
+// function to select Appointment info from Appointment table
+const getAppointment = (doctorId, callback) => {
+  const sql = `select Patients.firstName, Patients.lastName, Appointment.date 
+  FROM Appointment
+  INNER JOIN Patients ON Appointment.id_Patients=Patients.id AND Appointment.id_Doctors='${doctorId}'`;
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during select info  from Doctor Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  })
+}
+
+
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
 module.exports.ConfirmationEmail = ConfirmationEmail;
@@ -573,3 +591,4 @@ module.exports.selectOneConsultation = selectOneConsultation;
 module.exports.updateDoctorInfo = updateDoctorInfo;
 module.exports.AddAppointment = AddAppointment;
 module.exports.AddnewCase = AddnewCase;
+module.exports.getAppointment=getAppointment;

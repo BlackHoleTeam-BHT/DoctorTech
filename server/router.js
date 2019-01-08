@@ -674,6 +674,21 @@ passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
+
+// service to deal with getAppointment request 
+router.route('/get-appointment')
+  .post(authenticationMiddleware(), function (req, res) {
+    var doctorId = req.body.doctorId
+    db.getAppointment(doctorId, function (err, results) {
+      if (err) throw err;
+      if (results.length > 0) {
+        res.send({
+          data: results
+        });
+      }
+    });
+  });
+
 passport.deserializeUser(function (id, done) {
   var query = `select * from Login where id=\"${id}\"`
   dbConnection.query(query, function (err, data) {
