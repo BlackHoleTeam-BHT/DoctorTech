@@ -8,7 +8,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import logo from '../../../../image/chief2.jpg'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { compose } from 'redux'
 import MCInput from './inputComponent/MCInput'
 
@@ -39,55 +39,55 @@ const styles = theme => ({
 
 class ChiefComplaint extends React.Component {
 
-    state = {
+  state = {
 
-    }
+  }
 
 
-    render() {
-        const { classes } = this.props;
-        console.log('CF',this.props.patient.chiefComplaint)
-        return (
-            <div>
-            <List className={classes.root}>
-                {this.props.patient.chiefComplaint.map((value, key) => {
-                    return (
-                         <div>
-                             
-                        <ListItem alignItems="flex-start" key={key} >
-                            <ListItemAvatar >
-                                <Avatar alt="Remy Sharp" src={logo} title={value.date} className={classes.img} />
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={value.title}
-                                secondary={
-                                    
-                                    <React.Fragment>
-                                        <br/>
-                                        <Typography component="span" className={classes.inline} color="textPrimary">
-                                           Complaint - &nbsp;
+  render() {
+    const { classes } = this.props;
+    console.log('CF', this.props.patient.chiefComplaint)
+    return (
+      <div>
+        <List className={classes.root}>
+          {this.props.patient.chiefComplaint.map((value, key) => {
+            return (
+              <div>
+
+                <ListItem alignItems="flex-start" key={key} >
+                  <ListItemAvatar >
+                    <Avatar alt="Remy Sharp" src={logo} title={value.date} className={classes.img} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={value.title}
+                    secondary={
+
+                      <React.Fragment>
+                        <br />
+                        <Typography component="span" className={classes.inline} color="textPrimary">
+                          Complaint - &nbsp;
                                           </Typography>
-                                        {value.description}
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
-                         <hr  className={classes.hr}/>
-                        </div>   
-                        
+                        {value.description}
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+                <hr className={classes.hr} />
+              </div>
 
 
-                    )
 
-                })}
+            )
 
-            </List>
-            
-            {(this.props.patient.CaseId !=0) && <MCInput />}
-        </div>
-        );
-       
-    }
+          })}
+
+        </List>
+
+        {(this.props.patient.CaseId != 0) && <MCInput />}
+      </div>
+    );
+
+  }
 
 
 }
@@ -98,13 +98,13 @@ ChiefComplaint.propTypes = {
 
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
-    return {
-      patient: state.patient
-    }
+  return {
+    patient: state.patient
   }
-  
+}
 
 
 
 
-export default compose(withStyles(styles),connect(mapStateToProps))(ChiefComplaint);
+
+export default compose(withStyles(styles), connect(mapStateToProps))(ChiefComplaint);

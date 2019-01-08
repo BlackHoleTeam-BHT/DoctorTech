@@ -1,5 +1,6 @@
 const dbConnection = require('./config');
 const moment = require('moment');
+
 // function to check if the account exist in database
 const isAccountExist = (user, callback) => {
   const sql = `select * from Login where email = "${user.email}";`;
@@ -524,8 +525,28 @@ const AddPatientHistory = (data, callback) => {
   })
 }
 
+
+
+
+//update the Confirmation Email 
+const ConfirmationEmail = (id, callback) => {
+
+  const sql = `UPDATE Login SET is_confirm=1 WHERE id=${id}`
+
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update Login Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results)
+    }
+  })
+
+}
+
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
+module.exports.ConfirmationEmail = ConfirmationEmail;
 module.exports.isAccountExist = isAccountExist;
 module.exports.insertUserInfo = insertUserInfo;
 module.exports.selectDoctorInfo = selectDoctorInfo;
