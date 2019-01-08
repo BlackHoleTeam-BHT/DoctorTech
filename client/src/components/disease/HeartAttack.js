@@ -56,7 +56,12 @@ class HeartAttack extends Component {
                   </div>
                 </div>
                 <div className="card-body">
+<<<<<<< HEAD
                   <Form onSubmit={this.handleSubmit}>
+=======
+                  <Form>
+
+>>>>>>> (feat) connect HeartAttack predictor with redux
                     <div className="form-group row">
                       <Label
                         for="Age"
@@ -101,6 +106,7 @@ class HeartAttack extends Component {
                     </div>
                     <div className="form-group row">
                       <Label
+<<<<<<< HEAD
                         for="Ca"
                         className="col-md-4 col-form-label text-md-right"
                       >
@@ -123,6 +129,8 @@ class HeartAttack extends Component {
                     </div>
                     <div className="form-group row">
                       <Label
+=======
+>>>>>>> (feat) connect HeartAttack predictor with redux
                         for="Cpt"
                         className="col-md-4 col-form-label text-md-right"
                       >
@@ -238,10 +246,36 @@ class HeartAttack extends Component {
                         for="Fbs"
                         className="col-md-4 col-form-label text-md-right"
                       >
+<<<<<<< HEAD
                         Fasting Blood Sugar
                       </Label>
                       <div className="col-md-6">
                         <Input
+=======
+                        Major Vessels (0-3)
+                      </Label>
+                      <div className="col-md-6">
+                        <Input
+                          type="number"
+                          id="Ca"
+                          className="form-control"
+                          name="Ca"
+                          required
+                          onChange={this.handleChange}
+                          value={this.state.Ca}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <Label
+                        for="Fbs"
+                        className="col-md-4 col-form-label text-md-right"
+                      >
+                        Fasting Blood Pressure
+                      </Label>
+                      <div className="col-md-6">
+                        <Input
+>>>>>>> (feat) connect HeartAttack predictor with redux
                           type="select"
                           id="Fbs"
                           className="form-control"
@@ -255,7 +289,7 @@ class HeartAttack extends Component {
                           <option>Greater than 120 mg/dl</option>
                         </Input>
                       </div>
-                    </div>
+                      </div>
                     <div className="form-group row">
                       <Label
                         for="Exang"
@@ -332,7 +366,11 @@ class HeartAttack extends Component {
 
                     <div className="form-group row">
                       <Label
+<<<<<<< HEAD
                         for="Thalium"
+=======
+                        for="Thal"
+>>>>>>> (feat) connect HeartAttack predictor with redux
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Thalium Heart Scan
@@ -356,7 +394,11 @@ class HeartAttack extends Component {
                     </div>
 
                     <div className="col-md-6 offset-md-4">
+<<<<<<< HEAD
                       <Button type="submit" color="primary">
+=======
+                      <Button type="submit" color="primary" onClick={this.handleSubmit.bind(this)}>
+>>>>>>> (feat) connect HeartAttack predictor with redux
                         Predict
                       </Button>
                     </div>
