@@ -700,7 +700,9 @@ router.route('/confirmEmail/:id').get(function (req, res) {
 
 //to upload image
 router.route('/upload').post(upload.single('pic'),function(req,res){
-     console.log(req.file.path)
+     console.log('body',req.body.id)
+     console.log('file',req.file)
+     
     res.send('1')
 })
 
