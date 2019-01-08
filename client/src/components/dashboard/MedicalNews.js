@@ -65,7 +65,14 @@ const styles = theme => ({
 });
 
 class RecipeReviewCard extends React.Component {
-  state = { expanded: false };
+    constructor(props) {
+        super(props);
+        this.state = {};
+
+        this.props.MedicalNewsAPI()
+        
+    }
+  
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
