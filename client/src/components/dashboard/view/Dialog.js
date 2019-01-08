@@ -35,6 +35,7 @@ class ScrollDialog extends React.Component {
           <DialogContent>
             <DialogContentText>
                 {this.props.content}
+               <a href={this.props.link}><Button color="primary">Read More</Button></a>
            </DialogContentText>
           </DialogContent>
           <DialogActions>

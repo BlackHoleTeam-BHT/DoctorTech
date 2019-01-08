@@ -21,10 +21,19 @@ import { compose } from 'redux';
 import {MedicalNewsAPI} from '../../store/action/API'
 import Grid from '@material-ui/core/Grid';
 import ScrollDialog from './view/Dialog'
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 
 const styles = theme => ({
   card: {
     maxWidth: 400,
+  },
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
   },
   media: {
     height: 0,
@@ -49,6 +58,9 @@ const styles = theme => ({
     backgroundColor: red[500],
     width: 60,
     height: 60,
+  },  gridList: {
+    width: '80%',
+    
   },
 });
 
@@ -64,10 +76,14 @@ class RecipeReviewCard extends React.Component {
     console.log(this.props)
 
     return (
-        <Grid container className={classes.root} spacing={16}>
+       <div className={classes.root}>
+       <GridList cellHeight={500} className={classes.gridList} cols={3}>   
+       
 {    this.props.Articles.map((value,key)=>{
-        return (        
-        <Card className={classes.card} key={key}>
+        return (
+       
+        <GridListTile key={key} >
+        <Card className={classes.card}>
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>
@@ -100,13 +116,19 @@ class RecipeReviewCard extends React.Component {
             <ShareIcon />
           </IconButton>
           <span style={{marginLeft: 'auto'}}>
-          <ScrollDialog  content={value.content}></ScrollDialog>
+          <ScrollDialog  link={value.url} content={value.content.slice(0,(value.content.length-14))}></ScrollDialog>
           </span>
         
         </CardActions>
-      </Card> )})}
-
-      </Grid>
+      </Card> 
+      </GridListTile>
+       
+      
+        
+      )})}
+      </GridList> 
+      </div>
+      
     );
   }
 }
