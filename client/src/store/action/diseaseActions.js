@@ -74,7 +74,7 @@ export const Health= (data) => {
     return (dispatch, getState) => {
       $.ajax({
         type: "POST",
-        url: '/HeartAttack',
+        url: '/heart-attack',
         data: JSON.stringify(data),
         contentType: 'application/json',
         success: function (res) {

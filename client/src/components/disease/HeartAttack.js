@@ -8,7 +8,7 @@ class HeartAttack extends Component {
     super(props);
     this.state = {
       Age: "",
-      Sex: "",
+      Gender: "",
       Cpt: "",
       Chol: "",
       Restecg: "",
@@ -43,10 +43,10 @@ class HeartAttack extends Component {
             <div className="col-md-8">
               <div className="card">
                 <div className="text-center">
-                  <div className="card-header">Heart Attack Predictor</div>
+                  <div className="card-header" style ={{fontWeight: "bold", backgroundColor:"#d5f3f6", height:50, fontSize:20  }}>Heart Attack Predictor</div>
                 </div>
                 <div className="card-body">
-                  <Form>
+                  <Form onSubmit={this.handleSubmit}>
 
                     <div className="form-group row">
                       <Label
@@ -61,9 +61,9 @@ class HeartAttack extends Component {
                           id="Age"
                           className="form-control"
                           name="Age"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Age}
+                          value={this.state.value}
+                          required
                         />
                       </div>
                     </div>
@@ -80,9 +80,9 @@ class HeartAttack extends Component {
                           id="Gender"
                           className="form-control"
                           name="Gender"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Gender}
+                          value={this.state.value}
+                          required
                         >
                           <option>--select--</option>
                           <option>Male</option>
@@ -103,9 +103,9 @@ class HeartAttack extends Component {
                           id="Cpt"
                           className="form-control"
                           name="Cpt"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Cpt}
+                          value={this.state.value}
+                          required
                         >
                           <option>--select--</option>
                           <option>Typical Angina</option>
@@ -128,9 +128,9 @@ class HeartAttack extends Component {
                           id="Chol"
                           className="form-control"
                           name="Chol"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Chol}
+                          value={this.state.value}
+                          required
                         />
                       </div>
                     </div>
@@ -147,9 +147,9 @@ class HeartAttack extends Component {
                           id="Trestbps"
                           className="form-control"
                           name="Trestbps"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Trestbps}
+                          value={this.state.value}
+                          required
                         />
                       </div>
                     </div>
@@ -166,9 +166,9 @@ class HeartAttack extends Component {
                           id="Thalach"
                           className="form-control"
                           name="Thalach"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Thalach}
+                          value={this.state.value}
+                          required
                         />
                       </div>
                     </div>
@@ -185,14 +185,14 @@ class HeartAttack extends Component {
                           id="Restecg"
                           className="form-control"
                           name="Restecg"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Restecg}
+                          value={this.state.value}
+                          required
                         >
                           <option>--select--</option>
                           <option>Normal</option>
-                          <option>value 1</option>
-                          <option>value 2</option>
+                          <option>ST-T wave abnormality(T wave inversions and/or ST elevation or depression of > 0.05 mV)</option>
+                          <option>probable or definite left ventricular hypertrophy by Estes' criteria</option>
                         </Input>
                       </div>
                     </div>
@@ -201,7 +201,7 @@ class HeartAttack extends Component {
                         for="Ca"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                        Major Vessels (0-3)
+                        ca
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -209,10 +209,12 @@ class HeartAttack extends Component {
                           id="Ca"
                           className="form-control"
                           name="Ca"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Ca}
+                          value={this.state.value}
+                          required
                         />
+                        <small id="emailHelp" class="form-text text-muted">number of major vessels (0-3) colored by flourosopy</small>
+
                       </div>
                     </div>
                     <div className="form-group row">
@@ -220,7 +222,7 @@ class HeartAttack extends Component {
                         for="Fbs"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                        Fasting Blood Pressure
+                        Fasting Blood Sugar
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -228,9 +230,9 @@ class HeartAttack extends Component {
                           id="Fbs"
                           className="form-control"
                           name="Fbs"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Fbs}
+                          value={this.state.value}
+                          required
                         >
                           <option>--select--</option>
                           <option>Less than 120 mg/dl</option>
@@ -251,9 +253,9 @@ class HeartAttack extends Component {
                           id="Exang"
                           className="form-control"
                           name="Exang"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Exang}
+                          value={this.state.value}
+                          required
                         >
                           <option>--select--</option>
                           <option>Yes</option>
@@ -274,10 +276,12 @@ class HeartAttack extends Component {
                           id="Oldpeak"
                           className="form-control"
                           name="Oldpeak"
-                          required
-                          value={this.state.Oldpeak}
+                          value={this.state.value}
                           onChange={this.handleChange}
+                          required
                         />
+                        <small id="oldp" class="form-text text-muted">ST depression induced by exercise relative to rest</small>
+
                       </div>
                     </div>
 
@@ -294,15 +298,17 @@ class HeartAttack extends Component {
                           id="Slope"
                           className="form-control"
                           name="Slope"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Slope}
+                          value={this.state.value}
+                          required
                         >
                           <option>--select--</option>
                           <option>Upsloping</option>
                           <option>Flat</option>
                           <option>Downsloping</option>
+
                         </Input>
+                        <small id="slope" class="form-text text-muted">the slope of the peak exercise ST segment</small>
                       </div>
                     </div>
 
@@ -319,15 +325,15 @@ class HeartAttack extends Component {
                           id="Thal"
                           className="form-control"
                           name="Thal"
-                          required
                           onChange={this.handleChange}
-                          value={this.state.Thal}
+                          value={this.state.value}
+                          required
                         />
                       </div>
                     </div>
 
                     <div className="col-md-6 offset-md-4">
-                      <Button type="submit" color="primary" onClick={this.handleSubmit.bind(this)}>
+                      <Button type="submit" color="primary" >
                         Predict
                       </Button>
                     </div>
