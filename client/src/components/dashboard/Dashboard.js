@@ -7,22 +7,22 @@ import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuIcon from '@material-ui/icons/Menu';
-import {Toolbar, Avatar} from '@material-ui/core';
+import { Toolbar, Avatar } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
 import DrawerMenu from './DrawerMenu.js';
-import { BrowserRouter, Route} from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import CreatePatient from '../Patient/CreatePatient2.js';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import Patients from '../Patient/Patients.js';
 import PatientProfile from '../Patient/Profile/patientProfile.js';
-import {logout} from '../../store/action/authActions.js';
-import {Redirect} from 'react-router-dom'
+import { logout } from '../../store/action/authActions.js';
+import { Redirect } from 'react-router-dom'
 import DrProfile from '../doctorProfile/DrProfile.js'
 import DoctorConsultation from '../doctor/DoctorConsultation.js'
-import Diabetes from '../disease/diabetes';
+import SmartPredict from '../disease/SmartPredict.js';
 
 const drawerWidth = 260;
 const styles = theme => ({
@@ -60,7 +60,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
   },
   avtar: {
-    background:  "#ff80b3",
+    background: "#ff80b3",
     color: "#fff",
     marginRight: 15
   }
@@ -76,18 +76,18 @@ class Dashboard extends React.Component {
   };
 
   // function to logout 
-  logout () {
+  logout() {
     // logout function from authAction
     this.props.logOut();
   }
   render() {
     const { classes, theme } = this.props;
-    if(this.props.logout) {
+    if (this.props.logout) {
       this.props.history.push('/')
-    } 
-    if(!this.props.login) {
+    }
+    if (!this.props.login) {
       return (
-        <Redirect to = '/' />
+        <Redirect to='/' />
       )
     }
     return (
@@ -109,7 +109,7 @@ class Dashboard extends React.Component {
               </Typography>
               <Avatar className={classes.avtar} >Dr</Avatar>
               <Typography variant="body2" color="inherit">
-                {this.props.user.firstName +' ' +this.props.user.lastName}
+                {this.props.user.firstName + ' ' + this.props.user.lastName}
               </Typography>
               <Button color="inherit" onClick={this.logout.bind(this)}>Logout</Button>
             </Toolbar>
@@ -127,7 +127,7 @@ class Dashboard extends React.Component {
                   paper: classes.drawerPaper,
                 }}
               >
-                <DrawerMenu  classes={classes} />
+                <DrawerMenu classes={classes} />
               </Drawer>
             </Hidden>
             <Hidden xsDown implementation="css">
@@ -148,10 +148,9 @@ class Dashboard extends React.Component {
             <Route exact path="/dashboard/:id/add-patient" component={CreatePatient} />
             <Route exact path="/dashboard/:id/patients" component={Patients} />
             <Route path="/dashboard/:id/PatientProfile/:id" component={PatientProfile} />
-            <Route exact path = "/dashboard/dr-profile" component = {DrProfile}/>
+            <Route exact path="/dashboard/dr-profile" component={DrProfile} />
             <Route path="/dashboard/:id/consultaion/" component={DoctorConsultation} />
-            <Route path = "/dashboard/diabetes" component={Diabetes} />
-
+            <Route path="/dashboard/:id/samrt-prediction/" component={SmartPredict} />
           </main>
         </div>
       </BrowserRouter>
@@ -171,7 +170,7 @@ Dashboard.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    user : state.auth.user,
+    user: state.auth.user,
     logout: state.auth.logout,
     login: state.auth.login
   }

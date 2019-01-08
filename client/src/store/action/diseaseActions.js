@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+//  This action to make request to server to predicat diabetes
 export const diabetes = (data) => {
     return (dispatch, getState) => {
       $.ajax({
@@ -49,3 +50,22 @@ export const Health= (data) => {
     });
   }
 }
+ //  This action to make request to server to predicat breast cancer
+  export const predictBreastCancer = (data) => {
+    return (dispatch, getState) => {
+      $.ajax({
+        type: "POST",
+        url: '/breast-cancer',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: function (res) {
+            if(res.data) {
+                dispatch({ type: 'BREAST_CANCER', data: res.data })
+            }
+        },
+        error: (err) => {
+          console.log("err in breastCancer POST request" ,err)
+        }
+      });
+    }
+  }

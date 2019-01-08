@@ -97,7 +97,7 @@ class MedicalHistory extends React.Component {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>}
-        {(this.props.patient.CaseId !=0) && (this.props.patient.MedicalHistory.length===0) &&  <MCInput></MCInput>}
+        {(this.props.patient.CaseId !==0) && (this.props.patient.MedicalHistory.length===0) &&  <MCInput></MCInput>}
 
       </div>
     );

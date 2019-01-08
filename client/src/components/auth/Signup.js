@@ -4,6 +4,8 @@ import { Container, Row, Col, FormGroup, Label, Input, Button, Alert } from 'rea
 import '../style/SignUp.css'
 import { signUp } from '../../store/action/authActions';
 import image from '../style/doctor.jpg'
+import SweetAlert from 'sweetalert2-react'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 class Signup extends Component {
   constructor(props) {
@@ -19,7 +21,11 @@ class Signup extends Component {
       clinicNumber: "",
       bio: "",
       location: "",
+      show: false,
+      progress: false,
+
     }
+
   }
   // function to get data from form
   takeValue = (e) => {
@@ -30,15 +36,20 @@ class Signup extends Component {
   // funcation to submit data to server and signup
   submitValue = (e) => {
     e.preventDefault()
+    this.setState({
+      progress:true
+    })
+
     // call sign up function from props that was maped from redux dispatch
     this.props.signUp(this.state)
   }
 
+  //confirm sweet alert 
+  onConfirmAlert = () => {
+    this.props.history.push('/dashboard/' + this.props.user.id);
+  }
+
   render() {
-    // to check if the user make sign up successfully
-    if (!this.props.login) {
-      this.props.history.push('/dashboard/' + this.props.user.id);
-    }
     return (
       <div>
         <Container>
@@ -119,11 +130,18 @@ class Signup extends Component {
                       This user is already exist!
                     </Alert>
                   }
+                  <SweetAlert
+                    show={this.props.login}
+                    title="Confirmation Email"
+                    text={"the confirmation Email has been sent to your Email: "+this.props.user.email}
+                    onConfirm={this.onConfirmAlert}
+                  />
                 </div>
               </div>
             </Col>
           </Row>
         </Container>
+        {this.state.progress && !this.props.userExist && !this.props.login && <LinearProgress></LinearProgress>}
       </div>
     )
   }
@@ -140,7 +158,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
     userExist: state.auth.userExist,
-    login: state.auth.user 
+    login: state.auth.login
   }
 }
 
