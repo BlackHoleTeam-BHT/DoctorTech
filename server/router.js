@@ -51,41 +51,6 @@ let transporter = nodemailer.createTransport({
   }
 })
 
-
-// this service to deal with predicate BreastCancer
-router.route('/breast-cancer')
-  .post(function (req, res) {
-    let featuresObj = req.body;
-    // recieve the data and config it to be ready to machine learning
-    let features = [parseFloat(featuresObj['Age']), parseFloat(featuresObj['BMI']), parseFloat(featuresObj['Glucose']),
-    parseFloat(featuresObj['Insulin']), parseFloat(featuresObj['HOMA']), parseFloat(featuresObj['Leptin']),
-    parseFloat(featuresObj['Adiponectin']), parseFloat(featuresObj['Resistin']), parseFloat(featuresObj['MCP1'])];
-
-    request.post('http://localhost:8000/breast-cancer/', { form: JSON.stringify({ features: features }) }, function (err, response, body) {
-      let result = JSON.parse(body);
-      res.send({
-        data: {
-          predicate: result.predicate === 1 ? 'Negative': 'Positive',
-          accuracy : result.accuracy
-        }
-      });
-    });
-  });
-
-// this service to deal with predicate HeartAttack
-router.route('/heart-attack')
-  .post(function (req, res) {
-    let featuresObj = req.body;
-    let features = [featuresObj['Age'], featuresObj['Gender'], featuresObj['Cpt'], featuresObj['Trestbps'], featuresObj['Chol'],
-    featuresObj['Fbs'], featuresObj['Restecg'], featuresObj['Thalach'], featuresObj['Exang'], featuresObj['Oldpeak'],
-    featuresObj['Slope'], featuresObj['Ca'], featuresObj['Thal']];
-    console.log(features)
-    // request.post('http://localhost:8000/heart-attack/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
-    //   console.log("Success " + body);
-    // });
-  })
-
-
 // dealing with sign up request 
 router.route('/sign-up')
   .post(function (req, res) {
@@ -634,14 +599,57 @@ router.route('/CheckSession')
     }
   })
 
-//Database test
+// this service to deal with predicate BreastCancer
+router.route('/breast-cancer')
+  .post(function (req, res) {
+    let featuresObj = req.body;
+    // recieve the data and config it to be ready to machine learning
+    let features = [parseFloat(featuresObj['Age']), parseFloat(featuresObj['BMI']), parseFloat(featuresObj['Glucose']),
+    parseFloat(featuresObj['Insulin']), parseFloat(featuresObj['HOMA']), parseFloat(featuresObj['Leptin']),
+    parseFloat(featuresObj['Adiponectin']), parseFloat(featuresObj['Resistin']), parseFloat(featuresObj['MCP1'])];
+
+    request.post('http://localhost:8000/breast-cancer/', { form: JSON.stringify({ features: features }) }, function (err, response, body) {
+      let result = JSON.parse(body);
+      res.send({
+        data: {
+          predicate: result.predicate === 1 ? 'Negative' : 'Positive',
+          accuracy: result.accuracy
+        }
+      });
+    });
+  });
+
+// this service to deal with predicate HeartAttack
+router.route('/heart-attack')
+  .get(function (req, res) {
+    let featuresObj = req.body;
+    let features = [featuresObj['age'], featuresObj['sex'], featuresObj['cp'], featuresObj['trestbps'], featuresObj['chol'],
+    featuresObj['fbs'], featuresObj['restecg'], featuresObj['thalach'], featuresObj['exang'], featuresObj['oldpeak'],
+    featuresObj['slop'], featuresObj['ca'], featuresObj['thal']];
+    request.post('http://localhost:8000/heart-attack/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
+      console.log("Success " + body);
+    });
+  })
 
 router.route('/diabetes').post(function (req, response) {
   //Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age
-  var obj = JSON.stringify({ value: [[6, 148, 72, 35, 0, 40.6, 0.627, 50]] })
+  let featuresObj = req.body;
+  // recieve the data and config it to be ready to machine learning
+  let features = [parseFloat(featuresObj['Pregnancies']), parseFloat(featuresObj['Glucose']), parseFloat(featuresObj['BloodPressure']),
+  parseFloat(featuresObj['SkinThickness']), parseFloat(featuresObj['Insulin']), parseFloat(featuresObj['BMI']),
+  parseFloat(featuresObj['DiabetesPedigreeFunction']), parseFloat(featuresObj['Age'])]
+
+  var obj = JSON.stringify({ value: [features] })
   request.post('http://127.0.0.1:8000/diabetes/predict/', { form: obj }, function (err, res, body) {
-    console.log(body)
-    response.send(body)
+  
+  let result = JSON.parse(body);
+   console.log(result)  
+    response.send({
+      data: {
+        predicate: result.predicate === 0 ? 'Negative' : 'Positive',
+        accuracy: result.accuracy
+      }
+    });
   })
 })
 

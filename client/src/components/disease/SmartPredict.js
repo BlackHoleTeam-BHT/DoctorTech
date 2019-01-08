@@ -12,7 +12,7 @@ import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux';
 import BreastCancer from './BreastCancer';
-import Diabetes  from './Diabetes'
+import Diabetes from './Diabetes'
 
 let root = {
   flexGrow: 1,
@@ -40,12 +40,12 @@ class SmartPredict extends React.Component {
     // }
     console.log("Breast" + this.props.breastCancer.accuracy)
     return (
-      
+
       <div style={{ justifyContent: "center", margin: 20 }}>
         <div>
           <Grid container>
             <Grid item md={12} xs={12} sm={12}>
-            
+
               <Tabs variant="fullWidth"
                 style={root}
                 value={this.state.value}
@@ -54,9 +54,9 @@ class SmartPredict extends React.Component {
                 textColor="secondary"
                 centered
               >
-                <Tab label="Breast Cancer Predictor" disableRipple/>
-                <Tab label="Diabetes Predictor" disableRipple/>
-                <Tab label="Heart Attack Predictor" disableRipple/>
+                <Tab label="Breast Cancer Predictor" disableRipple />
+                <Tab label="Diabetes Predictor" disableRipple />
+                <Tab label="Heart Attack Predictor" disableRipple />
               </Tabs>
             </Grid>
             <Grid item md={8} xs={12} sm={12}>
@@ -69,14 +69,24 @@ class SmartPredict extends React.Component {
                 <div>
                   <Typography variant="display1" color="primary">Result :</Typography>
                 </div>
-                <div style={{marginTop: 20, marginBottom: 50}}>
-                  <Typography variant="h5" color="primary">{this.props.breastCancer.predicate}</Typography>
+                <div style={{ marginTop: 20, marginBottom: 50 }}>
+                  <Typography variant="h5" color="primary">
+                    {
+                      this.state.value === 0 ? this.props.breastCancer.predicate : this.state.value === 1 ?
+                        this.props.diabetes.predicate : this.props.breastCancer.predicate
+                    }
+                  </Typography>
                 </div>
                 <div>
                   <Typography variant="display1" color="secondary">Accuracy</Typography>
                 </div>
-                <div style={{marginTop: 20}}>
-                  <Typography variant="h5" color="secondary">{this.props.breastCancer.accuracy}</Typography>
+                <div style={{ marginTop: 20 }}>
+                  <Typography variant="h5" color="secondary">
+                    {
+                      this.state.value === 0 ? this.props.breastCancer.accuracy : this.state.value === 1 ?
+                        this.props.diabetes.accuracy : this.props.breastCancer.accuracy
+                    }
+                  </Typography>
                 </div>
               </Paper>
             </Grid>
@@ -92,6 +102,7 @@ const mapStateToProps = (state) => {
   return {
     login: state.auth.login,
     breastCancer: state.disease.breastCancerPredictions,
+    diabetes: state.disease.diabetes
   }
 }
 
