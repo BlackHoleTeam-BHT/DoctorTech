@@ -7,7 +7,9 @@ const initState = {
   consultsInbox: [],
   isShowConsultDetialsOpen: false,
   targetConsult: {},
-  appointments: []
+  appointments: [],
+  isDoctorInfoReceived : false
+
 };
 
 // this function to dealing with doctor action in redux
@@ -44,7 +46,8 @@ const doctorReducer = (state = initState, action) => {
     case "GET_CONSULTATIONS_INBOX":
       return {
         ...state,
-        consultsInbox: action.data
+        consultsInbox: action.data,
+        isDoctorInfoReceived: true
       }
     case "OPEN_SHOWCONSULT_DETIALS":
       return {

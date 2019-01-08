@@ -60,7 +60,7 @@ class DoctorListEntry extends React.Component {
               <Grid item xs={12} sm={12} md={2}>
                 <Button 
                   variant="outlined" color="secondary" 
-                  style={{ marginTop: 20, paddingRight: 40, width: 100 }}
+                  style={{ marginTop: 20, width: 100 }}
                   onClick = {this.handlOnClickSend.bind(this)}
                 >
                  Send

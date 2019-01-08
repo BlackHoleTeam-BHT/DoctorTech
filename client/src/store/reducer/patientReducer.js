@@ -2,6 +2,7 @@ const initState={
     patient: {},
     patientID: 0,
     patients: [],
+    isPatiensInfoReceived : false,
     selectPatient:false,
     patientSearchResults : [],
     isSearchNow: false,
@@ -45,11 +46,13 @@ const patientReducer = (state = initState, action) => {
   switch (action.type) {
     case "CREATE_PATIENT": return {
       ...state,
-      patientID: action.data
+      patientID: action.data,
+     
     }
     case "GET_PATIENTS": return {
       ...state,
-      patients: action.data
+      patients: action.data,
+      isPatiensInfoReceived: true
     }
     case "CREATE_PATIENT_ERROR":
       return state;
