@@ -274,7 +274,7 @@ class HeartAttack extends Component {
                           <option>Greater than 120 mg/dl</option>
                         </Input>
                       </div>
-                      </div>
+                    </div>
                     <div className="form-group row">
                       <Label
                         for="Exang"
