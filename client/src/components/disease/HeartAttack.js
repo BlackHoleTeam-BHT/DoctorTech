@@ -47,6 +47,7 @@ class HeartAttack extends Component {
                 </div>
                 <div className="card-body">
                   <Form>
+
                     <div className="form-group row">
                       <Label
                         for="Age"
@@ -91,7 +92,7 @@ class HeartAttack extends Component {
                     </div>
                     <div className="form-group row">
                       <Label
-                        for="Gender"
+                        for="Cpt"
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Chest Pain type
@@ -119,7 +120,7 @@ class HeartAttack extends Component {
                         for="Chol"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                        Serum Cholestoral (mg/dL)
+                        Serum Cholestoral(mg/dL)
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -138,7 +139,7 @@ class HeartAttack extends Component {
                         for="Trestbps"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                        Resting Blood Pressure (mm/Hg)
+                        Resting Blood Pressure(mm/Hg)
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -152,7 +153,6 @@ class HeartAttack extends Component {
                         />
                       </div>
                     </div>
-      
                     <div className="form-group row">
                       <Label
                         for="Thalach"
@@ -173,13 +173,6 @@ class HeartAttack extends Component {
                       </div>
                     </div>
                     <div className="form-group row">
-                      <Label
-                        for="Fbs"
-                        className="col-md-4 col-form-label text-md-right"
-                      >
-                        Fasting Blood Pressure
-                      </Label>
-                      <div className="form-group row">
                       <Label
                         for="Restecg"
                         className="col-md-4 col-form-label text-md-right"
@@ -208,7 +201,7 @@ class HeartAttack extends Component {
                         for="Ca"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                        Major Vessels
+                        Major Vessels (0-3)
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -222,6 +215,13 @@ class HeartAttack extends Component {
                         />
                       </div>
                     </div>
+                    <div className="form-group row">
+                      <Label
+                        for="Fbs"
+                        className="col-md-4 col-form-label text-md-right"
+                      >
+                        Fasting Blood Pressure
+                      </Label>
                       <div className="col-md-6">
                         <Input
                           type="select"
@@ -237,7 +237,7 @@ class HeartAttack extends Component {
                           <option>Greater than 120 mg/dl</option>
                         </Input>
                       </div>
-                    </div>
+                      </div>
                     <div className="form-group row">
                       <Label
                         for="Exang"
@@ -280,6 +280,7 @@ class HeartAttack extends Component {
                         />
                       </div>
                     </div>
+
                     <div className="form-group row">
                       <Label
                         for="Slope"
@@ -304,25 +305,7 @@ class HeartAttack extends Component {
                         </Input>
                       </div>
                     </div>
-                    <div className="form-group row">
-                      <Label
-                        for="Ca"
-                        className="col-md-4 col-form-label text-md-right"
-                      >
-                        Major Vessels
-                      </Label>
-                      <div className="col-md-6">
-                        <Input
-                          type="number"
-                          id="Ca"
-                          className="form-control"
-                          name="Ca"
-                          required
-                          onChange={this.handleChange}
-                          value={this.state.Ca}
-                        />
-                      </div>
-                    </div>
+
                     <div className="form-group row">
                       <Label
                         for="Thal"
@@ -344,11 +327,7 @@ class HeartAttack extends Component {
                     </div>
 
                     <div className="col-md-6 offset-md-4">
-                      <Button
-                        type="submit"
-                        color="primary"
-                        onClick={this.handleSubmit}
-                      >
+                      <Button type="submit" color="primary" onClick={this.handleSubmit.bind(this)}>
                         Predict
                       </Button>
                     </div>
@@ -366,7 +345,7 @@ class HeartAttack extends Component {
 // map state from redux to props
 const mapStateToProps = state => {
   return {
-    diabetes: state.disease.diabetes
+    heartAttack: state.disease.heartAttack
   };
 };
 
