@@ -7,22 +7,26 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
 
 const items = [
   {
     src: 'http://t.commonsupport.com/healing/images/main-slider/image-3.jpg',
-    altText: '',
-    caption: 'We Care About You'
+    altText: 'Welcome in Doctor Tech paltform ',
+    caption: 'Is an e-health platform specialy designed for doctors,that covers the convenience of health care technology to make work easy for doctors,'
+
   },
   {
     src: 'http://wowthemez.com/demos/medinex/img/slider-1.jpg',
-    altText: '',
-    caption: 'Welcome to Physio Therapy & Chiroparctor Clinic'
+    altText: 'Welcome in Doctor Tech paltform ',
+    caption: 'Is an e-health platform specialy designed for doctors,that covers the convenience of health care technology to make work easy for doctors,'
+
   },
   {
     src: 'http://wowthemez.com/demos/medinex/img/slider-2.jpg',
-    altText: 'Slide 3',
-    caption: 'Slide 3'
+    altText: 'Welcome in Doctor Tech paltform ',
+    caption: 'Is an e-health platform specialy designed for doctors,that covers the convenience of health care technology to make work easy for doctors,'
+
   }
 ];
 
@@ -70,26 +74,29 @@ class CarouselHome extends Component {
         <CarouselItem
           onExiting={this.onExiting}
           onExited={this.onExited}
-          key={item.src}  
+          key={item.src}
         >
           <img src={item.src} alt={item.altText} />
-          <CarouselCaption captionHeader={item.caption} captionText="" />
+          <CarouselCaption captionHeader={item.altText} captionText={item.caption} />
         </CarouselItem>
       );
     });
 
     return (
-        <div>
-      <Carousel
-        activeIndex={activeIndex}
-        next={this.next}
-        previous={this.previous}
-      >
-        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-        {slides}
-        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-        <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-      </Carousel>
+      <div className="carousalContainer">
+        <Carousel
+          activeIndex={activeIndex}
+          next={this.next}
+          previous={this.previous}
+        >
+          <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+          {slides}
+          <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+          <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+        </Carousel>
+        <div className="cover">
+        </div>
+
       </div>
     );
   }

@@ -2,6 +2,7 @@ const initState={
     patient: {},
     patientID: 0,
     patients: [],
+    isPatiensInfoReceived : false,
     selectPatient:false,
     patientSearchResults : [],
     isSearchNow: false,
@@ -36,7 +37,8 @@ const initState={
       step:5
     }],
   SelectCase: false,
-  CaseId: 0
+  CaseId: 0,
+
 }
 
 
@@ -45,11 +47,13 @@ const patientReducer = (state = initState, action) => {
   switch (action.type) {
     case "CREATE_PATIENT": return {
       ...state,
-      patientID: action.data
+      patientID: action.data,
+     
     }
     case "GET_PATIENTS": return {
       ...state,
-      patients: action.data
+      patients: action.data,
+      isPatiensInfoReceived: true
     }
     case "CREATE_PATIENT_ERROR":
       return state;
@@ -73,7 +77,6 @@ const patientReducer = (state = initState, action) => {
         PatientPlan: [],
         CaseId: 0,
         SelectCase: false
-
       }
 
     case "SEARCH_PATIENT":
@@ -178,7 +181,7 @@ const patientReducer = (state = initState, action) => {
       newPatientPlan[0].step = action.data.step
       var Cases = state.currentCase
       for (var i = 0; i < Cases.length; i++) {
-        if (Cases[i].id == action.data.CaseId) {
+        if (Cases[i].id === action.data.CaseId) {
           Cases[i].isOpen = 1
         }
       }
@@ -193,18 +196,8 @@ const patientReducer = (state = initState, action) => {
         ...state,
         PatientPlan: [action.data]
       }
-
-
-    case "AddAppointment":
-      var newAppointment = state.Appointment
-      newAppointment.push(action.data)
-
-      return {
-        ...state,
-        Appointment: newAppointment
-
-      }
-
+     
+   
       case "AddnewCase":
       var AddnewCase = state.currentCase
       AddnewCase.push(action.data)
@@ -217,8 +210,7 @@ const patientReducer = (state = initState, action) => {
       case "unSelectPatient":
       return{
         ...state,
-        selectPatient:false
-
+        selectPatient: false
       }
 
     default:

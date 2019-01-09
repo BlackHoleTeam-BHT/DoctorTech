@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Grid, Typography
+  Grid, Typography, CircularProgress
 } from '@material-ui/core'
 import Search from './Search.js'
 import PatientList from './PatientList'
@@ -34,6 +34,8 @@ class Patients extends React.Component {
       )
     }
     return (
+      !this.props.isPatiensInfoReceived ?  
+      <CircularProgress disableShrink size={50}  style ={{position: 'absolute', top: "50%", left: "50%"}}/> :
       <div>
         <Grid item sm={12} xs={12} >
           <Typography variant="h6" color="secondary">
@@ -54,7 +56,8 @@ const mapStateToProps = (state) => {
     patientSearchResults: state.patient.patientSearchResults,
     isSearchNow: state.patient.isSearchNow,
     user: state.auth.user,
-    login: state.auth.login
+    login: state.auth.login,
+    isPatiensInfoReceived: state.patient.isPatiensInfoReceived
   }
 }
 

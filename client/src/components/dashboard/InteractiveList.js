@@ -21,7 +21,8 @@ import GetAppointment from './GetAppointment';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { getAppointment } from '../../store/action/doctorActions'
-
+import MedicalNews from './MedicalNews';
+import Appointment from '../Patient/Profile/patientComponent/Appointment'
 const styles = theme => ({
 
   demo: {
@@ -32,7 +33,7 @@ const styles = theme => ({
   },
   root: {
     width: '100%',
-    maxWidth: 450,
+    maxWidth: 400,
     backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
   },
@@ -43,32 +44,30 @@ const styles = theme => ({
 });
 
 
-
-
-
 class InteractiveList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
       dense: false,
       open: true,
 
     }
-    this.filter = () => {
-      var y = new Date
-      var newAppointment = []
-      console.log("dddddd", y.toISOString().slice(0, 10))
-      console.log("Appointment", this.props.appointment)
-      for (var key in this.props.appointment) {
-        if (this.props.appointment.date.slice(0, 10) === y.toISOString().slice(0, 10)) {
-          newAppointment.push(this.props.appointment)
-        }
-      }
-      return newAppointment
-    }
+
+    // this.filter = () => {
+    //   var y = new Date();
+    //   var newAppointment = []
+    //   console.log("dddddd", y.toISOString().slice(0, 10))
+    //   console.log("Appointment", this.props.appointment)
+    //   for (var key in this.props.appointment) {
+    //     if (this.props.appointment.date.slice(0, 10) === y.toISOString().slice(0, 10)) {
+    //       newAppointment.push(this.props.appointment)
+    //     }
+    //   }
+    //   return newAppointment
+    // }
     this.props.getAppointment(this.props.user.id)
   }
+
   handleClick = () => {
     this.setState(state => ({ open: !state.open }));
   };
@@ -77,18 +76,21 @@ class InteractiveList extends React.Component {
     const { classes } = this.props;
     const { dense } = this.state;
     var appointments = this.props.appointments;
-
     console.log('ggygygy', this.props)
-
-
-
     return (
       <div>
+        
+        <Grid >
+        <Appointment />
+        <Grid item sm ={12} xs={12} md={8}>
+          <MedicalNews />
+        </Grid> 
+        <Grid item sm ={12} xs={12} md={4}>
         <List
           component="nav"
           subheader={<ListSubheader component="div"></ListSubheader>}
           className={classes.root}
-          style={{ position: 'absolute', right: 15, }}
+          style={{ position: 'absolute', right: 10, }}
         >
           <ListItem button onClick={this.handleClick}>
             <ListItemIcon>
@@ -100,18 +102,14 @@ class InteractiveList extends React.Component {
           <Collapse in={this.state.open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
-
                 <Grid item xs={12} md={12}>
-
                   <div className={classes.demo}>
                     <List dense={dense}>
 
                       {appointments.length > 0 ? (
-
                         appointments && appointments.map((elem =>
                           <GetAppointment key={elem.id} appointment={elem} />
                         ))
-
                       ) : (
                           <div className="text-center">
                             <h4>No data found</h4>
@@ -125,14 +123,17 @@ class InteractiveList extends React.Component {
             </List>
           </Collapse>
         </List>
-        <div class="main-content">
+        </Grid>
+       
+        </Grid>
+        {/* <div class="main-content">
           <div>
             <div class="syllabus-item embed" height="100%">
               <iframe height="600px" width="60%" allowfullscreen="true" title="Doctor Calendar" type="iframe" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=ulmhfubqcehs9o0k2bm6e1qod0%40group.calendar.google.com&amp;color=%238D6F47&amp;ctz=Asia%2FAmman" _links="[object Object]">
               </iframe>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
