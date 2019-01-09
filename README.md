@@ -34,7 +34,7 @@
 
 - Node.js with express framework
 - Mysql
-- Django 
+- Django
 - Machine learning
 - Sqlite3
 - ReactJS & React-Redux
