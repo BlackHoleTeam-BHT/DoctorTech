@@ -22,7 +22,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { getAppointment } from '../../store/action/doctorActions'
 import MedicalNews from './MedicalNews';
-
+import Appointment from '../Patient/Profile/patientComponent/Appointment'
 const styles = theme => ({
 
   demo: {
@@ -79,7 +79,9 @@ class InteractiveList extends React.Component {
     console.log('ggygygy', this.props)
     return (
       <div>
+        
         <Grid >
+        <Appointment />
         <Grid item sm ={12} xs={12} md={8}>
           <MedicalNews />
         </Grid> 

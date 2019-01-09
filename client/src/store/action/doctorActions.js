@@ -174,7 +174,6 @@ export const DoctorImage = (data) => {
 // Note: Add Appointment
 export const AddAppointment = (data) => {
   console.log('action AddAppointment', data)
-
   return (dispatch, getState) => {
 
     $.ajax({
@@ -195,12 +194,32 @@ export const AddAppointment = (data) => {
 }
 
 // this action to open model to add appointment to patient
-export const openAddAppointmentDialog = (isOpen, targetAppointment) => {
+export const openAddAppointmentDialog = (isOpen, targetAppointment, context) => {
   return (dispatch, getState) => {
     dispatch({
       type: "OPEN_ADD_APPOINTMENT_DAILOG",
       data: isOpen,
-      targetAppointment: targetAppointment
+      targetAppointment: targetAppointment,
+      context: context
     })
+  }
+}
+
+// this action to delete appointment 
+export const updateAppointment = (newAppointment) => {
+  return (dispatch, getState) => {
+    //sync
+    $.ajax({
+      type: "POST",
+      url: '/update-appointment',
+      data: JSON.stringify(newAppointment),
+      contentType: 'application/json',
+      success:  (res) => {
+        dispatch({ type: 'UPDATE_APPOINTMENT', data: res.data })
+      },
+      error: (err) => {
+        console.log("Error during update docotr appointment the server")
+      }
+    });
   }
 }

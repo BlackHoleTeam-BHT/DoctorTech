@@ -113,7 +113,7 @@ class PatientProfile extends React.Component {
 
   // this function to open addAppointmentDialog
   handleClickOpenAddAppointment = () => {
-    this.props.openAddAppointmentDialog(!this.props.isAddAppointmentDialogOpen, this.props.targetAppointment);
+    this.props.openAddAppointmentDialog(!this.props.isAddAppointmentDialogOpen, this.props.targetAppointment, 'PATIENT_PROFILE');
   }
 
   render() {
@@ -256,7 +256,7 @@ const mapDispatchToProps = (dispatch) => {
     GetCaseInfo: (id) => dispatch(GetCaseInfo(id)),
     Health: (data) => dispatch(Health(data)),
     GetPationInformation: (id) => dispatch(GetUserInformation(id)),
-    openAddAppointmentDialog: (isOpen, targetAppointment) => dispatch(openAddAppointmentDialog(isOpen, targetAppointment))
+    openAddAppointmentDialog: (isOpen, targetAppointment, context) => dispatch(openAddAppointmentDialog(isOpen, targetAppointment, context))
   }
 }
 

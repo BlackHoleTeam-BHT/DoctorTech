@@ -10,7 +10,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
 import { connect } from 'react-redux';
-import { deleteAppointment } from '../../store/action/doctorActions';
+import { deleteAppointment, openAddAppointmentDialog } from '../../store/action/doctorActions';
 class GetAppoitment extends React.Component {
   constructor(props) {
     super(props);
@@ -36,6 +36,11 @@ class GetAppoitment extends React.Component {
   deleteAppointment() {
     this.props.deleteAppointment(this.props.user.id, this.props.appointment.id);
   }
+  
+  // this function to open addAppointmentDialog
+  handleClickOpenAddAppointment = () => {
+    this.props.openAddAppointmentDialog(!this.props.isAddAppointmentDialogOpen, this.props.appointment, 'DASHBOARD');
+  }
 
   render() {
    
@@ -53,7 +58,10 @@ class GetAppoitment extends React.Component {
           }
         />
         <ListItemSecondaryAction>
-          <IconButton aria-label="Edit">
+          <IconButton
+             aria-label="Edit"
+             onClick={this.handleClickOpenAddAppointment}
+          >
             <Icon>edit_icon</Icon>
           </IconButton>
           <IconButton
@@ -72,13 +80,17 @@ const mapStateToProps = (state) => {
   return {
     appointments: state.doctor.appointments,
     user: state.auth.user,
+    isAddAppointmentDialogOpen: state.doctor.isAddAppointmentDialogOpen,
+    targetAppointment: state.doctor.targetAppointment
   }
 }
 
 // Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteAppointment: (doctorId, appointmentId) => dispatch(deleteAppointment(doctorId, appointmentId))
+    deleteAppointment: (doctorId, appointmentId) => dispatch(deleteAppointment(doctorId, appointmentId)),
+    openAddAppointmentDialog: (isOpen, targetAppointment, context) => dispatch(openAddAppointmentDialog(isOpen, targetAppointment, context))
+
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(GetAppoitment);

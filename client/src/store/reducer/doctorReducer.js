@@ -11,6 +11,7 @@ const initState = {
   isDoctorInfoReceived : false,
   targetAppointment:{},
   isAddAppointmentDialogOpen: false,
+  contextCallAddApointament : ''
 };
 
 // this function to dealing with doctor action in redux
@@ -64,7 +65,8 @@ const doctorReducer = (state = initState, action) => {
     return {
       ...state,
       isAddAppointmentDialogOpen: action.data,
-      targetAppointment : action.targetAppointment
+      targetAppointment : action.targetAppointment,
+      contextCallAddApointament: action.context
     }  
 
    case "AddAppointment":
@@ -75,10 +77,16 @@ const doctorReducer = (state = initState, action) => {
       ...state,
       appointments: newAppointment
     }
-    case "DELETE_APPOINTMENT": return {
-      ...state,
-      appointments: action.data
-    }
+    case "DELETE_APPOINTMENT":
+      return {
+        ...state,
+        appointments: action.data
+      }
+    case "UPDATE_APPOINTMENT": 
+      return {
+        ...state,
+        appointments: action.data
+      }
     default:
       return state;
   }
