@@ -17,6 +17,7 @@ const app =  express();
 
 //Note: Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use('/uploads',express.static(path.resolve(__dirname, '../uploads')));
 
 
 //Note: add bodyParser

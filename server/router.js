@@ -5,8 +5,37 @@ const db = require('../database/index.js')
 const request = require('request')
 const nodemailer = require('nodemailer');
 var bcrypt = require('bcryptjs');
+const multer =require('multer');
+
 // Note: define the router
 var router = express.Router();
+
+
+
+//Note: config multer
+
+const fileFilter=(req,file,cb)=>{
+  if(file.mimetype==='image/jpeg' || file.mimetype==='image/png'){
+    cb(null,true)
+  }else{
+    cb(null,false)
+  }
+
+}
+
+const storage=multer.diskStorage({
+  destination:function(req,file,cb){
+    cb(null,'uploads/')
+  },
+  filename:function(req,file,cb){
+    cb(null,file.originalname)
+  }
+})
+
+const upload=multer({
+  storage:storage,
+  fileFilter:fileFilter
+})
 
 
 
@@ -669,10 +698,54 @@ router.route('/confirmEmail/:id').get(function (req, res) {
 })
 
 
+//to upload image
+router.route('/upload').post(upload.single('pic'),function(req,res){
+    var id=req.body.id
+    var path=req.file.originalname
+    console.log('body',id)
+    console.log('file',path)
+
+    db.UploadImage(id,path,function(err,result){
+      
+      if(err){
+        throw err
+      }else{
+        db.selectDoctorInfo(id,function(err,result){
+          if(err){
+            throw err
+          }else{
+            res.send(result)
+          }
+        })
+        
+      }
+
+
+    })
+    
+     
+    
+})
+
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
+
+
+// service to deal with getAppointment request 
+router.route('/get-appointment')
+  .post(authenticationMiddleware(), function (req, res) {
+    var doctorId = req.body.doctorId
+    db.getAppointment(doctorId, function (err, results) {
+      if (err) throw err;
+      if (results.length > 0) {
+        res.send({
+          data: results
+        });
+      }
+    });
+  });
 
 passport.deserializeUser(function (id, done) {
   var query = `select * from Login where id=\"${id}\"`
