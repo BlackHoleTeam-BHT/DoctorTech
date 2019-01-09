@@ -23,8 +23,8 @@ import { Redirect } from 'react-router-dom'
 import DrProfile from '../doctorProfile/DrProfile.js'
 import DoctorConsultation from '../doctor/DoctorConsultation.js'
 import SmartPredict from '../disease/SmartPredict.js';
+import InteractiveList from './InteractiveList';
 
-import InteractiveList from './InteractiveList'
 const drawerWidth = 260;
 const styles = theme => ({
   root: {

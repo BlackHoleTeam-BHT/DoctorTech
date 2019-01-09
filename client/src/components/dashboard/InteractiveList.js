@@ -21,6 +21,7 @@ import GetAppointment from './GetAppointment';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { getAppointment } from '../../store/action/doctorActions'
+import MedicalNews from './MedicalNews';
 
 const styles = theme => ({
 
@@ -32,7 +33,7 @@ const styles = theme => ({
   },
   root: {
     width: '100%',
-    maxWidth: 450,
+    maxWidth: 400,
     backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
   },
@@ -78,11 +79,16 @@ class InteractiveList extends React.Component {
     console.log('ggygygy', this.props)
     return (
       <div>
+        <Grid >
+        <Grid item sm ={12} xs={12} md={8}>
+          <MedicalNews />
+        </Grid> 
+        <Grid item sm ={12} xs={12} md={4}>
         <List
           component="nav"
           subheader={<ListSubheader component="div"></ListSubheader>}
           className={classes.root}
-          style={{ position: 'absolute', right: 15, }}
+          style={{ position: 'absolute', right: 10, }}
         >
           <ListItem button onClick={this.handleClick}>
             <ListItemIcon>
@@ -115,14 +121,17 @@ class InteractiveList extends React.Component {
             </List>
           </Collapse>
         </List>
-        <div class="main-content">
+        </Grid>
+       
+        </Grid>
+        {/* <div class="main-content">
           <div>
             <div class="syllabus-item embed" height="100%">
               <iframe height="600px" width="60%" allowfullscreen="true" title="Doctor Calendar" type="iframe" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=ulmhfubqcehs9o0k2bm6e1qod0%40group.calendar.google.com&amp;color=%238D6F47&amp;ctz=Asia%2FAmman" _links="[object Object]">
               </iframe>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

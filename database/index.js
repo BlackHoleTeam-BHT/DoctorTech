@@ -528,8 +528,6 @@ const AddPatientHistory = (data, callback) => {
 }
 
 
-
-
 //update the Confirmation Email 
 const ConfirmationEmail = (id, callback) => {
 
@@ -591,6 +589,20 @@ const deleteAppointment = (doctorId, appointmentId, callback) => {
   });
 }
 
+// This function to update appoitment
+const updateAppointment = (newAppointment, callback) => {
+  const sql  = `update Appointment set date ="${newAppointment.date}", notes= "${newAppointment.notes}" where id = "${newAppointment.appointmentId}"`;
+  dbConnection.query(sql, function (err, result) {
+    if (err) {
+      console.log("Error during update info  for Doctor Appointment  \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+}
+
+
 
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
@@ -624,4 +636,5 @@ module.exports.AddAppointment = AddAppointment;
 module.exports.AddnewCase = AddnewCase;
 module.exports.getAppointment=getAppointment;
 module.exports.deleteAppointment = deleteAppointment;
+module.exports.updateAppointment = updateAppointment;
 
