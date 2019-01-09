@@ -52,8 +52,6 @@ let transporter = nodemailer.createTransport({
 })
 
 
-
-
 // this service to deal with predicate BreastCancer
 router.route('/breast-cancer')
   .post(function (req, res) {
@@ -70,14 +68,15 @@ router.route('/breast-cancer')
   
 // this service to deal with predicate HeartAttack
 router.route('/heart-attack')
-  .get(function (req, res) {
+  .post(function (req, res) {
     let featuresObj = req.body;
-    let features = [featuresObj['age'], featuresObj['sex'], featuresObj['cp'], featuresObj['trestbps'], featuresObj['chol'],
-    featuresObj['fbs'], featuresObj['restecg'], featuresObj['thalach'], featuresObj['exang'], featuresObj['oldpeak'],
-    featuresObj['slop'], featuresObj['ca'], featuresObj['thal']];
-    request.post('http://localhost:8000/heart-attack/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
-      console.log("Success " + body);
-    });
+    let features = [featuresObj['Age'], featuresObj['Gender'], featuresObj['Cpt'], featuresObj['Trestbps'], featuresObj['Chol'],
+    featuresObj['Fbs'], featuresObj['Restecg'], featuresObj['Thalach'], featuresObj['Exang'], featuresObj['Oldpeak'],
+    featuresObj['Slope'], featuresObj['Ca'], featuresObj['Thal']];
+    console.log(features)
+    // request.post('http://localhost:8000/heart-attack/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
+    //   console.log("Success " + body);
+    // });
   })
 
 

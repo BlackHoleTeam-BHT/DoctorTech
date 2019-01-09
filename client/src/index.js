@@ -10,6 +10,8 @@ import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MedicalNews from './components/dashboard/MedicalNews'
 import DrProfile from './components/doctorProfile/DrProfile'
+import HeartAttack from './components/disease/HeartAttack'
+
 
 // Note:create the store and add the thunk Middleware
 const store=createStore(rootReducer,applyMiddleware(thunk))
