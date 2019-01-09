@@ -105,6 +105,7 @@ class HeartAttack extends Component {
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Number of Major Vessels
+
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -257,7 +258,7 @@ class HeartAttack extends Component {
                         for="Fbs"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                        Fasting Blood Pressure
+                          Fasting Blood Sugar
                       </Label>
                       <div className="col-md-6">
                         <Input

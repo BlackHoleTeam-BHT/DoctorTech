@@ -9,7 +9,7 @@ import rootReducer from './store/reducer/rootReducer'
 import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HeartAttack from './components/disease/HeartAttack'
-//welcome 
+
 // Note:create the store and add the thunk Middleware
 const store=createStore(rootReducer,applyMiddleware(thunk))
 
