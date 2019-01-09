@@ -46,7 +46,7 @@ export const GetUserInformation = (id) => {
   console.log('action', 'recived')
 
   return (dispatch, getState) => {
-
+    dispatch({ type: 'unSelectPatient'})
     $.ajax({
       type: "POST",
       url: '/patientInformation',
@@ -352,35 +352,10 @@ export const AddPatientHistory = (data) => {
     });
 
 
-
   }
 
 }
 
-
-// Note: Add Appointment
-export const AddAppointment = (data) => {
-  console.log('action AddAppointment', data)
-
-  return (dispatch, getState) => {
-
-    $.ajax({
-      type: "POST",
-      url: '/add-appointment',
-      contentType: 'application/json',
-      data: JSON.stringify(data),
-      success: function (result) {
-        console.log('AddAppointmentServer', data)
-        dispatch({ type: 'AddAppointment', data: data })
-      },
-      error: (err) => {
-        console.log('server err', err)
-      }
-
-    });
-
-  }
-}
 
 // Note: Add new Case
 export const AddnewCase = (data) => {
@@ -446,15 +421,12 @@ export const ClosePatientProfile = (Id, step, CaseId) => {
 
 // Note: to open the patient profile
 export const OpenPatientProfile = (Id, step, CaseId) => {
-
   const data = {
     Id: Id,
     step: step,
     CaseId: CaseId
   }
-
   console.log('action OpenPatientProfile', data)
-
   return (dispatch, getState) => {
 
     $.ajax({
@@ -472,21 +444,12 @@ export const OpenPatientProfile = (Id, step, CaseId) => {
       }
 
     });
-
-
-
   }
-
 }
-
 
 // Note: to add  patient plan
 export const AddPatientPlan = (data) => {
-
-
-
   console.log('action AddPatientPlan', data)
-
   return (dispatch, getState) => {
 
     $.ajax({
@@ -495,18 +458,13 @@ export const AddPatientPlan = (data) => {
       contentType: 'application/json',
       data: JSON.stringify(data),
       success: function (result) {
-
         console.log('AddPatientPlan', result)
         dispatch({ type: 'AddPatientPlan', data: data })
       },
       error: (err) => {
         console.log('server err', err)
       }
-
     });
-
-
-
   }
-
 }
+

@@ -40,7 +40,10 @@ export const signIn = (user) => {
                 // dispatch the data from response  with type of action to authReducer
                 if (res.state === "LOGIN_SUCCESS") {
                     dispatch({ type: 'LOGIN', data: res.data, correctLogin: true})
-                } else {
+                } else if(res.state === "Not_Confirm"){
+                    console.log('confirm',res)
+                    dispatch({ type: 'Email_Not_Confirm'})
+                }else{
                     dispatch({ type: 'LOGIN_NOT_SUCCESS', correctLogin: false })
                 }
 

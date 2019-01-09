@@ -4,14 +4,24 @@
 
 ## Team
 
-  - __Product Owner__: Walid HajHussien
-  - __Scrum Master__: Mohammad Al-Rawashdah
-  - __Development Team Members__: Mahmoud Zaid, Dana Amer
+  - __Product Owner__: [Walid HajHussien](https://github.com/walid-hajhussien)
+  - __Scrum Master__: [Mohammad Al-Rawashdah](https://github.com/mhd-rawashdah)
+  - __Development Team Members__: [Mahmoud Zaid](https://github.com/Mahmoud-Zaid94), [Dana Amer](https://github.com/DanaAmer)
 
 ## Table of Contents
 
-1. [Usage] 
- Through our web application, doctors can easily:
+1. [Usage](#Usage)
+1. [Requirements](#requirements)
+1. [Development](#development)
+    1. [Installing Dependencies](#installing-dependencies)
+1. [DatabaseSchema](#databaseSchema)
+1. [Team](#team)
+1. [Contributing](#contributing)
+
+
+## Usage
+
+> Through our web application, doctors can easily:
 
 - Set and modify appointments for patients.
 - Add patient electronic medical records by simple way.
@@ -19,36 +29,17 @@
 - Board of consultants where doctors can send for each other an advisory opinion.
 - Intuitive "disease prediction system" this is what makes our application stand out than other health care platforms, by using the power of AI and machine learning to assess health status of patients.
 
-1. [Requirements]
-Node.js with express framework
-Mysql
-Django 
-Machine learning
-Sqlite3
-ReactJS & React-Redux
-Material-ui
-reactStrap
-
-1. [Development](#development)
-    1. [Installing Dependencies]
-    npm install
-    1. [Tasks](#tasks)
-1. [Team] 
-walid-hajhussien
-mhd-rawashdah
-Mahmoud-Zaid94
-DanaAmer
-1. [Contributing](#contributing)
-
 
 ## Requirements
 
-- Node 0.10.x
-- Mysql 2.16.0
-- React 16.7.0
-- Express 4.16.4
-- React-redux 6.0.0
-- Bootstrap 4.2.1
+- Node.js with express framework
+- Mysql
+- Django
+- Machine learning
+- Sqlite3
+- ReactJS & React-Redux
+- Material-ui
+- reactStrap
 
 ## Development
 
@@ -65,11 +56,16 @@ npm start
 
 After running all these commands the dev environment should be running
 
+## DatabaseSchema
+
+![docdb](https://user-images.githubusercontent.com/34889770/50775647-5f54be00-129f-11e9-8836-a70bbe77b4d8.jpg)
+
+
 ### Roadmap
 
-View the project roadmap https://waffle.io/BlackHoleTeam-BHT/DoctorTech
+View the project roadmap [https://waffle.io/BlackHoleTeam-BHT/DoctorTech] 
 
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines.

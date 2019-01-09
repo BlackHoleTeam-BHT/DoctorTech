@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
 import DrawerMenu from './DrawerMenu.js';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CreatePatient from '../Patient/CreatePatient2.js';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -23,6 +23,7 @@ import { Redirect } from 'react-router-dom'
 import DrProfile from '../doctorProfile/DrProfile.js'
 import DoctorConsultation from '../doctor/DoctorConsultation.js'
 import SmartPredict from '../disease/SmartPredict.js';
+import InteractiveList from './InteractiveList';
 
 const drawerWidth = 260;
 const styles = theme => ({
@@ -39,7 +40,7 @@ const styles = theme => ({
     },
   },
   appBar: {
-    background: "#2caee2",
+    background: "#2ec8a6",
     marginLeft: drawerWidth,
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -104,14 +105,22 @@ class Dashboard extends React.Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" color="inherit" className={classes.grow}>
+              <Typography variant="h5" color="inherit" className={classes.grow}>
                 Doctor Tech
               </Typography>
-              <Avatar className={classes.avtar} >Dr</Avatar>
-              <Typography variant="body2" color="inherit">
+              <Avatar style={{background:"#1c947c", color: "#ff0f"}} className={classes.avtar} >Dr</Avatar>
+              <Typography variant="h5"
+                 color="inherit" 
+                 className={classes.grow}
+                 style= {{fontSize: 18, fontWeight: 'bold'}}
+              >
                 {this.props.user.firstName + ' ' + this.props.user.lastName}
               </Typography>
-              <Button color="inherit" onClick={this.logout.bind(this)}>Logout</Button>
+              <Button
+                color="inherit" 
+                onClick={this.logout.bind(this)}
+                style= {{fontSize: 18, fontWeight: 'bold'}}
+              >Logout</Button>
             </Toolbar>
           </AppBar>
           <nav className={classes.drawer}>
@@ -145,15 +154,20 @@ class Dashboard extends React.Component {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             {/*  Router for Drawer menu TODO add the compnent */}
-            <Route exact path="/dashboard/:id/add-patient" component={CreatePatient} />
-            <Route exact path="/dashboard/:id/patients" component={Patients} />
+            <Switch>
+            <Route exact path="/dashboard/:id/" component={InteractiveList} />
+            <Route path="/dashboard/:id/add-patient" component={CreatePatient} />
+            <Route path="/dashboard/:id/patients" component={Patients} />
             <Route path="/dashboard/:id/PatientProfile/:id" component={PatientProfile} />
-            <Route exact path="/dashboard/dr-profile" component={DrProfile} />
+            <Route path="/dashboard/:id/dr-profile" component={DrProfile} />
             <Route path="/dashboard/:id/consultaion/" component={DoctorConsultation} />
             <Route path="/dashboard/:id/samrt-prediction/" component={SmartPredict} />
+            </Switch>
           </main>
         </div>
       </BrowserRouter>
+      
+      
     );
   }
 }

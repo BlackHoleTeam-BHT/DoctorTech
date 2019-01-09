@@ -7,8 +7,8 @@ import Signup from './components/auth/Signup.js';
 import Home from './components/layout/Home.js';
 import {connect} from 'react-redux'
 import DoctorConsultation from './components/doctor/DoctorConsultation.js';
-import PatientProfile from './components/Patient/Profile/patientProfile'
-
+import PatientProfile from './components/Patient/Profile/patientProfile';
+import SmartPredict from './components/disease/SmartPredict';
 class App extends Component {
   state = {
     isLogin: true
@@ -26,6 +26,7 @@ class App extends Component {
             <Route path="/dashboard/:id" component={Dashboard} />
             <Route path="/consultaion" component={DoctorConsultation} />
             <Route path="/PatientProfile/:id" component={PatientProfile} />
+            <Route path="/test" component={SmartPredict} />
 
           </Switch>
         </div>

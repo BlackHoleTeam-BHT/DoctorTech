@@ -1,7 +1,8 @@
 const initState = {
   diabetes: {},
   Health: [],
-  breastCancerPredictions: {}
+  breastCancerPredictions: {},
+  heartAttackPredictions: {}
 
 }
 
@@ -25,6 +26,11 @@ const disesesReducer = (state = initState, action) => {
       return {
         ...state,
         breastCancerPredictions: action.data
+      }
+      case "HEART_ATTACK":
+      return {
+        ...state,
+        heartAttack: action.data
       }
 
     default: return {

@@ -46,7 +46,7 @@ class PatientCard extends React.Component {
     }
 
     //Note : to get the patient information
-    this.props.GetPationInformation(this.props.id)
+    // this.props.GetPationInformation(this.props.id)
 
   }
 

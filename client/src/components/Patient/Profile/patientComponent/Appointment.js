@@ -11,7 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { AddAppointment } from '../../../../store/action/patientAction';
+import { AddAppointment, openAddAppointmentDialog, updateAppointment} from '../../../../store/action/doctorActions';
 
 const styles = theme => ({
   root: {
@@ -67,7 +67,8 @@ class Appointment extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    //this.setState({ open: false });
+    this.props.openAddAppointmentDialog(false, this.props.targetAppointment, '')
   };
 
   handelSubmit = () => {
@@ -77,8 +78,20 @@ class Appointment extends React.Component {
       id_Patients: this.props.patientProfile[0].id,
       id_Doctors: this.props.patientProfile[0].id_Doctor
     }
-
-    this.props.AddAppointment(obj)
+     if (this.props.context === "PATIENT_PROFILE") {
+       // add appointment 
+      this.props.AddAppointment(obj)
+     } else {
+       // update appointment
+      let newAppointment = {
+        date: this.state.date,
+        notes: this.state.notes,
+        id_Doctors: this.props.targetAppointment.id_Doctors,
+        appointmentId: this.props.targetAppointment.id
+      } 
+      this.props.updateAppointment(newAppointment)
+     }
+     this.setState({date:"", notes:""});
   }
 
   render() {
@@ -86,11 +99,11 @@ class Appointment extends React.Component {
     console.log("mmmmmmmmmmmmmm", this.props)
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+        {/* <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
         Add Appointment
-        </Button>
+        </Button> */}
         <Dialog
-          open={this.state.open}
+          open={this.props.isAddAppointmentDialogOpen}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
@@ -131,7 +144,6 @@ class Appointment extends React.Component {
               />
             </Grid>
 
-
           </DialogContent>
           <DialogActions>
             <Button onClick={(event)=>{this.handelSubmit();this.handleClose()}} color="primary" variant="contained"> 
@@ -155,7 +167,10 @@ Appointment.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patientProfile: state.patient.PatientProfile
+    patientProfile: state.patient.PatientProfile,
+    isAddAppointmentDialogOpen: state.doctor.isAddAppointmentDialogOpen,
+    targetAppointment: state.doctor.targetAppointment,
+    context : state.doctor.contextCallAddApointament
   }
 }
 
@@ -163,7 +178,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     AddAppointment: (data) => dispatch(AddAppointment(data)),
-
+    openAddAppointmentDialog: (isOpen, targetAppointment, context) => dispatch(openAddAppointmentDialog(isOpen, targetAppointment, context)),
+    updateAppointment: (newAppointment) => dispatch(updateAppointment(newAppointment))
   }
 }
 

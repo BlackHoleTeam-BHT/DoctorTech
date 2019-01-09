@@ -1,5 +1,6 @@
 const dbConnection = require('./config');
 const moment = require('moment');
+
 // function to check if the account exist in database
 const isAccountExist = (user, callback) => {
   const sql = `select * from Login where email = "${user.email}";`;
@@ -92,6 +93,8 @@ const insertIntoPatientTable = (patient, callback) => {
     }
   })
 }
+
+
 
 //function to  select Patient information based on the ID
 const selectAllPatientInfo = (doctorId, callback) => {
@@ -524,8 +527,87 @@ const AddPatientHistory = (data, callback) => {
   })
 }
 
+
+//update the Confirmation Email 
+const ConfirmationEmail = (id, callback) => {
+
+  const sql = `UPDATE Login SET is_confirm=1 WHERE id=${id}`
+
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update Login Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results)
+    }
+  })
+
+}
+
+// function to select Appointment info from Appointment table
+const getAppointment = (doctorId, callback) => {
+  const sql = `select Patients.firstName, Patients.lastName, Appointment.* 
+  FROM Appointment
+  INNER JOIN Patients ON Appointment.id_Patients=Patients.id AND Appointment.id_Doctors='${doctorId}'`;
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during select info  from Doctor Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  })
+}
+
+//update the Confirmation Email 
+const UploadImage = (id,path, callback) => {
+  
+
+  const sql = `UPDATE Doctors SET image='${path}' WHERE id=${id}`
+
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update Doctors image Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results)
+    }
+  })
+
+}
+
+// This function to delete appoitment
+const deleteAppointment = (doctorId, appointmentId, callback) => {
+  const sql  = `DELETE FROM Appointment WHERE id = "${appointmentId}" and id_Doctors = "${doctorId}"`;
+  dbConnection.query(sql, function (err, result) {
+    if (err) {
+      console.log("Error during delete info  from Appointment Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+}
+
+// This function to update appoitment
+const updateAppointment = (newAppointment, callback) => {
+  const sql  = `update Appointment set date ="${newAppointment.date}", notes= "${newAppointment.notes}" where id = "${newAppointment.appointmentId}"`;
+  dbConnection.query(sql, function (err, result) {
+    if (err) {
+      console.log("Error during update info  for Doctor Appointment  \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+}
+
+
+
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
+module.exports.UploadImage = UploadImage;
+module.exports.ConfirmationEmail = ConfirmationEmail;
 module.exports.isAccountExist = isAccountExist;
 module.exports.insertUserInfo = insertUserInfo;
 module.exports.selectDoctorInfo = selectDoctorInfo;
@@ -552,3 +634,7 @@ module.exports.selectOneConsultation = selectOneConsultation;
 module.exports.updateDoctorInfo = updateDoctorInfo;
 module.exports.AddAppointment = AddAppointment;
 module.exports.AddnewCase = AddnewCase;
+module.exports.getAppointment=getAppointment;
+module.exports.deleteAppointment = deleteAppointment;
+module.exports.updateAppointment = updateAppointment;
+
