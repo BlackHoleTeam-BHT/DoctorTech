@@ -700,10 +700,31 @@ router.route('/confirmEmail/:id').get(function (req, res) {
 
 //to upload image
 router.route('/upload').post(upload.single('pic'),function(req,res){
-     console.log('body',req.body.id)
-     console.log('file',req.file)
+    var id=req.body.id
+    var path=req.file.originalname
+    console.log('body',id)
+    console.log('file',path)
+
+    db.UploadImage(id,path,function(err,result){
+      
+      if(err){
+        throw err
+      }else{
+        db.selectDoctorInfo(id,function(err,result){
+          if(err){
+            throw err
+          }else{
+            res.send(result)
+          }
+        })
+        
+      }
+
+
+    })
+    
      
-    res.send('1')
+    
 })
 
 //Note: add the passport function 

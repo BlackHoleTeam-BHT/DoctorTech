@@ -55,6 +55,14 @@ const authReducer = (state = initState, action) => {
           correctLogin:true
 
         }
+        case "UpdateImage":
+        console.log('ssssss',action.data)
+        
+        return{
+          ...state,
+          user:action.data[0]
+
+        }
 
       default:
         return state;

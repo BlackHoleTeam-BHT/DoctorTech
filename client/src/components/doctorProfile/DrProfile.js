@@ -61,8 +61,10 @@ class DrProfile extends Component {
     }else{
       this.props.DoctorImage(this.state)
     }
-    console.log(this.state)
+    
   }
+
+
 
 
 
@@ -80,7 +82,7 @@ class DrProfile extends Component {
                     <div className="image-container">
                       <img
                         alt=""
-                        src="http://placehold.it/150x150"
+                        src={( this.props.user.image !=='') ? ('../../../../uploads/' + this.props.user.image) : "http://placehold.it/150x150"}
                         id="imgProfile"
                         style={{ width: "150px", height: "150px" }}
                         className="img-thumbnail"

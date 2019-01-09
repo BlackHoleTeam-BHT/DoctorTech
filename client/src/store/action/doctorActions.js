@@ -160,9 +160,10 @@ export const DoctorImage = (data) => {
       data: fd,
       contentType: false,
       success: function (res) {
-          if(res.data) {
-            // dispatch({ type: 'SEND_CONSULTATION', data: res.data })
-          }
+        console.log('server',res)
+          
+            dispatch({ type:'UpdateImage', data:res})
+          
       }
     })
 
