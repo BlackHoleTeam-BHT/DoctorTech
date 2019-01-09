@@ -104,7 +104,8 @@ class HeartAttack extends Component {
                         for="Ca"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                        Major Vessels
+                        Number of Major Vessels
+
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -238,7 +239,26 @@ class HeartAttack extends Component {
                         for="Fbs"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                        Fasting Blood Sugar
+                        Major Vessels (0-3)
+                      </Label>
+                      <div className="col-md-6">
+                        <Input
+                          type="number"
+                          id="Ca"
+                          className="form-control"
+                          name="Ca"
+                          required
+                          onChange={this.handleChange}
+                          value={this.state.value}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <Label
+                        for="Fbs"
+                        className="col-md-4 col-form-label text-md-right"
+                      >
+                          Fasting Blood Sugar
                       </Label>
                       <div className="col-md-6">
                         <Input
