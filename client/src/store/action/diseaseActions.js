@@ -69,3 +69,23 @@ export const Health= (data) => {
       });
     }
   }
+
+  export const predictHeartAttack = (data) => {
+    return (dispatch, getState) => {
+      $.ajax({
+        type: "POST",
+        url: '/heart-attack',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: function (res) {
+            if(res.data) {
+                dispatch({ type: 'HEART_ATTACK', data: res.data })
+            }
+        },
+        error: (err) => {
+          console.log("err in HeartAttack POST request" ,err)
+        }
+      });
+    }
+  }
+

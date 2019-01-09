@@ -35,6 +35,7 @@ class SignIn extends React.Component {
   // this function to login 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.props)
     let userSignInDetails = {
       email: this.state.email,
       password: this.state.password
@@ -102,6 +103,13 @@ class SignIn extends React.Component {
                     </Alert>
                   }
                 </div>
+                <div  className="text-center" style ={{marginTop: 20}}>
+                  {this.props.isNotConfirmEmail &&
+                    <Alert color="danger">
+                       Please confirm your Email !!!
+                    </Alert>
+                  }
+                </div>
               </div>
             </Col>
           </Row>
@@ -123,7 +131,8 @@ const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
     login: state.auth.login,
-    correctLogin: state.auth.correctLogin
+    correctLogin: state.auth.correctLogin,
+    isNotConfirmEmail:state.auth.isNotConfirmEmail
   }
 }
 

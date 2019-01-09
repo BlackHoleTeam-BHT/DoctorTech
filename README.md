@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: Walid HajHussien
-  - __Scrum Master__: Mohammad Al-Rawashdah
-  - __Development Team Members__: Mahmoud Zaid, Dana Amer
+  - __Product Owner__: [Walid HajHussien](https://github.com/walid-hajhussien)
+  - __Scrum Master__: [Mohammad Al-Rawashdah](https://github.com/mhd-rawashdah)
+  - __Development Team Members__: [Mahmoud Zaid](https://github.com/Mahmoud-Zaid94), [Dana Amer](https://github.com/DanaAmer)
 
 ## Table of Contents
 
@@ -14,9 +14,10 @@
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+1. [DatabaseSchema](#databaseSchema)
 1. [Team](#team)
 1. [Contributing](#contributing)
+
 
 ## Usage
 
@@ -33,7 +34,7 @@
 
 - Node.js with express framework
 - Mysql
-- Django 
+- Django
 - Machine learning
 - Sqlite3
 - ReactJS & React-Redux
@@ -55,9 +56,14 @@ npm start
 
 After running all these commands the dev environment should be running
 
+## DatabaseSchema
+
+![docdb](https://user-images.githubusercontent.com/34889770/50775647-5f54be00-129f-11e9-8836-a70bbe77b4d8.jpg)
+
+
 ### Roadmap
 
-View the project roadmap [here] https://waffle.io/BlackHoleTeam-BHT/DoctorTech
+View the project roadmap [https://waffle.io/BlackHoleTeam-BHT/DoctorTech] 
 
 
 ## Contributing
