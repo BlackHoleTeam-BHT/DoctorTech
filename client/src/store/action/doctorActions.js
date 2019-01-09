@@ -127,15 +127,15 @@ export const getAppointment = (doctorId) => {
 }
 
 // this action to delete appointment 
-export const deleteAppointment = (doctorId) => {
+export const deleteAppointment = (doctorId, appointmentId) => {
   return (dispatch, getState) => {
     //sync
     $.ajax({
       type: "POST",
-      url: '/get-appointment',
-      data: JSON.stringify({ doctorId: doctorId }),
+      url: '/delete-appointment',
+      data: JSON.stringify({ doctorId: doctorId , appointmentId: appointmentId}),
       contentType: 'application/json',
-      success: function (res) {
+      success:  (res) => {
         dispatch({ type: 'DELETE_APPOINTMENT', data: res.data })
       },
       error: (err) => {

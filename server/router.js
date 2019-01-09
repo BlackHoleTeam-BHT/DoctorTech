@@ -760,6 +760,28 @@ router.route('/get-appointment')
     });
   });
 
+// service to deal with getAppointment request 
+router.route('/delete-appointment')
+.post(authenticationMiddleware(), function (req, res) {
+  console.log(req.body);
+  var doctorId = req.body.doctorId;
+  var appointmentId = req.body.appointmentId;
+  db.deleteAppointment(doctorId, appointmentId, function(err, result){
+    if (err) {
+      throw err;
+    } else {
+      db.getAppointment(doctorId, function (err, results) {
+        if (err) {throw err;
+        } else {
+          res.send({
+            data: results
+          });
+        }
+      });
+    }
+  })
+});
+
 passport.deserializeUser(function (id, done) {
   var query = `select * from Login where id=\"${id}\"`
   dbConnection.query(query, function (err, data) {

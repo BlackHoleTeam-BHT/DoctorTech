@@ -43,32 +43,30 @@ const styles = theme => ({
 });
 
 
-
-
-
 class InteractiveList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
       dense: false,
       open: true,
 
     }
-    this.filter = () => {
-      var y = new Date
-      var newAppointment = []
-      console.log("dddddd", y.toISOString().slice(0, 10))
-      console.log("Appointment", this.props.appointment)
-      for (var key in this.props.appointment) {
-        if (this.props.appointment.date.slice(0, 10) === y.toISOString().slice(0, 10)) {
-          newAppointment.push(this.props.appointment)
-        }
-      }
-      return newAppointment
-    }
+
+    // this.filter = () => {
+    //   var y = new Date();
+    //   var newAppointment = []
+    //   console.log("dddddd", y.toISOString().slice(0, 10))
+    //   console.log("Appointment", this.props.appointment)
+    //   for (var key in this.props.appointment) {
+    //     if (this.props.appointment.date.slice(0, 10) === y.toISOString().slice(0, 10)) {
+    //       newAppointment.push(this.props.appointment)
+    //     }
+    //   }
+    //   return newAppointment
+    // }
     this.props.getAppointment(this.props.user.id)
   }
+
   handleClick = () => {
     this.setState(state => ({ open: !state.open }));
   };
@@ -77,11 +75,7 @@ class InteractiveList extends React.Component {
     const { classes } = this.props;
     const { dense } = this.state;
     var appointments = this.props.appointments;
-
     console.log('ggygygy', this.props)
-
-
-
     return (
       <div>
         <List
@@ -100,18 +94,14 @@ class InteractiveList extends React.Component {
           <Collapse in={this.state.open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
-
                 <Grid item xs={12} md={12}>
-
                   <div className={classes.demo}>
                     <List dense={dense}>
 
                       {appointments.length > 0 ? (
-
                         appointments && appointments.map((elem =>
                           <GetAppointment key={elem.id} appointment={elem} />
                         ))
-
                       ) : (
                           <div className="text-center">
                             <h4>No data found</h4>

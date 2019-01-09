@@ -548,7 +548,7 @@ const ConfirmationEmail = (id, callback) => {
 
 // function to select Appointment info from Appointment table
 const getAppointment = (doctorId, callback) => {
-  const sql = `select Patients.firstName, Patients.lastName, Appointment.date 
+  const sql = `select Patients.firstName, Patients.lastName, Appointment.* 
   FROM Appointment
   INNER JOIN Patients ON Appointment.id_Patients=Patients.id AND Appointment.id_Doctors='${doctorId}'`;
   dbConnection.query(sql, function (err, results) {
@@ -577,6 +577,20 @@ const UploadImage = (id,path, callback) => {
   })
 
 }
+
+// This function to delete appoitment
+const deleteAppointment = (doctorId, appointmentId, callback) => {
+  const sql  = `DELETE FROM Appointment WHERE id = "${appointmentId}" and id_Doctors = "${doctorId}"`;
+  dbConnection.query(sql, function (err, result) {
+    if (err) {
+      console.log("Error during delete info  from Appointment Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+}
+
 
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
@@ -609,3 +623,5 @@ module.exports.updateDoctorInfo = updateDoctorInfo;
 module.exports.AddAppointment = AddAppointment;
 module.exports.AddnewCase = AddnewCase;
 module.exports.getAppointment=getAppointment;
+module.exports.deleteAppointment = deleteAppointment;
+

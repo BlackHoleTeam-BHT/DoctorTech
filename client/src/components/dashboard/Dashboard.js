@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
 import DrawerMenu from './DrawerMenu.js';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CreatePatient from '../Patient/CreatePatient2.js';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -154,13 +154,15 @@ class Dashboard extends React.Component {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             {/*  Router for Drawer menu TODO add the compnent */}
+            <Switch>
             <Route exact path="/dashboard/:id/" component={InteractiveList} />
-            <Route exact path="/dashboard/:id/add-patient" component={CreatePatient} />
-            <Route exact path="/dashboard/:id/patients" component={Patients} />
+            <Route path="/dashboard/:id/add-patient" component={CreatePatient} />
+            <Route path="/dashboard/:id/patients" component={Patients} />
             <Route path="/dashboard/:id/PatientProfile/:id" component={PatientProfile} />
-            <Route exact path="/dashboard/dr-profile" component={DrProfile} />
+            <Route path="/dashboard/:id/dr-profile" component={DrProfile} />
             <Route path="/dashboard/:id/consultaion/" component={DoctorConsultation} />
             <Route path="/dashboard/:id/samrt-prediction/" component={SmartPredict} />
+            </Switch>
           </main>
         </div>
       </BrowserRouter>
