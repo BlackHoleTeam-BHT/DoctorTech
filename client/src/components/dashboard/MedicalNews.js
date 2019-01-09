@@ -23,6 +23,7 @@ import Grid from '@material-ui/core/Grid';
 import ScrollDialog from './view/Dialog'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import LazyLoad from 'react-lazyload'
 
 const styles = theme => ({
   card: {
@@ -88,7 +89,7 @@ class RecipeReviewCard extends React.Component {
        
 {    this.props.Articles.map((value,key)=>{
         return (
-       
+           
         <GridListTile key={key} >
         <Card className={classes.card}>
         <CardHeader
@@ -129,7 +130,7 @@ class RecipeReviewCard extends React.Component {
         </CardActions>
       </Card> 
       </GridListTile>
-       
+     
       
         
       )})}

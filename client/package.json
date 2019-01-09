@@ -17,6 +17,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-circular-progressbar": "^1.0.0",
     "react-dom": "^16.7.0",
+    "react-lazyload": "^2.3.0",
     "react-rater": "^5.0.5",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
