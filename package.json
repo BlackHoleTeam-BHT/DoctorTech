@@ -7,7 +7,7 @@
   },
   "scripts": {
     "server": "node server",
-    "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "test": "mocha"
   },
   "cacheDirectories": [
@@ -23,7 +23,7 @@
     "heroku",
     "react"
   ],
-  "license": "MIT",
+  "license": "RBK",
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
