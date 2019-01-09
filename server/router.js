@@ -5,8 +5,37 @@ const db = require('../database/index.js')
 const request = require('request')
 const nodemailer = require('nodemailer');
 var bcrypt = require('bcryptjs');
+const multer =require('multer');
+
 // Note: define the router
 var router = express.Router();
+
+
+
+//Note: config multer
+
+const fileFilter=(req,file,cb)=>{
+  if(file.mimetype==='image/jpeg' || file.mimetype==='image/png'){
+    cb(null,true)
+  }else{
+    cb(null,false)
+  }
+
+}
+
+const storage=multer.diskStorage({
+  destination:function(req,file,cb){
+    cb(null,'uploads/')
+  },
+  filename:function(req,file,cb){
+    cb(null,file.originalname)
+  }
+})
+
+const upload=multer({
+  storage:storage,
+  fileFilter:fileFilter
+})
 
 
 
@@ -667,6 +696,35 @@ router.route('/confirmEmail/:id').get(function (req, res) {
   // <a href="http://localhost:3000/signin">Login</a>`)
 })
 
+
+//to upload image
+router.route('/upload').post(upload.single('pic'),function(req,res){
+    var id=req.body.id
+    var path=req.file.originalname
+    console.log('body',id)
+    console.log('file',path)
+
+    db.UploadImage(id,path,function(err,result){
+      
+      if(err){
+        throw err
+      }else{
+        db.selectDoctorInfo(id,function(err,result){
+          if(err){
+            throw err
+          }else{
+            res.send(result)
+          }
+        })
+        
+      }
+
+
+    })
+    
+     
+    
+})
 
 //Note: add the passport function 
 passport.serializeUser(function (user, done) {

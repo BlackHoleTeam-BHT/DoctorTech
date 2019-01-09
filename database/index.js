@@ -561,9 +561,26 @@ const getAppointment = (doctorId, callback) => {
   })
 }
 
+//update the Confirmation Email 
+const UploadImage = (id,path, callback) => {
+  
+
+  const sql = `UPDATE Doctors SET image='${path}' WHERE id=${id}`
+
+  dbConnection.query(sql, function (err, results) {
+    if (err) {
+      console.log("Error during update Doctors image Table \n" + err)
+      callback(err, null);
+    } else {
+      callback(null, results)
+    }
+  })
+
+}
 
 //callback(null, obj);
 //dbConnection.query(sql1, function(err, results) {})
+module.exports.UploadImage = UploadImage;
 module.exports.ConfirmationEmail = ConfirmationEmail;
 module.exports.isAccountExist = isAccountExist;
 module.exports.insertUserInfo = insertUserInfo;

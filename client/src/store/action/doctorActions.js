@@ -144,4 +144,30 @@ export const deleteAppointment = (doctorId) => {
     });
   }
 }
+// to save the doctor image  
+export const DoctorImage = (data) => {
+  return (dispatch, getState) => {
+    console.log('action',data)
+
+    var fd = new FormData();
+    var pic = data.pic
+    fd.append('pic',pic)
+    fd.append('id',data.id)
+    $.ajax({
+      url: '/upload',
+      type: "POST",
+      processData: false,
+      data: fd,
+      contentType: false,
+      success: function (res) {
+        console.log('server',res)
+          
+            dispatch({ type:'UpdateImage', data:res})
+          
+      }
+    })
+
+  }
+}
+
 

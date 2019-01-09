@@ -22,12 +22,16 @@ import img from "../style/drSimson.jpg";
 import { connect } from "react-redux";
 import { openModal } from "../../store/action/doctorActions";
 import EditDrProfile from "./EditDrProfile";
+import {DoctorImage} from '../../store/action/doctorActions'
+
 
 class DrProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: "1"
+      activeTab: "1",
+      pic: '',
+      id: this.props.user.id
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -41,10 +45,31 @@ class DrProfile extends Component {
   }
 
   handleOpenModal() {
+
     this.props.openModal(!this.props.isOpen);
   }
 
+  ImageOnChange(e) {
+    this.setState({
+      pic: e.target.files[0]
+    });
+  }
+
+  OnSubmit = () => {
+    if(this.state.pic===""){
+
+    }else{
+      this.props.DoctorImage(this.state)
+    }
+    
+  }
+
+
+
+
+
   render() {
+    console.log(this.props)
     return (
       <div className="container">
         <EditDrProfile />
@@ -56,7 +81,8 @@ class DrProfile extends Component {
                   <div className="d-flex justify-content-start">
                     <div className="image-container">
                       <img
-                        src="http://placehold.it/150x150"
+                        alt=""
+                        src={( this.props.user.image !=='') ? ('../../../../uploads/' + this.props.user.image) : "http://placehold.it/150x150"}
                         id="imgProfile"
                         style={{ width: "150px", height: "150px" }}
                         className="img-thumbnail"
@@ -67,12 +93,14 @@ class DrProfile extends Component {
                           className="btn btn-secondary"
                           id="btnChangePicture"
                           value="Change"
+                          onClick={this.OnSubmit}
                         />
                         <Input
                           type="file"
-                          style={{ display: "none" }}
+                          style={{ opacity: 0 }}
                           id="profilePicture"
                           name="file"
+                          onChange={this.ImageOnChange.bind(this)}
                         />
                       </div>
                     </div>
@@ -103,7 +131,7 @@ class DrProfile extends Component {
         <div className="row" style={{ marginTop: 20, marginLeft: 2 }}>
           <Nav tabs>
             <NavItem>
-              <NavLink id = "d"
+              <NavLink id="d"
                 className={classnames({ active: this.state.activeTab === "1" })}
                 onClick={() => {
                   this.toggle("1");
@@ -113,7 +141,7 @@ class DrProfile extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink id = "d"
+              <NavLink id="d"
                 className={classnames({ active: this.state.activeTab === "2" })}
                 onClick={() => {
                   this.toggle("2");
@@ -123,7 +151,7 @@ class DrProfile extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink id = "d"
+              <NavLink id="d"
                 className={classnames({ active: this.state.activeTab === "3" })}
                 onClick={() => {
                   this.toggle("3");
@@ -151,7 +179,7 @@ class DrProfile extends Component {
                     {this.props.user.firstName + " " + this.props.user.lastName}
                   </div>
                 </div>
-                <hr className= "style14" />
+                <hr className="style14" />
 
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
@@ -161,7 +189,7 @@ class DrProfile extends Component {
                     {this.props.user.birthDate}
                   </div>
                 </div>
-                <hr className= "style14" />
+                <hr className="style14" />
 
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
@@ -169,7 +197,7 @@ class DrProfile extends Component {
                   </div>
                   <div className="col-md-8 col-6">{this.props.user.gender}</div>
                 </div>
-                <hr className= "style14" />
+                <hr className="style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Nationality</Label>
@@ -178,7 +206,7 @@ class DrProfile extends Component {
                     {this.props.user.nationality}
                   </div>
                 </div>
-                <hr className= "style14" />
+                <hr className="style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Phone Number</Label>
@@ -187,7 +215,7 @@ class DrProfile extends Component {
                     {this.props.user.phoneNumber}
                   </div>
                 </div>
-                <hr className= "style14" />
+                <hr className="style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Specialty</Label>
@@ -196,7 +224,7 @@ class DrProfile extends Component {
                     {this.props.user.specialist}
                   </div>
                 </div>
-                <hr className= "style14" />
+                <hr className="style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Clinic Name</Label>
@@ -205,7 +233,7 @@ class DrProfile extends Component {
                     {this.props.user.clinicName}
                   </div>
                 </div>
-                <hr className= "style14" />
+                <hr className="style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Clinic Number</Label>
@@ -214,7 +242,7 @@ class DrProfile extends Component {
                     {this.props.user.clinicNumber}
                   </div>
                 </div>
-                <hr className= "style14" />
+                <hr className="style14" />
                 <div className="row">
                   <div className="col-sm-3 col-md-2 col-5">
                     <Label style={{ fontWeight: "bold" }}>Location</Label>
@@ -223,9 +251,9 @@ class DrProfile extends Component {
                     {this.props.user.location}
                   </div>
                 </div>
-                <hr className= "style14" />
+                <hr className="style14" />
                 <Button color="primary" onClick={this.handleOpenModal.bind(this)}>
-                Edit
+                  Edit
               </Button>
               </div>
             </div>
@@ -275,7 +303,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    openModal: isOpen => dispatch(openModal(isOpen))
+    openModal: isOpen => dispatch(openModal(isOpen)),
+    DoctorImage: data => dispatch(DoctorImage(data)),
+
   };
 };
 
