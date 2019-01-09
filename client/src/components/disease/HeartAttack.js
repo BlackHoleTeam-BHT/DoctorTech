@@ -104,7 +104,7 @@ class HeartAttack extends Component {
                         for="Ca"
                         className="col-md-4 col-form-label text-md-right"
                       >
-                        Major Vessels
+                        Number of Major Vessels
                       </Label>
                       <div className="col-md-6">
                         <Input
@@ -248,7 +248,7 @@ class HeartAttack extends Component {
                           name="Ca"
                           required
                           onChange={this.handleChange}
-                          value={this.state.Ca}
+                          value={this.state.value}
                         />
                       </div>
                     </div>
