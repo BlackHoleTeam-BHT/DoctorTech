@@ -37,7 +37,8 @@ const initState={
       step:5
     }],
   SelectCase: false,
-  CaseId: 0
+  CaseId: 0,
+
 }
 
 
@@ -76,7 +77,6 @@ const patientReducer = (state = initState, action) => {
         PatientPlan: [],
         CaseId: 0,
         SelectCase: false
-
       }
 
     case "SEARCH_PATIENT":
@@ -181,7 +181,7 @@ const patientReducer = (state = initState, action) => {
       newPatientPlan[0].step = action.data.step
       var Cases = state.currentCase
       for (var i = 0; i < Cases.length; i++) {
-        if (Cases[i].id == action.data.CaseId) {
+        if (Cases[i].id === action.data.CaseId) {
           Cases[i].isOpen = 1
         }
       }
@@ -196,18 +196,8 @@ const patientReducer = (state = initState, action) => {
         ...state,
         PatientPlan: [action.data]
       }
-
-
-    case "AddAppointment":
-      var newAppointment = state.Appointment
-      newAppointment.push(action.data)
-
-      return {
-        ...state,
-        Appointment: newAppointment
-
-      }
-
+     
+   
       case "AddnewCase":
       var AddnewCase = state.currentCase
       AddnewCase.push(action.data)
@@ -220,8 +210,7 @@ const patientReducer = (state = initState, action) => {
       case "unSelectPatient":
       return{
         ...state,
-        selectPatient:false
-
+        selectPatient: false
       }
 
     default:

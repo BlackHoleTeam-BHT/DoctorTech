@@ -171,3 +171,36 @@ export const DoctorImage = (data) => {
 }
 
 
+// Note: Add Appointment
+export const AddAppointment = (data) => {
+  console.log('action AddAppointment', data)
+
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/add-appointment',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+        dispatch({ type: 'AddAppointment', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+  }
+}
+
+// this action to open model to add appointment to patient
+export const openAddAppointmentDialog = (isOpen, targetAppointment) => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: "OPEN_ADD_APPOINTMENT_DAILOG",
+      data: isOpen,
+      targetAppointment: targetAppointment
+    })
+  }
+}

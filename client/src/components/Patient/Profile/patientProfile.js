@@ -8,6 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import NoSsr from '@material-ui/core/NoSsr';
 import Tab from '@material-ui/core/Tab';
+import {Button} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import ChiefComplaint from './patientComponent/chiefComplent'
 import MedicalHistory from './patientComponent/MedicalHistory'
@@ -30,7 +31,8 @@ import Appointment from './patientComponent/Appointment';
 import NewCase from './patientComponent/NewCase';
 import Indicator from './patientComponent/Indicator'
 import { Health } from '../../../store/action/diseaseActions'
-import { GetUserInformation } from '../../../store/action/patientAction'
+import { GetUserInformation } from '../../../store/action/patientAction';
+import {openAddAppointmentDialog} from '../../../store/action/doctorActions';
 
 function TabContainer(props) {
   return (
@@ -92,8 +94,6 @@ class PatientProfile extends React.Component {
 
   }
 
-
-
   handleChange = (event, value) => {
     console.log(event.target, value)
     this.setState({ value });
@@ -111,6 +111,10 @@ class PatientProfile extends React.Component {
     console.log('x1', this.props)
   }
 
+  // this function to open addAppointmentDialog
+  handleClickOpenAddAppointment = () => {
+    this.props.openAddAppointmentDialog(!this.props.isAddAppointmentDialogOpen, this.props.targetAppointment);
+  }
 
   render() {
     console.log('chifcomplaint ', this.props.patient.selectPatient)
@@ -138,6 +142,9 @@ class PatientProfile extends React.Component {
                 <div style={{ display: 'inline-flex' }}>
                   <div>
                     <Appointment />
+                    <Button variant="outlined" color="primary" onClick={this.handleClickOpenAddAppointment}>
+                      Add Appointment
+                    </Button>
                   </div>
                   <div style={{ alignSelf: 'center', marginLeft: '10px' }}>
                     <NewCase />
@@ -146,13 +153,8 @@ class PatientProfile extends React.Component {
               </Grid>
               <div style={{ display: 'inline-flex' }}>
                 <FormControl className={classes.formControl}>
-
                   <InputLabel htmlFor="age-simple">Select Case</InputLabel>
-
-
                   <Select
-
-
                     value={this.state.selectValue}
                     onChange={this.handleChangeSelect}
                     inputProps={{
@@ -168,12 +170,8 @@ class PatientProfile extends React.Component {
                     })}
 
                   </Select>
-
-
                 </FormControl>
-
               </div>
-
             </Grid>
 
             <Grid md={1} style={{ justifyContent: 'center', margin: 'auto' }} item >{this.state.selectDate && moment(this.state.selectDate).fromNow()}{!(this.props.patient.currentPatient) && <CircularProgress disableShrink />}{!this.props.patient.currentPatient && 'Loading...'}</Grid>
@@ -188,7 +186,7 @@ class PatientProfile extends React.Component {
             <Grid md={10} sm={11} xs={11} item>
               <NoSsr>
                 <div className={classes.root}>
-                  <AppBar position="static" style={{background:"#2ec8a6"}}>
+                  <AppBar position="static" style={{ background: "#2ec8a6" }}>
                     <Tabs fullWidth className={classes.tab} value={value} indicatorColor="#2ec8a6" onChange={this.handleChange}>
                       <LinkTab label="chief Complent" href="page1" />
                       <LinkTab label="Medical History" href="page2" />
@@ -227,10 +225,6 @@ class PatientProfile extends React.Component {
             </Grid>
             <Grid md={1} item></Grid>
           </Grid>
-
-
-
-
         </Grid>}
       </div>
     )
@@ -248,7 +242,9 @@ const mapStateToProps = (state) => {
   return {
     patient: state.patient,
     patientProfile: state.patient.PatientProfile,
-    login: state.auth.login
+    login: state.auth.login,
+    isAddAppointmentDialogOpen: state.doctor.isAddAppointmentDialogOpen,
+    targetAppointment: state.doctor.targetAppointment
 
   }
 }
@@ -259,7 +255,8 @@ const mapDispatchToProps = (dispatch) => {
     GetPatientCassis: (id) => dispatch(GetPatientCassis(id)),
     GetCaseInfo: (id) => dispatch(GetCaseInfo(id)),
     Health: (data) => dispatch(Health(data)),
-    GetPationInformation: (id) => dispatch(GetUserInformation(id))
+    GetPationInformation: (id) => dispatch(GetUserInformation(id)),
+    openAddAppointmentDialog: (isOpen, targetAppointment) => dispatch(openAddAppointmentDialog(isOpen, targetAppointment))
   }
 }
 

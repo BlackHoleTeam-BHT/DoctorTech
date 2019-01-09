@@ -34,7 +34,6 @@ class GetAppoitment extends React.Component {
 
   // This function to delete the appointement
   deleteAppointment() {
-     console.log("jhhhhhhhhhh",this.props.appointment);
     this.props.deleteAppointment(this.props.user.id, this.props.appointment.id);
   }
 

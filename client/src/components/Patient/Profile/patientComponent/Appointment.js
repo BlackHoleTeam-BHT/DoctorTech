@@ -11,7 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { AddAppointment } from '../../../../store/action/patientAction';
+import { AddAppointment, openAddAppointmentDialog} from '../../../../store/action/doctorActions';
 
 const styles = theme => ({
   root: {
@@ -67,7 +67,8 @@ class Appointment extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    //this.setState({ open: false });
+    this.props.openAddAppointmentDialog(false, this.props.targetAppointment)
   };
 
   handelSubmit = () => {
@@ -86,11 +87,11 @@ class Appointment extends React.Component {
     console.log("mmmmmmmmmmmmmm", this.props)
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+        {/* <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
         Add Appointment
-        </Button>
+        </Button> */}
         <Dialog
-          open={this.state.open}
+          open={this.props.isAddAppointmentDialogOpen}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
@@ -155,7 +156,9 @@ Appointment.propTypes = {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    patientProfile: state.patient.PatientProfile
+    patientProfile: state.patient.PatientProfile,
+    isAddAppointmentDialogOpen: state.doctor.isAddAppointmentDialogOpen,
+    targetAppointment: state.doctor.targetAppointment
   }
 }
 
@@ -163,6 +166,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     AddAppointment: (data) => dispatch(AddAppointment(data)),
+    openAddAppointmentDialog: (isOpen, targetAppointment) => dispatch(openAddAppointmentDialog(isOpen, targetAppointment))
 
   }
 }
