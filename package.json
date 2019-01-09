@@ -6,9 +6,10 @@
     "node": "10.x"
   },
   "scripts": {
-    "server": "node server",
+    "server": "nodemon server",
     "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node server"
   },
   "cacheDirectories": [
     "node_modules",
@@ -23,7 +24,6 @@
     "heroku",
     "react"
   ],
-  
   "license": "DoctorTech",
   "devDependencies": {
     "chai": "^4.2.0",
