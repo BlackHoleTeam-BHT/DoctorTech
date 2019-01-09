@@ -23,6 +23,7 @@
     "heroku",
     "react"
   ],
+  
   "license": "DoctorTech",
   "devDependencies": {
     "chai": "^4.2.0",
