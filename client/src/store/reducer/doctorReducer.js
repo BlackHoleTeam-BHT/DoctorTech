@@ -96,6 +96,12 @@ const doctorReducer = (state = initState, action) => {
       ...state,
       searchResults: action.data
     }
+    case "DeactivateAppointment":
+      return {
+        ...state,
+        activeAppointment:false
+      }
+        
     default:
       return state;
       

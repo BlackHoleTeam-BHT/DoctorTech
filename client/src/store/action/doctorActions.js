@@ -245,3 +245,12 @@ export const searchForDoctor = (data) => {
 }
 
 
+
+
+// this deactivate the appointment SnackBar
+export const DeactivateAppointment = (id) => {
+  return (dispatch, getState) => {
+
+    dispatch({type: 'DeactivateAppointment'})
+  }
+}

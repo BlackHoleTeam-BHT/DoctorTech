@@ -13,6 +13,10 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import {DeactivateAppointment} from '../../../../../store/action/doctorActions'
+
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -107,23 +111,26 @@ class CustomizedSnackbars extends React.Component {
       return;
     }
 
-    this.setState({ open: false });
+   if(this.props.name==='activeAppointment'){
+       this.props.DeactivateAppointment(1)
+   }
+    
+
   };
 
   render() {
     const { classes } = this.props;
+    console.log('snackbar',this.props)
 
     return (
       <div>
-        <Button className={classes.margin} onClick={this.handleClick}>
-          Open success snackbar
-        </Button>
+      
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          open={this.state.open}
+          open={this.props.open}
           autoHideDuration={6000}
           onClose={this.handleClose}
         >
@@ -143,4 +150,21 @@ CustomizedSnackbars.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles2)(CustomizedSnackbars);
+
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+    return {
+      doctor:state.doctor
+    }
+  }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        DeactivateAppointment: (id) => dispatch(DeactivateAppointment(id)),
+    }
+}
+
+
+
+
+export default compose(withStyles(styles2),connect(mapStateToProps,mapDispatchToProps))(CustomizedSnackbars);

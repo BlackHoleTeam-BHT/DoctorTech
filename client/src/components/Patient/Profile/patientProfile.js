@@ -118,7 +118,7 @@ class PatientProfile extends React.Component {
   }
 
   render() {
-    console.log('chifcomplaint ', this.props.patient.selectPatient)
+    console.log('doctor ', this.props.doctor.activeAppointment)
     const { classes } = this.props;
 
     const { value } = this.state;
@@ -146,7 +146,7 @@ class PatientProfile extends React.Component {
                     <Button variant="outlined" color="primary" onClick={this.handleClickOpenAddAppointment}>
                       Add Appointment
                     </Button>
-                    <CustomizedSnackbars data="Welcome walid"></CustomizedSnackbars>
+                    <CustomizedSnackbars  name="activeAppointment" open={this.props.doctor.activeAppointment} data="Welcome walid"></CustomizedSnackbars>
                   </div>
                   <div style={{ alignSelf: 'center', marginLeft: '10px' }}>
                     <NewCase />
@@ -246,7 +246,8 @@ const mapStateToProps = (state) => {
     patientProfile: state.patient.PatientProfile,
     login: state.auth.login,
     isAddAppointmentDialogOpen: state.doctor.isAddAppointmentDialogOpen,
-    targetAppointment: state.doctor.targetAppointment
+    targetAppointment: state.doctor.targetAppointment,
+    doctor:state.doctor
 
   }
 }
