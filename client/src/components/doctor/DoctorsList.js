@@ -10,8 +10,6 @@ class DoctorList extends React.Component {
     console.log(this.props)
     let doctors = this.props.doctors;
     return (
-      !this.props.isSearchResultReceivd ?  
-      <CircularProgress disableShrink size={50}  style ={{position: 'absolute', top: "50%", left: "50%"}}/> :
       <Container style={{ position: 'relative',overflow: 'auto', maxHeight: 700}}>
         {/* to check if  there are doctor or not*/}
         {doctors.length > 0 ? (

@@ -77,7 +77,7 @@ router.route('/sign-up')
                 if (err) throw err;
                 req.login(user, function (done) {
 
-                  let link = 'https://doctortech.herokuapp.com/confirmEmail/' + results[0].id
+                  let link = 'http://localhost:5000/confirmEmail/' + results[0].id
 
                   // setup email data with unicode symbols
                   let mailOptions = {
