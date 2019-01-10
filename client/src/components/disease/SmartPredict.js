@@ -12,8 +12,8 @@ import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux';
 import BreastCancer from './BreastCancer';
-import Diabetes from './Diabetes.js'
-
+import Diabetes from './Diabetes.js';
+import HeartAttack from './HeartAttack';
 let root = {
   flexGrow: 1,
   justifyContent: 'center',
@@ -62,7 +62,7 @@ class SmartPredict extends React.Component {
             <Grid item md={8} xs={12} sm={12}>
               {this.state.value === 0 && <BreastCancer />}
               {this.state.value === 1 && <Diabetes />}
-              {this.state.value === 2 && <Diabetes />}
+              {this.state.value === 2 && <HeartAttack />}
             </Grid>
             <Grid item md={3} xs={12} sm={12}>
               <Paper style={{ padding: 20, maxHeight: 350, height: "100%", textAlign: 'center' }}>
@@ -73,7 +73,7 @@ class SmartPredict extends React.Component {
                   <Typography variant="h5" color="primary">
                     {
                       this.state.value === 0 ? this.props.breastCancer.predicate : this.state.value === 1 ?
-                        this.props.diabetes.predicate : this.props.breastCancer.predicate
+                        this.props.diabetes.predicate : this.props.heartAttack.predicate
                     }
                   </Typography>
                 </div>
@@ -84,7 +84,7 @@ class SmartPredict extends React.Component {
                   <Typography variant="h5" color="secondary">
                     {
                       this.state.value === 0 ? this.props.breastCancer.accuracy : this.state.value === 1 ?
-                        this.props.diabetes.accuracy : this.props.breastCancer.accuracy
+                        this.props.diabetes.accuracy : this.props.heartAttack.accuracy
                     }
                   </Typography>
                 </div>
@@ -102,7 +102,8 @@ const mapStateToProps = (state) => {
   return {
     login: state.auth.login,
     breastCancer: state.disease.breastCancerPredictions,
-    diabetes: state.disease.diabetes
+    diabetes: state.disease.diabetes,
+    heartAttack: state.disease.heartAttackPredictions
   }
 }
 

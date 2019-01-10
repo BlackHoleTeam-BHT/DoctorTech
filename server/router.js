@@ -77,7 +77,7 @@ router.route('/sign-up')
                 if (err) throw err;
                 req.login(user, function (done) {
 
-                  let link = 'http://127.0.0.1:5000/confirmEmail/' + results[0].id
+                  let link = 'https://doctortech.herokuapp.com/confirmEmail/' + results[0].id
 
                   // setup email data with unicode symbols
                   let mailOptions = {
@@ -608,7 +608,7 @@ router.route('/breast-cancer')
     parseFloat(featuresObj['Insulin']), parseFloat(featuresObj['HOMA']), parseFloat(featuresObj['Leptin']),
     parseFloat(featuresObj['Adiponectin']), parseFloat(featuresObj['Resistin']), parseFloat(featuresObj['MCP1'])];
 
-    request.post('http://localhost:8000/breast-cancer/', { form: JSON.stringify({ features: features }) }, function (err, response, body) {
+    request.post('https://dtai.herokuapp.com/breast-cancer/', { form: JSON.stringify({ features: features }) }, function (err, response, body) {
       let result = JSON.parse(body);
       res.send({
         data: {
@@ -621,13 +621,23 @@ router.route('/breast-cancer')
 
 // this service to deal with predicate HeartAttack
 router.route('/heart-attack')
-  .get(function (req, res) {
+  .post(function (req, res) {
     let featuresObj = req.body;
-    let features = [featuresObj['age'], featuresObj['sex'], featuresObj['cp'], featuresObj['trestbps'], featuresObj['chol'],
-    featuresObj['fbs'], featuresObj['restecg'], featuresObj['thalach'], featuresObj['exang'], featuresObj['oldpeak'],
-    featuresObj['slop'], featuresObj['ca'], featuresObj['thal']];
-    request.post('http://localhost:8000/heart-attack/', { form: JSON.stringify({ features: features }) }, function (err, res, body) {
-      console.log("Success " + body);
+    console.log(featuresObj);
+    let features = [parseFloat(featuresObj['Age']), parseFloat(featuresObj['Gender']), parseFloat(featuresObj['Cpt']),
+    parseFloat(featuresObj['Trestbps']), parseFloat(featuresObj['Chol']), parseFloat(featuresObj['Fbs']),
+    parseFloat(featuresObj['Restecg']), parseFloat(featuresObj['Thalach']), parseFloat(featuresObj['Exang']),
+    parseFloat(featuresObj['Oldpeak']),
+    parseFloat(featuresObj['Slope']), parseFloat(featuresObj['Ca']), parseFloat(featuresObj['Thalium'])];
+    request.post('https://dtai.herokuapp.com/heart-attack/', { form: JSON.stringify({ features: features }) }, function (err, response, body) {
+      let result = JSON.parse(body);
+      console.log(result)  
+       res.send({
+         data: {
+           predicate: result.predicate === 0 ? 'Negative' : 'Positive',
+           accuracy: result.accurcy
+         }
+       });
     });
   })
 
@@ -640,7 +650,7 @@ router.route('/diabetes').post(function (req, response) {
   parseFloat(featuresObj['DiabetesPedigreeFunction']), parseFloat(featuresObj['Age'])]
 
   var obj = JSON.stringify({ value: [features] })
-  request.post('http://127.0.0.1:8000/diabetes/predict/', { form: obj }, function (err, res, body) {
+  request.post('https://dtai.herokuapp.com/diabetes/predict/', { form: obj }, function (err, res, body) {
   
   let result = JSON.parse(body);
    console.log(result)  
@@ -656,7 +666,7 @@ router.route('/diabetes').post(function (req, response) {
 //Get the Health predict from python server 
 router.route('/Health').post(function (req, response) {
   var obj = JSON.stringify({ wight: req.body.weight, height: req.body.height })
-  request.post('http://127.0.0.1:8000/health/predict/', { form: obj }, function (err, res, body) {
+  request.post('https://dtai.herokuapp.com/health/predict/', { form: obj }, function (err, res, body) {
     console.log(body)
     response.send(body)
   })
@@ -702,12 +712,12 @@ router.route('/confirmEmail/:id').get(function (req, res) {
     if (err) {
       throw err
     } else {
-      res.redirect('http://localhost:3000/signin')
+      res.redirect('https://doctortech.herokuapp.com/signin')
     }
   })
 
   // res.send(`<p>the email has been confirmed press in the below link to login</p>
-  // <a href="http://localhost:3000/signin">Login</a>`)
+  // <a href="https://doctortech.herokuapp.com/signin">Login</a>`)
 })
 
 
@@ -732,12 +742,7 @@ router.route('/upload').post(upload.single('pic'),function(req,res){
         })
         
       }
-
-
-    })
-    
-     
-    
+    })  
 })
 
 //Note: add the passport function 
