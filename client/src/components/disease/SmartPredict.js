@@ -12,7 +12,7 @@ import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import { connect } from 'react-redux';
 import BreastCancer from './BreastCancer';
-import Diabetes from './Diabetes'
+import Diabetes from './Diabetes.js'
 
 let root = {
   flexGrow: 1,
