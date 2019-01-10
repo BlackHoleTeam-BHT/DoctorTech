@@ -1,3 +1,5 @@
+import { searchForDoctor } from "../action/doctorActions";
+
 const initState = {
   isOpen: false,
   doctors: [],
@@ -11,7 +13,8 @@ const initState = {
   isDoctorInfoReceived : false,
   targetAppointment:{},
   isAddAppointmentDialogOpen: false,
-  contextCallAddApointament : ''
+  contextCallAddApointament : '',
+  searchResults: []
 };
 
 // this function to dealing with doctor action in redux
@@ -87,8 +90,14 @@ const doctorReducer = (state = initState, action) => {
         ...state,
         appointments: action.data
       }
+    case "SEARCH_DOCTOR": return {
+      ...state,
+      searchResults: action.data
+    }
     default:
       return state;
+      
+
   }
 }
 

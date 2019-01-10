@@ -335,6 +335,22 @@ router.route('/patientInformation')
       }
     })
   })
+// searh for doctors
+  router.route('/search-doctors')
+  .post(function (req, res) {
+    const target = req.body.target
+    console.log("ydegdjkegjhfdghke",req.body)
+    db.searchDoctor(target, function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        res.send({
+          data: result
+        });
+      }
+    })
+
+  })
 
 //Note :to select the patient Cassis
 router.route('/patientInCassis')
