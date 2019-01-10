@@ -18,12 +18,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {MedicalNewsAPI} from '../../store/action/API'
-import Grid from '@material-ui/core/Grid';
+import { MedicalNewsAPI } from '../../store/action/API'
 import ScrollDialog from './view/Dialog'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import LazyLoad from 'react-lazyload'
 
 const styles = theme => ({
   card: {
@@ -42,8 +40,6 @@ const styles = theme => ({
   },
   actions: {
     display: 'flex',
-   
-    
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -57,23 +53,20 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500],
-    width: 60,
-    height: 60,
-  },  gridList: {
-    width: '80%',
-    
+    width: 40,
+    height: 40,
+  }, gridList: {
+    width: '100%',
   },
 });
 
 class RecipeReviewCard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.props.MedicalNewsAPI()
 
-        this.props.MedicalNewsAPI()
-        
-    }
-  
+  }
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -84,59 +77,60 @@ class RecipeReviewCard extends React.Component {
     console.log(this.props)
 
     return (
-       <div className={classes.root}>
-       <GridList cellHeight={500} className={classes.gridList} cols={3}>   
-       
-{    this.props.Articles.map((value,key)=>{
-        return (
-           
-        <GridListTile key={key} >
-        <Card className={classes.card}>
-        <CardHeader
-          avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              {value.title[0].toUpperCase()}
-            </Avatar>
-          }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={value.title}
-          subheader={value.publishedAt.slice(0,10)}
-        />
-        <CardMedia
-          className={classes.media}
-          image={value.urlToImage}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography component="p">
-                {value.description}
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton>
-          <span style={{marginLeft: 'auto'}}>
-          <ScrollDialog  link={value.url} content={value.content.slice(0,(value.content.length-14))}></ScrollDialog>
-          </span>
-        
-        </CardActions>
-      </Card> 
-      </GridListTile>
-     
-      
-        
-      )})}
-      </GridList> 
+      <div className={classes.root}>
+        <GridList cellHeight={500} className={classes.gridList} cols={3}>
+
+          {this.props.Articles.map((value, key) => {
+            return (
+
+              <GridListTile key={key} >
+                <Card className={classes.card}>
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="Recipe" className={classes.avatar}>
+                        {value.title[0].toUpperCase()}
+                      </Avatar>
+                    }
+                    action={
+                      <IconButton>
+                        <MoreVertIcon />
+                      </IconButton>
+                    }
+                    title={value.title}
+                    subheader={value.publishedAt.slice(0, 10)}
+                  />
+                  <CardMedia
+                    className={classes.media}
+                    image={value.urlToImage}
+                    title="Paella dish"
+                  />
+                  <CardContent>
+                    <Typography component="p">
+                      {value.description}
+                    </Typography>
+                  </CardContent>
+                  <CardActions className={classes.actions} disableActionSpacing>
+                    <IconButton aria-label="Add to favorites">
+                      <FavoriteIcon />
+                    </IconButton>
+                    <IconButton aria-label="Share">
+                      <ShareIcon />
+                    </IconButton>
+                    <span style={{ marginLeft: 'auto' }}>
+                      <ScrollDialog link={value.url} content={value.content.slice(0, (value.content.length - 14))}></ScrollDialog>
+                    </span>
+
+                  </CardActions>
+                </Card>
+              </GridListTile>
+
+
+
+            )
+          })}
+        </GridList>
       </div>
-      
+
     );
   }
 }
@@ -148,19 +142,19 @@ RecipeReviewCard.propTypes = {
 
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
-    return {
-        Articles: state.API.article,     
-    }
+  return {
+    Articles: state.API.article,
   }
-  
-  //Note: add the action to the props
-  const mapDispatchToProps = (dispatch) => {
-    return {
-        MedicalNewsAPI: () => dispatch(MedicalNewsAPI())
-    }
-  }
+}
 
-export default compose(withStyles(styles),connect(mapStateToProps,mapDispatchToProps))(RecipeReviewCard);
+//Note: add the action to the props
+const mapDispatchToProps = (dispatch) => {
+  return {
+    MedicalNewsAPI: () => dispatch(MedicalNewsAPI())
+  }
+}
+
+export default compose(withStyles(styles), connect(mapStateToProps, mapDispatchToProps))(RecipeReviewCard);
 
 
 

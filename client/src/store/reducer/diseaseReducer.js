@@ -2,7 +2,7 @@ const initState = {
   diabetes: {},
   Health: [],
   breastCancerPredictions: {},
-  heartAttack: {}
+  heartAttackPredictions: {}
 
 }
 

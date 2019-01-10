@@ -3,12 +3,9 @@ import  { connect }  from "react-redux";
 import { diabetes } from '../../store/action/diseaseActions';
 import {
   Container,
-  Row,
-  Col,
   Label,
   Input,
   Button,
-  Alert,
   Form
 } from "reactstrap";
 
@@ -17,14 +14,13 @@ class Diabetes extends Component {
 constructor(props){
   super(props)
   this.state = {
-
-    diabetesPedigree: "",
-    bloodPressure: "",
-    skinThickness: "",
-    pregnancies: "",
-    glucose: "",
-    insulin: "",
-    age: "",
+    DiabetesPedigreeFunction: "",
+    BloodPressure: "",
+    SkinThickness: "",
+    Pregnancies: "",
+    Glucose: "",
+    Insulin: "",
+    Age: "",
     BMI: ""
   }
   this.handleChange = this.handleChange.bind(this)
@@ -52,10 +48,10 @@ handleSubmit = (e) => {
                   <div className="card-header">Diabetes Predictor</div>
                 </div>
                 <div className="card-body">
-                  <Form>
+                  <form onSubmit={this.handleSubmit}>
                     <div className="form-group row">
                       <Label
-                        for="diabetesPedigree"
+                        for="DiabetesPedigreeFunction"
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Diabetes Pedigree Function
@@ -63,20 +59,18 @@ handleSubmit = (e) => {
                       <div className="col-md-6">
                         <Input
                           type="number"
-                          id="diabetesPedigree"
+                          id="DiabetesPedigreeFunction"
                           className="form-control"
-													placeholder="diabetes pedigree"
-                          name="diabetesPedigree"
+                          name="DiabetesPedigreeFunction"
                           required
                           onChange= {this.handleChange}
                           value = {this.state.value}
-                          
                         />
                       </div>
                     </div>
                     <div className="form-group row">
                       <Label
-                        for="bloodPressure"
+                        for="BloodPressure"
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Blood Pressure
@@ -84,9 +78,9 @@ handleSubmit = (e) => {
                       <div className="col-md-6">
                         <Input
                           type="number"
-                          id="bloodPressure"
+                          id="BloodPressure"
                           className="form-control"
-                          name="bloodPressure"
+                          name="BloodPressure"
                           required
                           onChange = {this.handleChange}
                           value = {this.state.value}
@@ -95,7 +89,7 @@ handleSubmit = (e) => {
                     </div>
                     <div className="form-group row">
                       <Label
-                        for="skinThickness"
+                        for="SkinThickness"
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Skin Thickness
@@ -103,9 +97,9 @@ handleSubmit = (e) => {
                       <div className="col-md-6">
                         <Input
                           type="number"
-                          id="skinThickness"
+                          id="SkinThickness"
                           className="form-control"
-                          name="skinThickness"
+                          name="SkinThickness"
                           required
                           onChange = {this.handleChange}
                           value = {this.state.value}
@@ -114,7 +108,7 @@ handleSubmit = (e) => {
                     </div>
                     <div className="form-group row">
                       <Label
-                        for="pregnancies"
+                        for="Pregnancies"
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Pregnancies
@@ -122,9 +116,9 @@ handleSubmit = (e) => {
                       <div className="col-md-6">
                         <Input
                           type="number"
-                          id="pregnancies"
+                          id="Pregnancies"
                           className="form-control"
-                          name="pregnancies"
+                          name="Pregnancies"
                           required
                           onChange = {this.handleChange}
                           value = {this.state.value}
@@ -133,7 +127,7 @@ handleSubmit = (e) => {
                     </div>
                     <div className="form-group row">
                       <Label
-                        for="glucose"
+                        for="Glucose"
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Glucose
@@ -141,9 +135,9 @@ handleSubmit = (e) => {
                       <div className="col-md-6">
                         <Input
                           type="number"
-                          id="glucose"
+                          id="Glucose"
                           className="form-control"
-                          name="glucose"
+                          name="Glucose"
                           required
                           onChange = {this.handleChange}
                           value = {this.state.value}
@@ -152,7 +146,7 @@ handleSubmit = (e) => {
                     </div>
                     <div className="form-group row">
                       <Label
-                        for="insulin"
+                        for="Insulin"
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Insulin
@@ -160,17 +154,19 @@ handleSubmit = (e) => {
                       <div className="col-md-6">
                         <Input
                           type="number"
-                          id="insulin"
-                          name="insulin"
+                          id="Insulin"
+                          name="Insulin"
                           className="form-control"
                           required
                           onChange = {this.handleChange}
+                          value = {this.state.value}
+
                         />
                       </div>
                     </div>
                     <div className="form-group row">
                       <Label
-                        for="age"
+                        for="Age"
                         className="col-md-4 col-form-label text-md-right"
                       >
                         Age
@@ -178,11 +174,13 @@ handleSubmit = (e) => {
                       <div className="col-md-6">
                         <Input
                           type="number"
-                          id="age"
+                          id="Age"
                           className="form-control"
-                          name="age"
+                          name="Age"
                           required
                           onChange = {this.handleChange}
+                          value = {this.state.value}
+
                         />
                       </div>
                     </div>
@@ -201,16 +199,17 @@ handleSubmit = (e) => {
                           name="BMI"
                           required
                           onChange = {this.handleChange}
+                          value = {this.state.value}
                         />
                       </div>
                     </div>
 
                     <div className="col-md-6 offset-md-4">
-                      <Button type="submit" color="primary" onClick={this.handleSubmit}>
+                      <Button type="submit" color="primary" >
                         Predict
                       </Button>
                     </div>
-                  </Form>
+                  </form>
                 </div>
               </div>
             </div>

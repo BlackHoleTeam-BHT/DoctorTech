@@ -7,12 +7,12 @@
   },
   "scripts": {
     "server": "nodemon server",
-    "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node server"
   },
   "cacheDirectories": [
     "node_modules",
-    "react-ui/node_modules"
+    "client/node_modules"
   ],
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "heroku",
     "react"
   ],
-  "license": "MIT",
+  "license": "DoctorTech",
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
