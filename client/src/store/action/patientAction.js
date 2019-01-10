@@ -467,4 +467,3 @@ export const AddPatientPlan = (data) => {
     });
   }
 }
-

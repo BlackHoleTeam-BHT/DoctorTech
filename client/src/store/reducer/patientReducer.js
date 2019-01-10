@@ -196,8 +196,10 @@ const patientReducer = (state = initState, action) => {
         ...state,
         PatientPlan: [action.data]
       }
-     
-   
+
+
+    
+
       case "AddnewCase":
       var AddnewCase = state.currentCase
       AddnewCase.push(action.data)
