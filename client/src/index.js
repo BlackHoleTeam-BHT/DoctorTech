@@ -11,12 +11,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MedicalNews from './components/dashboard/MedicalNews'
 import DrProfile from './components/doctorProfile/DrProfile'
 import HeartAttack from './components/disease/HeartAttack'
+import PatientProfile from './components/Patient/Profile/patientProfile'
+
 
 
 // Note:create the store and add the thunk Middleware
 const store=createStore(rootReducer,applyMiddleware(thunk))
 
-ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
