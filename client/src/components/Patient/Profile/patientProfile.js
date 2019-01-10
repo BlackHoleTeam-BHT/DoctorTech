@@ -33,6 +33,7 @@ import Indicator from './patientComponent/Indicator'
 import { Health } from '../../../store/action/diseaseActions'
 import { GetUserInformation } from '../../../store/action/patientAction';
 import {openAddAppointmentDialog} from '../../../store/action/doctorActions';
+import CustomizedSnackbars from './patientComponent/layout/Snackbar'
 
 function TabContainer(props) {
   return (
@@ -145,6 +146,7 @@ class PatientProfile extends React.Component {
                     <Button variant="outlined" color="primary" onClick={this.handleClickOpenAddAppointment}>
                       Add Appointment
                     </Button>
+                    <CustomizedSnackbars data="Welcome walid"></CustomizedSnackbars>
                   </div>
                   <div style={{ alignSelf: 'center', marginLeft: '10px' }}>
                     <NewCase />

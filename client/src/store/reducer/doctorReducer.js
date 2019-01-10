@@ -14,7 +14,8 @@ const initState = {
   targetAppointment:{},
   isAddAppointmentDialogOpen: false,
   contextCallAddApointament : '',
-  searchResults: []
+  searchResults: [],
+  activeAppointment:false
 };
 
 // this function to dealing with doctor action in redux
@@ -78,7 +79,8 @@ const doctorReducer = (state = initState, action) => {
 
     return {
       ...state,
-      appointments: newAppointment
+      appointments: newAppointment,
+      activeAppointment:true
     }
     case "DELETE_APPOINTMENT":
       return {
