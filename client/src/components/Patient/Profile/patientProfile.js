@@ -146,7 +146,7 @@ class PatientProfile extends React.Component {
                     <Button variant="outlined" color="primary" onClick={this.handleClickOpenAddAppointment}>
                       Add Appointment
                     </Button>
-                    <CustomizedSnackbars  name="activeAppointment" open={this.props.doctor.activeAppointment} data="Welcome walid"></CustomizedSnackbars>
+                    <CustomizedSnackbars  name="activeAppointment" open={this.props.doctor.activeAppointment} data="the Appointment has been Added"></CustomizedSnackbars>
                   </div>
                   <div style={{ alignSelf: 'center', marginLeft: '10px' }}>
                     <NewCase />
