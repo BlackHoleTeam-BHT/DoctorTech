@@ -1,13 +1,17 @@
 import React from 'react';
 import { Container } from 'reactstrap'
 import DoctorListEntry from './DoctorListEntry';
-
+import {CircularProgress} from '@material-ui/core';
+import { connect } from 'react-redux';
+import {startProgressBar} from '../../store/action/doctorActions'
 class DoctorList extends React.Component {
 
   render() {
     console.log(this.props)
     let doctors = this.props.doctors;
     return (
+      !this.props.isSearchResultReceivd ?  
+      <CircularProgress disableShrink size={50}  style ={{position: 'absolute', top: "50%", left: "50%"}}/> :
       <Container style={{ position: 'relative',overflow: 'auto', maxHeight: 700}}>
         {/* to check if  there are doctor or not*/}
         {doctors.length > 0 ? (
@@ -27,5 +31,18 @@ class DoctorList extends React.Component {
   }
 }
 
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+  return {
+    isSearchResultReceivd: state.doctor.isSearchResultReceivd
+  }
+}
 
-export default DoctorList;
+//Note: add the action to the props
+const mapDispatchToProps = (dispatch) => {
+  return {
+    startProgressBar: (isOpen) => dispatch(startProgressBar(isOpen))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DoctorList);
