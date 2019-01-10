@@ -15,13 +15,13 @@ class Header extends React.Component {
       <div>
         <Navbar className="primaryColor">
           <div className="container">
-            <NavbarBrand href="/dashboard"> <h3 className="NavHover">Doctor Tech</h3></NavbarBrand>
+            <NavbarBrand href="/"> <h3 className="NavHover">Doctor Tech</h3></NavbarBrand>
             <Nav>
               <NavItem className="NavHover">
-                <NavLink exact="true" href="/signup" className="mdFont" >Create account</NavLink>
+                <NavLink exact="true" href="/signup" className="mdFont NavHover" >Create account</NavLink>
               </NavItem>
               <NavItem className="NavHover">
-                <NavLink exact="true" href="/signin"  className="mdFont">Login</NavLink>
+                <NavLink exact="true" href="/signin"  className="mdFont NavHover">Login</NavLink>
               </NavItem>
             </Nav>
           </div>

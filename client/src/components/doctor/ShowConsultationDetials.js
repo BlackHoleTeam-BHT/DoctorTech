@@ -62,7 +62,6 @@ class ShowConsultationDetials extends React.Component {
           <AppBar className={classes.appBar}>
             <Toolbar>
               <IconButton color="inherit"
-                style={{ paddingRight: 40 }}
                 onClick={this.handleClose}
                 aria-label="Close">
                 <CloseIcon />
@@ -71,7 +70,7 @@ class ShowConsultationDetials extends React.Component {
               <Button variant="outlined"
                 onClick={this.handleReply.bind(this)}
                 color="inherit"
-                style={{ paddingRight: 40, marginLeft: 12, height: 20, fontSize: 17 }}
+                style={{ marginLeft: 12, height: 20, fontSize: 17 }}
               >
                 Reply
               </Button>

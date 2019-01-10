@@ -17,6 +17,7 @@ const app =  express();
 
 //Note: Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use('/uploads',express.static(path.resolve(__dirname, '../uploads')));
 
 
 //Note: add bodyParser
@@ -40,6 +41,10 @@ app.use(passport.session());
 // Note: activate the router
 app.use('/', router);
 
+// All remaining requests return the React app, so it can handle routing.
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, function () {

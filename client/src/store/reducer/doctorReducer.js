@@ -1,3 +1,5 @@
+import { searchForDoctor } from "../action/doctorActions";
+
 const initState = {
   isOpen: false,
   doctors: [],
@@ -7,7 +9,12 @@ const initState = {
   consultsInbox: [],
   isShowConsultDetialsOpen: false,
   targetConsult: {},
-  appointments: []
+  appointments: [],
+  isDoctorInfoReceived : false,
+  targetAppointment:{},
+  isAddAppointmentDialogOpen: false,
+  contextCallAddApointament : '',
+  searchResults: []
 };
 
 // this function to dealing with doctor action in redux
@@ -44,7 +51,8 @@ const doctorReducer = (state = initState, action) => {
     case "GET_CONSULTATIONS_INBOX":
       return {
         ...state,
-        consultsInbox: action.data
+        consultsInbox: action.data,
+        isDoctorInfoReceived: true
       }
     case "OPEN_SHOWCONSULT_DETIALS":
       return {
@@ -56,12 +64,40 @@ const doctorReducer = (state = initState, action) => {
       ...state,
       appointments: action.data
     }
-    case "DELETE_APPOINTMENT": return {
+    case "OPEN_ADD_APPOINTMENT_DAILOG" : 
+    return {
       ...state,
-      appointments: action.data
+      isAddAppointmentDialogOpen: action.data,
+      targetAppointment : action.targetAppointment,
+      contextCallAddApointament: action.context
+    }  
+
+   case "AddAppointment":
+    var newAppointment = state.appointments
+    newAppointment.push(action.data)
+
+    return {
+      ...state,
+      appointments: newAppointment
+    }
+    case "DELETE_APPOINTMENT":
+      return {
+        ...state,
+        appointments: action.data
+      }
+    case "UPDATE_APPOINTMENT": 
+      return {
+        ...state,
+        appointments: action.data
+      }
+    case "SEARCH_DOCTOR": return {
+      ...state,
+      searchResults: action.data
     }
     default:
       return state;
+      
+
   }
 }
 

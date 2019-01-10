@@ -51,7 +51,7 @@ const DrawerMenu = (props) => {
         <MenuItem
           className={classes.menuItem}
           component={NavLink}
-          to="/dashboard/dr-profile"
+          to={"/dashboard/"+  props.user.id + "/dr-profile"}
         >
           Dr Profile
         </MenuItem>

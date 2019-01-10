@@ -1,23 +1,31 @@
 .primaryColor{
-    background: #2caee2;
+    background: #2ec8a6;
 }
 
 .mdFont{
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: bold;
   color: #ffffff;
+  font-family: 'Trebuchet MS', sans-serif;
+   padding: 10px;
 }
 .NavHover{
   color: aliceblue;
-
 }
 
 .NavHover:hover {
-  background: white;
-  color: #2caee2;
+  color: #ff0f;
+  display: block;
   text-decoration: none;
 }
 .active-style{
-    background: white;
-    color: #2caee2;
+    background: #1c947c;
+    color: #ff0f;
     text-decoration: none;
+}
+
+.header {
+  width: 100%;
+  position: fixed;
+  overflow: hidden;
 }

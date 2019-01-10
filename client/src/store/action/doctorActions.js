@@ -127,15 +127,15 @@ export const getAppointment = (doctorId) => {
 }
 
 // this action to delete appointment 
-export const deleteAppointment = (doctorId) => {
+export const deleteAppointment = (doctorId, appointmentId) => {
   return (dispatch, getState) => {
     //sync
     $.ajax({
       type: "POST",
-      url: '/get-appointment',
-      data: JSON.stringify({ doctorId: doctorId }),
+      url: '/delete-appointment',
+      data: JSON.stringify({ doctorId: doctorId , appointmentId: appointmentId}),
       contentType: 'application/json',
-      success: function (res) {
+      success:  (res) => {
         dispatch({ type: 'DELETE_APPOINTMENT', data: res.data })
       },
       error: (err) => {
@@ -144,4 +144,104 @@ export const deleteAppointment = (doctorId) => {
     });
   }
 }
+// to save the doctor image  
+export const DoctorImage = (data) => {
+  return (dispatch, getState) => {
+    console.log('action',data)
+
+    var fd = new FormData();
+    var pic = data.pic
+    fd.append('pic',pic)
+    fd.append('id',data.id)
+    $.ajax({
+      url: '/upload',
+      type: "POST",
+      processData: false,
+      data: fd,
+      contentType: false,
+      success: function (res) {
+        console.log('server',res)
+          
+            dispatch({ type:'UpdateImage', data:res})
+          
+      }
+    })
+
+  }
+}
+
+
+// Note: Add Appointment
+export const AddAppointment = (data) => {
+  console.log('action AddAppointment', data)
+  return (dispatch, getState) => {
+
+    $.ajax({
+      type: "POST",
+      url: '/add-appointment',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function (result) {
+        dispatch({ type: 'AddAppointment', data: data })
+      },
+      error: (err) => {
+        console.log('server err', err)
+      }
+
+    });
+
+  }
+}
+
+// this action to open model to add appointment to patient
+export const openAddAppointmentDialog = (isOpen, targetAppointment, context) => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: "OPEN_ADD_APPOINTMENT_DAILOG",
+      data: isOpen,
+      targetAppointment: targetAppointment,
+      context: context
+    })
+  }
+}
+
+// this action to delete appointment 
+export const updateAppointment = (newAppointment) => {
+  return (dispatch, getState) => {
+    //sync
+    $.ajax({
+      type: "POST",
+      url: '/update-appointment',
+      data: JSON.stringify(newAppointment),
+      contentType: 'application/json',
+      success:  (res) => {
+        dispatch({ type: 'UPDATE_APPOINTMENT', data: res.data })
+      },
+      error: (err) => {
+        console.log("Error during update docotr appointment the server")
+      }
+    });
+  }
+}
+export const searchForDoctor = (data) => {
+  console.log(data)
+  return (dispatch, getState) => {
+    $.ajax({
+      type: 'POST',
+      url: '/search-doctors',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: function (res) {
+        if(res.data){
+          dispatch({type:'SEARCH_DOCTOR', data:res.data})
+        }
+      },
+      error:(err) =>{
+        console.log("ERROR IN SEARCH FOR DOCTOR" , err)
+      }
+
+    })
+  }
+}
+
 
