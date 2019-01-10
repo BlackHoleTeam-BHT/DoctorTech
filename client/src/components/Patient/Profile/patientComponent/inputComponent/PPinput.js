@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import Button from '@material-ui/core/Button';
-import { AddPatientPlan } from '../../../../../store/action/patientAction'
+import { AddPatientPlan } from '../../../../../store/action/doctorActions'
 
 
 const styles = theme => ({

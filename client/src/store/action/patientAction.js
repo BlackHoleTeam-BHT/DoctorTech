@@ -447,24 +447,3 @@ export const OpenPatientProfile = (Id, step, CaseId) => {
   }
 }
 
-// Note: to add  patient plan
-export const AddPatientPlan = (data) => {
-  console.log('action AddPatientPlan', data)
-  return (dispatch, getState) => {
-
-    $.ajax({
-      type: "POST",
-      url: '/AddPatientPlan',
-      contentType: 'application/json',
-      data: JSON.stringify(data),
-      success: function (result) {
-        console.log('AddPatientPlan', result)
-        dispatch({ type: 'AddPatientPlan', data: data })
-      },
-      error: (err) => {
-        console.log('server err', err)
-      }
-    });
-  }
-}
-
