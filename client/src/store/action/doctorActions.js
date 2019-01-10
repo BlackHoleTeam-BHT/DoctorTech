@@ -187,38 +187,40 @@ export const AddAppointment = (data) => {
       error: (err) => {
         console.log('server err', err)
       }
+
     });
 
   }
 }
 
-// Note: to add  patient plan
-export const AddPatientPlan = (data) => {
-
-
-
-  console.log('action AddPatientPlan', data)
-
+// this action to open model to add appointment to patient
+export const openAddAppointmentDialog = (isOpen, targetAppointment, context) => {
   return (dispatch, getState) => {
+    dispatch({
+      type: "OPEN_ADD_APPOINTMENT_DAILOG",
+      data: isOpen,
+      targetAppointment: targetAppointment,
+      context: context
+    })
+  }
+}
 
+// this action to delete appointment 
+export const updateAppointment = (newAppointment) => {
+  return (dispatch, getState) => {
+    //sync
     $.ajax({
       type: "POST",
-      url: '/AddPatientPlan',
+      url: '/update-appointment',
+      data: JSON.stringify(newAppointment),
       contentType: 'application/json',
-      data: JSON.stringify(data),
-      success: function (result) {
-
-        console.log('AddPatientPlan', result)
-        dispatch({ type: 'AddPatientPlan', data: data })
+      success:  (res) => {
+        dispatch({ type: 'UPDATE_APPOINTMENT', data: res.data })
       },
       error: (err) => {
-        console.log('server err', err)
+        console.log("Error during update docotr appointment the server")
       }
-
     });
-
-
-
   }
 }
 export const searchForDoctor = (data) => {
