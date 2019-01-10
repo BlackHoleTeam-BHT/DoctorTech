@@ -84,15 +84,7 @@ const doctorReducer = (state = initState, action) => {
       appointments: newAppointment,
       activeAppointment:true
     }
-    case "AddAppointment":
-      var newAppointment = state.Appointment
-      newAppointment.push(action.data)
-
-      return {
-        ...state,
-        Appointment: newAppointment
-
-      }
+  
     case "SEARCH_DOCTOR": return {
       ...state,
       searchResults: action.data,
