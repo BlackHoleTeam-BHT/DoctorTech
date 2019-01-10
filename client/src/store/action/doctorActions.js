@@ -223,3 +223,34 @@ export const updateAppointment = (newAppointment) => {
     });
   }
 }
+export const searchForDoctor = (data) => {
+  console.log(data)
+  return (dispatch, getState) => {
+    $.ajax({
+      type: 'POST',
+      url: '/search-doctors',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: function (res) {
+        if(res.data){
+          dispatch({type:'SEARCH_DOCTOR', data:res.data})
+        }
+      },
+      error:(err) =>{
+        console.log("ERROR IN SEARCH FOR DOCTOR" , err)
+      }
+
+    })
+  }
+}
+
+
+
+
+// this deactivate the appointment SnackBar
+export const DeactivateAppointment = (id) => {
+  return (dispatch, getState) => {
+
+    dispatch({type: 'DeactivateAppointment'})
+  }
+}
