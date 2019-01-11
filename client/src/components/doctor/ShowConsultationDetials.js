@@ -19,7 +19,7 @@ import moment from 'moment';
 const styles = {
   appBar: {
     position: 'relative',
-    background: '#2caee2'
+    background: '#2ec8a6'
   },
   flex: {
     flex: 1,
@@ -70,7 +70,7 @@ class ShowConsultationDetials extends React.Component {
               <Button variant="outlined"
                 onClick={this.handleReply.bind(this)}
                 color="inherit"
-                style={{ marginLeft: 12, height: 20, fontSize: 17 }}
+                style={{ fontSize: 17 }}
               >
                 Reply
               </Button>

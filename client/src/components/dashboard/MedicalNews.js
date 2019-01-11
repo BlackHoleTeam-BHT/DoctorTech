@@ -78,7 +78,7 @@ class RecipeReviewCard extends React.Component {
 
     return (
       <div className={classes.root}>
-        <GridList cellHeight={500} className={classes.gridList} cols={3}>
+        <GridList cellHeight={600} className={classes.gridList} cols={3}>
 
           {this.props.Articles.map((value, key) => {
             return (
@@ -86,16 +86,17 @@ class RecipeReviewCard extends React.Component {
               <GridListTile key={key} >
                 <Card className={classes.card}>
                   <CardHeader
-                    avatar={
-                      <Avatar aria-label="Recipe" className={classes.avatar}>
-                        {value.title[0].toUpperCase()}
-                      </Avatar>
-                    }
-                    action={
-                      <IconButton>
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
+                    // avatar={
+                    //   <Avatar aria-label="Recipe" className={classes.avatar}>
+                    //     {value.title[0].toUpperCase()}
+                    //   </Avatar>
+                    // }
+                    // action={
+                    //   <IconButton>
+                    //     <MoreVertIcon />
+                    //   </IconButton>
+                    // }
+                    component ="h6"
                     title={value.title}
                     subheader={value.publishedAt.slice(0, 10)}
                   />
@@ -110,12 +111,12 @@ class RecipeReviewCard extends React.Component {
                     </Typography>
                   </CardContent>
                   <CardActions className={classes.actions} disableActionSpacing>
-                    <IconButton aria-label="Add to favorites">
+                    {/* <IconButton aria-label="Add to favorites">
                       <FavoriteIcon />
                     </IconButton>
                     <IconButton aria-label="Share">
                       <ShareIcon />
-                    </IconButton>
+                    </IconButton> */}
                     <span style={{ marginLeft: 'auto' }}>
                       <ScrollDialog link={value.url} content={value.content.slice(0, (value.content.length - 14))}></ScrollDialog>
                     </span>
@@ -123,9 +124,6 @@ class RecipeReviewCard extends React.Component {
                   </CardActions>
                 </Card>
               </GridListTile>
-
-
-
             )
           })}
         </GridList>

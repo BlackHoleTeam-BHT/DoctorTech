@@ -62,3 +62,35 @@ describe('/sign-up', () => {
     });
   });
 });
+
+
+describe('Test the /patients', () => {
+	it('it should return status code equal 200 and array of object', (done) => {
+		// Test data.
+    chai.request('http://127.0.0.1:5000')
+    .post('/patients')
+    .send({ id: 61})
+    .end((err, res) => {
+    	res.should.have.status(200);
+        res.body.should.be.a('object');
+      // res.body.should.have.property('errors');
+      done();
+    });
+  });
+});
+
+
+describe('Test the  get doctors', () => {
+	it('it should return status code equal 200 and array of object', (done) => {
+		// Test data.
+    chai.request('http://127.0.0.1:5000')
+    .get('/doctores')
+    .end((err, res) => {
+    	res.should.have.status(200);
+        res.body.should.be.a('object');
+      // res.body.should.have.property('errors');
+      done();
+    });
+  });
+});
+

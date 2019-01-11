@@ -33,7 +33,7 @@ const styles = theme => ({
   },
   root: {
     width: '100%',
-    maxWidth: 400,
+    maxWidth: 500,
     backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
   },
@@ -76,55 +76,54 @@ class InteractiveList extends React.Component {
     const { classes } = this.props;
     const { dense } = this.state;
     var appointments = this.props.appointments;
-    console.log('ggygygy', this.props)
     return (
       <div>
-        
-        <Grid >
-        <Appointment />
-        <Grid item sm ={12} xs={12} md={8}>
-          <MedicalNews />
-        </Grid> 
-        <Grid item sm ={12} xs={12} md={4}>
-        <List
-          component="nav"
-          subheader={<ListSubheader component="div"></ListSubheader>}
-          className={classes.root}
-          style={{ position: 'absolute', right: 10, }}
-        >
-          <ListItem button onClick={this.handleClick}>
-            <ListItemIcon>
-              <i class="material-icons">local_laundry_service</i>
-            </ListItemIcon>
-            <ListItemText inset primary="Appointment" />
-            {this.state.open ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem button className={classes.nested}>
-                <Grid item xs={12} md={12}>
-                  <div className={classes.demo}>
-                    <List dense={dense}>
 
-                      {appointments.length > 0 ? (
-                        appointments && appointments.map((elem =>
-                          <GetAppointment key={elem.id} appointment={elem} />
-                        ))
-                      ) : (
-                          <div className="text-center">
-                            <h4>No data found</h4>
-                          </div>
-                        )
-                      }
-                    </List>
-                  </div>
-                </Grid>
+        <Grid container>
+          <Appointment />
+          <Grid item sm={12} xs={12} md={8}>
+            <MedicalNews />
+          </Grid>
+          <Grid item sm={12} xs={12} md={4}>
+            <List
+              component="nav"
+              subheader={<ListSubheader component="div"></ListSubheader>}
+              className={classes.root}
+              style={{ position: 'absolute', right: 10, }}
+            >
+              <ListItem button onClick={this.handleClick}>
+                <ListItemIcon>
+                  <i class="material-icons">local_laundry_service</i>
+                </ListItemIcon>
+                <ListItemText inset primary="Appointment" />
+                {this.state.open ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
+              <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <ListItem button className={classes.nested}>
+                    <Grid item xs={12} md={12}>
+                      <div className={classes.demo}>
+                        <List dense={dense}>
+
+                          {appointments.length > 0 ? (
+                            appointments && appointments.map((elem =>
+                              <GetAppointment key={elem.id} appointment={elem} />
+                            ))
+                          ) : (
+                              <div className="text-center">
+                                <h4>No data found</h4>
+                              </div>
+                            )
+                          }
+                        </List>
+                      </div>
+                    </Grid>
+                  </ListItem>
+                </List>
+              </Collapse>
             </List>
-          </Collapse>
-        </List>
-        </Grid>
-       
+          </Grid>
+
         </Grid>
         {/* <div class="main-content">
           <div>
