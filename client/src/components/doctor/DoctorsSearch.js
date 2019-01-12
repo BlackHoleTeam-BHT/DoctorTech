@@ -11,7 +11,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'redux'
 import { connect } from 'react-redux';
 import {searchAboutPatient} from '../../store/action/patientAction.js';
-import {searchForDoctor} from '../../store/action/doctorActions.js';
+import {searchForDoctor, startProgressBar} from '../../store/action/doctorActions.js';
+
 
 const styles = {
   root: {
@@ -49,6 +50,8 @@ class DoctorSearch extends React.Component {
   handleOnClick(e) {
    e.preventDefault()
    this.props.searchForDoctor(this.state)
+  //  this.props.startProgressBar(true);
+
   }
 
   render() {
@@ -97,7 +100,9 @@ const mapStateToProps = (state) => {
 //Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
-    searchForDoctor: (target) => dispatch(searchForDoctor(target))
+    searchForDoctor: (target) => dispatch(searchForDoctor(target)),
+    startProgressBar: (isOpen) => dispatch(startProgressBar(isOpen))
+
   }
 }
 

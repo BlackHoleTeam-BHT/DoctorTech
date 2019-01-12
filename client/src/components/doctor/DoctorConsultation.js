@@ -48,7 +48,7 @@ class DoctorConsultation extends React.Component {
     //     <Redirect to='/' />
     //   )
     // }
-    let  doctors = []
+    let doctors = []
     if (this.props.searchResults.length > 0) {
       doctors = this.props.searchResults;
     } else {
