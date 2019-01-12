@@ -182,25 +182,28 @@ img {
 } */
 
 #fb{
-  color:#00d3f8;
+  color: #00f8ae;
 }
 #fb:hover{
   color: #0051ff
 }
  #ln{
-  color: #00d3f8;
+	color:  #00f8ae;
+	padding-left: 20px;
 } 
 #ln:hover{
   color: rgb(57, 120, 207);
 }
  #tw{
-  color: #00d3f8;
+	color: #00f8ae;
+	padding-left: 20px;
 } 
 #tw:hover{
   color: rgb(0, 191, 255);
 }
 #go{
-  color:#00d3f8
+	color: #00f8ae;
+	padding-left:20px;
 } 
 #go:hover{
   color: rgb(206, 56, 39);
@@ -235,4 +238,14 @@ img {
   background-color:#55b6c7 ;
   color:whitesmoke;
   padding: 20px;
+}
+
+.homeCard{
+	padding: 50px;
+	color: white !important;
+
+}
+
+.homeText{
+	color: #55b6c7
 }

@@ -19,9 +19,7 @@ class HeartAttack extends Component {
       Oldpeak: "",
       Slope: "",
       Ca: "",
-      Thal: ""
     };
-    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = e => {
@@ -30,8 +28,11 @@ class HeartAttack extends Component {
     });
   };
 
+  // submit data
   handleSubmit = e => {
     e.preventDefault();
+
+
     this.props.predictHeartAttack(this.state);
   };
 
@@ -94,8 +95,8 @@ class HeartAttack extends Component {
                           required
                         >
                           <option>--select--</option>
-                          <option>Male</option>
-                          <option>Female</option>
+                          <option value = "1">Male</option>
+                          <option value = "0">Female</option>
                         </Input>
                       </div>
                     </div>
@@ -139,11 +140,11 @@ class HeartAttack extends Component {
                           value={this.state.value}
                           required
                         >
-                          <option>--select--</option>
-                          <option>Typical Angina</option>
-                          <option>Atypical Angina</option>
-                          <option>Non-anginal Pain</option>
-                          <option>Asymptomatic</option>
+                          <option value = "0">--select--</option>
+                          <option value = "1">Typical Angina</option>
+                          <option value = "2">Atypical Angina</option>
+                          <option value = "3">Non-anginal Pain</option>
+                          <option value = "4">Asymptomatic</option>
                         </Input>
                       </div>
                     </div>
@@ -222,12 +223,12 @@ class HeartAttack extends Component {
                           required
                         >
                           <option>--select--</option>
-                          <option>Normal</option>
-                          <option>
+                          <option value = "0">Normal</option>
+                          <option value = "1">
                             ST-T wave abnormality(T wave inversions and/or ST
                             elevation or depression of > 0.05 mV)
                           </option>
-                          <option>
+                          <option value = "2">
                             Probable or definite left ventricular hypertrophy by
                             Estes' criteria
                           </option>
@@ -271,8 +272,8 @@ class HeartAttack extends Component {
                           required
                         >
                           <option>--select--</option>
-                          <option>Less than 120 mg/dl</option>
-                          <option>Greater than 120 mg/dl</option>
+                          <option value = "0">Less than 120 mg/dl</option>
+                          <option value = "1">Greater than 120 mg/dl</option>
                         </Input>
                       </div>
                     </div>
@@ -294,8 +295,8 @@ class HeartAttack extends Component {
                           required
                         >
                           <option>--select--</option>
-                          <option>Yes</option>
-                          <option>No</option>
+                          <option value = "1">Yes</option>
+                          <option value = "0">No</option>
                         </Input>
                       </div>
                     </div>
@@ -339,10 +340,10 @@ class HeartAttack extends Component {
                           value={this.state.value}
                           required
                         >
-                          <option>--select--</option>
-                          <option>Upsloping</option>
-                          <option>Flat</option>
-                          <option>Downsloping</option>
+                          <option value = "0">--select--</option>
+                          <option value = "1">Upsloping</option>
+                          <option value = "2">Flat</option>
+                          <option value = "3">Downsloping</option>
                         </Input>
                         <small id="slope" class="form-text text-muted">
                           The slope of the peak exercise ST segment
@@ -367,10 +368,10 @@ class HeartAttack extends Component {
                           value={this.state.value}
                           required
                         >
-                          <option>--select--</option>
-                          <option>Normal(no cold spots)</option>
-                          <option>Fixed defect (cold spots during rest and exercise)</option>
-                          <option>Reversible defect (when cold spots only appear during exercise)</option>
+                          <option value = "0">--select--</option>
+                          <option value = "3">Normal(no cold spots)</option>
+                          <option value = "6">Fixed defect (cold spots during rest and exercise)</option>
+                          <option value = "7">Reversible defect (when cold spots only appear during exercise)</option>
                         </Input>
                       </div>
                     </div>

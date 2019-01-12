@@ -1,6 +1,5 @@
 import React from 'react'
 import { FormGroup } from 'reactstrap';
-import logo from '../style/logo.png'
 import '../style/Home.css'
 
 class Footer extends React.Component {
@@ -14,7 +13,7 @@ class Footer extends React.Component {
                 <div className="footer-column col-md-7 col-sm-6 col-xs-12">
                   <div className="footer-widget logo-widget" id="firstrow">
                     <div className="logo" id="logo">
-                      <img src={logo} />
+                     
                     </div>
                     <div className="text">we address the cause of your pain, not just the symptom.</div>
                   </div>

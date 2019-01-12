@@ -23,7 +23,7 @@ class ScrollDialog extends React.Component {
   render() {
     return (
       <div>
-        <Button variant="contained" color="secondary" onClick={this.handleClickOpen('paper')}>Show</Button>
+        <Button variant="contained"  color="inherit" style={{background:"#2ec8a6"}} onClick={this.handleClickOpen('paper')}>Show</Button>
        
         <Dialog
           open={this.state.open}

@@ -30,7 +30,7 @@ const disesesReducer = (state = initState, action) => {
       case "HEART_ATTACK":
       return {
         ...state,
-        heartAttack: action.data
+        heartAttackPredictions: action.data
       }
 
     default: return {
