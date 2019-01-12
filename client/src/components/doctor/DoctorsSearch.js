@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import {searchAboutPatient} from '../../store/action/patientAction.js';
 import {searchForDoctor, startProgressBar} from '../../store/action/doctorActions.js';
 
+
 const styles = {
   root: {
     padding: '2px 8px',
@@ -50,6 +51,7 @@ class DoctorSearch extends React.Component {
    e.preventDefault()
    this.props.searchForDoctor(this.state)
   //  this.props.startProgressBar(true);
+
   }
 
   render() {

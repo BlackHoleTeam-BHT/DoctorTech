@@ -254,8 +254,6 @@ export const startProgressBar = (isOpen) => {
   }
 }
 
-
-
 // this deactivate the appointment SnackBar
 export const DeactivateAppointment = (id) => {
   return (dispatch, getState) => {
