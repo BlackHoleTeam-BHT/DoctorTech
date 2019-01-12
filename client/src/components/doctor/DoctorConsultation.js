@@ -48,7 +48,7 @@ class DoctorConsultation extends React.Component {
     //     <Redirect to='/' />
     //   )
     // }
-    let  doctors = []
+    let doctors = []
     if (this.props.searchResults.length > 0) {
       doctors = this.props.searchResults;
     } else {
@@ -57,52 +57,34 @@ class DoctorConsultation extends React.Component {
 
     return (
       // add progress bar until the data come from database
-      !this.props.isDoctorInfoReceived ?  
-      <CircularProgress disableShrink size={50}  style ={{position: 'absolute', top: "50%", left: "50%"}}/> :
-      <Grid container>
-        <ShowConsultationDetials />
-        <Grid item sm={12} xs={12} md={7}>
-          <SendConsultation />
-          <DoctorsSearch />
-          <DoctorList doctors={doctors} />
+      !this.props.isDoctorInfoReceived ?
+        <CircularProgress disableShrink size={50} style={{ position: 'absolute', top: "50%", left: "50%" }} /> :
+        <Grid container>
+          <ShowConsultationDetials />
+          <Grid item sm={12} xs={12} md={7}>
+            <SendConsultation />
+            <DoctorsSearch />
+            <DoctorList doctors={doctors} />
+          </Grid>
+          <Grid item sm={12} xs={12} md={5}>
+            <Card>
+              <Paper square style={{ flexGrow: 1, width: "100%" }}>
+                <Tabs
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  fullWidth
+                  indicatorColor="primary"
+                  textColor="primary"
+                >
+                  <Tab icon={<InboxIcon />} />
+                  <Tab icon={<SendIcon />} />
+                </Tabs>
+              </Paper>
+              {this.state.value === 0 && <ConsultationList consults={this.props.consultsInbox} />}
+              {this.state.value === 1 && <ConsultationList consults={this.props.consultsOutbox} />}
+            </Card>
+          </Grid>
         </Grid>
-        <Grid item sm={12} xs={12} md={5}>
-          <Card>
-            <Paper square style={{ flexGrow: 1, width: "100%" }}>
-              <Tabs
-                value={this.state.value}
-                onChange={this.handleChange}
-                fullWidth
-                indicatorColor="primary"
-                textColor="primary"
-              >
-                <Tab icon={<InboxIcon />} />
-                <Tab icon={<SendIcon />} />
-              </Tabs>
-            </Paper>
-            {this.state.value === 0 && <ConsultationList consults={this.props.consultsInbox} />}
-            {this.state.value === 1 && <ConsultationList consults={this.props.consultsOutbox} />}
-          </Card>
-      </Grid>
-      <Grid item sm={12} xs={12} md={5}>
-        <Card>
-          <Paper square style={{ flexGrow: 1, width: "100%" }}>
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleChange}
-              fullWidth
-              indicatorColor="primary"
-              textColor="primary"
-            >
-              <Tab icon={<InboxIcon />} />
-              <Tab icon={<SendIcon />} />
-            </Tabs>
-          </Paper>
-          {this.state.value === 0 && <ConsultationList consults={this.props.consultsInbox} />}
-          {this.state.value === 1 && <ConsultationList consults={this.props.consultsOutbox} />}
-        </Card>
-      </Grid>
-    </Grid>
     )
   }
 }
@@ -113,7 +95,7 @@ const mapStateToProps = (state) => {
     login: state.auth.login,
     user: state.auth.user,
     doctors: state.doctor.doctors,
-    searchResults : state.doctor.searchResults,
+    searchResults: state.doctor.searchResults,
     consultsOutbox: state.doctor.consultsOutbox,
     consultsInbox: state.doctor.consultsInbox,
     isDoctorInfoReceived: state.doctor.isDoctorInfoReceived

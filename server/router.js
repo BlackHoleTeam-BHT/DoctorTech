@@ -268,6 +268,7 @@ router.route('/get-consult-outbox')
     });
 
   });
+  
 
 // service to deal with get consultation inbox request 
 router.route('/get-consult-inbox')
@@ -728,7 +729,7 @@ router.route('/confirmEmail/:id').get(function (req, res) {
     if (err) {
       throw err
     } else {
-      res.redirect('https://doctortech.herokuapp.com/signin')
+      res.redirect('http://localhost:5000/signin')
     }
   })
 
