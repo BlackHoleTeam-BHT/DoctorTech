@@ -28,3 +28,33 @@ export const MedicalNewsAPI = (user) => {
 
 
 }
+
+
+//http://api.openweathermap.org/data/2.5/weather?id=250441&APPID=c8cc230b2e6224f2bfae9783ac9ee316
+
+
+//Note : weather API 
+export const WeatherAPI = (user) => {
+    console.log(1000000000)
+    return (dispatch, getState) => {
+
+        $.ajax({
+            url: 'http://api.openweathermap.org/data/2.5/weather?id=250441&APPID=c8cc230b2e6224f2bfae9783ac9ee316',
+            type: 'GET',
+            success: (res) => {
+             console.log('WeatherAPI',res.weather)
+             
+             dispatch({ type: 'Weather', data: res})    
+                
+            },
+            error: (error) => {
+               console.log("Error during WeatherAPI",error)
+            }
+        })
+
+
+    }
+
+
+
+}
