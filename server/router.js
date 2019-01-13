@@ -143,7 +143,7 @@ router.route('/login')
                 } else {
                   // add session for the user
                   req.login(user, function (done) {
-                    req.session.cookie.expires = 60000;
+                    // req.session.cookie.expires = 60000;
                     console.log("user login Success")
                     res.send({
                       data: null || results[0],

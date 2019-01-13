@@ -69,8 +69,9 @@ class PatientCard extends React.Component {
 
             </ListItemAvatar>
             <ListItemText
+              style={{fontSize: 17, color: "red"}}
               className={classes.list}
-              primary={PatioentInformation.firstName}
+              primary={PatioentInformation.firstName + ' ' + PatioentInformation.middleName + ' ' + PatioentInformation.lastName}
               secondary={
 
                 <React.Fragment>

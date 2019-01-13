@@ -76,8 +76,8 @@ class DoctorConsultation extends React.Component {
                 indicatorColor="primary"
                 textColor="primary"
               >
-                <Tab icon={<InboxIcon />} />
-                <Tab icon={<SendIcon />} />
+                <Tab icon={<InboxIcon />} label="Inbox" />
+                <Tab icon={<SendIcon />}  label="Sent"/>
               </Tabs>
             </Paper>
             {this.state.value === 0 && <ConsultationList consults={this.props.consultsInbox} />}
