@@ -55,9 +55,9 @@ class SmartPredict extends React.Component {
                 textColor="secondary"
                 centered
               >
-                <Tab label="Breast Cancer Predictor" disableRipple />
-                <Tab label="Diabetes Predictor" disableRipple />
-                <Tab label="Heart Attack Predictor" disableRipple />
+                <Tab style={{ color: "#1c947c", fontSize: 16, fontWeight: 'bold' }} label="Breast Cancer Predictor" disableRipple />
+                <Tab style={{ color: "#1c947c", fontSize: 16, fontWeight: 'bold' }} label="Diabetes Predictor" disableRipple />
+                <Tab style={{ color: "#1c947c", fontSize: 16, fontWeight: 'bold' }} label="Heart Attack Predictor" disableRipple />
               </Tabs>
             </Grid>
             <Grid item md={8} xs={12} sm={12}>
