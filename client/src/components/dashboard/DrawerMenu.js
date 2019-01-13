@@ -12,10 +12,10 @@ import {connect} from 'react-redux';
 
 const DrawerMenu = (props) => {
   const classes = props.classes;
-  console.log(props)
+  console.log('Menue',props.API.Weather.weather)
   return (
     <div>
-      <div className={classes.toolbar} />
+     {props.API.Weather.weather && <div className={classes.toolbar} ><img style={{width:'25%',marginLeft:'15%'}}    src={'http://openweathermap.org/img/w/'+ props.API.Weather.weather[0].icon + '.png'} alt=""/>{Math.round((props.API.Weather.main.temp-273.15))+'°C '}{props.API.Weather.weather[0].description.toUpperCase()}</div>}
       <Divider />
       <MenuList>
         <MenuItem 
@@ -65,7 +65,8 @@ const DrawerMenu = (props) => {
 //Note:add the redux state to the props
 const mapStateToProps = (state) => {
   return {
-    user : state.auth.user
+    user : state.auth.user,
+    API:state.API
   }
 }
 

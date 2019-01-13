@@ -24,6 +24,7 @@ import DrProfile from '../doctorProfile/DrProfile.js'
 import DoctorConsultation from '../doctor/DoctorConsultation.js'
 import SmartPredict from '../disease/SmartPredict.js';
 import InteractiveList from './InteractiveList';
+import {WeatherAPI} from '../../store/action/API'
 
 const drawerWidth = 260;
 const styles = theme => ({
@@ -68,9 +69,19 @@ const styles = theme => ({
 });
 
 class Dashboard extends React.Component {
-  state = {
-    mobileOpen: false,
-  };
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      mobileOpen: false,
+    };
+
+    this.props.WeatherAPI()
+
+  }
+
+
 
   handleDrawerToggle = () => {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
@@ -81,7 +92,11 @@ class Dashboard extends React.Component {
     // logout function from authAction
     this.props.logOut();
   }
+
+
+
   render() {
+    console.log('fun',this.props.WeatherAPI)
     const { classes, theme } = this.props;
     if (this.props.logout) {
       this.props.history.push('/')
@@ -193,7 +208,8 @@ const mapStateToProps = (state) => {
 //Note: add the action to the props
 const mapDispatchToProps = (dispatch) => {
   return {
-    logOut: () => dispatch(logout())
+    logOut: () => dispatch(logout()),
+    WeatherAPI: () => dispatch(WeatherAPI())
   }
 }
 export default compose(withStyles(styles, { withTheme: true }), connect(mapStateToProps, mapDispatchToProps))(Dashboard);

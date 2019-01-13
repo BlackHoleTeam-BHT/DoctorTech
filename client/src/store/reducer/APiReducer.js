@@ -1,5 +1,6 @@
 const initState = {
-  article: []
+  article: [],
+  Weather:{}
 
 }
 
@@ -10,6 +11,11 @@ const APiReducer = (state = initState, action) => {
         ...state,
         article: action.data
 
+      }
+      case "Weather":
+      return{
+        ...state,
+        Weather:action.data
       }
     default:
       return state;
