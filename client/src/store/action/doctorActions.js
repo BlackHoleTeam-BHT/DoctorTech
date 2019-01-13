@@ -244,8 +244,15 @@ export const searchForDoctor = (data) => {
   }
 }
 
-
-
+// this action to open model to add appointment to patient
+export const startProgressBar = (isOpen) => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: "START_PROGRESSBAR",
+      data: isOpen,
+    })
+  }
+}
 
 // this deactivate the appointment SnackBar
 export const DeactivateAppointment = (id) => {

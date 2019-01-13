@@ -3,6 +3,7 @@ import $ from 'jquery';
 //  This action to make request to server to predicat diabetes
 export const diabetes = (data) => {
   return (dispatch, getState) => {
+    dispatch({ type: 'BREAST_CANCER_Progress'})
     $.ajax({
       type: "POST",
       url: '/diabetes',
@@ -53,6 +54,7 @@ export const Health = (data) => {
 //  This action to make request to server to predicat breast cancer
 export const predictBreastCancer = (data) => {
   return (dispatch, getState) => {
+    dispatch({ type: 'BREAST_CANCER_Progress'})
     $.ajax({
       type: "POST",
       url: '/breast-cancer',
@@ -72,6 +74,7 @@ export const predictBreastCancer = (data) => {
 }
   export const predictHeartAttack = (data) => {
     return (dispatch, getState) => {
+      dispatch({ type: 'BREAST_CANCER_Progress'})
       $.ajax({
         type: "POST",
         url: '/heart-attack',

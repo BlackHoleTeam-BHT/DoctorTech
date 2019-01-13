@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import BreastCancer from './BreastCancer';
 import Diabetes from './Diabetes.js';
 import HeartAttack from './HeartAttack';
+import CircularProgress from '@material-ui/core/CircularProgress';
 let root = {
   flexGrow: 1,
   justifyContent: 'center',
@@ -38,7 +39,7 @@ class SmartPredict extends React.Component {
     //     <Redirect to='/' />
     //   )
     // }
-    console.log("Breast" + this.props.breastCancer.accuracy)
+    console.log("Breast" , this.props.disease.BreastCancerProgress)
     return (
 
       <div style={{ justifyContent: "center", margin: 20 }}>
@@ -89,6 +90,7 @@ class SmartPredict extends React.Component {
                   </Typography>
                 </div>
               </Paper>
+             { this.props.disease.BreastCancerProgress && <CircularProgress style={{ position: 'absolute', top: '50%', left: '80%' }} size={50} disableShrink />}
             </Grid>
           </Grid>
         </div>
@@ -103,7 +105,8 @@ const mapStateToProps = (state) => {
     login: state.auth.login,
     breastCancer: state.disease.breastCancerPredictions,
     diabetes: state.disease.diabetes,
-    heartAttack: state.disease.heartAttackPredictions
+    heartAttack: state.disease.heartAttackPredictions,
+    disease:state.disease
   }
 }
 

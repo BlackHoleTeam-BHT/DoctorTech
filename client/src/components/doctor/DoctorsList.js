@@ -1,7 +1,9 @@
 import React from 'react';
 import { Container } from 'reactstrap'
 import DoctorListEntry from './DoctorListEntry';
-
+import {CircularProgress} from '@material-ui/core';
+import { connect } from 'react-redux';
+import {startProgressBar} from '../../store/action/doctorActions'
 class DoctorList extends React.Component {
 
   render() {
@@ -27,5 +29,18 @@ class DoctorList extends React.Component {
   }
 }
 
+//Note:add the redux state to the props
+const mapStateToProps = (state) => {
+  return {
+    isSearchResultReceivd: state.doctor.isSearchResultReceivd
+  }
+}
 
-export default DoctorList;
+//Note: add the action to the props
+const mapDispatchToProps = (dispatch) => {
+  return {
+    startProgressBar: (isOpen) => dispatch(startProgressBar(isOpen))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DoctorList);
