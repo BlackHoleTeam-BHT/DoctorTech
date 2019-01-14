@@ -8,7 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import NoSsr from '@material-ui/core/NoSsr';
 import Tab from '@material-ui/core/Tab';
-import {Button} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import ChiefComplaint from './patientComponent/chiefComplent'
 import MedicalHistory from './patientComponent/MedicalHistory'
@@ -32,7 +32,7 @@ import NewCase from './patientComponent/NewCase';
 import Indicator from './patientComponent/Indicator'
 import { Health } from '../../../store/action/diseaseActions'
 import { GetUserInformation } from '../../../store/action/patientAction';
-import {openAddAppointmentDialog} from '../../../store/action/doctorActions';
+import { openAddAppointmentDialog } from '../../../store/action/doctorActions';
 import CustomizedSnackbars from './patientComponent/layout/Snackbar'
 
 function TabContainer(props) {
@@ -146,7 +146,7 @@ class PatientProfile extends React.Component {
                     <Button variant="outlined" color="primary" onClick={this.handleClickOpenAddAppointment}>
                       Add Appointment
                     </Button>
-                    <CustomizedSnackbars  name="activeAppointment" open={this.props.doctor.activeAppointment} data="the Appointment has been Added"></CustomizedSnackbars>
+                    <CustomizedSnackbars name="activeAppointment" open={this.props.doctor.activeAppointment} data="the Appointment has been Added"></CustomizedSnackbars>
                   </div>
                   <div style={{ alignSelf: 'center', marginLeft: '10px' }}>
                     <NewCase />
@@ -188,14 +188,14 @@ class PatientProfile extends React.Component {
             <Grid md={10} sm={11} xs={11} item>
               <NoSsr>
                 <div className={classes.root}>
-                  <AppBar position="static" style={{ background: "#2ec8a6" }}>
-                    <Tabs fullWidth className={classes.tab} value={value} indicatorColor="#2ec8a6" onChange={this.handleChange}>
-                      <LinkTab label="chief Complent" href="page1" />
-                      <LinkTab label="Medical History" href="page2" />
-                      <LinkTab label="Physical Examination" href="page3" />
-                      <LinkTab label="Medical Analysis" href="page4" />
-                      <LinkTab label="Medical Prescription" href="page5" />
-                      <LinkTab label="Patient Plan" href="page6" />
+                  <AppBar position="static" style={{ background: "#1c947c" }}>
+                    <Tabs fullWidth className={classes.tab} value={value}  indicatorColor="secondary" onChange={this.handleChange}>
+                      <Tab style={{ color: "#ffff03", fontSize: 16 , fontWeight: 'bold'}} label="chief Complent" />
+                      <Tab style={{ color: "#ffff03", fontSize: 16 , fontWeight: 'bold'}} label="Medical History" />
+                      <Tab style={{ color: "#ffff03", fontSize: 16 , fontWeight: 'bold'}} label="Physical Examination" />
+                      <Tab style={{ color: "#ffff03", fontSize: 16 , fontWeight: 'bold'}} label="Medical Analysis" />
+                      <Tab style={{ color: "#ffff03", fontSize: 16 , fontWeight: 'bold'}} label="Medical Prescription" />
+                      <Tab style={{ color: "#ffff03", fontSize: 16 , fontWeight: 'bold'}} label="Patient Plan" />
                     </Tabs>
                   </AppBar>
                   {value === 0 && <TabContainer>
@@ -247,7 +247,7 @@ const mapStateToProps = (state) => {
     login: state.auth.login,
     isAddAppointmentDialogOpen: state.doctor.isAddAppointmentDialogOpen,
     targetAppointment: state.doctor.targetAppointment,
-    doctor:state.doctor
+    doctor: state.doctor
 
   }
 }

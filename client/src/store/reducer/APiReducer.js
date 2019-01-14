@@ -1,7 +1,7 @@
 const initState = {
   article: [],
-  Weather:{}
-
+  Weather:{},
+  isArticalReceived: false 
 }
 
 const APiReducer = (state = initState, action) => {
@@ -9,8 +9,8 @@ const APiReducer = (state = initState, action) => {
     case "Articles":
       return {
         ...state,
-        article: action.data
-
+        article: action.data,
+        isArticalReceived: true
       }
       case "Weather":
       return{

@@ -76,31 +76,13 @@ class DoctorConsultation extends React.Component {
                 indicatorColor="primary"
                 textColor="primary"
               >
-                <Tab icon={<InboxIcon />} />
-                <Tab icon={<SendIcon />} />
+                <Tab icon={<InboxIcon />} label="Inbox" />
+                <Tab icon={<SendIcon />}  label="Sent"/>
               </Tabs>
             </Paper>
             {this.state.value === 0 && <ConsultationList consults={this.props.consultsInbox} />}
             {this.state.value === 1 && <ConsultationList consults={this.props.consultsOutbox} />}
           </Card>
-      </Grid>
-      <Grid item sm={12} xs={12} md={5}>
-        <Card>
-          <Paper square style={{ flexGrow: 1, width: "100%" }}>
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleChange}
-              fullWidth
-              indicatorColor="primary"
-              textColor="primary"
-            >
-              <Tab icon={<InboxIcon />} />
-              <Tab icon={<SendIcon />} />
-            </Tabs>
-          </Paper>
-          {this.state.value === 0 && <ConsultationList consults={this.props.consultsInbox} />}
-          {this.state.value === 1 && <ConsultationList consults={this.props.consultsOutbox} />}
-        </Card>
       </Grid>
     </Grid>
     )

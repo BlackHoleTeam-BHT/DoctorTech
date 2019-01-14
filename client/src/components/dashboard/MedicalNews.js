@@ -1,21 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import classnames from 'classnames';
-import Card from '@material-ui/core/Card';
+import {Card, CircularProgress} from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { MedicalNewsAPI } from '../../store/action/API'
@@ -77,57 +69,44 @@ class RecipeReviewCard extends React.Component {
     console.log(this.props)
 
     return (
-      <div className={classes.root}>
-        <GridList cellHeight={600} className={classes.gridList} cols={3}>
+      // add progress bar until the data come from database
+      !this.props.isArticalReceived ?
+        <CircularProgress disableShrink size={50} style={{ position: 'absolute', top: "50%", left: "50%" }} /> :
+        <div className={classes.root}>
+          <GridList cellHeight={600} className={classes.gridList} cols={3}>
 
-          {this.props.Articles.map((value, key) => {
-            return (
+            {this.props.Articles.map((value, key) => {
+              return (
 
-              <GridListTile key={key} >
-                <Card className={classes.card}>
-                  <CardHeader
-                    // avatar={
-                    //   <Avatar aria-label="Recipe" className={classes.avatar}>
-                    //     {value.title[0].toUpperCase()}
-                    //   </Avatar>
-                    // }
-                    // action={
-                    //   <IconButton>
-                    //     <MoreVertIcon />
-                    //   </IconButton>
-                    // }
-                    component ="h6"
-                    title={value.title}
-                    subheader={value.publishedAt.slice(0, 10)}
-                  />
-                  <CardMedia
-                    className={classes.media}
-                    image={value.urlToImage}
-                    title="Paella dish"
-                  />
-                  <CardContent>
-                    <Typography component="p">
-                      {value.description}
-                    </Typography>
-                  </CardContent>
-                  <CardActions className={classes.actions} disableActionSpacing>
-                    {/* <IconButton aria-label="Add to favorites">
-                      <FavoriteIcon />
-                    </IconButton>
-                    <IconButton aria-label="Share">
-                      <ShareIcon />
-                    </IconButton> */}
-                    <span style={{ marginLeft: 'auto' }}>
-                      <ScrollDialog link={value.url} content={value.content.slice(0, (value.content.length - 14))}></ScrollDialog>
-                    </span>
+                <GridListTile key={key} >
+                  <Card className={classes.card}>
+                    <CardHeader
+                      component="h6"
+                      title={value.title}
+                      subheader={value.publishedAt.slice(0, 10)}
+                    />
+                    <CardMedia
+                      className={classes.media}
+                      image={value.urlToImage}
+                      title="Paella dish"
+                    />
+                    <CardContent>
+                      <Typography component="p">
+                        {value.description}
+                      </Typography>
+                    </CardContent>
+                    <CardActions className={classes.actions} disableActionSpacing>
+                      <span style={{ marginLeft: 'auto' }}>
+                        <ScrollDialog link={value.url} content={value.content.slice(0, (value.content.length - 14))}></ScrollDialog>
+                      </span>
 
-                  </CardActions>
-                </Card>
-              </GridListTile>
-            )
-          })}
-        </GridList>
-      </div>
+                    </CardActions>
+                  </Card>
+                </GridListTile>
+              )
+            })}
+          </GridList>
+        </div>
 
     );
   }
@@ -142,6 +121,7 @@ RecipeReviewCard.propTypes = {
 const mapStateToProps = (state) => {
   return {
     Articles: state.API.article,
+    isArticalReceived: state.API.isArticalReceived
   }
 }
 

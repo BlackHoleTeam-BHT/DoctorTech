@@ -52,9 +52,8 @@ class SignIn extends React.Component {
     }
     return (
       <div>
-        <Container>
           <Row>
-            <Col md="6" sm="12" id="Right" ><img src={image} /></Col>
+            <Col md="6" sm="12" id="Right" ><img src={image} alt =""/></Col>
             <Col md="6" sm="12">
               <div id="signinCss">
                 <h3>Hey there, welcome back.</h3>
@@ -84,7 +83,7 @@ class SignIn extends React.Component {
                 </FormGroup>
                 <FormGroup>
                   <Button
-                    color="primary"
+                    style={{background: "#1c947c", fontSize: 18, fontWeight:"bold"}}
                     id="btn"
                     type="submit"
                     
@@ -113,7 +112,6 @@ class SignIn extends React.Component {
               </div>
             </Col>
           </Row>
-        </Container>
       </div>
     );
   }
