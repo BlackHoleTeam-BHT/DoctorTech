@@ -123,7 +123,13 @@ class Signup extends Component {
                   </FormGroup>
                   <div>
                     <FormGroup>
-                      <Button color="primary" id="btn" type="submit" >Sign up</Button>
+                      <Button
+                        style={{background: "#1c947c", fontSize: 18, fontWeight:"bold"}}
+                        id="btn" 
+                        type="submit"
+                      > 
+                        Sign up
+                      </Button>
                     </FormGroup>
                   </div>
                 </form>

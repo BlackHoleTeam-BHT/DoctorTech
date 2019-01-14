@@ -77,7 +77,7 @@ router.route('/sign-up')
                 if (err) throw err;
                 req.login(user, function (done) {
 
-                  let link = 'http://localhost:5000/confirmEmail/' + results[0].id
+                  let link = 'http://localhost:3000/confirmEmail/' + results[0].id
 
                   // setup email data with unicode symbols
                   let mailOptions = {
@@ -730,7 +730,7 @@ router.route('/confirmEmail/:id').get(function (req, res) {
     if (err) {
       throw err
     } else {
-      res.redirect('http://localhost:5000/signin')
+      res.redirect('http://localhost:3000/signin')
     }
   })
 

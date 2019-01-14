@@ -31,7 +31,7 @@ class Home extends React.Component {
               <Row>
                 <Col sm="5" xs="12" md="5"><div className="img"> <img src={image} alt="" /> </div></Col>
                 <Col xs="12" sm="7" md="7"> <h2 className="who"> What is Doctor Tech</h2>
-                  <div> <h2 className="whof">First Medical Website in Middle East and South Africa </h2>
+                  <div> <h2 className="whof">First Medical Website in Middle East and North Africa </h2>
                   <h2 className="whos">
                   Is an e-health platform specialy designed for doctors,that covers the convenience of health care technology 
                   to make work easy for doctors, by controlling manual tasks with efficiency. In addition to taking the advantage

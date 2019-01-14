@@ -101,6 +101,18 @@ const doctorReducer = (state = initState, action) => {
         activeAppointment:false
       }
         
+    case "DELETE_APPOINTMENT" :
+      return {
+        ...state,
+        appointments: action.data
+      }  
+    
+    case "UPDATE_APPOINTMENT" :
+      return {
+        ...state,
+        appointments: action.data
+      }
+
     default:
       return state;
       

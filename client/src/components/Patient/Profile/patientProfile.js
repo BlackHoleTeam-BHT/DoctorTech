@@ -189,7 +189,7 @@ class PatientProfile extends React.Component {
               <NoSsr>
                 <div className={classes.root}>
                   <AppBar position="static" style={{ background: "#1c947c" }}>
-                    <Tabs fullWidth className={classes.tab} value={value} indicatorColor="#2ec8a6" onChange={this.handleChange}>
+                    <Tabs fullWidth className={classes.tab} value={value}  indicatorColor="secondary" onChange={this.handleChange}>
                       <Tab style={{ color: "#ffff03", fontSize: 16 , fontWeight: 'bold'}} label="chief Complent" />
                       <Tab style={{ color: "#ffff03", fontSize: 16 , fontWeight: 'bold'}} label="Medical History" />
                       <Tab style={{ color: "#ffff03", fontSize: 16 , fontWeight: 'bold'}} label="Physical Examination" />
